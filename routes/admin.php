@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\Auth\LoginController;
 use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
+use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
+use App\Http\Controllers\Web\Admin\Settings\GeneralSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +52,27 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/', function () {
         return view('web.admin.pages.index');
     })->name('index');
+
+    Route::prefix('/settings')->as('settings.')->group(function () {
+
+        Route::controller(GeneralSettingsController::class)->as('general.')->group(function () {
+
+            Route::get('/general', 'index')->name('index');
+            Route::put('/general', 'update')->name('update');
+        });
+
+        Route::controller(FilesSettingsController::class)->as('files.')->group(function () {
+
+            Route::get('/files', 'index')->name('index');
+            Route::put('/files', 'update')->name('update');
+        });
+
+        Route::controller(LinksSettingsController::class)->as('links.')->group(function () {
+
+            Route::get('/links', 'index')->name('index');
+            Route::put('/links', 'update')->name('update');
+        });
+    });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

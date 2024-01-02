@@ -12,6 +12,7 @@ return [
     'x_link_label' => 'X',
     'threads_link_label' => 'Threads',
     'tiktok_link_label' => 'Tiktok',
+    'google_plus_link_label' => 'Google Plus',
     'submit' => 'Update',
     'success' => 'Links Settings Updated Successfully',
 

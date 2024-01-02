@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/settings/links/index.title'))
 
@@ -38,30 +38,40 @@
                                     </label>
                                     <input type="text" value="{{ old('facebook_link', settings()->get('facebook_link')) }}"
                                         name="facebook_link" class="form-control" id="facebook_link">
+                                        @error('facebook_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                 </div>
-                                @error('facebook_link')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
                                     <label for="instgram_link">
                                         {{ __('admin/settings/links/index.instgram_link_label') }}
                                     </label>
                                     <input type="text" value="{{ old('instgram_link', settings()->get('instgram_link')) }}"
                                         name="instgram_link" class="form-control" id="instgram_link">
+                                        @error('instgram_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                 </div>
-                                @error('instgram_link')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
                                     <label for="x_link">
                                         {{ __('admin/settings/links/index.x_link_label') }}
                                     </label>
                                     <input type="text" value="{{ old('x_link', settings()->get('x_link')) }}"
                                         name="x_link" class="form-control" id="x_link">
+                                        @error('x_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                 </div>
-                                @error('x_link')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <div class="form-group">
+                                    <label for="google_plus_link">
+                                        {{ __('admin/settings/links/index.google_plus_link_label') }}
+                                    </label>
+                                    <input type="text" value="{{ old('google_plus_link', settings()->get('google_plus_link')) }}"
+                                        name="google_plus_link" class="form-control" id="google_plus_link">
+                                        @error('google_plus_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -72,30 +82,30 @@
                                     </label>
                                     <input type="text" value="{{ old('tiktok_link', settings()->get('tiktok_link')) }}"
                                         name="tiktok_link" class="form-control" id="tiktok_link">
+                                        @error('tiktok_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                 </div>
-                                @error('tiktok_link')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
                                     <label for="youtube_link">
                                         {{ __('admin/settings/links/index.youtube_link_label') }}
                                     </label>
                                     <input type="text" value="{{ old('youtube_link', settings()->get('youtube_link')) }}"
                                         name="youtube_link" class="form-control" id="youtube_link">
+                                        @error('youtube_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                 </div>
-                                @error('youtube_link')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
                                     <label for="threads_link">
                                         {{ __('admin/settings/links/index.threads_link_label') }}
                                     </label>
                                     <input type="text" value="{{ old('threads_link', settings()->get('threads_link')) }}"
                                         name="threads_link" class="form-control" id="threads_link">
+                                        @error('threads_link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                 </div>
-                                @error('threads_link')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
                     </div>

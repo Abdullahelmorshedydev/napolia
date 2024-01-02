@@ -3,7 +3,7 @@
 <aside class="app-sidebar sidebar-scroll">
     <div class="main-sidebar-header active">
         <a class="desktop-logo logo-light active" href="#">
-            <img src="{{ asset('uploads/settings/') }}" class="main-logo" alt="logo">
+            <img src="{{ asset(settings()->get('site_logo')) }}" class="main-logo" alt="logo">
         </a>
     </div>
     <div class="main-sidemenu">
@@ -20,8 +20,8 @@
                 </div>
             </div>
         </div>
-        {{-- <ul class="side-menu">
-            <li class="side-item side-item-category">{{ __('admin/home/sidebar.main') }}</li>
+        <ul class="side-menu">
+            {{-- <li class="side-item side-item-category">{{ __('admin/home/sidebar.main') }}</li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('admin.index') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -113,7 +113,7 @@
                             href="{{ route('admin.branches.create') }}">{{ __('admin/home/sidebar.branch_create') }}</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -137,7 +137,7 @@
                     </li>
                 </ul>
             </li>
-        </ul> --}}
+        </ul>
     </div>
 </aside>
 <!-- main-sidebar -->

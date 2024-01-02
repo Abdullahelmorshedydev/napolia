@@ -1,5 +1,5 @@
 <!-- Favicon -->
-<link rel="icon" href="{{ asset('admin/assets/img/brand/favicon.png') }}" type="image/x-icon" />
+<link rel="icon" href="{{ asset(settings()->get('favicon')) }}" type="image/x-icon" sizes="16x16" />
 
 <!-- Icons css -->
 <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet">
@@ -15,10 +15,6 @@
 
 <!-- Maps css -->
 <link href="{{ asset('admin/assets/plugins/jqvmap/jqvmap.min.css') }}" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @if (app()->getLocale() == 'ar')
     <!-- Sidemenu css -->
@@ -46,5 +42,9 @@
     <!---Skinmodes css-->
     <link href="{{ asset('admin/assets/css/skin-modes.css') }}" rel="stylesheet" />
 @endif
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @stack('style')

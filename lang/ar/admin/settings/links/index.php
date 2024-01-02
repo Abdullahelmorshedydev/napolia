@@ -12,6 +12,7 @@ return [
     'x_link_label' => 'اكس',
     'threads_link_label' => 'ثريدز',
     'tiktok_link_label' => 'تيك توك',
+    'google_plus_link_label' => 'جوجل بلص',
     'submit' => 'تعديل',
     'success' => 'تم تعديل اللينكات بنجاح',
 

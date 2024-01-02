@@ -35,7 +35,6 @@ class ResetPasswordController extends Controller
         Admin::where('email', $request->email)->update([
             'password' => Hash::make($request->password)
         ]);
-
         return redirect()->route('admin.auth.login.show');
     }
 }
