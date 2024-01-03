@@ -4,7 +4,7 @@
 
 @endpush
 
-@section('title', __('admin/home/header.title'))
+@section('title', settings()->get('site_name_' . app()->currentLocale()))
 
 @section('breadcrumb')
     <div class="breadcrumb-header justify-content-between">

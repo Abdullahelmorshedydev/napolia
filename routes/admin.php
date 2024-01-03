@@ -6,6 +6,8 @@ use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
+use App\Http\Controllers\Web\Admin\Settings\AboutUsSettingsController;
+use App\Http\Controllers\Web\Admin\Settings\ContactSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\GeneralSettingsController;
 
 /*
@@ -71,6 +73,18 @@ Route::middleware('auth:admin')->group(function () {
 
             Route::get('/links', 'index')->name('index');
             Route::put('/links', 'update')->name('update');
+        });
+
+        Route::controller(AboutUsSettingsController::class)->as('about_us.')->group(function () {
+
+            Route::get('/about-us', 'index')->name('index');
+            Route::put('/about-us', 'update')->name('update');
+        });
+
+        Route::controller(ContactSettingsController::class)->as('contact.')->group(function () {
+
+            Route::get('/contact', 'index')->name('index');
+            Route::put('/contact', 'update')->name('update');
         });
     });
 

@@ -128,15 +128,4 @@
 @endsection
 
 @push('script')
-    {{-- <script>
-        ClassicEditor
-            .create(document.querySelector('#editor1'))
-            .catch(error => {
-                console.error(error);
-            });
-            .create(document.querySelector('#editor16'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
 @endpush

@@ -135,6 +135,12 @@
                     <li><a class="slide-item"
                             href="{{ route('admin.settings.links.index') }}">{{ __('admin/home/sidebar.links_settings') }}</a>
                     </li>
+                    <li><a class="slide-item"
+                            href="{{ route('admin.settings.about_us.index') }}">{{ __('admin/home/sidebar.about_us_settings') }}</a>
+                    </li>
+                    <li><a class="slide-item"
+                            href="{{ route('admin.settings.contact.index') }}">{{ __('admin/home/sidebar.contact_settings') }}</a>
+                    </li>
                 </ul>
             </li>
         </ul>

@@ -21,5 +21,7 @@ return [
     'general_settings' => 'الاعدادات العامة',
     'files_settings' => 'اعدادات الملفات',
     'links_settings' => 'اعدادات اللينكات',
+    'about_us_settings' => 'اعدادات من نحن',
+    'contact_settings' => 'اعدادات الاتصال',
 
 ];

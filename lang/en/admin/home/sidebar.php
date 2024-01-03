@@ -21,5 +21,7 @@ return [
     'general_settings' => 'General Settings',
     'files_settings' => 'Files Settings',
     'links_settings' => 'Links Settings',
+    'about_us_settings' => 'About Us Settings',
+    'contact_settings' => 'Contact Settings',
 
 ];
