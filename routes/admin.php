@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\Auth\LoginController;
+use App\Http\Controllers\Web\Admin\Auth\ProfileController;
 use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\Admin\HomeController;
@@ -95,6 +96,14 @@ Route::middleware('auth:admin')->group(function () {
             Route::get('/return_exchange', 'index')->name('index');
             Route::put('/return_exchange', 'update')->name('update');
         });
+    });
+
+    Route::controller(ProfileController::class)->prefix('/profile')->as('profile.')->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::post('/generalStore', 'generalStore')->name('general_store');
+        Route::put('/generalUpdate', 'generalUpdate')->name('general_update');
+        Route::put('/passwordUpdate', 'passwordUpdate')->name('password_update');
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');

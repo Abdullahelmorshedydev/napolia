@@ -270,25 +270,30 @@
                         </svg></a>
                 </div>
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
-                    <a class="profile-user d-flex" href=""><img alt=""
-                            src="{{ asset('admin/assets/img/faces/6.jpg') }}"></a>
+                    <a class="profile-user d-flex" href="">
+                        <img alt=""
+                            src="{{ isset(auth('admin')->user()->profile->image) ? asset(auth('admin')->user()->profile->image) : asset('admin/assets/img/faces/6.jpg') }}">
+                    </a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
-                                <div class="main-img-user"><img alt=""
-                                        src="{{ asset('admin/assets/img/faces/6.jpg') }}" class=""></div>
+                                <div class="main-img-user">
+                                    <img alt=""
+                                        src="{{ isset(auth('admin')->user()->profile->image) ? asset(auth('admin')->user()->profile->image) : asset('admin/assets/img/faces/6.jpg') }}"
+                                        class="">
+                                </div>
                                 <div class="ml-3 my-auto">
-                                    <h6>Petey Cruiser</h6><span>Premium Member</span>
+                                    <h6>{{ auth('admin')->user()->name }}</h6>
+                                    <span>{{ auth('admin')->user()->email }}</span>
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit
-                            Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account
-                            Settings</a>
+                        <a class="dropdown-item" href="{{ route('admin.profile.index') }}">
+                            <i class="bx bx-user-circle"></i>
+                            {{ __('admin/home/header.profile') }}
+                        </a>
+                        {{-- <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a> --}}
                         <form action="{{ route('admin.auth.logout') }}" method="post">
                             @csrf
                             <button class="dropdown-item" type="submit">

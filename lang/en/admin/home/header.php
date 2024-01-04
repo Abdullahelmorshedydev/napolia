@@ -2,8 +2,7 @@
 
 return [
 
-    'title' => 'Morshedy Is Only One',
-    'header' => 'Welcome Morshedy',
+    'profile' => 'Profile',
     'sign_out' => 'Sign Out',
 
 ];
