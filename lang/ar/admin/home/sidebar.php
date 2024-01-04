@@ -23,5 +23,7 @@ return [
     'links_settings' => 'اعدادات اللينكات',
     'about_us_settings' => 'اعدادات من نحن',
     'contact_settings' => 'اعدادات الاتصال',
+    'terms_settings' => 'الشروط و الاحكام',
+    'return_exchange_settings' => 'سياسة الاستبدال و الاسترجاع',
 
 ];

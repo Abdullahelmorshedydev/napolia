@@ -21,7 +21,7 @@
             </div>
         </div>
         <ul class="side-menu">
-            {{-- <li class="side-item side-item-category">{{ __('admin/home/sidebar.main') }}</li>
+            <li class="side-item side-item-category">{{ __('admin/home/sidebar.main') }}</li>
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('admin.index') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@
                     <span class="side-menu__label">{{ __('admin/home/sidebar.home') }}</span>
                 </a>
             </li>
-            <li class="side-item side-item-category">{{ __('admin/home/sidebar.general') }}</li>
+            {{-- <li class="side-item side-item-category">{{ __('admin/home/sidebar.general') }}</li>
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -140,6 +140,12 @@
                     </li>
                     <li><a class="slide-item"
                             href="{{ route('admin.settings.contact.index') }}">{{ __('admin/home/sidebar.contact_settings') }}</a>
+                    </li>
+                    <li><a class="slide-item"
+                            href="{{ route('admin.settings.terms.index') }}">{{ __('admin/home/sidebar.terms_settings') }}</a>
+                    </li>
+                    <li><a class="slide-item"
+                            href="{{ route('admin.settings.return_exchange.index') }}">{{ __('admin/home/sidebar.return_exchange_settings') }}</a>
                     </li>
                 </ul>
             </li>
