@@ -2,10 +2,10 @@
 
 return [
 
-    'title' => 'All Categories',
+    'title' => 'Show Category',
     'header' => 'Categories',
-    'active' => 'All Categories',
-    'label' => 'All Categories',
+    'active' => 'Show Category',
+    'label' => 'Sub Categories',
     'image' => 'Image',
     'name' => 'Name',
     'category_name' => 'Category Name',
@@ -15,5 +15,6 @@ return [
     'delete' => 'Delete',
     'show' => 'Show',
     'success' => 'Category Deleted Successfully',
+    'parent_category' => 'Parent Category',
 
 ];

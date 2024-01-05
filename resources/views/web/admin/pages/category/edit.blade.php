@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
 @section('style')
 @endsection
@@ -37,10 +37,10 @@
                                     <input type="text" value="{{ old('name', $category->name) }}" name="name"
                                         class="form-control" id="exampleInputName1"
                                         placeholder="{{ __('admin/category/edit.name_place') }}">
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                @error('name')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
                                     <label for="exampleInputImage1">{{ __('admin/category/edit.image_label') }}</label>
                                     <div class="custom-file">
@@ -49,6 +49,28 @@
                                             {{ __('admin/category/edit.choose_file') }}
                                         </label>
                                     </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        for="exampleInputCategoryId1">{{ __('admin/product/create.category_id_label') }}</label>
+                                    <select name="category_id" id="exampleInputCategoryId1" class="form-control">
+                                        <option disabled selected>{{ __('admin/product/create.category_id_place') }}
+                                        </option>
+                                        @foreach ($categories as $category)
+                                            <option {{ old('category_id') == $category->id ? 'selected' : '' }}
+                                                value="{{ $category->id }}">
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="alert alert-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputStatus1">{{ __('admin/category/edit.status_label') }}</label>
@@ -57,19 +79,22 @@
                                         @foreach ($status as $stat)
                                             <option {{ old('status', $category->status) == $stat ? 'selected' : '' }}
                                                 value="{{ $stat }}">
-                                                {{ $stat }}
+                                                @if (app()->currentLocale() == 'ar' && $stat == 'active')
+                                                    مفعلة
+                                                @elseif (app()->currentLocale() == 'ar' && $stat == 'desactive')
+                                                    غير مفعلة
+                                                @else
+                                                    {{ $stat }}
+                                                @endif
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('status')
+                                        <span class="alert alert-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
-                                @error('status')
-                                    <div class="alert alert-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                @error('image')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/category/edit.submit') }}

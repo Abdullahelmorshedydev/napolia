@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
 @section('style')
 @endsection
@@ -30,24 +30,51 @@
                         <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="">
-                                <div class="form-group">
-                                    <label for="exampleInputNameEn1">{{ __('admin/category/create.name_en_label') }}</label>
-                                    <input type="text" value="{{ old('name_en') }}" name="name_en"
-                                        class="form-control" id="exampleInputNameEn1"
-                                        placeholder="{{ __('admin/category/create.name_en_place') }}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="exampleInputNameEn1">{{ __('admin/category/create.name_en_label') }}</label>
+                                            <input type="text" value="{{ old('name_en') }}" name="name_en"
+                                                class="form-control" id="exampleInputNameEn1"
+                                                placeholder="{{ __('admin/category/create.name_en_place') }}">
+                                            @error('name_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="exampleInputNameAr1">{{ __('admin/category/create.name_ar_label') }}</label>
+                                            <input type="text" value="{{ old('name_ar') }}" name="name_ar"
+                                                class="form-control" id="exampleInputNameAr1"
+                                                placeholder="{{ __('admin/category/create.name_ar_place') }}">
+                                            @error('name_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                @error('name_en')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
-                                    <label for="exampleInputNameAr1">{{ __('admin/category/create.name_ar_label') }}</label>
-                                    <input type="text" value="{{ old('name_ar') }}" name="name_ar"
-                                        class="form-control" id="exampleInputNameAr1"
-                                        placeholder="{{ __('admin/category/create.name_ar_place') }}">
+                                    <label
+                                        for="exampleInputCategoryId1">{{ __('admin/product/create.category_id_label') }}</label>
+                                    <select name="category_id" id="exampleInputCategoryId1" class="form-control">
+                                        <option disabled selected>{{ __('admin/product/create.category_id_place') }}
+                                        </option>
+                                        @foreach ($categories as $category)
+                                            <option {{ old('category_id') == $category->id ? 'selected' : '' }}
+                                                value="{{ $category->id }}">
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="alert alert-danger">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
-                                @error('name_ar')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                                 <div class="form-group">
                                     <label for="exampleInputImage1">{{ __('admin/category/create.image_label') }}</label>
                                     <div class="custom-file">

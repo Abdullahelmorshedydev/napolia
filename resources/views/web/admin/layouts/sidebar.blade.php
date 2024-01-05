@@ -33,8 +33,8 @@
                     <span class="side-menu__label">{{ __('admin/home/sidebar.home') }}</span>
                 </a>
             </li>
-            {{-- <li class="side-item side-item-category">{{ __('admin/home/sidebar.general') }}</li>
-            <li class="slide">
+            <li class="side-item side-item-category">{{ __('admin/home/sidebar.general') }}</li>
+            {{-- <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />
@@ -53,7 +53,7 @@
                             href="{{ route('admin.sliders.create') }}">{{ __('admin/home/sidebar.slider_create') }}</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="slide">
+            {{-- <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />
@@ -93,8 +93,8 @@
                             href="{{ route('admin.products.create') }}">{{ __('admin/home/sidebar.product_create') }}</a>
                     </li>
                 </ul>
-            </li>
-            <li class="slide">
+            </li> --}}
+            {{-- <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />

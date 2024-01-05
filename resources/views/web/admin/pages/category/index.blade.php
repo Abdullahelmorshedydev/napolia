@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
 @section('style')
 @endsection
@@ -36,6 +36,7 @@
                                 <th>#</th>
                                 <th>{{ __('admin/category/index.image') }}</th>
                                 <th>{{ __('admin/category/index.name') }}</th>
+                                <th>{{ __('admin/category/index.category_name') }}</th>
                                 <th>{{ __('admin/category/index.status') }}</th>
                                 <th>{{ __('admin/category/index.actions') }}</th>
                             </tr>
@@ -45,12 +46,19 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>
-                                        <img style="width: 50px;"
-                                            src="{{ asset('uploads/categories/' . $category->image) }}"
-                                            alt="category_image">
+                                        <img style="width: 50px;" src="{{ asset($category->image) }}" alt="category_image">
                                     </td>
-                                    <th scope="row">{{ $category->name }}</th>
-                                    <td>{{ $category->status }}</td>
+                                    <th>{{ $category->name }}</th>
+                                    <th>{{ isset($category->category) ? $category->category->name : 'Parent' }}</th>
+                                    <td>
+                                        @if (app()->currentLocale() == 'ar' && $category->status == 'active')
+                                            مفعلة
+                                        @elseif (app()->currentLocale() == 'ar' && $category->status == 'desactive')
+                                            غير مفعلة
+                                        @else
+                                            {{ $category->status }}
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.categories.show', $category->id) }}"
                                             class="btn btn-secondary">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\Admin\Auth\LoginController;
 use App\Http\Controllers\Web\Admin\Auth\ProfileController;
 use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
@@ -105,6 +106,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/generalUpdate', 'generalUpdate')->name('general_update');
         Route::put('/passwordUpdate', 'passwordUpdate')->name('password_update');
     });
+
+    Route::resource('categories', CategoryController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });
