@@ -51,7 +51,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category->with('categories')->paginate();
+        $category->with('categories')->with('products');
         return view('web.admin.pages.category.show', compact('category'));
     }
 

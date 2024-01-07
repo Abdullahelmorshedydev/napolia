@@ -1,7 +1,7 @@
 @extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/category/show.title'))
 
@@ -101,12 +101,68 @@
                                         <a href="{{ route('admin.categories.edit', $cat->id) }}" class="btn btn-info">
                                             {{ __('admin/category/show.edit') }}
                                         </a>
-                                        <form class="btn btn-danger"
-                                            action="{{ route('admin.categories.destroy', $cat->id) }}" method="post">
+                                        <form class="d-inline"
+                                            action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn-danger"
-                                                type="submit">{{ __('admin/category/show.delete') }}</button>
+                                            <button class="btn btn-danger"
+                                                type="submit">{{ __('admin/category/index.delete') }}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header pb-0">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title mg-b-0">{{ __('admin/category/show.product_label') }}</h4>
+                    <i class="mdi mdi-dots-horizontal text-gray"></i>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table mg-b-0 text-md-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ __('admin/category/show.name') }}</th>
+                                <th>{{ __('admin/category/show.sales_count') }}</th>
+                                <th>{{ __('admin/category/show.status') }}</th>
+                                <th>{{ __('admin/category/show.actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($category->products as $product)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th>{{ $product->name }}</th>
+                                    <th>{{ $product->sales_count }}</th>
+                                    <td>
+                                        @if (app()->currentLocale() == 'ar' && $product->status == 'active')
+                                            مفعلة
+                                        @elseif (app()->currentLocale() == 'ar' && $product->status == 'desactive')
+                                            غير مفعلة
+                                        @else
+                                            {{ $product->status }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-secondary">
+                                            {{ __('admin/category/show.show') }}
+                                        </a>
+                                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info">
+                                            {{ __('admin/category/show.edit') }}
+                                        </a>
+                                        <form class="d-inline"
+                                            action="{{ route('admin.products.destroy', $product->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger"
+                                                type="submit">{{ __('admin/category/index.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -120,5 +176,5 @@
     <!--/div-->
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush

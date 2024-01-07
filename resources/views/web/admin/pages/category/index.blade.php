@@ -1,7 +1,7 @@
 @extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/category/index.title'))
 
@@ -67,11 +67,11 @@
                                         <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-info">
                                             {{ __('admin/category/index.edit') }}
                                         </a>
-                                        <form class="btn btn-danger"
+                                        <form class="d-inline"
                                             action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn-danger"
+                                            <button class="btn btn-danger"
                                                 type="submit">{{ __('admin/category/index.delete') }}</button>
                                         </form>
                                     </td>
@@ -87,5 +87,5 @@
     <!--/div-->
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush

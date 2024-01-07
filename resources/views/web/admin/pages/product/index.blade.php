@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/product/index.title'))
 
@@ -34,9 +34,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('admin/product/index.image') }}</th>
                                 <th>{{ __('admin/product/index.name') }}</th>
-                                <th>{{ __('admin/product/index.author') }}</th>
+                                <th>{{ __('admin/product/index.price') }}</th>
+                                <th>{{ __('admin/product/index.condition') }}</th>
                                 <th>{{ __('admin/product/index.status') }}</th>
                                 <th>{{ __('admin/product/index.actions') }}</th>
                             </tr>
@@ -45,13 +45,31 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $product->name }}</td>
                                     <td>
-                                        <img style="width: 50px;" src="{{ asset('uploads/products/' . $product->image) }}"
-                                            alt="product_image">
+                                        @if (isset($product->discount))
+                                            <p>
+                                                {{ $product->price - $product->price * ($product->discount / 100) . __('admin/product/index.pound') }}
+                                                <span class="text-secondary font-weight-normal tx-13 ml-1 prev-price">
+                                                    {{ $product->price }}$
+                                                </span>
+                                            </p>
+                                        @else
+                                            <p>
+                                                {{ $product->price }}$
+                                            </p>
+                                        @endif
                                     </td>
-                                    <th>{{ $product->name }}</th>
-                                    <th>{{ $product->author }}</th>
-                                    <td>{{ $product->status }}</td>
+                                    <td class="text-center">{{ $product->condition }}</td>
+                                    <td>
+                                        @if (app()->currentLocale() == 'ar' && $product->status == 'active')
+                                            مفعلة
+                                        @elseif (app()->currentLocale() == 'ar' && $product->status == 'desactive')
+                                            غير مفعلة
+                                        @else
+                                            {{ $product->status }}
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.products.show', $product->id) }}"
                                             class="btn btn-secondary">
@@ -60,11 +78,11 @@
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info">
                                             {{ __('admin/product/index.edit') }}
                                         </a>
-                                        <form class="btn btn-danger"
-                                            action="{{ route('admin.products.destroy', $product->id) }}" method="post">
+                                        <form class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}"
+                                            method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn-danger"
+                                            <button class="btn btn-danger"
                                                 type="submit">{{ __('admin/product/index.delete') }}</button>
                                         </form>
                                     </td>
@@ -80,5 +98,5 @@
     <!--/div-->
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush

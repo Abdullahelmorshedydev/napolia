@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\HomeController;
+use App\Http\Controllers\Web\Admin\ProductController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\AboutUsSettingsController;
@@ -108,6 +109,9 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     Route::resource('categories', CategoryController::class);
+
+    Route::resource('products', ProductController::class);
+    Route::get('/sub-categories/{id?}',[ProductController::class, 'getSubCategories'])->name('sub_categories');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

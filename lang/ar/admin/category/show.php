@@ -16,5 +16,7 @@ return [
     'show' => 'تفاصيل',
     'success' => 'تم حذف القسم بنجاح',
     'parent_category' => 'قسم اب',
+    'product_label' => 'المنتجات',
+    'sales_count' => 'مرات البيع',
 
 ];

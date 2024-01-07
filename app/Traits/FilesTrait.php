@@ -24,4 +24,18 @@ trait FilesTrait
         }
         return false;
     }
+
+    public static function update(object $object, int $id, UploadedFile $file, string $publicStoragePath)
+    {
+        foreach ($object->images as $image) {
+            if ($image->id == $id) {
+                self::delete($image->image);
+                $image->update([
+                    'image' => self::store($file, $publicStoragePath),
+                ]);
+                return true;
+            }
+        }
+        return false;
+    }
 }

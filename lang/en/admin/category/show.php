@@ -16,5 +16,7 @@ return [
     'show' => 'Show',
     'success' => 'Category Deleted Successfully',
     'parent_category' => 'Parent Category',
+    'product_label' => 'Products',
+    'sales_count' => 'Sale Count',
 
 ];

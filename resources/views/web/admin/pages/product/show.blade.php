@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/product/show.title'))
 
@@ -19,84 +19,75 @@
 @endsection
 
 @section('content')
-    @if (session()->has('success'))
-        <div class="alert alert-success">{{ session()->get('success') }}</div>
-    @endif
-    <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
+    <div class="col-12  col-lg-12 col-xl-12">
         <div class="card">
             <div class="card-body">
-                <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
-                    <div class="card-header">
-                        <h4 class="card-title mb-1">{{ __('admin/product/show.title') }}</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="card-title">{{ __('admin/product/show.images') }}:</h5>
                     </div>
-                    <div class="card-body pt-0">
-                        <form>
-                            @csrf
-                            <div class="">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">{{ __('admin/product/show.name_label') }}</label>
-                                    <input type="text" value="{{ $product->name }}" name="name" class="form-control"
-                                        id="exampleInputName1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputAuthor1">{{ __('admin/product/show.author_label') }}</label>
-                                    <input type="text" value="{{ $product->author }}" name="author" class="form-control"
-                                        id="exampleInputAuthor1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPrice1">{{ __('admin/product/show.price_label') }}</label>
-                                    <input type="number" value="{{ $product->price }}" name="price" class="form-control"
-                                        id="exampleInputPrice1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="exampleInputOfferPrice1">{{ __('admin/product/show.offer_price_label') }}</label>
-                                    <input type="number" value="{{ $product->offer_price }}" name="offer_price"
-                                        class="form-control" id="exampleInputOfferPrice1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="exampleInputQuantity1">{{ __('admin/product/show.quantity_label') }}</label>
-                                    <input type="number" value="{{ $product->quantity }}" name="quantity"
-                                        class="form-control" id="exampleInputQuantity1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPages1">{{ __('admin/product/show.pages_label') }}</label>
-                                    <input type="number" value="{{ $product->pages }}" name="pages" class="form-control"
-                                        id="exampleInputPages1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="exampleInputSalesCount1">{{ __('admin/product/show.sales_count_label') }}</label>
-                                    <input type="number" value="{{ $product->sales_count }}" name="sales_count"
-                                        class="form-control" id="exampleInputSalesCount1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputStatus1">{{ __('admin/product/show.status_label') }}</label>
-                                    <input type="text" value="{{ $product->status }}" name="status"
-                                        class="form-control" id="exampleInputStatus1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="exampleInputCategoryId1">{{ __('admin/product/show.category_id_label') }}</label>
-                                    <input type="text" value="{{ $product->category->name }}" name="category_id"
-                                        class="form-control" id="exampleInputCategoryId1" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="exampleInputDescription1">{{ __('admin/product/show.description_label') }}</label>
-                                    <textarea class="form-control" name="description" id="exampleInputDescription1" disabled>{{ $product->description }}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputImage1">{{ __('admin/product/show.image_label') }}</label>
-                                    <div class="custom-file">
-                                        <input class="custom-file-input" name="image" id="customFile" type="file">
-                                        <img height="50px" width="100px"
-                                            src="{{ asset('uploads/products/' . $product->image) }}" alt="product_image">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                    @foreach ($product->images as $image)
+                        <div class="img-fluid card-img-top mt-5 col-md-6">
+                            <img width="75%" height="200px" src="{{ asset($image->image) }}" alt="image">
+                        </div>
+                    @endforeach
+                </div>
+                <div class="mt-5 row">
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.name') }}:
+                        <h5 class="card-title d-inline">{{ $product->name }}</h5>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.quantity') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->quantity }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.price') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->price }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.discount') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->discount ? $product->discount : 0 }}
+                            %</h6>
+                    </div>
+                    @isset($product->discount)
+                        <div class="col-md-12 mt-2">
+                            {{ __('admin/product/show.price_after_discount') }}:
+                            <h6 class="card-subtitle mb-2 text-muted d-inline">
+                                {{ $product->price - ($product->price * (($product->discount / 100))) . __('admin/product/show.pound') }}</h6>
+                        </div>
+                    @endisset
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.status') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->status }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.condition') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->condition }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.sales_count') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->sales_count }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.category') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->category->name }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.sub_category') }}:
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->subCategory->name }}</h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.description') }}:
+                        <p class="card-subtitle mb-2 text-muted d-inline">{{ $product->description }}</p>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <a href="{{ route('admin.products.edit', $product->id) }}" class="card-link text-secondary ml-2">
+                            {{ __('admin/product/show.edit') }}
+                        </a>
+                        <a href="{{ route('admin.products.destroy', $product->id) }}" class="card-link text-secondary">
+                            {{ __('admin/product/show.delete') }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -104,5 +95,5 @@
     </div>
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush

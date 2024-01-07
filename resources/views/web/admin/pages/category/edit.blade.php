@@ -1,7 +1,7 @@
 @extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/category/edit.title'))
 
@@ -107,5 +107,5 @@
     </div>
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush
