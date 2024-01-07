@@ -44,9 +44,9 @@
                         <tbody>
                             @foreach ($categories as $category)
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ $categories->firstItem() + $loop->index }}</th>
                                     <td>
-                                        <img style="width: 50px;" src="{{ asset($category->image) }}" alt="category_image">
+                                        <img style="width: 50px;" src="{{ asset($category->image->image) }}" alt="category_image">
                                     </td>
                                     <th>{{ $category->name }}</th>
                                     <th>{{ isset($category->category) ? $category->category->name : 'Parent' }}</th>

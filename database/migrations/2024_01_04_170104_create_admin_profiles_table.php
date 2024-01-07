@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('admin_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('admin_id')->unique()->constrained('admins')->cascadeOnDelete();
-            $table->string('image')->nullable();
             $table->json('job_title');
             $table->json('bio');
             $table->timestamps();

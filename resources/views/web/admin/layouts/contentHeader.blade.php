@@ -272,14 +272,14 @@
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
                     <a class="profile-user d-flex" href="">
                         <img alt=""
-                            src="{{ isset(auth('admin')->user()->profile->image) ? asset(auth('admin')->user()->profile->image) : asset('admin/assets/img/faces/6.jpg') }}">
+                            src="{{ isset(auth('admin')->user()->image->image) ? asset(auth('admin')->user()->image->image) : asset('admin/assets/img/faces/6.jpg') }}">
                     </a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user">
                                     <img alt=""
-                                        src="{{ isset(auth('admin')->user()->profile->image) ? asset(auth('admin')->user()->profile->image) : asset('admin/assets/img/faces/6.jpg') }}"
+                                        src="{{ isset(auth('admin')->user()->image->image) ? asset(auth('admin')->user()->image->image) : asset('admin/assets/img/faces/6.jpg') }}"
                                         class="">
                                 </div>
                                 <div class="ml-3 my-auto">

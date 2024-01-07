@@ -16,7 +16,6 @@ class AdminProfile extends Model
 
     protected $fillable = [
         'admin_id',
-        'image',
         'bio',
         'job_title',
     ];

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Category extends Model
 {
@@ -17,7 +18,6 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'image',
         'category_id',
         'status',
     ];
@@ -37,5 +37,10 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function image() : MorphOne
+    {
+        return $this->morphOne(Image::class, 'morphable');
     }
 }

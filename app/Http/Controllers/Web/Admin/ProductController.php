@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate();
+        $products = Product::with('images')->paginate();
         $status = Product::$status;
         return view('web.admin.pages.product.index', compact('products', 'status'));
     }

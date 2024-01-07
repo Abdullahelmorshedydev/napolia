@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,5 +47,10 @@ class Admin extends Authenticatable
     public function profile()
     {
         return $this->hasOne(AdminProfile::class);
+    }
+
+    public function image() : MorphOne
+    {
+        return $this->MorphOne(Image::class, 'morphable');
     }
 }

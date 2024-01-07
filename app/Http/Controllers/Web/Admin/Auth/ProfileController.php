@@ -27,36 +27,21 @@ class ProfileController extends Controller
         $admin = Admin::findOrFail(auth('admin')->user()->id)->with('profile')->first();
         $data = $request->validated();
         if ($request->hasFile('image')) {
-            $data['image'] = FilesTrait::store($request->file('image'), 'uploads/profiles/');
-            AdminProfile::create([
-                'admin_id' => auth('admin')->user()->id,
-                'bio' => [
-                    'en' => $data['bio_en'],
-                    'ar' => $data['bio_ar']
-                ],
-                'job_title' => [
-                    'en' => $data['job_title_en'],
-                    'ar' => $data['job_title_ar']
-                ],
-                'image' => $data['image'],
-            ]);
-        } else {
-            AdminProfile::create([
-                'admin_id' => auth('admin')->user()->id,
-                'bio' => [
-                    'en' => $data['bio_en'],
-                    'ar' => $data['bio_ar']
-                ],
-                'job_title' => [
-                    'en' => $data['job_title_en'],
-                    'ar' => $data['job_title_ar']
-                ],
+            $admin->image()->create([
+                'image' => FilesTrait::store($request->file('image'), 'uploads/profiles/'),
             ]);
         }
-        $admin->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        $admin->profile()->create([
+            'bio' => [
+                'en' => $data['bio_en'],
+                'ar' => $data['bio_ar']
+            ],
+            'job_title' => [
+                'en' => $data['job_title_en'],
+                'ar' => $data['job_title_ar']
+            ],
         ]);
+        $admin->update($data);
         return back()->with('success', __('admin/auth/profile.general_create_success'));
     }
 
@@ -65,37 +50,19 @@ class ProfileController extends Controller
         $admin = Admin::findOrFail(auth('admin')->user()->id)->with('profile')->first();
         $data = $request->validated();
         if ($request->hasFile('image')) {
-            if (isset($admin->profile->image)) {
-                FilesTrait::delete($admin->profile->image);
+            if (isset($admin->image)) {
+                FilesTrait::delete($admin->image->image);
+                $admin->image->update([
+                    'image' => FilesTrait::store($request->file('image'), 'uploads/profiles/'),
+                ]);
+            } else {
+                $admin->image()->create([
+                    'image' => FilesTrait::store($request->file('image'), 'uploads/profiles/'),
+                ]);
             }
-            $data['image'] = FilesTrait::store($request->file('image'), 'uploads/profiles/');
-            $admin->profile->update([
-                'bio' => [
-                    'en' => $data['bio_en'],
-                    'ar' => $data['bio_ar']
-                ],
-                'job_title' => [
-                    'en' => $data['job_title_en'],
-                    'ar' => $data['job_title_ar']
-                ],
-                'image' => $data['image'],
-            ]);
-        } else {
-            $admin->profile->update([
-                'bio' => [
-                    'en' => $data['bio_en'],
-                    'ar' => $data['bio_ar']
-                ],
-                'job_title' => [
-                    'en' => $data['job_title_en'],
-                    'ar' => $data['job_title_ar'],
-                ],
-            ]);
         }
-        $admin->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ]);
+        $admin->profile->update($data);
+        $admin->update($data);
         return back()->with('success', __('admin/auth/profile.general_success'));
     }
 

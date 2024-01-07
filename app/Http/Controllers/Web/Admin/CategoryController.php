@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate();
+        $categories = Category::with('image')->with('category')->paginate();
         return view('web.admin.pages.category.index', compact('categories'));
     }
 
@@ -38,10 +38,12 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->validated();
-        Category::create([
+        $category = Category::create([
             'name' => ['en' => $data['name_en'], 'ar' => $data['name_ar']],
-            'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
             'category_id' => isset($data['category_id']) ? $data['category_id'] : null,
+        ]);
+        $category->image()->create([
+            'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
         ]);
         return redirect()->route('admin.categories.index')->with('success',  __('admin/category/create.success'));
     }
@@ -51,7 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category->with('categories')->with('products');
+        $category->with('categories')->with('products')->with('image');
         return view('web.admin.pages.category.show', compact('category'));
     }
 
@@ -73,11 +75,11 @@ class CategoryController extends Controller
         $data = $request->validated();
         if ($request->hasFile('image')) {
             FilesTrait::delete($category->image);
-            $data['image'] = FilesTrait::store($request->file('image'), 'uploads/categories/');
-            $category->update($data);
-        } else {
-            $category->update($data);
+            $category->image->update([
+                'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
+            ]);
         }
+        $category->update($data);
         return redirect()->route('admin.categories.index')->with('success', __('admin/category/edit.success'));
     }
 
@@ -87,6 +89,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         FilesTrait::delete($category->image);
+        $category->image()->delete();
         $category->delete();
         return back()->with('success', __('admin/category/index.success'));
     }

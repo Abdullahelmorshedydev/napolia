@@ -11,7 +11,7 @@
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ isset(auth('admin')->user()->profile->image) ? asset(auth('admin')->user()->profile->image) : asset('admin/assets/img/faces/user.png') }}">
+                        src="{{ isset(auth('admin')->user()->image->image) ? asset(auth('admin')->user()->image->image) : asset('admin/assets/img/faces/user.png') }}">
                     <span class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
