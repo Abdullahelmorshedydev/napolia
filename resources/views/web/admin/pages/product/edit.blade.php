@@ -142,17 +142,9 @@
                                         <option disabled selected>{{ __('admin/product/edit.condition_place') }}</option>
                                         @foreach ($conditions as $condition)
                                             <option
-                                                {{ old('condition', $product->condition) == $condition ? 'selected' : '' }}
-                                                value="{{ $condition }}">
-                                                @if (app()->currentLocale() == 'ar' && $condition == 'hot')
-                                                    حار
-                                                @elseif (app()->currentLocale() == 'ar' && $condition == 'new')
-                                                    جديد
-                                                @elseif (app()->currentLocale() == 'ar' && $condition == 'default')
-                                                    عادى
-                                                @else
-                                                    {{ $condition }}
-                                                @endif
+                                                {{ old('condition', $product->condition->value) == $condition->value ? 'selected' : '' }}
+                                                value="{{ $condition->value }}">
+                                                {{ $product->condition->lang() }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -167,15 +159,9 @@
                                     <select name="status" id="exampleInputStatus1" class="form-control">
                                         <option disabled selected>{{ __('admin/product/edit.status_place') }}</option>
                                         @foreach ($status as $stat)
-                                            <option {{ old('status', $product->status) == $stat ? 'selected' : '' }}
-                                                value="{{ $stat }}">
-                                                @if (app()->currentLocale() == 'ar' && $stat == 'active')
-                                                    مفعلة
-                                                @elseif (app()->currentLocale() == 'ar' && $stat == 'desactive')
-                                                    غير مفعلة
-                                                @else
-                                                    {{ $stat }}
-                                                @endif
+                                            <option {{ old('status', $product->status->value) == $stat->value ? 'selected' : '' }}
+                                                value="{{ $stat->value }}">
+                                                {{ $stat->lang() }}
                                             </option>
                                         @endforeach
                                     </select>

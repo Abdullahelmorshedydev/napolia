@@ -39,15 +39,7 @@
                                         {{ __('admin/category/show.parent_category') }}
                                     @endif
                                 </h6>
-                                <p class="card-text">
-                                    @if (app()->currentLocale() == 'ar' && $category->status == 'active')
-                                        مفعلة
-                                    @elseif (app()->currentLocale() == 'ar' && $category->status == 'desactive')
-                                        غير مفعلة
-                                    @else
-                                        {{ $category->status }}
-                                    @endif
-                                </p>
+                                <p class="card-text">{{ $category->status->lang() }}</p>
                                 <a href="{{ route('admin.categories.edit', $category->id) }}"
                                     class="card-link text-secondary">{{ __('admin/category/index.edit') }}</a>
                             </div>

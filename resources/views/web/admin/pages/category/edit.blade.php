@@ -77,15 +77,10 @@
                                     <select name="status" id="exampleInputStatus1" class="form-control">
                                         <option disabled selected>{{ __('admin/category/edit.status_place') }}</option>
                                         @foreach ($status as $stat)
-                                            <option {{ old('status', $category->status) == $stat ? 'selected' : '' }}
-                                                value="{{ $stat }}">
-                                                @if (app()->currentLocale() == 'ar' && $stat == 'active')
-                                                    مفعلة
-                                                @elseif (app()->currentLocale() == 'ar' && $stat == 'desactive')
-                                                    غير مفعلة
-                                                @else
-                                                    {{ $stat }}
-                                                @endif
+                                            <option
+                                                {{ old('status', $category->status->value) == $stat->value ? 'selected' : '' }}
+                                                value="{{ $stat->value }}">
+                                                {{ $stat->lang() }}
                                             </option>
                                         @endforeach
                                     </select>

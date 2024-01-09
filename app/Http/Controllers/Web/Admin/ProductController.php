@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Enums\ProductConditionEnum;
+use App\Enums\ProductStatusEnum;
 use App\Models\Product;
 use App\Models\Category;
 use App\Traits\FilesTrait;
-use App\Models\ProductImage;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateProductRequest;
-use App\Models\Image;
 
 class ProductController extends Controller
 {
@@ -22,8 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('images')->paginate();
-        $status = Product::$status;
-        return view('web.admin.pages.product.index', compact('products', 'status'));
+        return view('web.admin.pages.product.index', compact('products'));
     }
 
     /**
@@ -79,8 +77,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $status = Product::$status;
-        $conditions = Product::$condition;
+        $status = ProductStatusEnum::cases();
+        $conditions = ProductConditionEnum::cases();
         $categories = Category::get();
         $subCategories = Category::where('category_id', $product->category_id)->get();
         $images = $product->images;

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Enums\CategoryStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Web\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Traits\FilesTrait;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -28,8 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::get();
-        $status = Category::$status;
-        return view('web.admin.pages.category.create', compact('status', 'categories'));
+        return view('web.admin.pages.category.create', compact('categories'));
     }
 
     /**
@@ -63,7 +62,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $categories = Category::get()->except($category->id);
-        $status = Category::$status;
+        $status = CategoryStatusEnum::cases();
         return view('web.admin.pages.category.edit', compact('category', 'categories', 'status'));
     }
 

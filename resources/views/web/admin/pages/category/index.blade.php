@@ -50,15 +50,7 @@
                                     </td>
                                     <th>{{ $category->name }}</th>
                                     <th>{{ isset($category->category) ? $category->category->name : 'Parent' }}</th>
-                                    <td>
-                                        @if (app()->currentLocale() == 'ar' && $category->status == 'active')
-                                            مفعلة
-                                        @elseif (app()->currentLocale() == 'ar' && $category->status == 'desactive')
-                                            غير مفعلة
-                                        @else
-                                            {{ $category->status }}
-                                        @endif
-                                    </td>
+                                    <td>{{ $category->status->lang() }}</td>
                                     <td>
                                         <a href="{{ route('admin.categories.show', $category->id) }}"
                                             class="btn btn-secondary">

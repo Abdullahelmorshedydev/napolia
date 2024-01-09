@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CategoryStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,7 +23,9 @@ class Category extends Model
         'status',
     ];
 
-    public static $status = ['active', 'desactive'];
+    protected $casts = [
+        'status' => CategoryStatusEnum::class,
+    ];
 
     public function category()
     {

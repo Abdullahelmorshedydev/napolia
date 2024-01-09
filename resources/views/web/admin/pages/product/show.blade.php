@@ -47,23 +47,29 @@
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.discount') }}:
-                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->discount ? $product->discount : 0 }}
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">
+                            {{ $product->discount ? $product->discount : 0 }}
                             %</h6>
                     </div>
                     @isset($product->discount)
                         <div class="col-md-12 mt-2">
                             {{ __('admin/product/show.price_after_discount') }}:
                             <h6 class="card-subtitle mb-2 text-muted d-inline">
-                                {{ $product->price - ($product->price * (($product->discount / 100))) . __('admin/product/show.pound') }}</h6>
+                                {{ $product->price - $product->price * ($product->discount / 100) . __('admin/product/show.pound') }}
+                            </h6>
                         </div>
                     @endisset
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.status') }}:
-                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->status }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">
+                            {{ $product->status->lang() }}
+                        </h6>
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.condition') }}:
-                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->condition }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">
+                            {{ $product->condition->lang() }}
+                        </h6>
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.sales_count') }}:

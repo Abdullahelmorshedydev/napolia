@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\ProductConditionEnum;
+use App\Enums\ProductStatusEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -18,8 +20,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('price');
             $table->decimal('discount')->nullable();
-            $table->enum('status', ['active', 'desactive'])->default('active');
-            $table->enum('condition',['default','new','hot'])->default('default');
+            $table->enum('status', ['active', 'desactive'])->default(ProductStatusEnum::ACTIVE->value);
+            $table->enum('condition',['default','new','hot'])->default(ProductConditionEnum::DEFAULT->value);
             $table->integer('sales_count')->default(0);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('sub_category_id')->constrained('categories')->cascadeOnDelete();

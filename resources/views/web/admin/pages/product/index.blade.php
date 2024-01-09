@@ -60,16 +60,8 @@
                                             </p>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{ $product->condition }}</td>
-                                    <td>
-                                        @if (app()->currentLocale() == 'ar' && $product->status == 'active')
-                                            مفعلة
-                                        @elseif (app()->currentLocale() == 'ar' && $product->status == 'desactive')
-                                            غير مفعلة
-                                        @else
-                                            {{ $product->status }}
-                                        @endif
-                                    </td>
+                                    <td>{{ $product->condition->lang() }}</td>
+                                    <td>{{ $product->status->lang() }}</td>
                                     <td>
                                         <a href="{{ route('admin.products.show', $product->id) }}"
                                             class="btn btn-secondary">

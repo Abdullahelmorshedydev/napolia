@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\ProductConditionEnum;
+use App\Enums\ProductStatusEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -29,8 +31,10 @@ class Product extends Model
         'sub_category_id',
     ];
 
-    public static $status = ['active', 'desactive'];
-    public static $condition = ['default','new','hot'];
+    protected $casts = [
+        'status' => ProductStatusEnum::class,
+        'condition' => ProductConditionEnum::class,
+    ];
 
     public function category()
     {
