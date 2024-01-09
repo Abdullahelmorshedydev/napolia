@@ -73,7 +73,7 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
         if ($request->hasFile('image')) {
-            FilesTrait::delete($category->image);
+            FilesTrait::delete($category->image->image);
             $category->image->update([
                 'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
             ]);
@@ -87,7 +87,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        FilesTrait::delete($category->image);
+        FilesTrait::delete($category->image->image);
         $category->image()->delete();
         $category->delete();
         return back()->with('success', __('admin/category/index.success'));

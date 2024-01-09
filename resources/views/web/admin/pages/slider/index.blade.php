@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/slider/index.title'))
 
@@ -42,24 +42,20 @@
                         <tbody>
                             @foreach ($sliders as $slider)
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ $sliders->firstItem() + $loop->index }}</th>
                                     <td>
-                                        <img style="width: 50px;border-radius:50%;"
-                                            src="{{ asset('uploads/sliders/' . $slider->image) }}" alt="slider_image">
+                                        <img width="100px" src="{{ asset($slider->image->image) }}" alt="slider_image">
                                     </td>
-                                    <td>{{ $slider->status }}</td>
+                                    <td>{{ $slider->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.sliders.show', $slider->id) }}" class="btn btn-secondary">
-                                            {{ __('admin/slider/index.show') }}
-                                        </a>
                                         <a href="{{ route('admin.sliders.edit', $slider->id) }}" class="btn btn-info">
                                             {{ __('admin/slider/index.edit') }}
                                         </a>
-                                        <form class="btn btn-danger"
+                                        <form class="d-inline"
                                             action="{{ route('admin.sliders.destroy', $slider->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn-danger"
+                                            <button class="btn btn-danger"
                                                 type="submit">{{ __('admin/slider/index.delete') }}</button>
                                         </form>
                                     </td>
@@ -68,11 +64,12 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $sliders->links() }}
             </div>
         </div>
     </div>
     <!--/div-->
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush

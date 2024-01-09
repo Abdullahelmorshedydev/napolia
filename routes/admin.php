@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\Admin\Settings\ContactSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\GeneralSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\ReturnExchangeSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
+use App\Http\Controllers\Web\Admin\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/generalUpdate', 'generalUpdate')->name('general_update');
         Route::put('/passwordUpdate', 'passwordUpdate')->name('password_update');
     });
+
+    Route::resource('sliders', SliderController::class)->except('show');
 
     Route::resource('categories', CategoryController::class);
 

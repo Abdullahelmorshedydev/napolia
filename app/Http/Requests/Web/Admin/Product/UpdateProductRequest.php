@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests\Web\Admin\Product;
 
-use App\Models\Product;
+use App\Enums\ProductConditionEnum;
+use App\Enums\ProductStatusEnum;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,8 +24,8 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $condition = Product::$condition;
-        $status = Product::$status;
+        $condition = ProductConditionEnum::cases();
+        $status = ProductStatusEnum::cases();
         return [
             'name' => ['required', 'string', 'unique:products,name,' . $this->id, 'min:3', 'max:50'],
             'description' => ['required', 'string'],

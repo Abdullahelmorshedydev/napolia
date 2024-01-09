@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
 @section('style')
 @endsection
@@ -35,10 +35,10 @@
                                 <label class="custom-file-label" for="customFile">
                                     {{ __('admin/slider/create.choose_file') }}
                                 </label>
+                                @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            @error('image')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/slider/create.submit') }}
                             </button>

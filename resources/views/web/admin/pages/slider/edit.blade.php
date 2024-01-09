@@ -1,7 +1,7 @@
-@extends('admin.layouts.app')
+@extends('web.admin.layouts.app')
 
-@section('style')
-@endsection
+@push('style')
+@endpush
 
 @section('title', __('admin/slider/edit.title'))
 
@@ -40,27 +40,27 @@
                                         {{ __('admin/slider/edit.choose_file') }}
                                     </label>
                                 </div>
+                                @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            @error('image')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
                             <div class="form-group">
                                 <label for="exampleInputStatus1">{{ __('admin/slider/edit.status_label') }}</label>
                                 <select name="status" id="exampleInputStatus1" class="form-control">
                                     <option disabled selected>{{ __('admin/slider/edit.status_place') }}</option>
                                     @foreach ($status as $stat)
-                                        <option {{ old('status', $slider->status) == $stat ? 'selected' : '' }}
-                                            value="{{ $stat }}">
-                                            {{ $stat }}
-                                        </option>
-                                    @endforeach
+                                            <option {{ old('status', $slider->status->value) == $stat->value ? 'selected' : '' }}
+                                                value="{{ $stat->value }}">
+                                                {{ $stat->lang() }}
+                                            </option>
+                                        @endforeach
                                 </select>
+                                @error('status')
+                                    <span class="alert alert-danger">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
-                            @error('status')
-                                <div class="alert alert-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/slider/edit.submit') }}
                             </button>
@@ -72,5 +72,5 @@
     </div>
 @endsection
 
-@section('script')
-@endsection
+@push('script')
+@endpush

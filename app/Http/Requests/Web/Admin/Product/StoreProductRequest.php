@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Admin\Product;
 
+use App\Enums\ProductConditionEnum;
 use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -23,7 +24,7 @@ class StoreProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $condition = Product::$condition;
+        $condition = ProductConditionEnum::cases();
         return [
             'name_en' => ['required', 'string', 'unique:products,name', 'min:3', 'max:50'],
             'name_ar' => ['required', 'string', 'unique:products,name', 'min:3', 'max:50'],

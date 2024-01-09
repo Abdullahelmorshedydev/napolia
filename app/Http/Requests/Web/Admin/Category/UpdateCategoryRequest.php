@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Web\Admin\Category;
 
-use App\Models\Category;
+use App\Enums\CategoryStatusEnum;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $status = Category::$status;
+        $status = CategoryStatusEnum::cases();
         return [
             'name' => ['required', 'string', 'unique:categories,name' . $this->id, 'min:3', 'max:50'],
             'image' => ['nullable', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
