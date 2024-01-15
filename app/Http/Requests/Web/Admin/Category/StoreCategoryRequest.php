@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Web\Admin\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -22,8 +23,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_en' => ['required', 'string', 'unique:categories,name', 'min:3', 'max:50'],
-            'name_ar' => ['required', 'string', 'unique:categories,name', 'min:3', 'max:50'],
+            'name_en' => ['required', 'string', Rule::unique('categories', 'name->en'), 'min:3', 'max:50'],
+            'name_ar' => ['required', 'string', Rule::unique('categories', 'name->ar'), 'min:3', 'max:50'],
             'category_id' => ['nullable','exists:categories,id'],
             'image' => ['required', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
         ];

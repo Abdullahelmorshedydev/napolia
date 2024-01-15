@@ -7,6 +7,14 @@ enum CategoryStatusEnum: string
     case ACTIVE = 'active';
     case DESACTIVE = 'desactive';
 
+    public static function values(): array
+    {
+        return [
+            self::ACTIVE->value,
+            self::DESACTIVE->value,
+        ];
+    }
+
     public function lang(): string
     {
         return match ($this)

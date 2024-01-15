@@ -26,8 +26,8 @@ class StoreProductRequest extends FormRequest
     {
         $condition = ProductConditionEnum::cases();
         return [
-            'name_en' => ['required', 'string', 'unique:products,name', 'min:3', 'max:50'],
-            'name_ar' => ['required', 'string', 'unique:products,name', 'min:3', 'max:50'],
+            'name_en' => ['required', 'string', Rule::unique('products', 'name->en'), 'min:3', 'max:50'],
+            'name_ar' => ['required', 'string', Rule::unique('products', 'name->ar'), 'min:3', 'max:50'],
             'description_en' => ['required', 'string'],
             'description_ar' => ['required', 'string'],
             'price' => ['required', 'numeric'],

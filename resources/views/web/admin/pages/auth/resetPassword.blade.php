@@ -15,7 +15,7 @@
     <title> {{ __('admin/auth/reset.title') }} </title>
 
     <!--- Favicon --->
-    <link rel="icon" href="{{ asset('admin/assets/img/brand/favicon.png') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset(settings()->get('favicon')) }}" type="image/x-icon" />
 
     <!--- Icons css --->
     <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet">

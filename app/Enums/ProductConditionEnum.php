@@ -8,6 +8,15 @@ enum ProductConditionEnum: string
     case HOT = 'hot';
     case NEW = 'new';
 
+    public static function values(): array
+    {
+        return [
+            self::DEFAULT->value,
+            self::HOT->value,
+            self::NEW->value,
+        ];
+    }
+
     public function lang(): string
     {
         return match ($this)

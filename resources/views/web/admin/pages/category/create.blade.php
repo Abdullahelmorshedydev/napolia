@@ -83,10 +83,10 @@
                                             {{ __('admin/category/create.choose_file') }}
                                         </label>
                                     </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                @error('image')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/category/create.submit') }}
