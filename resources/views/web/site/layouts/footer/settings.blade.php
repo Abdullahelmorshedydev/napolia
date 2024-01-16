@@ -470,13 +470,6 @@
                     <li id="rtl_btn"><a href="javascript:void(0)" class="btn setting_btn">RTL</a></li>
                 </ul>
             </div>
-            <div class="buy_btn">
-                <a href="http://themes.pixelstrap.com/bigboost/" target="_blank"
-                    class="btn btn-block purchase_btn"><i class="fa fa-desktop" aria-hidden="true"></i> View
-                    Showcase</a>
-                <a href="#" target="_blank" class="btn btn-block purchase_btn blue-btn"><i
-                        class="fa fa-shopping-cart" aria-hidden="true"></i> Purchase theme now!</a>
-            </div>
         </div>
     </div>
 </div>

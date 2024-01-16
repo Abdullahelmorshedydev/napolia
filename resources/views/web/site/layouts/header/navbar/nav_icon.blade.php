@@ -12,15 +12,21 @@
             <div class="show-div setting">
                 <h6>language</h6>
                 <ul>
-                    <li><a href="#">english</a> </li>
-                    <li><a href="#">french</a> </li>
-                </ul>
-                <h6>currency</h6>
-                <ul class="list-inline">
-                    <li><a href="#">euro</a> </li>
-                    <li><a href="#">rupees</a> </li>
-                    <li><a href="#">pound</a> </li>
-                    <li><a href="#">doller</a> </li>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            @if ($localeCode == 'ar')
+                                <a hreflang="{{ $localeCode }}"
+                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            @else
+                                <a hreflang="{{ $localeCode }}"
+                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </li>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 @include('web.site.layouts.head')
 
-<body>
+<body {{ app()->currentLocale() == 'ar' ? 'class="rtl"' : 'class="ltr"' }}>
 
     @yield('preload')
 

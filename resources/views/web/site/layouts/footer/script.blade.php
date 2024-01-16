@@ -15,7 +15,7 @@
 
 <!-- Theme js-->
 <script src="{{ asset('site/assets/js/script.js') }}"></script>
-{{-- {{ asset('site/assets/js --}}
+
 <script>
     $(window).on('load', function() {
         $('#exampleModal').modal('show');
