@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\Site\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+Route::get('/', HomeController::class)->name('index');
 
 Route::fallback(function () {
     return redirect()->route('index');

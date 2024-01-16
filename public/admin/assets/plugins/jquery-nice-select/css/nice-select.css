@@ -1,6 +1,6 @@
 .nice-select {
 	position: relative;
-	text-align: left;
+	text-align: left !important;
 	-webkit-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
 	-webkit-user-select: none;
