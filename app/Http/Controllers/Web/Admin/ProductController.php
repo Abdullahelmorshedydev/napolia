@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Enums\CategoryStatusEnum;
 use App\Enums\ProductConditionEnum;
 use App\Enums\ProductStatusEnum;
 use App\Models\Product;
@@ -79,7 +80,7 @@ class ProductController extends Controller
     {
         $status = ProductStatusEnum::cases();
         $conditions = ProductConditionEnum::cases();
-        $categories = Category::get();
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
         $subCategories = Category::where('category_id', $product->category_id)->get();
         $images = $product->images;
         return view('web.admin.pages.product.edit', compact('product', 'status', 'conditions', 'categories', 'subCategories', 'images'));

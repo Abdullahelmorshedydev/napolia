@@ -50,7 +50,9 @@
                                 <tr>
                                     <th scope="row">{{ $coupons->firstItem() + $loop->index }}</th>
                                     <th>{{ $coupon->code }}</th>
-                                    <th>{{ $coupon->value }}</th>
+                                    <th>
+                                        {{ $coupon->type->value == 'percent' ? $coupon->value . '%' : $coupon->value }}
+                                    </th>
                                     <th>{{ $coupon->type->lang() }}</th>
                                     <th>{{ $coupon->max_usage }}</th>
                                     <th>{{ $coupon->number_of_usage ?? 0 }}</th>
@@ -61,8 +63,8 @@
                                         <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-info">
                                             {{ __('admin/coupon/index.edit') }}
                                         </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.coupons.destroy', $coupon->id) }}" method="post">
+                                        <form class="d-inline" action="{{ route('admin.coupons.destroy', $coupon->id) }}"
+                                            method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger"

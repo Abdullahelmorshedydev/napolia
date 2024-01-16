@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::get()->except($category->id);
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get()->except($category->id);
         $status = CategoryStatusEnum::cases();
         return view('web.admin.pages.category.edit', compact('category', 'categories', 'status'));
     }

@@ -70,7 +70,7 @@
                                         @endforeach
                                     </select>
                                     @error('category_id')
-                                        <span class="alert alert-danger">
+                                        <span class="text-danger">
                                             {{ $message }}
                                         </span>
                                     @enderror

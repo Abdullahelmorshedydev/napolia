@@ -7,5 +7,7 @@ return [
     'default' => 'عادى',
     'hot' => 'حار',
     'new' => 'جديد',
+    'fixed' => 'نقدى',
+    'percent' => 'مئوى',
 
 ];

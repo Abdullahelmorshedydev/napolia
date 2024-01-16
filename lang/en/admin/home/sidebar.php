@@ -25,5 +25,17 @@ return [
     'contact_settings' => 'Contact Settings',
     'terms_settings' => 'Terms & Conditions Settings',
     'return_exchange_settings' => 'Return & Exchange Settings',
+    'country_title' => 'Countries',
+    'country_all' => 'All Countries',
+    'country_create' => 'Create New Country',
+    'city_title' => 'Cities',
+    'city_all' => 'All Cities',
+    'city_create' => 'Create New City',
+    'state_title' => 'States',
+    'state_all' => 'All States',
+    'state_create' => 'Create New State',
+    'shipping_title' => 'Shipping',
+    'shipping_all' => 'Shipping Settings',
+    'shipping_create' => 'Create New Shipping Data',
 
 ];

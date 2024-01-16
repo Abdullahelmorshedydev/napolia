@@ -6,6 +6,8 @@ use App\Http\Controllers\Web\Admin\Auth\ProfileController;
 use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\CityController;
+use App\Http\Controllers\Web\Admin\CountryController;
 use App\Http\Controllers\Web\Admin\CouponController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\ProductController;
@@ -16,7 +18,9 @@ use App\Http\Controllers\Web\Admin\Settings\ContactSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\GeneralSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\ReturnExchangeSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
+use App\Http\Controllers\Web\Admin\ShippingController;
 use App\Http\Controllers\Web\Admin\SliderController;
+use App\Http\Controllers\Web\Admin\StateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +122,16 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/sub-categories/{id?}',[ProductController::class, 'getSubCategories'])->name('sub_categories');
 
     Route::resource('coupons', CouponController::class)->except('show');
+
+    Route::resource('countries', CountryController::class)->except('show');
+
+    Route::resource('cities', CityController::class)->except('show');
+
+    Route::resource('states', StateController::class)->except('show');
+    Route::get('/country_cities/{id?}',[StateController::class, 'getCities'])->name('country_cities');
+
+    Route::resource('shippings', ShippingController::class)->except('show');
+    Route::get('/shiping_cities/{id?}',[ShippingController::class, 'getCities'])->name('shipping_cities');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

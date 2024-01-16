@@ -133,7 +133,7 @@
                                                 @endforeach
                                             </select>
                                             @error('status')
-                                                <span class="alert alert-danger">
+                                                <span class="text-danger">
                                                     {{ $message }}
                                                 </span>
                                             @enderror
