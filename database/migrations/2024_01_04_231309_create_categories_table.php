@@ -16,9 +16,8 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
-            $table->enum('status', ['active', 'desactive'])->default(CategoryStatusEnum::class);
+            $table->enum('status', CategoryStatusEnum::values())->default(CategoryStatusEnum::ACTIVE->value);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

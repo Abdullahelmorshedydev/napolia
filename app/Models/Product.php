@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use App\Enums\ProductConditionEnum;
+use App\Enums\DiscountTypeEnum;
 use App\Enums\ProductStatusEnum;
+use App\Enums\ProductConditionEnum;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory, HasTranslations, SoftDeletes;
+    use HasFactory, HasTranslations;
 
     protected $table = 'products';
 
@@ -20,13 +21,16 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'quantity',
         'price',
         'discount',
+        'discount_type',
         'status',
         'condition',
         'description',
         'sales_count',
+        'shipping_time',
         'category_id',
         'sub_category_id',
     ];
@@ -34,6 +38,7 @@ class Product extends Model
     protected $casts = [
         'status' => ProductStatusEnum::class,
         'condition' => ProductConditionEnum::class,
+        'discount_type' => DiscountTypeEnum::class,
     ];
 
     public function category()

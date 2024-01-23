@@ -104,21 +104,5 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="footer-bottom">
-                    <ul>
-                        <li><a href="#">mens</a></li>
-                        <li><a href="#">womens</a></li>
-                        <li><a href="#">clothing</a></li>
-                        <li><a href="#">accessories</a></li>
-                        <li><a href="#">featured</a></li>
-                        <li><a href="#">service</a></li>
-                        <li><a href="#">cart</a></li>
-                        <li><a href="#">my order</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

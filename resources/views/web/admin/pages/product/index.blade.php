@@ -48,16 +48,9 @@
                                     <td>{{ $product->name }}</td>
                                     <td>
                                         @if (isset($product->discount))
-                                            <p>
-                                                {{ $product->price - $product->price * ($product->discount / 100) . __('admin/product/index.pound') }}
-                                                <span class="text-secondary font-weight-normal tx-13 ml-1 prev-price">
-                                                    {{ $product->price }}$
-                                                </span>
-                                            </p>
+                                            {{ $product->discount_type->calc($product->price, $product->discount) }}
                                         @else
-                                            <p>
-                                                {{ $product->price }}$
-                                            </p>
+                                            {{ $product->price }}$
                                         @endif
                                     </td>
                                     <td>{{ $product->condition->lang() }}</td>

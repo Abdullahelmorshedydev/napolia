@@ -24,6 +24,4 @@
 </div>
 <!-- tap to top End -->
 
-@include('web.site.layouts.footer.settings')
-
 @include('web.site.layouts.footer.script')

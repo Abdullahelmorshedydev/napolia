@@ -14,8 +14,7 @@ return new class extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['active', 'desactive'])
-                ->default(SliderStatusEnum::ACTIVE->value);
+            $table->enum('status', SliderStatusEnum::values())->default(SliderStatusEnum::ACTIVE->value);
             $table->timestamps();
         });
     }

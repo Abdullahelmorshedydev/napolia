@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-xl-6 col-md-6 col-sm-12">
                 <div class="footer-end">
-                    <p><i class="fa fa-copyright" aria-hidden="true"></i> 2018-19 themeforest powered by pixelstrap</p>
+                    <p><i class="fa fa-copyright" aria-hidden="true"></i> {{ now()->year }}
+                        {{ settings()->get('site_name_' . app()->currentLocale()) }} POWERED BY EL-MORSHEDY</p>
                 </div>
             </div>
             <div class="col-xl-6 col-md-6 col-sm-12">

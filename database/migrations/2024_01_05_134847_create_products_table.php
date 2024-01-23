@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\DiscountTypeEnum;
 use App\Enums\ProductConditionEnum;
 use App\Enums\ProductStatusEnum;
 use Illuminate\Support\Facades\Schema;
@@ -16,17 +17,19 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->string('slug');
             $table->json('description');
             $table->integer('quantity');
             $table->decimal('price');
             $table->decimal('discount')->nullable();
-            $table->enum('status', ['active', 'desactive'])->default(ProductStatusEnum::ACTIVE->value);
-            $table->enum('condition',['default','new','hot'])->default(ProductConditionEnum::DEFAULT->value);
+            $table->enum('discount_type', DiscountTypeEnum::values())->nullable();
+            $table->enum('status', ProductStatusEnum::values())->default(ProductStatusEnum::ACTIVE->value);
+            $table->enum('condition', ProductConditionEnum::values())->default(ProductConditionEnum::DEFAULT->value);
             $table->integer('sales_count')->default(0);
+            $table->integer('shipping_time');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('sub_category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -1,6 +1,10 @@
 @extends('web.admin.layouts.app')
 
 @push('style')
+    <!---Internal Fileupload css-->
+    <link href="{{ asset('admin/assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+    <!---Internal Fancy uploader css-->
+    <link href="{{ asset('admin/assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
 @endpush
 
 @section('title', __('admin/product/create.title'))
@@ -56,14 +60,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="quantity">{{ __('admin/product/create.quantity_label') }}</label>
-                                    <input type="number" value="{{ old('quantity') }}" name="quantity"
-                                        class="form-control" id="quantity"
-                                        placeholder="{{ __('admin/product/create.quantity_place') }}">
-                                    @error('quantity')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="slug">{{ __('admin/product/create.slug_label') }}</label>
+                                            <input type="text" value="{{ old('slug') }}" name="slug"
+                                                class="form-control" id="slug"
+                                                placeholder="{{ __('admin/product/create.slug_place') }}">
+                                            @error('slug')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="quantity">{{ __('admin/product/create.quantity_label') }}</label>
+                                            <input type="number" value="{{ old('quantity') }}" name="quantity"
+                                                class="form-control" id="quantity"
+                                                placeholder="{{ __('admin/product/create.quantity_place') }}">
+                                            @error('quantity')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -80,6 +99,20 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label
+                                                for="shipping_time1">{{ __('admin/product/create.shipping_time_label') }}</label>
+                                            <input type="number" value="{{ old('shipping_time') }}" name="shipping_time"
+                                                class="form-control" id="shipping_time1"
+                                                placeholder="{{ __('admin/product/create.shipping_time_place') }}">
+                                            @error('shipping_time')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="discount1">{{ __('admin/product/create.discount_label') }}</label>
                                             <input type="text" value="{{ old('discount') }}" name="discount"
                                                 class="form-control" id="discount1"
@@ -89,15 +122,35 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="discount_type">{{ __('admin/product/create.discount_type_label') }}</label>
+                                            <select name="discount_type" id="type" class="form-control">
+                                                <option disabled selected>
+                                                    {{ __('admin/product/create.discount_type_place') }}
+                                                </option>
+                                                @foreach ($types as $type)
+                                                    <option {{ old('discount_type') == $type->value ? 'selected' : '' }}
+                                                        value="{{ $type->value }}">
+                                                        {{ $type->lang() }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('discount_type')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputDescription_en1">
                                         {{ __('admin/product/create.description_en_label') }}
                                     </label>
                                     <textarea class="form-control" name="description_en" id="exampleInputDescription_en1"
-                                        placeholder="{{ __('admin/product/create.description_en_place') }}">
-                                        {{ old('description_en') }}
-                                    </textarea>
+                                        placeholder="{{ __('admin/product/create.description_en_place') }}">{{ old('description_en') }}</textarea>
                                     @error('description_en')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -107,9 +160,7 @@
                                         {{ __('admin/product/create.description_ar_label') }}
                                     </label>
                                     <textarea class="form-control" name="description_ar" id="exampleInputDescription_ar1"
-                                        placeholder="{{ __('admin/product/create.description_ar_place') }}">
-                                        {{ old('description_ar') }}
-                                    </textarea>
+                                        placeholder="{{ __('admin/product/create.description_ar_place') }}">{{ old('description_ar') }}</textarea>
                                     @error('description_ar')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -157,70 +208,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/create.image_1_label') }}
-                                            </label>
+                                            <label for="exampleInputImage1">{{ __('admin/product/create.images_label') }}</label>
                                             <div class="custom-file">
-                                                <input class="custom-file-input" name="image_1" id="customFile"
-                                                    type="file">
+                                                <input type="file" class="custom-file-input" name="images[]" multiple>
                                                 <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/create.choose_file') }}
+                                                    {{ __('admin/product/create.choose_file') }}
                                                 </label>
                                             </div>
-                                            @error('image_1')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/create.image_2_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input class="custom-file-input" name="image_2" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/create.choose_file') }}
-                                                </label>
-                                            </div>
-                                            @error('image_2')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/create.image_3_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input class="custom-file-input" name="image_3" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/create.choose_file') }}
-                                                </label>
-                                            </div>
-                                            @error('image_3')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/create.image_4_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input class="custom-file-input" name="image_4" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/create.choose_file') }}
-                                                </label>
-                                            </div>
-                                            @error('image_4')
+                                            @error('images')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->decimal('price');
-            $table->foreignId('city_id')->unique()->constrained('cities')->cascadeOnDelete();
+            $table->foreignId('state_id')->unique()->constrained('states')->cascadeOnDelete();
             $table->timestamps();
         });
     }

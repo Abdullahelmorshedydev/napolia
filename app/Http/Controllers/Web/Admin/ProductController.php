@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Enums\CategoryStatusEnum;
+use App\Enums\ColorEnum;
+use App\Enums\DiscountTypeEnum;
 use App\Enums\ProductConditionEnum;
 use App\Enums\ProductStatusEnum;
 use App\Models\Product;
@@ -10,7 +12,9 @@ use App\Models\Category;
 use App\Traits\FilesTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Product\StoreProductRequest;
+use App\Http\Requests\Web\Admin\Product\UpdateImageRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateProductRequest;
+use App\Models\Image;
 
 class ProductController extends Controller
 {
@@ -30,8 +34,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
-        return view('web.admin.pages.product.create', compact('categories'));
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->has('categories')->get();
+        $types = DiscountTypeEnum::cases();
+        return view('web.admin.pages.product.create', compact('categories', 'types'));
     }
 
     /**
@@ -44,24 +49,21 @@ class ProductController extends Controller
             'name' => ['en' => $data['name_en'], 'ar' => $data['name_ar']],
             'description' => ['en' => $data['description_en'], 'ar' => $data['description_ar']],
             'price' => $data['price'],
+            'slug' => $data['slug'],
             'discount' => isset($data['discount']) ? $data['discount'] : null,
+            'discount_type' => isset($data['discount_type']) ? $data['discount_type'] : null,
             'condition' => isset($data['condition']) ? $data['condition'] : 'default',
             'quantity' => $data['quantity'],
+            'shipping_time' => $data['shipping_time'],
+            'color' => explode(',', $data['color']),
             'category_id' => $data['category_id'],
             'sub_category_id' => $data['sub_category_id'],
         ]);
-        $product->images()->create([
-            'image' => FilesTrait::store($request->file('image_1'), 'uploads/products/'),
-        ]);
-        $product->images()->create([
-            'image' => FilesTrait::store($request->file('image_2'), 'uploads/products/'),
-        ]);
-        $product->images()->create([
-            'image' => FilesTrait::store($request->file('image_3'), 'uploads/products/'),
-        ]);
-        $product->images()->create([
-            'image' => FilesTrait::store($request->file('image_4'), 'uploads/products/'),
-        ]);
+        foreach ($data['images'] as $image) {
+            $product->images()->create([
+                'image' => FilesTrait::store($image, 'uploads/products/'),
+            ]);
+        }
         return redirect()->route('admin.products.index')->with('success',  __('admin/product/create.success'));
     }
 
@@ -82,8 +84,8 @@ class ProductController extends Controller
         $conditions = ProductConditionEnum::cases();
         $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
         $subCategories = Category::where('category_id', $product->category_id)->get();
-        $images = $product->images;
-        return view('web.admin.pages.product.edit', compact('product', 'status', 'conditions', 'categories', 'subCategories', 'images'));
+        $types = DiscountTypeEnum::cases();
+        return view('web.admin.pages.product.edit', compact('product', 'status', 'conditions', 'categories', 'subCategories', 'types'));
     }
 
     /**
@@ -91,21 +93,29 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $data = $request->validated();
-        if ($request->hasFile('image_1')) {
-            FilesTrait::update($product, $data['image_id_1'], $request->file('image_1'), 'uploads/products/');
-        }
-        if ($request->hasFile('image_2')) {
-            FilesTrait::update($product, $data['image_id_2'], $request->file('image_2'), 'uploads/products/');
-        }
-        if ($request->hasFile('image_3')) {
-            FilesTrait::update($product, $data['image_id_3'], $request->file('image_3'), 'uploads/products/');
-        }
-        if ($request->hasFile('image_4')) {
-            FilesTrait::update($product, $data['image_id_4'], $request->file('image_4'), 'uploads/products/');
-        }
-        $product->update($data);
+        $product->update($request->validated());
         return redirect()->route('admin.products.index')->with('success', __('admin/product/edit.success'));
+    }
+
+    public function editImage(Image $image)
+    {
+        return view('web.admin.pages.product.editImage', compact('image'));
+    }
+
+    public function updateImage(UpdateImageRequest $request, Image $image)
+    {
+        FilesTrait::delete($image->image);
+        $image->update([
+            'image' => FilesTrait::store($request->file('image'), 'uploads/products/'),
+        ]);
+        return redirect()->route('admin.products.show', $image->morphable_id)->with('success', __('admin/product/edit.success_image'));
+    }
+
+    public function deleteImage(Image $image)
+    {
+        FilesTrait::delete($image->image);
+        $image->delete();
+        return redirect()->route('admin.products.show', $image->morphable_id)->with('success', __('admin/product/edit.success_delete_image'));
     }
 
     /**

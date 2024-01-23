@@ -27,8 +27,18 @@
                         <h5 class="card-title">{{ __('admin/product/show.images') }}:</h5>
                     </div>
                     @foreach ($product->images as $image)
-                        <div class="img-fluid card-img-top mt-5 col-md-6">
-                            <img width="75%" height="200px" src="{{ asset($image->image) }}" alt="image">
+                        <div class="img-fluid card-img-top mt-5 col-md-4">
+                            <div class="mb-2">
+                                <img width="75%" height="200px" src="{{ asset($image->image) }}" alt="image">
+                            </div>
+                            <div class="col-md-12">
+                                <a class="btn btn-info" href="{{ route('admin.products.edit.image', $image->id) }}">{{ __('admin/product/index.edit') }}</a>
+                                <form action="{{ route('admin.products.delete.image', $image->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">{{ __('admin/product/index.delete') }}</button>
+                                </form>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -43,19 +53,19 @@
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.price') }}:
-                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->price }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->price . ' ' . __('admin/product/show.pound') }}</h6>
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.discount') }}:
                         <h6 class="card-subtitle mb-2 text-muted d-inline">
-                            {{ $product->discount ? $product->discount : 0 }}
-                            %</h6>
+                            {{ $product->discount ? $product->discount . $product->discount_type->char() : 0 }}
+                        </h6>
                     </div>
                     @isset($product->discount)
                         <div class="col-md-12 mt-2">
                             {{ __('admin/product/show.price_after_discount') }}:
                             <h6 class="card-subtitle mb-2 text-muted d-inline">
-                                {{ $product->price - $product->price * ($product->discount / 100) . __('admin/product/show.pound') }}
+                                {{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
                             </h6>
                         </div>
                     @endisset

@@ -119,6 +119,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
+    Route::get('/editImage/{image}', [ProductController::class, 'editImage'])->name('products.edit.image');
+    Route::put('/updateImage/{image}', [ProductController::class, 'updateImage'])->name('products.update.image');
+    Route::delete('/deleteImage/{image}', [ProductController::class, 'deleteImage'])->name('products.delete.image');
     Route::get('/sub-categories/{id?}',[ProductController::class, 'getSubCategories'])->name('sub_categories');
 
     Route::resource('coupons', CouponController::class)->except('show');

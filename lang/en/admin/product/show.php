@@ -18,6 +18,7 @@ return [
     'category' => 'Category',
     'sub_category' => 'Sub Category',
     'sales_count' => 'Sales Count',
+    'pound' => 'LE',
     'edit' => 'Edit',
     'delete' => 'Delete',
 

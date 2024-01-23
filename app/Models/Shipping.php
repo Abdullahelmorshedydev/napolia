@@ -13,11 +13,11 @@ class Shipping extends Model
 
     protected $fillable = [
         'price',
-        'city_id',
+        'state',
     ];
 
-    public function city()
+    public function state()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(State::class);
     }
 }

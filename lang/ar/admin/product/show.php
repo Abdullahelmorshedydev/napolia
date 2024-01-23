@@ -18,6 +18,7 @@ return [
     'category' => 'القسم',
     'sub_category' => 'القسم التابع',
     'sales_count' => 'مرات البيع',
+    'pound' => 'جنيه',
     'edit' => 'تعديل',
     'delete' => 'حذف',
 

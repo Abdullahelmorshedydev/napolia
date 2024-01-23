@@ -9,5 +9,10 @@ return [
     'new' => 'جديد',
     'fixed' => 'نقدى',
     'percent' => 'مئوى',
+    'fixed_char' => 'جنيه',
+    'percent_char' => '%',
+    'red' => 'أحمر',
+    'green' => 'أخضر',
+    'black' => 'أسود',
 
 ];

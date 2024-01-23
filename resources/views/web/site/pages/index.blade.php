@@ -10,45 +10,13 @@
             <div class="row">
                 <div class="col-12 slider-part">
                     <div class="slide-1 home-slider">
+                        @foreach ($sliders as $slider)
                         <div>
                             <div class="home text-center p-right">
-                                <img src="{{ asset('site/assets/images/home-banner/23.jpg') }}" class="bg-img " alt="">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="slider-contain">
-                                                <div>
-                                                    <h5>all furniture</h5>
-                                                    <h1>latest funrniture</h1>
-                                                    <h4>save up to 50% off</h4>
-                                                    <a href="#" class="btn btn-solid">shop now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <img src="{{ asset($slider->image->image) }}" class="bg-img " alt="">
                             </div>
                         </div>
-                        <div>
-                            <div class="home text-center p-right">
-                                <img src="{{ asset('site/assets/images/home-banner/24.jpg') }}" class="bg-img "
-                                    alt="">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="slider-contain">
-                                                <div>
-                                                    <h5>all furniture</h5>
-                                                    <h1>latest funrniture</h1>
-                                                    <h4>save up to 50% off</h4>
-                                                    <a href="#" class="btn btn-solid">shop now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -60,97 +28,22 @@
     <section class="category category-classic bg-grey">
         <div class="container">
             <div class="slide-6 no-arrow">
+                @foreach ($categories as $category)
                 <div>
                     <div class="category-wrapper">
                         <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/1.png') }}"
+                            <a href="#">
+                                <img src="{{ asset($category->image->image) }}"
                                     alt="" class=" img-fluid"></a>
                         </div>
                         <div class="category-title">
                             <a href="#">
-                                <h5>mobile</h5>
+                                <h5>{{ $category->name }}</h5>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="category-wrapper">
-                        <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/2.png') }}"
-                                    alt="" class=" img-fluid"></a>
-                        </div>
-                        <div class="category-title">
-                            <a href="#">
-                                <h5>t-shirt</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="category-wrapper">
-                        <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/3.png') }}"
-                                    alt="" class=" img-fluid"></a>
-                        </div>
-                        <div class="category-title">
-                            <a href="#">
-                                <h5>camera</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="category-wrapper">
-                        <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/4.png') }}"
-                                    alt="" class=" img-fluid"></a>
-                        </div>
-                        <div class="category-title">
-                            <a href="#">
-                                <h5>table</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="category-wrapper">
-                        <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/5.png') }}"
-                                    alt="" class=" img-fluid"></a>
-                        </div>
-                        <div class="category-title">
-                            <a href="#">
-                                <h5>ps4</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="category-wrapper">
-                        <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/6.png') }}"
-                                    alt="" class=" img-fluid"></a>
-                        </div>
-                        <div class="category-title">
-                            <a href="#">
-                                <h5>shoes</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="category-wrapper">
-                        <div class="img-block">
-                            <a href="#"><img src="{{ asset('site/assets/images/category/furniture/7.png') }}"
-                                    alt="" class=" img-fluid"></a>
-                        </div>
-                        <div class="category-title">
-                            <a href="#">
-                                <h5>camera</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

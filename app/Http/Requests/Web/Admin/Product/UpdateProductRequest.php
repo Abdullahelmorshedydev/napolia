@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Web\Admin\Product;
 
-use App\Enums\ProductConditionEnum;
-use App\Enums\ProductStatusEnum;
+use App\Enums\DiscountTypeEnum;
 use Illuminate\Validation\Rule;
+use App\Enums\ProductStatusEnum;
+use App\Enums\ProductConditionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
@@ -26,24 +27,35 @@ class UpdateProductRequest extends FormRequest
     {
         $condition = ProductConditionEnum::cases();
         $status = ProductStatusEnum::cases();
+        $types = DiscountTypeEnum::cases();
         return [
             'name' => ['required', 'string', 'unique:products,name,' . $this->id, 'min:3', 'max:50'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
-            'discount' => ['nullable', 'numeric'],
+            'shipping_time' => ['required', 'numeric'],
+            'discount' => ['numeric', 'min:0', function ($attribte, $value, $fail) {
+                if (request()->input('discount_type') == 'percent') {
+                    if ($value <= 0 || $value > 100) {
+                        $fail(__('admin/prodcut/create.valid_max'));
+                    }
+                } elseif (request()->input('discount_type') == 'fixed') {
+                    if ($value > request()->input('price')) {
+                        $fail(__('admin/prodcut/create.valid_max'));
+                    }
+                }
+            }],
+            'discount_type' => [Rule::in($types), function ($attribte, $value, $fail) {
+                if (request()->input('discount') != null) {
+                    if ($value == null) {
+                        $fail(__('admin/prodcut/create.valid_required'));
+                    }
+                }
+            }],
             'condition' => ['nullable', Rule::in($condition)],
             'status' => ['nullable', Rule::in($status)],
             'quantity' => ['required', 'numeric'],
             'category_id' => ['required', 'exists:categories,id'],
             'sub_category_id' => ['required', 'exists:categories,id'],
-            'image_id_1' => ['required'],
-            'image_id_2' => ['required'],
-            'image_id_3' => ['required'],
-            'image_id_4' => ['required'],
-            'image_1' => ['nullable', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
-            'image_2' => ['nullable', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
-            'image_3' => ['nullable', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
-            'image_4' => ['nullable', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
         ];
     }
 
@@ -68,18 +80,10 @@ class UpdateProductRequest extends FormRequest
             'category_id.exists' => __('admin/product/create.valid_exists'),
             'sub_category_id.required' => __('admin/product/create.valid_required'),
             'sub_category_id.exists' => __('admin/product/create.valid_exists'),
-            'image_1.image' => __('admin/product/create.valid_image'),
-            'image_1.mimetype' => __('admin/product/create.valid_mimetype'),
-            'image_1.mimes' => __('admin/product/create.valid_mimes'),
-            'image_2.image' => __('admin/product/create.valid_image'),
-            'image_2.mimetype' => __('admin/product/create.valid_mimetype'),
-            'image_2.mimes' => __('admin/product/create.valid_mimes'),
-            'image_3.image' => __('admin/product/create.valid_image'),
-            'image_3.mimetype' => __('admin/product/create.valid_mimetype'),
-            'image_3.mimes' => __('admin/product/create.valid_mimes'),
-            'image_4.image' => __('admin/product/create.valid_image'),
-            'image_4.mimetype' => __('admin/product/create.valid_mimetype'),
-            'image_4.mimes' => __('admin/product/create.valid_mimes'),
+            'discount.numeric' => __('admin/product/create.valid_numeric'),
+            'discount_type.rule' => __('admin/product/create.valid_rule'),
+            'shipping_time.required' => __('admin/product/create.valid_required'),
+            'shipping_time.numeric' => __('admin/product/create.valid_numeric'),
         ];
     }
 }
