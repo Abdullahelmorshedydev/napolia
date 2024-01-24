@@ -63,11 +63,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="slug">{{ __('admin/product/create.slug_label') }}</label>
-                                            <input type="text" value="{{ old('slug') }}" name="slug"
-                                                class="form-control" id="slug"
-                                                placeholder="{{ __('admin/product/create.slug_place') }}">
-                                            @error('slug')
+                                            <label for="code">{{ __('admin/product/create.code_label') }}</label>
+                                            <input type="text" value="{{ old('code') }}" name="code"
+                                                class="form-control" id="code"
+                                                placeholder="{{ __('admin/product/create.code_place') }}">
+                                            @error('code')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

@@ -5,19 +5,22 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Models\City;
 use Illuminate\Http\Request;
 use App\Enums\CityStatusEnum;
+use App\Enums\CountryStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\City\StoreCityRequest;
 use App\Http\Requests\Web\Admin\City\UpdateCityRequest;
 use App\Models\Country;
+use App\Traits\TranslateTrait;
 
 class CityController extends Controller
 {
+    use TranslateTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cities = City::with('country')->paginate();
+        $cities = City::where('status', CityStatusEnum::ACTIVE->value)->with('country')->paginate();
         return view('web.admin.pages.city.index', compact('cities'));
     }
 
@@ -26,7 +29,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        $countries = Country::get();
+        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.city.create', compact('countries'));
     }
 
@@ -35,13 +38,10 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        City::create([
-            'name' => [
-                'ar' => $request->name_ar,
-                'en' => $request->name_en,
-            ],
-            'country_id' => $request->country_id,
-        ]);
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        City::create($data);
         return redirect()->route('admin.cities.index')->with('success',  __('admin/city/create.success'));
     }
 
@@ -51,7 +51,7 @@ class CityController extends Controller
     public function edit(City $city)
     {
         $status = CityStatusEnum::cases();
-        $countries = Country::get();
+        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.city.edit', compact('city', 'status', 'countries'));
     }
 
@@ -60,7 +60,10 @@ class CityController extends Controller
      */
     public function update(UpdateCityRequest $request, City $city)
     {
-        $city->update($request->validated());
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        $city->update($data);
         return redirect()->route('admin.cities.index')->with('success',  __('admin/city/edit.success'));
     }
 

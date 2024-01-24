@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Enums\CityStatusEnum;
+use App\Enums\CountryStatusEnum;
 use App\Models\City;
 use App\Models\State;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Enums\StateStatusEnum;
+use App\Traits\TranslateTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\State\StoreStateRequest;
 use App\Http\Requests\Web\Admin\State\UpdateStateRequest;
 
 class StateController extends Controller
 {
+    use TranslateTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $states = State::with('city')->with('country')->paginate();
+        $states = State::where('status', StateStatusEnum::ACTIVE->value)->with('city')->with('country')->paginate();
         return view('web.admin.pages.state.index', compact('states'));
     }
 
@@ -27,8 +31,8 @@ class StateController extends Controller
      */
     public function create()
     {
-        $countries = Country::get();
-        $cities = City::get();
+        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->get();
+        $cities = City::where('status', CityStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.state.create', compact('countries', 'cities'));
     }
 
@@ -37,14 +41,10 @@ class StateController extends Controller
      */
     public function store(StoreStateRequest $request)
     {
-        State::create([
-            'name' => [
-                'ar' => $request->name_ar,
-                'en' => $request->name_en,
-            ],
-            'country_id' => $request->country_id,
-            'city_id' => $request->city_id,
-        ]);
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        State::create($data);
         return redirect()->route('admin.states.index')->with('success',  __('admin/state/create.success'));
     }
 
@@ -54,8 +54,8 @@ class StateController extends Controller
     public function edit(State $state)
     {
         $status = StateStatusEnum::cases();
-        $countries = Country::get();
-        $cities = City::where('country_id', $state->country_id)->get();
+        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->get();
+        $cities = City::where('country_id', $state->country_id)->where('status', CityStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.state.edit', compact('state', 'cities', 'status', 'countries'));
     }
 
@@ -64,7 +64,10 @@ class StateController extends Controller
      */
     public function update(UpdateStateRequest $request, State $state)
     {
-        $state->update($request->validated());
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        $state->update($data);
         return redirect()->route('admin.states.index')->with('success',  __('admin/state/edit.success'));
     }
 

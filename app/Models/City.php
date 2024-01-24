@@ -13,13 +13,20 @@ class City extends Model
 
     protected $table = 'cities';
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'slug'];
 
     protected $fillable = [
         'name',
+        'slug',
         'country_id',
         'status',
     ];
+
+    public function getRouteKeyName()
+    {
+        $locale = app()->getLocale();
+        return "slug->{$locale}";
+    }
 
     protected $casts = [
         'status' => CityStatusEnum::class,

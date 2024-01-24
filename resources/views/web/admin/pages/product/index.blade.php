@@ -56,14 +56,14 @@
                                     <td>{{ $product->condition->lang() }}</td>
                                     <td>{{ $product->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.products.show', $product->id) }}"
+                                        <a href="{{ route('admin.products.show', $product->slug) }}"
                                             class="btn btn-secondary">
                                             {{ __('admin/product/index.show') }}
                                         </a>
-                                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info">
+                                        <a href="{{ route('admin.products.edit', $product->slug) }}" class="btn btn-info">
                                             {{ __('admin/product/index.edit') }}
                                         </a>
-                                        <form class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}"
+                                        <form class="d-inline" action="{{ route('admin.products.destroy', $product->slug) }}"
                                             method="post">
                                             @csrf
                                             @method('DELETE')

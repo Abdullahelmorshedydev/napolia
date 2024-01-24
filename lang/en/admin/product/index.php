@@ -11,7 +11,7 @@ return [
     'status' => 'Status',
     'edit' => 'Edit',
     'delete' => 'Delete',
-    'show' => 'Show',
+    'show' => 'Details',
     'success' => 'Product Deleted Successfully',
     'price' => 'Price',
     'discount' => 'Discount',

@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Country\StoreCountryRequest;
 use App\Http\Requests\Web\Admin\Country\UpdateCountryRequest;
+use App\Traits\TranslateTrait;
 
 class CountryController extends Controller
 {
+    use TranslateTrait;
     /**
      * Display a listing of the resource.
      */
@@ -33,12 +35,10 @@ class CountryController extends Controller
      */
     public function store(StoreCountryRequest $request)
     {
-        Country::create([
-            'name' => [
-                'ar' => $request->name_ar,
-                'en' => $request->name_en,
-            ],
-        ]);
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        Country::create($data);
         return redirect()->route('admin.countries.index')->with('success',  __('admin/country/create.success'));
     }
 
@@ -56,7 +56,10 @@ class CountryController extends Controller
      */
     public function update(UpdateCountryRequest $request, Country $country)
     {
-        $country->update($request->validated());
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        $country->update($data);
         return redirect()->route('admin.countries.index')->with('success',  __('admin/country/edit.success'));
     }
 

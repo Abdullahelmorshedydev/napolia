@@ -13,12 +13,19 @@ class Country extends Model
 
     protected $table = 'countries';
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'slug'];
 
     protected $fillable = [
         'name',
+        'slug',
         'status',
     ];
+
+    public function getRouteKeyName()
+    {
+        $locale = app()->getLocale();
+        return "slug->{$locale}";
+    }
 
     protected $casts = [
         'status' => CountryStatusEnum::class,

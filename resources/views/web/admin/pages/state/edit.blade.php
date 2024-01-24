@@ -28,56 +28,79 @@
                         <h4 class="card-title mb-1">{{ __('admin/state/edit.title') }}</h4>
                     </div>
                     <div class="card-body pt-0">
-                        <form action="{{ route('admin.states.update', $state->id) }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('admin.states.update', $state->slug) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">{{ __('admin/state/edit.name_label') }}</label>
-                                    <input type="text" value="{{ old('name', $state->name) }}" name="name"
-                                        class="form-control" id="exampleInputName1"
-                                        placeholder="{{ __('admin/state/edit.name_place') }}">
-                                    @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="exampleInputNameEn1">{{ __('admin/state/edit.name_en_label') }}</label>
+                                            <input type="text" value="{{ old('name_en', $state->getTranslation('name', 'en')) }}" name="name_en"
+                                                class="form-control" id="exampleInputNameEn1"
+                                                placeholder="{{ __('admin/state/edit.name_en_place') }}">
+                                            @error('name_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="exampleInputNameAr1">{{ __('admin/state/edit.name_ar_label') }}</label>
+                                            <input type="text" value="{{ old('name_ar', $state->getTranslation('name', 'ar')) }}" name="name_ar"
+                                                class="form-control" id="exampleInputNameAr1"
+                                                placeholder="{{ __('admin/state/edit.name_ar_place') }}">
+                                            @error('name_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="countryId1">{{ __('admin/state/edit.country_id_label') }}</label>
-                                    <select name="country_id" id="countryId1" class="form-control">
-                                        <option disabled selected>{{ __('admin/state/edit.country_id_place') }}
-                                        </option>
-                                        @foreach ($countries as $country)
-                                            <option
-                                                {{ old('country_id', $state->country_id) == $country->id ? 'selected' : '' }}
-                                                value="{{ $country->id }}">
-                                                {{ $country->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('country_id')
-                                        <span class="text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="cityId1">{{ __('admin/state/edit.city_id_label') }}</label>
-                                    <select name="city_id" id="cityId1" class="form-control">
-                                        <option disabled selected>{{ __('admin/state/edit.city_id_place') }}
-                                        </option>
-                                        @foreach ($cities as $city)
-                                            <option {{ old('city_id', $state->city_id) == $city->id ? 'selected' : '' }}
-                                                value="{{ $city->id }}">
-                                                {{ $city->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('city_id')
-                                        <span class="text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="exampleInputcountryId1">{{ __('admin/state/edit.country_id_label') }}</label>
+                                            <select name="country_id" id="exampleInputcountryId1" class="form-control">
+                                                <option disabled selected>{{ __('admin/state/edit.country_id_place') }}
+                                                </option>
+                                                @foreach ($countries as $country)
+                                                    <option {{ old('country_id', $state->country_id) == $country->id ? 'selected' : '' }}
+                                                        value="{{ $country->id }}">
+                                                        {{ $country->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('country_id')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="exampleInputcityId1">{{ __('admin/state/edit.city_id_label') }}</label>
+                                            <select name="city_id" id="exampleInputcityId1" class="form-control">
+                                                <option disabled selected>{{ __('admin/state/edit.city_id_place') }}
+                                                </option>
+                                                @foreach ($cities as $city)
+                                                    <option {{ old('city_id', $state->city_id) == $city->id ? 'selected' : '' }}
+                                                        value="{{ $city->id }}">
+                                                        {{ $city->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('city_id')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputStatus1">{{ __('admin/state/edit.status_label') }}</label>

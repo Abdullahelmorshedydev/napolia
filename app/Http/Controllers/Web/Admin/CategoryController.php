@@ -8,17 +8,18 @@ use App\Http\Requests\Web\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Web\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Traits\FilesTrait;
+use App\Traits\TranslateTrait;
 
 class CategoryController extends Controller
 {
-    use FilesTrait;
+    use FilesTrait, TranslateTrait;
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::with('image')->with('category')->paginate();
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->with('image')->with('category')->paginate();
         return view('web.admin.pages.category.index', compact('categories'));
     }
 
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.category.create', compact('categories'));
     }
 
@@ -37,10 +38,9 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->validated();
-        $category = Category::create([
-            'name' => ['en' => $data['name_en'], 'ar' => $data['name_ar']],
-            'category_id' => isset($data['category_id']) ? $data['category_id'] : null,
-        ]);
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        $category = Category::create($data);
         $category->image()->create([
             'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
         ]);
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get()->except($category->id);
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get()->except($category->slug);
         $status = CategoryStatusEnum::cases();
         return view('web.admin.pages.category.edit', compact('category', 'categories', 'status'));
     }
@@ -72,6 +72,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $data = $request->validated();
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
         if ($request->hasFile('image')) {
             FilesTrait::delete($category->image->image);
             $category->image->update([

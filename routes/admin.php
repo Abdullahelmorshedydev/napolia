@@ -119,6 +119,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
+    Route::get('/createImage/{product}', [ProductController::class, 'createImage'])->name('products.create.image');
+    Route::post('/createImage/{product}', [ProductController::class, 'storeImage'])->name('products.store.image');
     Route::get('/editImage/{image}', [ProductController::class, 'editImage'])->name('products.edit.image');
     Route::put('/updateImage/{image}', [ProductController::class, 'updateImage'])->name('products.update.image');
     Route::delete('/deleteImage/{image}', [ProductController::class, 'deleteImage'])->name('products.delete.image');

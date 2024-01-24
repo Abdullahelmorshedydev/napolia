@@ -28,7 +28,7 @@
                         <h4 class="card-title mb-1">{{ __('admin/state/create.title') }}</h4>
                     </div>
                     <div class="card-body pt-0">
-                        <form action="{{ route('admin.states.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.states.store') }}" method="POST">
                             @csrf
                             <div class="">
                                 <div class="row">

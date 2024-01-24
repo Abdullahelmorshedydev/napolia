@@ -21,5 +21,6 @@ return [
     'pound' => 'جنيه',
     'edit' => 'تعديل',
     'delete' => 'حذف',
+    'create_image' => 'اضافة صورة جديدة',
 
 ];

@@ -17,11 +17,12 @@ class Product extends Model
 
     protected $table = 'products';
 
-    public $translatable = ['name', 'description'];
+    public $translatable = ['name', 'description', 'slug'];
 
     protected $fillable = [
         'name',
         'slug',
+        'code',
         'quantity',
         'price',
         'discount',
@@ -34,6 +35,12 @@ class Product extends Model
         'category_id',
         'sub_category_id',
     ];
+
+    public function getRouteKeyName()
+    {
+        $locale = app()->getLocale();
+        return "slug->{$locale}";
+    }
 
     protected $casts = [
         'status' => ProductStatusEnum::class,

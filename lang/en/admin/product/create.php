@@ -16,8 +16,8 @@ return [
     'description_ar_label' => 'Description in arabic',
     'description_en_place' => 'Enter Description in english',
     'description_ar_place' => 'Enter Description in arabic',
-    'slug_label' => 'Slug',
-    'slug_place' => 'Enter Product Slug',
+    'code_label' => 'Code',
+    'code_place' => 'Enter Product Code',
     'shipping_time_label' => 'Shipping Time',
     'shipping_time_place' => 'Enter Shipping Time',
     'discount_type_label' => 'Discount Type',
@@ -48,5 +48,6 @@ return [
     'valid_array' => 'This input should be an array',
     'another_image' => 'add another image',
     'success' => 'Product Created Successfully',
+    'success_image' => 'Product Image Added Successfully',
 
 ];

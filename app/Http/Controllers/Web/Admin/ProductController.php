@@ -11,14 +11,16 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Traits\FilesTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Admin\Product\StoreImageRequest;
 use App\Http\Requests\Web\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateImageRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateProductRequest;
 use App\Models\Image;
+use App\Traits\TranslateTrait;
 
 class ProductController extends Controller
 {
-    use FilesTrait;
+    use FilesTrait, TranslateTrait;
 
     /**
      * Display a listing of the resource.
@@ -34,7 +36,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->has('categories')->get();
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
         $types = DiscountTypeEnum::cases();
         return view('web.admin.pages.product.create', compact('categories', 'types'));
     }
@@ -45,20 +47,10 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
-        $product = Product::create([
-            'name' => ['en' => $data['name_en'], 'ar' => $data['name_ar']],
-            'description' => ['en' => $data['description_en'], 'ar' => $data['description_ar']],
-            'price' => $data['price'],
-            'slug' => $data['slug'],
-            'discount' => isset($data['discount']) ? $data['discount'] : null,
-            'discount_type' => isset($data['discount_type']) ? $data['discount_type'] : null,
-            'condition' => isset($data['condition']) ? $data['condition'] : 'default',
-            'quantity' => $data['quantity'],
-            'shipping_time' => $data['shipping_time'],
-            'color' => explode(',', $data['color']),
-            'category_id' => $data['category_id'],
-            'sub_category_id' => $data['sub_category_id'],
-        ]);
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['description'] = TranslateTrait::translate($request->description_en, $request->description_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        $product = Product::create($data);
         foreach ($data['images'] as $image) {
             $product->images()->create([
                 'image' => FilesTrait::store($image, 'uploads/products/'),
@@ -93,8 +85,25 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->validated());
+        $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
+        $data['description'] = TranslateTrait::translate($request->description_en, $request->description_ar);
+        $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        $product->update($data);
         return redirect()->route('admin.products.index')->with('success', __('admin/product/edit.success'));
+    }
+
+    public function createImage(Product $product)
+    {
+        return view('web.admin.pages.product.createImage', compact('product'));
+    }
+
+    public function storeImage(StoreImageRequest $request, Product $product)
+    {
+        $product->images()->create([
+            'image' => FilesTrait::store($request->file('image'), 'uploads/products/'),
+        ]);
+        return redirect()->route('admin.products.show', $product->slug)->with('success',  __('admin/product/create.success_image'));
     }
 
     public function editImage(Image $image)

@@ -3,8 +3,9 @@
         <div class="col-12">
             <div class="left-part">
                 <div class="brand-logo">
-                    <a href="{{ route('index') }}"> <img src="{{ asset(settings()->get('site_logo')) }}" class=" img-fluid"
-                            alt=""></a>
+                    <a href="{{ route('index') }}">
+                        <img src="{{ asset(settings()->get('site_logo')) }}" class=" img-fluid" alt="">
+                    </a>
                 </div>
             </div>
             <div class="nav-right">

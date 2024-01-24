@@ -52,15 +52,15 @@
                                     <th>{{ isset($category->category) ? $category->category->name : 'Parent' }}</th>
                                     <td>{{ $category->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.categories.show', $category->id) }}"
+                                        <a href="{{ route('admin.categories.show', $category->slug) }}"
                                             class="btn btn-secondary">
                                             {{ __('admin/category/index.show') }}
                                         </a>
-                                        <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-info">
+                                        <a href="{{ route('admin.categories.edit', $category->slug) }}" class="btn btn-info">
                                             {{ __('admin/category/index.edit') }}
                                         </a>
                                         <form class="d-inline"
-                                            action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
+                                            action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger"

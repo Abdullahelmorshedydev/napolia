@@ -4,7 +4,7 @@
             <div class="col-xl-6 col-md-6 col-sm-12">
                 <div class="footer-end">
                     <p><i class="fa fa-copyright" aria-hidden="true"></i> {{ now()->year }}
-                        {{ settings()->get('site_name_' . app()->currentLocale()) }} POWERED BY EL-MORSHEDY</p>
+                        {{ settings()->get('site_name_' . app()->currentLocale()) }} POWERED BY EL-{{ settings()->get('site_name_' . app()->currentLocale()) }}</p>
                 </div>
             </div>
             <div class="col-xl-6 col-md-6 col-sm-12">

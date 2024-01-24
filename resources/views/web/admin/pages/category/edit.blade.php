@@ -32,14 +32,29 @@
                             @csrf
                             @method('PUT')
                             <div class="">
-                                <div class="form-group">
-                                    <label for="exampleInputName1">{{ __('admin/category/edit.name_label') }}</label>
-                                    <input type="text" value="{{ old('name', $category->name) }}" name="name"
-                                        class="form-control" id="exampleInputName1"
-                                        placeholder="{{ __('admin/category/edit.name_place') }}">
-                                    @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName_en1">{{ __('admin/category/edit.name_en_label') }}</label>
+                                            <input type="text" value="{{ old('name_en', $category->getTranslation('name', 'en')) }}" name="name"
+                                                class="form-control" id="exampleInputName_en1"
+                                                placeholder="{{ __('admin/category/edit.name_en_place') }}">
+                                            @error('name_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName_ar1">{{ __('admin/category/edit.name_ar_label') }}</label>
+                                            <input type="text" value="{{ old('name_ar', $category->getTranslation('name', 'ar')) }}" name="name"
+                                                class="form-control" id="exampleInputName_ar1"
+                                                placeholder="{{ __('admin/category/edit.name_ar_place') }}">
+                                            @error('name_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputImage1">{{ __('admin/category/edit.image_label') }}</label>

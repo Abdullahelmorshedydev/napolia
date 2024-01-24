@@ -95,9 +95,9 @@
                                 <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                     <div class="card-sigin">
                                         <div class="mb-5 d-flex"> <a href="index.html">
-                                                <img src="{{ asset('admin/assets/img/brand/favicon.png') }}"
+                                                <img src="{{ asset(settings()->get('favicon')) }}"
                                                     class="sign-favicon ht-40" alt="logo"></a>
-                                            <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Morshedy</h1>
+                                            <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{ settings()->get('site_name_' . app()->currentLocale()) }}</h1>
                                         </div>
                                         <div class="main-signup-header">
                                             <h2 class="text-primary">{{ __('admin/auth/register.get_started') }}</h2>

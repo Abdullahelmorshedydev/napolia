@@ -15,13 +15,20 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'slug'];
 
     protected $fillable = [
         'name',
+        'slug',
         'category_id',
         'status',
     ];
+
+    public function getRouteKeyName()
+    {
+        $locale = app()->getLocale();
+        return "slug->{$locale}";
+    }
 
     protected $casts = [
         'status' => CategoryStatusEnum::class,

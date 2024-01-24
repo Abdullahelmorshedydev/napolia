@@ -25,7 +25,8 @@ class UpdateCountryRequest extends FormRequest
     {
         $status = CountryStatusEnum::cases();
         return [
-            'name' => ['required', 'unique:countries,name,' . $this->country->id],
+            'name_en' => ['required', Rule::unique('countries', 'name->en')->ignore($this->country)],
+            'name_ar' => ['required', Rule::unique('countries', 'name->ar')->ignore($this->country)],
             'status' => [Rule::in($status)],
         ];
     }
@@ -33,9 +34,12 @@ class UpdateCountryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => __('admin/country/edit.valid_required'),
-            'name.string' => __('admin/country/edit.valid_string'),
-            'name.unique' => __('admin/country/edit.valid_uinque'),
+            'name_en.required' => __('admin/country/edit.valid_required'),
+            'name_en.string' => __('admin/country/edit.valid_string'),
+            'name_en.unique' => __('admin/country/edit.valid_uinque'),
+            'name_ar.required' => __('admin/country/edit.valid_required'),
+            'name_ar.string' => __('admin/country/edit.valid_string'),
+            'name_ar.unique' => __('admin/country/edit.valid_uinque'),
             'status.rule' => __('admin/country/edit.valid_rule'),
         ];
     }

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->json('slug');
             $table->enum('status', CountryStatusEnum::values())->default(CountryStatusEnum::ACTIVE->value);
             $table->timestamps();
         });

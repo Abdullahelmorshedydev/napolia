@@ -27,18 +27,43 @@
                         <h4 class="card-title mb-1">{{ __('admin/product/edit.title') }}</h4>
                     </div>
                     <div class="card-body pt-0">
-                        <form action="{{ route('admin.products.update', $product->id) }}" method="POST">
+                        <form action="{{ route('admin.products.update', $product->slug) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputName1">{{ __('admin/product/edit.name_label') }}</label>
-                                            <input type="text" value="{{ old('name', $product->name) }}" name="name"
-                                                class="form-control" id="exampleInputName1"
-                                                placeholder="{{ __('admin/product/edit.name_place') }}">
-                                            @error('name')
+                                            <label for="exampleInputName_en1">{{ __('admin/product/edit.name_en_label') }}</label>
+                                            <input type="text" value="{{ old('name_en', $product->getTranslation('name', 'en')) }}" name="name_en"
+                                                class="form-control" id="exampleInputName_en1"
+                                                placeholder="{{ __('admin/product/edit.name_en_place') }}">
+                                            @error('name_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputName_ar1">{{ __('admin/product/edit.name_ar_label') }}</label>
+                                            <input type="text" value="{{ old('name_ar', $product->getTranslation('name', 'ar')) }}" name="name_ar"
+                                                class="form-control" id="exampleInputName_ar1"
+                                                placeholder="{{ __('admin/product/edit.name_ar_place') }}">
+                                            @error('name_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="code1">{{ __('admin/product/edit.code_label') }}</label>
+                                            <input type="text" value="{{ old('code', $product->code) }}" name="code"
+                                                class="form-control" id="code1"
+                                                placeholder="{{ __('admin/product/edit.code_place') }}">
+                                            @error('code')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -117,12 +142,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputDescription1">
-                                        {{ __('admin/product/edit.description_label') }}
+                                    <label for="exampleInputDescription_en1">
+                                        {{ __('admin/product/edit.description_en_label') }}
                                     </label>
-                                    <textarea class="form-control" name="description" id="exampleInputDescription1"
-                                        placeholder="{{ __('admin/product/edit.description_place') }}">{{ old('description', $product->description) }}</textarea>
-                                    @error('description')
+                                    <textarea class="form-control" name="description_en" id="exampleInputDescription_en1"
+                                        placeholder="{{ __('admin/product/edit.description_en_place') }}">{{ old('description_en', $product->getTranslation('description', 'en')) }}</textarea>
+                                    @error('description_en')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputDescription_ar1">
+                                        {{ __('admin/product/edit.description_ar_label') }}
+                                    </label>
+                                    <textarea class="form-control" name="description_ar" id="exampleInputDescription_ar1"
+                                        placeholder="{{ __('admin/product/edit.description_ar_place') }}">{{ old('description_ar', $product->getTranslation('description', 'ar')) }}</textarea>
+                                    @error('description_ar')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -185,7 +220,7 @@
                                                     <option
                                                         {{ old('condition', $product->condition->value) == $condition->value ? 'selected' : '' }}
                                                         value="{{ $condition->value }}">
-                                                        {{ $product->condition->lang() }}
+                                                        {{ $condition->lang() }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -216,86 +251,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/edit.image_1_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input type="hidden" name="image_id_1" value="{{ $images[0]['id'] }}">
-                                                <input class="custom-file-input" name="image_1" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/edit.choose_file') }}
-                                                </label>
-                                            </div>
-                                            <img width="100px" src="{{ asset($images[0]['image']) }}" alt="image_1">
-                                            @error('image_1')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="hidden" name="image_id_2" value="{{ $images[1]['id'] }}">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/edit.image_2_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input class="custom-file-input" name="image_2" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/edit.choose_file') }}
-                                                </label>
-                                            </div>
-                                            <img width="100px" src="{{ asset($images[1]['image']) }}" alt="image_2">
-                                            @error('image_2')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="hidden" name="image_id_3" value="{{ $images[2]['id'] }}">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/edit.image_3_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input class="custom-file-input" name="image_3" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/edit.choose_file') }}
-                                                </label>
-                                            </div>
-                                            <img width="100px" src="{{ asset($images[2]['image']) }}" alt="image_3">
-                                            @error('image_3')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="hidden" name="image_id_4" value="{{ $images[3]['id'] }}">
-                                            <label for="exampleInputImage1">
-                                                {{ __('admin/product/edit.image_4_label') }}
-                                            </label>
-                                            <div class="custom-file">
-                                                <input class="custom-file-input" name="image_4" id="customFile"
-                                                    type="file">
-                                                <label class="custom-file-label" for="customFile">
-                                                    {{ __('admin/category/edit.choose_file') }}
-                                                </label>
-                                            </div>
-                                            <img width="100px" src="{{ asset($images[3]['image']) }}" alt="image_4">
-                                            @error('image_4')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/product/edit.submit') }}

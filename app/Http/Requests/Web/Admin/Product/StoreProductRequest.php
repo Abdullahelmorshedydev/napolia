@@ -32,7 +32,7 @@ class StoreProductRequest extends FormRequest
             'description_en' => ['required', 'string'],
             'description_ar' => ['required', 'string'],
             'price' => ['required', 'numeric'],
-            'slug' => ['required'],
+            'code' => ['required'],
             'shipping_time' => ['required', 'numeric'],
             'discount' => ['numeric', 'min:0', function ($attribte, $value, $fail) {
                 if (request()->input('discount_type') == 'percent') {
@@ -80,7 +80,7 @@ class StoreProductRequest extends FormRequest
             'description_ar.string' => __('admin/product/create.valid_string'),
             'price.required' => __('admin/product/create.valid_required'),
             'price.numeric' => __('admin/product/create.valid_numeric'),
-            'slug.required' => __('admin/product/create.valid_required'),
+            'code.required' => __('admin/product/create.valid_required'),
             'discount.numeric' => __('admin/product/create.valid_numeric'),
             'discount_type.rule' => __('admin/product/create.valid_rule'),
             'condition.rule' => __('admin/product/create.valid_rule'),

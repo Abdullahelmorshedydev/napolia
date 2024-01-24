@@ -19,8 +19,8 @@ return [
     'image_label' => 'الصور',
     'price_label' => 'السعر',
     'price_place' => 'ادخل السعر',
-    'slug_label' => 'Slug',
-    'slug_place' => 'Enter Product Slug',
+    'code_label' => 'الكود',
+    'code_place' => 'ادخل الكود',
     'shipping_time_label' => 'وقت الشحن',
     'shipping_time_place' => 'ادخل وقت الشحن',
     'discount_type_label' => 'نوع الخصم',
@@ -48,5 +48,6 @@ return [
     'valid_array' => 'الحقل يجب ان يكون دالة',
     'another_image' => 'اضافة صورة اخرى',
     'success' => 'تم اضافة المنتج بنجاح',
+    'success_image' => 'تمت اضافة الصورة بنجاح',
 
 ];

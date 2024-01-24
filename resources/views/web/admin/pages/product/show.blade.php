@@ -32,17 +32,25 @@
                                 <img width="75%" height="200px" src="{{ asset($image->image) }}" alt="image">
                             </div>
                             <div class="col-md-12">
-                                <a class="btn btn-info" href="{{ route('admin.products.edit.image', $image->id) }}">{{ __('admin/product/index.edit') }}</a>
-                                <form action="{{ route('admin.products.delete.image', $image->id) }}" method="POST" class="d-inline">
+                                <a class="btn btn-info"
+                                    href="{{ route('admin.products.edit.image', $image->id) }}">{{ __('admin/product/index.edit') }}</a>
+                                <form action="{{ route('admin.products.delete.image', $image->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">{{ __('admin/product/index.delete') }}</button>
+                                    <button class="btn btn-danger"
+                                        type="submit">{{ __('admin/product/index.delete') }}</button>
                                 </form>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="mt-5 row">
+                    <div class="col-md-12">
+                        <a href="{{ route('admin.products.create.image', $product->slug) }}" class="btn btn-success">
+                            {{ __('admin/product/show.create_image') }}
+                        </a>
+                    </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.name') }}:
                         <h5 class="card-title d-inline">{{ $product->name }}</h5>
@@ -53,7 +61,8 @@
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.price') }}:
-                        <h6 class="card-subtitle mb-2 text-muted d-inline">{{ $product->price . ' ' . __('admin/product/show.pound') }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted d-inline">
+                            {{ $product->price . ' ' . __('admin/product/show.pound') }}</h6>
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.discount') }}:
@@ -98,10 +107,10 @@
                         <p class="card-subtitle mb-2 text-muted d-inline">{{ $product->description }}</p>
                     </div>
                     <div class="col-md-12 mt-2">
-                        <a href="{{ route('admin.products.edit', $product->id) }}" class="card-link text-secondary ml-2">
+                        <a href="{{ route('admin.products.edit', $product->slug) }}" class="card-link text-secondary ml-2">
                             {{ __('admin/product/show.edit') }}
                         </a>
-                        <a href="{{ route('admin.products.destroy', $product->id) }}" class="card-link text-secondary">
+                        <a href="{{ route('admin.products.destroy', $product->slug) }}" class="card-link text-secondary">
                             {{ __('admin/product/show.delete') }}
                         </a>
                     </div>

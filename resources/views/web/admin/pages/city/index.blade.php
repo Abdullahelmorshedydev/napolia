@@ -49,11 +49,11 @@
                                     <th>{{ $city->country->name }}</th>
                                     <td>{{ $city->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.cities.edit', $city->id) }}" class="btn btn-info">
+                                        <a href="{{ route('admin.cities.edit', $city->slug) }}" class="btn btn-info">
                                             {{ __('admin/city/index.edit') }}
                                         </a>
                                         <form class="d-inline"
-                                            action="{{ route('admin.cities.destroy', $city->id) }}" method="post">
+                                            action="{{ route('admin.cities.destroy', $city->slug) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger"

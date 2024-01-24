@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->json('slug')->unique();
             $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->enum('status', CategoryStatusEnum::values())->default(CategoryStatusEnum::ACTIVE->value);
             $table->timestamps();

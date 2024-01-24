@@ -13,7 +13,7 @@ return [
     'status' => 'Status',
     'edit' => 'Edit',
     'delete' => 'Delete',
-    'show' => 'Show',
+    'show' => 'Details',
     'success' => 'Category Deleted Successfully',
 
 ];

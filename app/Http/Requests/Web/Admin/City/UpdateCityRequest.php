@@ -26,7 +26,8 @@ class UpdateCityRequest extends FormRequest
     {
         $status = CityStatusEnum::cases();
         return [
-            'name' => ['required', 'string', 'unique:cities,name,' . $this->city->id],
+            'name_en' => ['required', Rule::unique('cities', 'name->en')->ignore($this->city)],
+            'name_ar' => ['required', Rule::unique('cities', 'name->ar')->ignore($this->city)],
             'status' => [Rule::in($status)],
             'country_id' => ['required', 'exists:countries,id'],
         ];
@@ -35,9 +36,12 @@ class UpdateCityRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => __('admin/city/edit.valid_required'),
-            'name.string' => __('admin/city/edit.valid_string'),
-            'name.unique' => __('admin/city/edit.valid_uinque'),
+            'name_en.required' => __('admin/city/edit.valid_required'),
+            'name_en.string' => __('admin/city/edit.valid_string'),
+            'name_en.unique' => __('admin/city/edit.valid_uinque'),
+            'name_ar.required' => __('admin/city/edit.valid_required'),
+            'name_ar.string' => __('admin/city/edit.valid_string'),
+            'name_ar.unique' => __('admin/city/edit.valid_uinque'),
             'status.rule' => __('admin/city/edit.valid_rule'),
             'country_id.required' => __('admin/city/edit.valid_required'),
             'country_id.exists' => __('admin/city/edit.valid_exists'),
