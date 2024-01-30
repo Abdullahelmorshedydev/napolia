@@ -263,7 +263,7 @@
                                 <div class="row" id="colors">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Colors In English:</label>
+                                            <label>{{ __('admin/product/edit.color_en_lable') }}:</label>
                                             <div class="mt-1" id="color_en">
                                                 @foreach ($product->colors as $color)
                                                     <div class="mt-1 color_en">
@@ -278,7 +278,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Colors In Arabic:</label>
+                                            <label>{{ __('admin/product/edit.color_ar_lable') }}:</label>
                                             <div class="mt-1" id="color_ar">
                                                 @foreach ($product->colors as $color)
                                                     <div class="mt-1 color_ar">
@@ -293,7 +293,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Colors code:</label>
+                                            <label>{{ __('admin/product/edit.color_code_lable') }}:</label>
                                             <div class="mt-1" id="color_code">
                                                 @foreach ($product->colors as $color)
                                                     <div class="mt-1 color_code">
@@ -306,8 +306,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" id="add-color">Add
-                                    Color</button>
+                                <button type="button" class="btn btn-primary" id="add-color">{{ __('admin/product/edit.add_color') }}</button>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/product/edit.submit') }}

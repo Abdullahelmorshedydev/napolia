@@ -51,5 +51,9 @@ return [
     'success' => 'تم تعديل المنتج بنجاح',
     'success_image' => 'تم تعديل صورة المنتج بنجاح',
     'success_delete_image' => 'تم حذف صورة المنتج بنجاح',
+    'color_en_lable' => 'اللون بالانجليزية',
+    'color_ar_lable' => 'اللون بالعربية',
+    'color_code_lable' => 'كود اللون',
+    'add_color' => 'اضافة لون',
 
 ];

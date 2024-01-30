@@ -49,5 +49,9 @@ return [
     'another_image' => 'اضافة صورة اخرى',
     'success' => 'تم اضافة المنتج بنجاح',
     'success_image' => 'تمت اضافة الصورة بنجاح',
+    'color_en_lable' => 'اللون بالانجليزية',
+    'color_ar_lable' => 'اللون بالعربية',
+    'color_code_lable' => 'كود اللون',
+    'add_color' => 'اضافة لون',
 
 ];

@@ -51,5 +51,9 @@ return [
     'success' => 'Product Updated Successfully',
     'success_image' => 'Product Image Updated Successfully',
     'success_delete_image' => 'Product Image Deleted Successfully',
+    'color_en_lable' => 'Color In English',
+    'color_ar_lable' => 'Color In Arabic',
+    'color_code_lable' => 'Color Code',
+    'add_color' => 'Add Color',
 
 ];

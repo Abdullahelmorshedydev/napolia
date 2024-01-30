@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('product_colors', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->string('code')->unique();
+            $table->string('code');
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -225,7 +225,7 @@
                                 <div class="row" id="colors">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Colors In English:</label>
+                                            <label>{{ __('admin/product/edit.color_en_lable') }}:</label>
                                             <div>
                                                 <div class="mt-1 color_en" id="color_en">
                                                     <div class="mt-1">
@@ -239,7 +239,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Colors In Arabic:</label>
+                                            <label>{{ __('admin/product/edit.color_ar_lable') }}:</label>
                                             <div class="mt-1 color_ar" id="color_ar">
                                                 <div class="mt-1">
                                                     <input type="text" name="colors[0][ar]"
@@ -250,7 +250,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Colors code:</label>
+                                            <label>{{ __('admin/product/edit.color_code_lable') }}:</label>
                                             <div class="mt-1 color_code" id="color_code">
                                                 <div class="mt-1">
                                                     <input type="text" name="colors[0][code]"
@@ -260,8 +260,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" id="add-color">Add
-                                    Color</button>
+                                <button type="button" class="btn btn-primary" id="add-color">{{ __('admin/product/edit.add_color') }}</button>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/product/create.submit') }}

@@ -49,5 +49,9 @@ return [
     'another_image' => 'add another image',
     'success' => 'Product Created Successfully',
     'success_image' => 'Product Image Added Successfully',
+    'color_en_lable' => 'Color In English',
+    'color_ar_lable' => 'Color In Arabic',
+    'color_code_lable' => 'Color Code',
+    'add_color' => 'Add Color',
 
 ];
