@@ -34,9 +34,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputName_en1">{{ __('admin/product/edit.name_en_label') }}</label>
-                                            <input type="text" value="{{ old('name_en', $product->getTranslation('name', 'en')) }}" name="name_en"
-                                                class="form-control" id="exampleInputName_en1"
+                                            <label
+                                                for="exampleInputName_en1">{{ __('admin/product/edit.name_en_label') }}</label>
+                                            <input type="text"
+                                                value="{{ old('name_en', $product->getTranslation('name', 'en')) }}"
+                                                name="name_en" class="form-control" id="exampleInputName_en1"
                                                 placeholder="{{ __('admin/product/edit.name_en_place') }}">
                                             @error('name_en')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -45,9 +47,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputName_ar1">{{ __('admin/product/edit.name_ar_label') }}</label>
-                                            <input type="text" value="{{ old('name_ar', $product->getTranslation('name', 'ar')) }}" name="name_ar"
-                                                class="form-control" id="exampleInputName_ar1"
+                                            <label
+                                                for="exampleInputName_ar1">{{ __('admin/product/edit.name_ar_label') }}</label>
+                                            <input type="text"
+                                                value="{{ old('name_ar', $product->getTranslation('name', 'ar')) }}"
+                                                name="name_ar" class="form-control" id="exampleInputName_ar1"
                                                 placeholder="{{ __('admin/product/edit.name_ar_place') }}">
                                             @error('name_ar')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -58,8 +62,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label
-                                                for="code1">{{ __('admin/product/edit.code_label') }}</label>
+                                            <label for="code1">{{ __('admin/product/edit.code_label') }}</label>
                                             <input type="text" value="{{ old('code', $product->code) }}" name="code"
                                                 class="form-control" id="code1"
                                                 placeholder="{{ __('admin/product/edit.code_place') }}">
@@ -72,8 +75,9 @@
                                         <div class="form-group">
                                             <label
                                                 for="shipping_time1">{{ __('admin/product/edit.shipping_time_label') }}</label>
-                                            <input type="number" value="{{ old('shipping_time', $product->shipping_time) }}" name="shipping_time"
-                                                class="form-control" id="shipping_time1"
+                                            <input type="number"
+                                                value="{{ old('shipping_time', $product->shipping_time) }}"
+                                                name="shipping_time" class="form-control" id="shipping_time1"
                                                 placeholder="{{ __('admin/product/edit.shipping_time_place') }}">
                                             @error('shipping_time')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -97,8 +101,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="quantity">{{ __('admin/product/edit.quantity_label') }}</label>
-                                            <input type="number" value="{{ old('quantity', $product->quantity) }}" name="quantity"
-                                                class="form-control" id="quantity"
+                                            <input type="number" value="{{ old('quantity', $product->quantity) }}"
+                                                name="quantity" class="form-control" id="quantity"
                                                 placeholder="{{ __('admin/product/edit.quantity_place') }}">
                                             @error('quantity')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -127,7 +131,8 @@
                                                     {{ __('admin/product/create.discount_type_place') }}
                                                 </option>
                                                 @foreach ($types as $type)
-                                                    <option {{ old('discount_type', $product->discount_type->value) == $type->value ? 'selected' : '' }}
+                                                    <option
+                                                        {{ old('discount_type', $product->discount_type->value) == $type->value ? 'selected' : '' }}
                                                         value="{{ $type->value }}">
                                                         {{ $type->lang() }}
                                                     </option>
@@ -215,7 +220,8 @@
                                             <label
                                                 for="exampleInputcondition1">{{ __('admin/product/edit.condition_label') }}</label>
                                             <select name="condition" id="exampleInputcondition1" class="form-control">
-                                                <option disabled selected>{{ __('admin/product/edit.condition_place') }}</option>
+                                                <option disabled selected>{{ __('admin/product/edit.condition_place') }}
+                                                </option>
                                                 @foreach ($conditions as $condition)
                                                     <option
                                                         {{ old('condition', $product->condition->value) == $condition->value ? 'selected' : '' }}
@@ -233,11 +239,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputStatus1">{{ __('admin/product/edit.status_label') }}</label>
+                                            <label
+                                                for="exampleInputStatus1">{{ __('admin/product/edit.status_label') }}</label>
                                             <select name="status" id="exampleInputStatus1" class="form-control">
-                                                <option disabled selected>{{ __('admin/product/edit.status_place') }}</option>
+                                                <option disabled selected>{{ __('admin/product/edit.status_place') }}
+                                                </option>
                                                 @foreach ($status as $stat)
-                                                    <option {{ old('status', $product->status->value) == $stat->value ? 'selected' : '' }}
+                                                    <option
+                                                        {{ old('status', $product->status->value) == $stat->value ? 'selected' : '' }}
                                                         value="{{ $stat->value }}">
                                                         {{ $stat->lang() }}
                                                     </option>
@@ -251,6 +260,54 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row" id="colors">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Colors In English:</label>
+                                            <div class="mt-1" id="color_en">
+                                                @foreach ($product->colors as $color)
+                                                    <div class="mt-1 color_en">
+                                                        <input type="text"
+                                                            value="{{ $color->getTranslation('name', 'en') }}"
+                                                            name="colors[{{ $loop->index }}][en]" placeholder="Color Name In English"
+                                                            class="form-control">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Colors In Arabic:</label>
+                                            <div class="mt-1" id="color_ar">
+                                                @foreach ($product->colors as $color)
+                                                    <div class="mt-1 color_ar">
+                                                        <input type="text"
+                                                            value="{{ $color->getTranslation('name', 'ar') }}"
+                                                            name="colors[{{ $loop->index }}][ar]" placeholder="Color Name In Arabic"
+                                                            class="form-control">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Colors code:</label>
+                                            <div class="mt-1" id="color_code">
+                                                @foreach ($product->colors as $color)
+                                                    <div class="mt-1 color_code">
+                                                        <input type="text" value="{{ $color->code }}"
+                                                            name="colors[{{ $loop->index }}][code]" placeholder="Color code"
+                                                            class="form-control">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="add-color">Add
+                                    Color</button>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/product/edit.submit') }}
@@ -300,6 +357,49 @@
                     console.log('Please select a subCategory');
                 }
             });
+        });
+    </script>
+    <script>
+        document.getElementById('add-color').addEventListener('click', function() {
+            var colorDivEn = document.getElementById('color_en');
+            var colorEnCount = document.getElementsByClassName('color_en').length;
+            var colorDivAr = document.getElementById('color_ar');
+            var colorArCount = document.getElementsByClassName('color_ar').length;
+            var colorCode = document.getElementById('color_code');
+            var colorColorCount = document.getElementsByClassName('color_code').length;
+            var colorDelete = document.getElementById('delete-color');
+            var colorDeleteCount = document.getElementsByClassName('delete-color').length;
+
+            var newColorDivEn = document.createElement('div');
+            var newColorDivAr = document.createElement('div');
+            var newColorDivCode = document.createElement('div');
+            var newDeleteColor = document.createElement('div');
+
+            newColorDivEn.classList.add('mt-1');
+            newColorDivAr.classList.add('mt-1');
+            newColorDivCode.classList.add('mt-1');
+            newDeleteColor.classList.add('mt-1');
+
+            newColorDivEn.innerHTML = `
+                <input type="text" name="colors[${colorEnCount}][en]"
+                    placeholder="Color Name In English" class="form-control">
+            `;
+            newColorDivAr.innerHTML = `
+                <input type="text" name="colors[${colorArCount}][ar]"
+                    placeholder="Color Name In Arabic" class="form-control">
+            `;
+            newColorDivCode.innerHTML = `
+                <input type="text" name="colors[${colorArCount}][code]"
+                    placeholder="Color Code" class="form-control">
+            `;
+            newDeleteColor.innerHTML = `
+                <button type="button" class="btn btn-danger" id="delete-color">Delete Color</button>
+            `
+
+            colorDivEn.appendChild(newColorDivEn);
+            colorDivAr.appendChild(newColorDivAr);
+            colorCode.appendChild(newColorDivCode);
+            colorDelete.appendChild(newDeleteColor);
         });
     </script>
 @endpush

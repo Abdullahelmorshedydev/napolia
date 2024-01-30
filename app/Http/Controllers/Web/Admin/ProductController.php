@@ -51,6 +51,12 @@ class ProductController extends Controller
         $data['description'] = TranslateTrait::translate($request->description_en, $request->description_ar);
         $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
         $product = Product::create($data);
+        foreach ($data['colors'] as $color) {
+            $product->colors()->create([
+                'name' => TranslateTrait::translate($color['en'], $color['ar']),
+                'code' => $color['code'],
+            ]);
+        }
         foreach ($data['images'] as $image) {
             $product->images()->create([
                 'image' => FilesTrait::store($image, 'uploads/products/'),
@@ -86,9 +92,18 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $data = $request->validated();
+        // dd($data);
         $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
         $data['description'] = TranslateTrait::translate($request->description_en, $request->description_ar);
         $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
+        if ($data['colors']) {
+            foreach ($data['colors'] as $color) {
+                $product->colors()->update([
+                    'name' => TranslateTrait::translate($color['en'], $color['ar']),
+                    'code' => $color['code'],
+                ]);
+            }
+        }
         $product->update($data);
         return redirect()->route('admin.products.index')->with('success', __('admin/product/edit.success'));
     }

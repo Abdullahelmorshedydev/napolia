@@ -47,6 +47,7 @@ return [
     'valid_mimetype' => 'Image type should be image',
     'valid_mimes' => 'Image extension not supported',
     'valid_exists' => 'this value not found in our records',
+    'valid_array' => 'This input should be an array',
     'success' => 'Product Updated Successfully',
     'success_image' => 'Product Image Updated Successfully',
     'success_delete_image' => 'Product Image Deleted Successfully',

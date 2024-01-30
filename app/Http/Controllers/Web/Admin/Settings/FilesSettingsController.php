@@ -22,8 +22,9 @@ class FilesSettingsController extends Controller
         foreach($request->validated() as $key => $value) {
             
             if ($request->hasFile($key)) {
-
-                FilesTrait::delete(settings()->get($key));
+                if (file_exists(asset(settings()->get($key)))) {
+                    FilesTrait::delete(settings()->get($key));
+                }
                 $val = FilesTrait::store($request->file($key), 'uploads/settings/');
                 Settings::set($key, $val);
             }

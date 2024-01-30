@@ -206,9 +206,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="exampleInputImage1">{{ __('admin/product/create.images_label') }}</label>
+                                            <label
+                                                for="exampleInputImage1">{{ __('admin/product/create.images_label') }}</label>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="images[]" multiple>
                                                 <label class="custom-file-label" for="customFile">
@@ -221,6 +222,46 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row" id="colors">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Colors In English:</label>
+                                            <div>
+                                                <div class="mt-1 color_en" id="color_en">
+                                                    <div class="mt-1">
+                                                        <input type="text"
+                                                            name="colors[0][en]"
+                                                            placeholder="Color Name In English" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Colors In Arabic:</label>
+                                            <div class="mt-1 color_ar" id="color_ar">
+                                                <div class="mt-1">
+                                                    <input type="text" name="colors[0][ar]"
+                                                        placeholder="Color Name In Arabic" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Colors code:</label>
+                                            <div class="mt-1 color_code" id="color_code">
+                                                <div class="mt-1">
+                                                    <input type="text" name="colors[0][code]"
+                                                        placeholder="Color code" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="add-color">Add
+                                    Color</button>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
                                 {{ __('admin/product/create.submit') }}
@@ -270,6 +311,41 @@
                     console.log('Please select a subCategory');
                 }
             });
+        });
+    </script>
+    <script>
+        document.getElementById('add-color').addEventListener('click', function() {
+            var colorDivEn = document.getElementById('color_en');
+            var colorEnCount = document.getElementsByClassName('color_en').length;
+            var colorDivAr = document.getElementById('color_ar');
+            var colorArCount = document.getElementsByClassName('color_ar').length;
+            var colorCode = document.getElementById('color_code');
+            var colorColorCount = document.getElementsByClassName('color_code').length;
+
+            var newColorDivEn = document.createElement('div');
+            var newColorDivAr = document.createElement('div');
+            var newColorDivCode = document.createElement('div');
+
+            newColorDivEn.classList.add('mt-1');
+            newColorDivAr.classList.add('mt-1');
+            newColorDivCode.classList.add('mt-1');
+
+            newColorDivEn.innerHTML = `
+                <input type="text" name="colors[${colorEnCount}][en]"
+                    placeholder="Color Name In English" class="form-control">
+            `;
+            newColorDivAr.innerHTML = `
+                <input type="text" name="colors[${colorArCount}][ar]"
+                    placeholder="Color Name In Arabic" class="form-control">
+            `;
+            newColorDivCode.innerHTML = `
+                <input type="text" name="colors[${colorArCount}][code]"
+                    placeholder="Color Code" class="form-control">
+            `;
+
+            colorDivEn.appendChild(newColorDivEn);
+            colorDivAr.appendChild(newColorDivAr);
+            colorCode.appendChild(newColorDivCode);
         });
     </script>
 @endpush

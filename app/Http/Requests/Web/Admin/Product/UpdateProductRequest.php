@@ -28,6 +28,7 @@ class UpdateProductRequest extends FormRequest
         $condition = ProductConditionEnum::cases();
         $status = ProductStatusEnum::cases();
         $types = DiscountTypeEnum::cases();
+        // dd($this->product->colors);
         return [
             'name_en' => ['required', 'string', Rule::unique('products', 'name->en')->ignore($this->product), 'min:3', 'max:50'],
             'name_ar' => ['required', 'string', Rule::unique('products', 'name->ar')->ignore($this->product), 'min:3', 'max:50'],
@@ -59,6 +60,7 @@ class UpdateProductRequest extends FormRequest
             'quantity' => ['required', 'numeric'],
             'category_id' => ['required', 'exists:categories,id'],
             'sub_category_id' => ['required', 'exists:categories,id'],
+            'colors' => ['required', 'array', 'unique:product_colors,code'],
         ];
     }
 
@@ -95,6 +97,8 @@ class UpdateProductRequest extends FormRequest
             'discount_type.rule' => __('admin/product/edit.valid_rule'),
             'shipping_time.required' => __('admin/product/edit.valid_required'),
             'shipping_time.numeric' => __('admin/product/edit.valid_numeric'),
+            'colors.required' => __('admin/product/edit.valid_required'),
+            'colors.array' => __('admin/product/edit.valid_array'),
         ];
     }
 }
