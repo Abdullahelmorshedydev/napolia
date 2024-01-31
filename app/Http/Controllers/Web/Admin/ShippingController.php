@@ -11,6 +11,7 @@ use App\Enums\CountryStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Shipping\StoreShippingRequest;
 use App\Http\Requests\Web\Admin\Shipping\UpdateShippingRequest;
+use App\Models\State;
 
 class ShippingController extends Controller
 {
@@ -19,7 +20,7 @@ class ShippingController extends Controller
      */
     public function index()
     {
-        $shippings = Shipping::with('city')->paginate();
+        $shippings = Shipping::with('state')->paginate();
         return view('web.admin.pages.shipping.index', compact('shippings'));
     }
 
@@ -51,7 +52,10 @@ class ShippingController extends Controller
         $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)
             ->has('cities')
             ->get();
-        return view('web.admin.pages.shipping.edit', compact('shipping', 'countries'));
+        $cities = City::where('status', CityStatusEnum::ACTIVE->value)
+            ->has('states')
+            ->get();
+        return view('web.admin.pages.shipping.edit', compact('shipping', 'countries', 'cities'));
     }
 
     /**
@@ -74,7 +78,13 @@ class ShippingController extends Controller
 
     public function getCities($id)
     {
-        $cities = City::where('country_id', $id)->doesntHave('shipping')->get();
+        $cities = City::where('country_id', $id)->has('states')->get();
         return response()->json(['data' => $cities]);
+    }
+
+    public function getStates($id)
+    {
+        $states = State::where('city_id', $id)->doesntHave('shipping')->get();
+        return response()->json(['data' => $states]);
     }
 }

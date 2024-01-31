@@ -32,7 +32,7 @@
                             @csrf
                             <div class="">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="price1">{{ __('admin/shipping/create.price_label') }}</label>
                                             <input type="text" value="{{ old('price') }}" name="price"
@@ -43,8 +43,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label
@@ -66,6 +64,8 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cityId1">{{ __('admin/shipping/create.city_id_label') }}</label>
@@ -74,6 +74,20 @@
                                                 </option>
                                             </select>
                                             @error('city_id')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="stateId1">{{ __('admin/shipping/create.state_id_label') }}</label>
+                                            <select name="state_id" id="stateId1" class="form-control">
+                                                <option disabled selected>{{ __('admin/shipping/create.state_id_place') }}
+                                                </option>
+                                            </select>
+                                            @error('state_id')
                                                 <span class="text-danger">
                                                     {{ $message }}
                                                 </span>
@@ -128,6 +142,44 @@
                     });
                 } else {
                     console.log('Please select a City');
+                }
+            });
+        });
+    </script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            $('select[name="city_id"]').on('change', function() {
+                var city_id = $(this).val();
+                var lang = "{{ LaravelLocalization::getCurrentLocale() }}";
+
+                if (city_id) {
+                    $.ajax({
+                        url: "{{ route('admin.shipping_states') }}/" + city_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(response) {
+                            html = "";
+                            $.each(response.data, function(index, value) {
+                                html +=
+                                    '<option value="' +
+                                    value.id +
+                                    '">' +
+                                    value.name[lang] +
+                                    '</option>';
+                            });
+                            $('select[name="state_id"]').empty('').append(html);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("feh error ya morshed");
+                        }
+                    });
+                } else {
+                    console.log('Please select a State');
                 }
             });
         });

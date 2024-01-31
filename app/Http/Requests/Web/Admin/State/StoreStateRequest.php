@@ -25,7 +25,6 @@ class StoreStateRequest extends FormRequest
         return [
             'name_en' => ['required', Rule::unique('states', 'name->en')],
             'name_ar' => ['required', Rule::unique('states', 'name->ar')],
-            'country_id' => ['required','exists:countries,id'],
             'city_id' => ['required','exists:cities,id'],
         ];
     }
@@ -39,8 +38,6 @@ class StoreStateRequest extends FormRequest
             'name_ar.required' => __('admin/state/create.valid_required'),
             'name_ar.string' => __('admin/state/create.valid_string'),
             'name_ar.unique' => __('admin/state/create.valid_uinque'),
-            'country_id.required' => __('admin/state/create.valid_required'),
-            'country_id.exists' => __('admin/state/create.valid_exists'),
             'city_id.required' => __('admin/state/create.valid_required'),
             'city_id.exists' => __('admin/state/create.valid_exists'),
         ];

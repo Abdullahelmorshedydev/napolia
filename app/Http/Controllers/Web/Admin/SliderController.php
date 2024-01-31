@@ -38,7 +38,7 @@ class SliderController extends Controller
     {
         $slider = Slider::create();
         $slider->image()->create([
-            'image' => FilesTrait::store($request->file('image'), 'uploads/sliders/'),
+            'image' => FilesTrait::store($request->file('image'), Slider::$img_path),
         ]);
         return redirect()->route('admin.sliders.index')->with('success', __('admin/slider/create.success'));
     }
@@ -61,7 +61,7 @@ class SliderController extends Controller
         if ($request->hasFile('image')) {
             FilesTrait::delete($slider->image->image);
             $slider->image()->update([
-                'image' => FilesTrait::store($request->file('image'), 'uploads/sliders/'),
+                'image' => FilesTrait::store($request->file('image'), Slider::$img_path),
             ]);
         }
         return redirect()->route('admin.sliders.index')->with('success',  __('admin/slider/edit.success'));

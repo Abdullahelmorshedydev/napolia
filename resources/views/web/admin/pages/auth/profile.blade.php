@@ -63,139 +63,79 @@
                     </div>
                     <div class="tab-content border-left border-bottom border-right border-top-0 p-4">
                         <div class="tab-pane active" id="settings">
-                            @if (isset(auth('admin')->user()->profile))
-                                <form action="{{ route('admin.profile.general_update') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="form-group">
-                                        <label for="FullName">{{ __('admin/auth/profile.name') }}</label>
-                                        <input type="text" name="name"
-                                            value="{{ old('name', auth('admin')->user()->name) }}" id="FullName"
-                                            class="form-control">
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                            <form action="{{ route('admin.profile.general_update') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-group">
+                                    <label for="FullName">{{ __('admin/auth/profile.name') }}</label>
+                                    <input type="text" name="name"
+                                        value="{{ old('name', auth('admin')->user()->name) }}" id="FullName"
+                                        class="form-control">
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email">{{ __('admin/auth/profile.email') }}</label>
+                                    <input type="email" name="email"
+                                        value="{{ old('email', auth('admin')->user()->email) }}" id="Email"
+                                        class="form-control">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="customFile">{{ __('admin/auth/profile.image') }}</label>
+                                    <div class="custom-file">
+                                        <input class="custom-file-input" name="image" id="customFile" type="file">
+                                        <label class="custom-file-label" for="customFile">
+                                            {{ __('admin/auth/profile.choose_file') }}
+                                        </label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="Email">{{ __('admin/auth/profile.email') }}</label>
-                                        <input type="email" name="email"
-                                            value="{{ old('email', auth('admin')->user()->email) }}" id="Email"
-                                            class="form-control">
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="customFile">{{ __('admin/auth/profile.image') }}</label>
-                                        <div class="custom-file">
-                                            <input class="custom-file-input" name="image" id="customFile" type="file">
-                                            <label class="custom-file-label" for="customFile">
-                                                {{ __('admin/auth/profile.choose_file') }}
-                                            </label>
-                                        </div>
-                                        @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="job_title">{{ __('admin/auth/profile.job_title') }}</label>
-                                        <input type="job_title" name="job_title"
-                                            value="{{ old('job_title', auth('admin')->user()->profile->job_title) }}"
-                                            id="job_title" class="form-control">
-                                        @error('job_title')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="bio">{{ __('admin/auth/profile.bio') }}</label>
-                                        <textarea name="bio" id="bio" class="form-control">{{ old('bio', auth('admin')->user()->profile->bio) }}</textarea>
-                                        @error('bio')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <button class="btn btn-primary waves-effect waves-light w-md"
-                                        type="submit">{{ __('admin/auth/profile.submit') }}</button>
-                                </form>
-                            @else
-                                <form action="{{ route('admin.profile.general_store') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="FullName">{{ __('admin/auth/profile.name') }}</label>
-                                        <input type="text" name="name"
-                                            value="{{ old('name', auth('admin')->user()->name) }}" id="FullName"
-                                            class="form-control">
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email">{{ __('admin/auth/profile.email') }}</label>
-                                        <input type="email" name="email"
-                                            value="{{ old('email', auth('admin')->user()->email) }}" id="Email"
-                                            class="form-control">
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="customFile">{{ __('admin/auth/profile.image') }}</label>
-                                        <div class="custom-file">
-                                            <input class="custom-file-input" name="image" id="customFile"
-                                                type="file">
-                                            <label class="custom-file-label" for="customFile">
-                                                {{ __('admin/auth/profile.choose_file') }}
-                                            </label>
-                                        </div>
-                                        @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label
-                                                    for="job_title_en">{{ __('admin/auth/profile.job_title_en') }}</label>
-                                                <input type="job_title_en" name="job_title_en"
-                                                    value="{{ old('job_title_en') }}"
-                                                    id="job_title_en" class="form-control">
-                                                @error('job_title_en')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label
-                                                    for="job_title_ar">{{ __('admin/auth/profile.job_title_ar') }}</label>
-                                                <input type="job_title_ar" name="job_title_ar"
-                                                    value="{{ old('job_title_ar') }}"
-                                                    id="job_title_ar" class="form-control">
-                                                @error('job_title_ar')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="job_title_en">{{ __('admin/auth/profile.job_title_en') }}</label>
+                                            <input type="job_title_en" name="job_title_en"
+                                                value="{{ old('job_title_en', auth('admin')->user()->profile ? $admin->getTranslation('job_title', 'en') : '') }}" id="job_title_en" class="form-control">
+                                            @error('job_title_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="bio_en">{{ __('admin/auth/profile.bio_en') }}</label>
-                                        <textarea name="bio_en" id="bio_en" class="form-control">{{ old('bio_en') }}</textarea>
-                                        @error('bio_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="job_title_ar">{{ __('admin/auth/profile.job_title_ar') }}</label>
+                                            <input type="job_title_ar" name="job_title_ar"
+                                                value="{{ old('job_title_ar', auth('admin')->user()->profile ? $admin->getTranslation('job_title', 'ar') : '') }}" id="job_title_ar" class="form-control">
+                                            @error('job_title_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="bio_ar">{{ __('admin/auth/profile.bio_ar') }}</label>
-                                        <textarea name="bio_ar" id="bio_ar" class="form-control">{{ old('bio_ar') }}</textarea>
-                                        @error('bio_ar')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <button class="btn btn-primary waves-effect waves-light w-md"
-                                        type="submit">{{ __('admin/auth/profile.submit') }}</button>
-                                </form>
-                            @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio_en">{{ __('admin/auth/profile.bio_en') }}</label>
+                                    <textarea name="bio_en" id="bio_en" class="form-control">{{ old('bio_en', auth('admin')->user()->profile ? $admin->getTranslation('bio', 'en') : '') }}</textarea>
+                                    @error('bio_en')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio_ar">{{ __('admin/auth/profile.bio_ar') }}</label>
+                                    <textarea name="bio_ar" id="bio_ar" class="form-control">{{ old('bio_ar', auth('admin')->user()->profile ? $admin->getTranslation('bio', 'ar') : '') }}</textarea>
+                                    @error('bio_ar')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <button class="btn btn-primary waves-effect waves-light w-md"
+                                    type="submit">{{ __('admin/auth/profile.submit') }}</button>
+                            </form>
                             <hr>
                             <form action="{{ route('admin.profile.password_update') }}" method="POST">
                                 @csrf

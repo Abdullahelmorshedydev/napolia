@@ -36,8 +36,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('admin/shipping/index.price') }}</th>
-                                <th>{{ __('admin/shipping/index.city_name') }}</th>
-                                <th>{{ __('admin/shipping/index.country_name') }}</th>
+                                <th>{{ __('admin/shipping/index.state_name') }}</th>
                                 <th>{{ __('admin/shipping/index.actions') }}</th>
                             </tr>
                         </thead>
@@ -46,8 +45,7 @@
                                 <tr>
                                     <th scope="row">{{ $shippings->firstItem() + $loop->index }}</th>
                                     <th>{{ $shipping->price }}</th>
-                                    <th>{{ $shipping->city->name }}</th>
-                                    <th>{{ $shipping->city->country->name }}</th>
+                                    <th>{{ $shipping->state->name }}</th>
                                     <td>
                                         <a href="{{ route('admin.shippings.edit', $shipping->id) }}" class="btn btn-info">
                                             {{ __('admin/shipping/index.edit') }}

@@ -53,4 +53,9 @@ class Admin extends Authenticatable
     {
         return $this->MorphOne(Image::class, 'morphable');
     }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

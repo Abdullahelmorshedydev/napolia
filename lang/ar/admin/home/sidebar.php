@@ -37,6 +37,9 @@ return [
     'shipping_title' => 'الشحن',
     'shipping_all' => 'اعدادات الشحن',
     'shipping_create' => 'اضافة بيانات شحن جديدة',
+    'blog_title' => 'المقالات',
+    'blog_all' => 'جميع المقالات',
+    'blog_create' => 'اضافة مقالة جديدة',
 
 
 ];

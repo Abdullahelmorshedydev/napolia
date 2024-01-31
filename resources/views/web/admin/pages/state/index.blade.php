@@ -36,7 +36,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('admin/state/index.name') }}</th>
-                                <th>{{ __('admin/state/index.country_name') }}</th>
                                 <th>{{ __('admin/state/index.city_name') }}</th>
                                 <th>{{ __('admin/state/index.status') }}</th>
                                 <th>{{ __('admin/state/index.actions') }}</th>
@@ -47,7 +46,6 @@
                                 <tr>
                                     <th scope="row">{{ $states->firstItem() + $loop->index }}</th>
                                     <th>{{ $state->name }}</th>
-                                    <th>{{ $state->country->name }}</th>
                                     <th>{{ $state->city->name }}</th>
                                     <td>{{ $state->status->lang() }}</td>
                                     <td>

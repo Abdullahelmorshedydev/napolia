@@ -27,7 +27,7 @@
                         <h4 class="card-title mb-1">{{ __('admin/category/edit.title') }}</h4>
                     </div>
                     <div class="card-body pt-0">
-                        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST"
+                        <form action="{{ route('admin.categories.update', $category->slug) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

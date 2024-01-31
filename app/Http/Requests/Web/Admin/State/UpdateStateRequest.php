@@ -29,7 +29,6 @@ class UpdateStateRequest extends FormRequest
             'name_en' => ['required', Rule::unique('states', 'name->en')->ignore($this->state)],
             'name_ar' => ['required', Rule::unique('states', 'name->ar')->ignore($this->state)],
             'status' => [Rule::in($status)],
-            'country_id' => ['required', 'exists:countries,id'],
             'city_id' => ['required', 'exists:cities,id'],
         ];
     }
@@ -44,8 +43,6 @@ class UpdateStateRequest extends FormRequest
             'name_ar.string' => __('admin/state/edit.valid_string'),
             'name_ar.unique' => __('admin/state/edit.valid_uinque'),
             'status.rule' => __('admin/state/edit.valid_rule'),
-            'country_id.required' => __('admin/state/edit.valid_required'),
-            'country_id.exists' => __('admin/state/edit.valid_exists'),
             'city_id.required' => __('admin/state/edit.valid_required'),
             'city_id.exists' => __('admin/state/edit.valid_exists'),
         ];

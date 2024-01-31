@@ -22,7 +22,7 @@ class StateController extends Controller
      */
     public function index()
     {
-        $states = State::where('status', StateStatusEnum::ACTIVE->value)->with('city')->with('country')->paginate();
+        $states = State::with('city')->paginate();
         return view('web.admin.pages.state.index', compact('states'));
     }
 
@@ -31,7 +31,7 @@ class StateController extends Controller
      */
     public function create()
     {
-        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->get();
+        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->has('cities')->get();
         $cities = City::where('status', CityStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.state.create', compact('countries', 'cities'));
     }
@@ -54,7 +54,7 @@ class StateController extends Controller
     public function edit(State $state)
     {
         $status = StateStatusEnum::cases();
-        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->get();
+        $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)->has('cities')->get();
         $cities = City::where('country_id', $state->country_id)->where('status', CityStatusEnum::ACTIVE->value)->get();
         return view('web.admin.pages.state.edit', compact('state', 'cities', 'status', 'countries'));
     }

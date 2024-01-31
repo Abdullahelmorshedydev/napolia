@@ -17,6 +17,8 @@ class Product extends Model
 
     protected $table = 'products';
 
+    public static $img_path = 'uploads/products/';
+
     public $translatable = ['name', 'description', 'slug'];
 
     protected $fillable = [

@@ -18,7 +18,6 @@ class State extends Model
     protected $fillable = [
         'name',
         'slug',
-        'country_id',
         'city_id',
         'status',
     ];
@@ -38,8 +37,8 @@ class State extends Model
         return $this->belongsTo(City::class);
     }
 
-    public function country()
+    public function shipping()
     {
-        return $this->belongsTo(Country::class);
+        return $this->hasOne(Shipping::class);
     }
 }

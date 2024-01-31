@@ -23,7 +23,7 @@ class UpdateShippingRequest extends FormRequest
     {
         return [
             'price' => ['required', 'numeric', 'min:0'],
-            'city_id' => ['required', 'exists:cities,id', 'unique:shippings,city_id,' . $this->shipping->id],
+            'state_id' => ['required', 'exists:states,id', 'unique:shippings,state_id,' . $this->shipping->id],
         ];
     }
 
@@ -33,9 +33,9 @@ class UpdateShippingRequest extends FormRequest
             'price.required' => __('admin/shipping/edit.valid_required'),
             'price.string' => __('admin/shipping/edit.valid_string'),
             'price.min' => __('admin/shipping/edit.valid_min'),
-            'city_id.required' => __('admin/shipping/edit.valid_required'),
-            'city_id.exists' => __('admin/shipping/edit.valid_exists'),
-            'city_id.unique' => __('admin/shipping/edit.valid_unique'),
+            'state_id.required' => __('admin/shipping/edit.valid_required'),
+            'state_id.exists' => __('admin/shipping/edit.valid_exists'),
+            'state_id.unique' => __('admin/shipping/edit.valid_unique'),
         ];
     }
 }

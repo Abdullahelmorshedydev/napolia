@@ -37,13 +37,8 @@ class City extends Model
         return $this->belongsTo(Country::class);
     }
 
-    public function state()
+    public function states()
     {
         return $this->hasMany(State::class);
-    }
-
-    public function shipping()
-    {
-        return $this->hasOne(Shipping::class);
     }
 }

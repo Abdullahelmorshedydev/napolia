@@ -12,56 +12,46 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Web\Admin\Auth\GeneralStoreProfileRequest;
 use App\Http\Requests\Web\Admin\Auth\GeneralUpdateProfileRequest;
 use App\Http\Requests\Web\Admin\Auth\PasswordUpdateProfileRequest;
+use App\Traits\TranslateTrait;
 
 class ProfileController extends Controller
 {
-    use FilesTrait;
+    use FilesTrait, TranslateTrait;
 
     public function index()
     {
-        return view('web.admin.pages.auth.profile');
-    }
-
-    public function generalStore(GeneralStoreProfileRequest $request)
-    {
-        $admin = Admin::findOrFail(auth('admin')->user()->id)->with('profile')->first();
-        $data = $request->validated();
-        if ($request->hasFile('image')) {
-            $admin->image()->create([
-                'image' => FilesTrait::store($request->file('image'), 'uploads/profiles/'),
-            ]);
-        }
-        $admin->profile()->create([
-            'bio' => [
-                'en' => $data['bio_en'],
-                'ar' => $data['bio_ar']
-            ],
-            'job_title' => [
-                'en' => $data['job_title_en'],
-                'ar' => $data['job_title_ar']
-            ],
-        ]);
-        $admin->update($data);
-        return back()->with('success', __('admin/auth/profile.general_create_success'));
+        $admin = AdminProfile::where('admin_id', auth('admin')->user()->id)->first();
+        return view('web.admin.pages.auth.profile', compact('admin'));
     }
 
     public function generalUpdate(GeneralUpdateProfileRequest $request)
     {
         $admin = Admin::findOrFail(auth('admin')->user()->id)->with('profile')->first();
         $data = $request->validated();
-        if ($request->hasFile('image')) {
-            if (isset($admin->image)) {
-                FilesTrait::delete($admin->image->image);
-                $admin->image->update([
-                    'image' => FilesTrait::store($request->file('image'), 'uploads/profiles/'),
-                ]);
-            } else {
+        $data['bio'] = TranslateTrait::translate($data['bio_en'], $data['bio_ar']);
+        $data['job_title'] = TranslateTrait::translate($data['job_title_en'], $data['job_title_ar']);
+        if (isset($admin->profile)) {
+            if ($request->hasFile('image')) {
+                if (isset($admin->image)) {
+                    FilesTrait::delete($admin->image->image);
+                    $admin->image->update([
+                        'image' => FilesTrait::store($request->file('image'), AdminProfile::$img_path),
+                    ]);
+                } else {
+                    $admin->image()->create([
+                        'image' => FilesTrait::store($request->file('image'), AdminProfile::$img_path),
+                    ]);
+                }
+            }
+            $admin->profile->update($data);
+        } else {
+            if ($request->hasFile('image')) {
                 $admin->image()->create([
-                    'image' => FilesTrait::store($request->file('image'), 'uploads/profiles/'),
+                    'image' => FilesTrait::store($request->file('image'), AdminProfile::$img_path),
                 ]);
             }
+            $admin->profile()->create($data);
         }
-        $admin->profile->update($data);
         $admin->update($data);
         return back()->with('success', __('admin/auth/profile.general_success'));
     }

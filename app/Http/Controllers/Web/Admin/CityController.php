@@ -20,7 +20,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::where('status', CityStatusEnum::ACTIVE->value)->with('country')->paginate();
+        $cities = City::with('country')->paginate();
         return view('web.admin.pages.city.index', compact('cities'));
     }
 

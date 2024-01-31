@@ -13,7 +13,7 @@ class Shipping extends Model
 
     protected $fillable = [
         'price',
-        'state',
+        'state_id',
     ];
 
     public function state()

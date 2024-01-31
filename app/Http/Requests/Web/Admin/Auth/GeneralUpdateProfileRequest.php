@@ -25,8 +25,10 @@ class GeneralUpdateProfileRequest extends FormRequest
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:admins,email,' . auth('admin')->user()->id,
             'image' => 'nullable|image|mimes:png,jpg,jpeg|mimetypes:image/png,image/jpg,image/jpeg',
-            'bio' => 'required|string|min:3',
-            'job_title' => 'required|string|min:3',
+            'bio_en' => 'required|string|min:3',
+            'bio_ar' => 'required|string|min:3',
+            'job_title_en' => 'required|string|min:3',
+            'job_title_ar' => 'required|string|min:3',
         ];
     }
 
@@ -42,12 +44,18 @@ class GeneralUpdateProfileRequest extends FormRequest
             'image.image' => __('admin/auth/profile/index.image_valid'),
             'image.mimes' => __('admin/auth/profile/index.mimes_valid'),
             'image.mimetype' => __('admin/auth/profile/index.mimetype_valid'),
-            'bio.required' => __('admin/auth/profile/index.required_valid'),
-            'bio.string' => __('admin/auth/profile/index.string_valid'),
-            'bio.min' => __('admin/auth/profile/index.min_valid'),
-            'job_title.required' => __('admin/auth/profile/index.required_valid'),
-            'job_title.string' => __('admin/auth/profile/index.string_valid'),
-            'job_title.min' => __('admin/auth/profile/index.min_valid'),
+            'bio_en.required' => __('admin/auth/profile/index.required_valid'),
+            'bio_en.string' => __('admin/auth/profile/index.string_valid'),
+            'bio_en.min' => __('admin/auth/profile/index.min_valid'),
+            'bio_ar.required' => __('admin/auth/profile/index.required_valid'),
+            'bio_ar.string' => __('admin/auth/profile/index.string_valid'),
+            'bio_ar.min' => __('admin/auth/profile/index.min_valid'),
+            'job_title_en.required' => __('admin/auth/profile/index.required_valid'),
+            'job_title_en.string' => __('admin/auth/profile/index.string_valid'),
+            'job_title_en.min' => __('admin/auth/profile/index.min_valid'),
+            'job_title_ar.required' => __('admin/auth/profile/index.required_valid'),
+            'job_title_ar.string' => __('admin/auth/profile/index.string_valid'),
+            'job_title_ar.min' => __('admin/auth/profile/index.min_valid'),
         ];
     }
 }

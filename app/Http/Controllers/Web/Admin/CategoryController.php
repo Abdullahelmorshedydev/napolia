@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->with('image')->with('category')->paginate();
+        $categories = Category::with(['image','category'])->paginate();
         return view('web.admin.pages.category.index', compact('categories'));
     }
 
@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
         $category = Category::create($data);
         $category->image()->create([
-            'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
+            'image' => FilesTrait::store($request->file('image'), Category::$img_path),
         ]);
         return redirect()->route('admin.categories.index')->with('success',  __('admin/category/create.success'));
     }
@@ -52,7 +52,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category->with('categories')->with('products')->with('image');
+        $category->with('categories')->with(['products','image']);
         return view('web.admin.pages.category.show', compact('category'));
     }
 
@@ -76,7 +76,7 @@ class CategoryController extends Controller
         if ($request->hasFile('image')) {
             FilesTrait::delete($category->image->image);
             $category->image->update([
-                'image' => FilesTrait::store($request->file('image'), 'uploads/categories/'),
+                'image' => FilesTrait::store($request->file('image'), Category::$img_path),
             ]);
         }
         $category->update($data);

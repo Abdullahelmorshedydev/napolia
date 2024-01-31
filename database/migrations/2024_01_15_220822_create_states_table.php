@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->json('slug');
-            $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
             $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
             $table->enum('status', StateStatusEnum::values())->default(StateStatusEnum::ACTIVE->value);
             $table->timestamps();

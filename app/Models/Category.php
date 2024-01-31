@@ -15,6 +15,8 @@ class Category extends Model
 
     protected $table = 'categories';
 
+    public static $img_path = 'uploads/categories/';
+
     public $translatable = ['name', 'slug'];
 
     protected $fillable = [

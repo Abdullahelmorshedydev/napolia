@@ -12,6 +12,8 @@ class AdminProfile extends Model
 
     protected $table = 'admin_profiles';
 
+    public static $img_path = 'uploads/profiles/';
+
     public $translatable = ['bio', 'job_title'];
 
     protected $fillable = [

@@ -36,7 +36,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->has('categories')->get();
         $types = DiscountTypeEnum::cases();
         return view('web.admin.pages.product.create', compact('categories', 'types'));
     }
@@ -59,7 +59,7 @@ class ProductController extends Controller
         }
         foreach ($data['images'] as $image) {
             $product->images()->create([
-                'image' => FilesTrait::store($image, 'uploads/products/'),
+                'image' => FilesTrait::store($image, Product::$img_path),
             ]);
         }
         return redirect()->route('admin.products.index')->with('success',  __('admin/product/create.success'));
@@ -80,7 +80,7 @@ class ProductController extends Controller
     {
         $status = ProductStatusEnum::cases();
         $conditions = ProductConditionEnum::cases();
-        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
+        $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->has('categories')->get();
         $subCategories = Category::where('category_id', $product->category_id)->get();
         $types = DiscountTypeEnum::cases();
         return view('web.admin.pages.product.edit', compact('product', 'status', 'conditions', 'categories', 'subCategories', 'types'));
@@ -116,7 +116,7 @@ class ProductController extends Controller
     public function storeImage(StoreImageRequest $request, Product $product)
     {
         $product->images()->create([
-            'image' => FilesTrait::store($request->file('image'), 'uploads/products/'),
+            'image' => FilesTrait::store($request->file('image'), Product::$img_path),
         ]);
         return redirect()->route('admin.products.show', $product->slug)->with('success',  __('admin/product/create.success_image'));
     }
@@ -130,7 +130,7 @@ class ProductController extends Controller
     {
         FilesTrait::delete($image->image);
         $image->update([
-            'image' => FilesTrait::store($request->file('image'), 'uploads/products/'),
+            'image' => FilesTrait::store($request->file('image'), Product::$img_path),
         ]);
         return redirect()->route('admin.products.show', $image->morphable_id)->with('success', __('admin/product/edit.success_image'));
     }
@@ -157,7 +157,7 @@ class ProductController extends Controller
 
     public function getSubCategories($id)
     {
-        $sub_categories = Category::where('category_id', $id)->get();
+        $sub_categories = Category::where('category_id', $id)->where('status', CategoryStatusEnum::ACTIVE->value)->get();
         return response()->json(['data' => $sub_categories]);
     }
 }

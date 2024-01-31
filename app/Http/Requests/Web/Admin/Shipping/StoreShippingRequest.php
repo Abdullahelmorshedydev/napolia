@@ -23,7 +23,7 @@ class StoreShippingRequest extends FormRequest
     {
         return [
             'price' => ['required', 'numeric', 'min:0'],
-            'city_id' => ['required', 'exists:cities,id', 'unique:shippings,city_id'],
+            'state_id' => ['required', 'exists:states,id', 'unique:shippings,state_id'],
         ];
     }
 
@@ -33,8 +33,9 @@ class StoreShippingRequest extends FormRequest
             'price.required' => __('admin/shipping/create.valid_required'),
             'price.string' => __('admin/shipping/create.valid_string'),
             'price.min' => __('admin/shipping/create.valid_min'),
-            'city_id.required' => __('admin/shipping/create.valid_required'),
-            'city_id.exists' => __('admin/shipping/create.valid_exists'),
+            'state_id.required' => __('admin/shipping/create.valid_required'),
+            'state_id.exists' => __('admin/shipping/create.valid_exists'),
+            'state_id.unique' => __('admin/shipping/create.valid_unique'),
         ];
     }
 }

@@ -1,26 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Admin\BlogController;
+use App\Http\Controllers\Web\Admin\CityController;
+use App\Http\Controllers\Web\Admin\HomeController;
+use App\Http\Controllers\Web\Admin\StateController;
+use App\Http\Controllers\Web\Admin\CouponController;
+use App\Http\Controllers\Web\Admin\SliderController;
+use App\Http\Controllers\Web\Admin\CountryController;
+use App\Http\Controllers\Web\Admin\ProductController;
+use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\ShippingController;
 use App\Http\Controllers\Web\Admin\Auth\LoginController;
 use App\Http\Controllers\Web\Admin\Auth\ProfileController;
-use App\Http\Controllers\Web\Admin\Auth\RegisterController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
-use App\Http\Controllers\Web\Admin\CategoryController;
-use App\Http\Controllers\Web\Admin\CityController;
-use App\Http\Controllers\Web\Admin\CountryController;
-use App\Http\Controllers\Web\Admin\CouponController;
-use App\Http\Controllers\Web\Admin\HomeController;
-use App\Http\Controllers\Web\Admin\ProductController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
+use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\AboutUsSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\ContactSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\GeneralSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\ReturnExchangeSettingsController;
-use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
-use App\Http\Controllers\Web\Admin\ShippingController;
-use App\Http\Controllers\Web\Admin\SliderController;
-use App\Http\Controllers\Web\Admin\StateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +34,6 @@ use App\Http\Controllers\Web\Admin\StateController;
 */
 
 Route::middleware('guest:admin')->prefix('/auth')->as('auth.')->group(function () {
-
-    Route::controller(RegisterController::class)->as('register.')->group(function () {
-
-        Route::get('/register', 'register')->name('show');
-        Route::post('/register/store', 'store')->name('store');
-    });
 
     Route::controller(LoginController::class)->as('login.')->group(function () {
 
@@ -109,7 +103,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::controller(ProfileController::class)->prefix('/profile')->as('profile.')->group(function () {
 
         Route::get('/', 'index')->name('index');
-        Route::post('/generalStore', 'generalStore')->name('general_store');
         Route::put('/generalUpdate', 'generalUpdate')->name('general_update');
         Route::put('/passwordUpdate', 'passwordUpdate')->name('password_update');
     });
@@ -137,6 +130,9 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::resource('shippings', ShippingController::class)->except('show');
     Route::get('/shiping_cities/{id?}',[ShippingController::class, 'getCities'])->name('shipping_cities');
+    Route::get('/shiping_states/{id?}',[ShippingController::class, 'getStates'])->name('shipping_states');
+
+    Route::resource('blogs', BlogController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

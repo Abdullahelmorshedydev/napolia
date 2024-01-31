@@ -31,11 +31,14 @@ return [
     'city_title' => 'Cities',
     'city_all' => 'All Cities',
     'city_create' => 'Create New City',
-    'state_title' => 'States',
-    'state_all' => 'All States',
-    'state_create' => 'Create New State',
+    'state_title' => 'Regions',
+    'state_all' => 'All Regions',
+    'state_create' => 'Create New Region',
     'shipping_title' => 'Shipping',
     'shipping_all' => 'Shipping Settings',
     'shipping_create' => 'Create New Shipping Data',
+    'blog_title' => 'Blog',
+    'blog_all' => 'Blog Settings',
+    'blog_create' => 'Create New Blog',
 
 ];

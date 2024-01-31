@@ -110,18 +110,18 @@
                                                     <input class="form-control" name="email"
                                                         placeholder="{{ __('admin/auth/login.email_place') }}"
                                                         type="text">
-                                                        @error('email')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                    @error('email')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('admin/auth/login.password') }}</label>
                                                     <input class="form-control" name="password"
                                                         placeholder="{{ __('admin/auth/login.password_place') }}"
                                                         type="password">
-                                                        @error('password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                    @error('password')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <button class="btn btn-main-primary btn-block">
                                                     {{ __('admin/auth/login.sign_in') }}
@@ -142,12 +142,8 @@
                                                 </div>
                                             </form>
                                             <div class="main-signup-footer mt-5">
-                                                <p><a href="{{ route('admin.auth.forget.index') }}">{{ __('admin/auth/login.forget_pass') }}</a></p>
-                                                <p>
-                                                    {{ __('admin/auth/login.have_not_acc') }}
-                                                    <a href="{{ route('admin.auth.register.show') }}">
-                                                        {{ __('admin/auth/login.create_acc') }}
-                                                    </a>
+                                                <p><a
+                                                        href="{{ route('admin.auth.forget.index') }}">{{ __('admin/auth/login.forget_pass') }}</a>
                                                 </p>
                                             </div>
                                         </div>

@@ -13,6 +13,8 @@ class Slider extends Model
 
     protected $table = 'sliders';
 
+    public static $img_path = 'uploads/sliders/';
+
     protected $fillable = [
         'status',
     ];

@@ -27,20 +27,20 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img width="100px" src="{{ asset($category->image) }}" alt="category_image">
+                                <img width="100px" src="{{ asset($category->image->image) }}" alt="category_image">
                             </div>
                             <div class="col-md-9">
                                 <h5 class="card-title">{{ $category->name }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                     @if (isset($category->category))
-                                        <a href="{{ route('admin.categories.show', $category->category->id) }}"
+                                        <a href="{{ route('admin.categories.show', $category->category->slug) }}"
                                             class="card-link text-secondary">{{ $category->category->name }}</a>
                                     @else
                                         {{ __('admin/category/show.parent_category') }}
                                     @endif
                                 </h6>
                                 <p class="card-text">{{ $category->status->lang() }}</p>
-                                <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                <a href="{{ route('admin.categories.edit', $category->slug) }}"
                                     class="card-link text-secondary">{{ __('admin/category/index.edit') }}</a>
                             </div>
                         </div>
