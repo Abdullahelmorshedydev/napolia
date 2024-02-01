@@ -3,27 +3,37 @@
     <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
     <div class="cart-inner">
         <div class="cart_top">
-            <h3>my account</h3>
+            <h3>{{ __('site/auth/login.my_acc') }}</h3>
             <div class="close-cart">
                 <a href="javascript:void(0)" onclick="closeAccount()">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
-        <form class="theme-form">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" placeholder="Email" required="">
-            </div>
-            <div class="form-group">
-                <label for="review">Password</label>
-                <input type="password" class="form-control" id="review" placeholder="Enter your password"
-                    required="">
-            </div>
-            <a href="#" class="btn btn-solid btn-solid-sm btn-block ">Login</a>
-            <h5 class="forget-class"><a href="forget_pwd.html" class="d-block">forget password?</a></h5>
-            <h5 class="forget-class"><a href="register.html" class="d-block">new to store? Signup now</a></h5>
-        </form>
+        @guest
+            <form action="{{ route('auth.login.store') }}" method="POST" class="theme-form">
+                @csrf
+                <div class="form-group">
+                    <label for="email">{{ __('site/auth/login.email') }}</label>
+                    <input type="email" class="form-control" name="email" placeholder="{{ __('site/auth/login.email_place') }}">
+                </div>
+                <div class="form-group">
+                    <label for="password">{{ __('site/auth/login.password') }}</label>
+                    <input type="password" class="form-control" name="password" placeholder="{{ __('site/auth/login.password_place') }}">
+                </div>
+                <button type="submit" class="btn btn-solid btn-solid-sm btn-block">{{ __('site/auth/login.button') }}</button>
+                <h5 class="forget-class">
+                    <a href="{{ route('auth.register.show') }}" class="d-block">{{ __('site/auth/login.have_not_acc') }}</a>
+                </h5>
+            </form>
+        @endguest
+        @auth
+            <form action="{{ route('auth.logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-solid btn-solid-sm btn-block">{{ __('site/auth/login.logout') }}</button>
+            </form>
+            <a href="{{ route('profile.index') }}" class="btn btn-solid btn-solid-sm btn-block mt-2">{{ __('site/auth/login.Profile') }}</a>
+        @endauth
     </div>
 </div>
 <!-- My account bar end-->
