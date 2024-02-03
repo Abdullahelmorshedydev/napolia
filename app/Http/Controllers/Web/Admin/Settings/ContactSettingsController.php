@@ -9,6 +9,18 @@ use App\Http\Requests\Web\Admin\Settings\ContactSettingsRequest;
 
 class ContactSettingsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:contact_settings-list|contact_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:contact_settings-edit'], ['only' => ['update']]);
+    }
+
     public function index()
     {
         return view('web.admin.pages.settings.contact.index');

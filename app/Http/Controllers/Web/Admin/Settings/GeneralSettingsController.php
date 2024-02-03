@@ -9,6 +9,18 @@ use App\Http\Requests\Web\Admin\Settings\GeneralSettingsRequest;
 
 class GeneralSettingsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:general_settings-list|general_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:general_settings-edit'], ['only' => ['update']]);
+    }
+
     public function index()
     {
         return view('web.admin.pages.settings.general.index');

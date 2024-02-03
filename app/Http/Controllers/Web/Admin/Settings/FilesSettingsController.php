@@ -12,6 +12,18 @@ class FilesSettingsController extends Controller
 {
     use FilesTrait;
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:files_settings-list|files_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:files_settings-edit'], ['only' => ['update']]);
+    }
+
+
     public function index()
     {
         return view('web.admin.pages.settings.files.index');

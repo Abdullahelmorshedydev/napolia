@@ -49,16 +49,20 @@
                                     <th>{{ $state->city->name }}</th>
                                     <td>{{ $state->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.states.edit', $state->slug) }}" class="btn btn-info">
-                                            {{ __('admin/state/index.edit') }}
-                                        </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.states.destroy', $state->slug) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/state/index.delete') }}</button>
-                                        </form>
+                                        @can('state-edit')
+                                            <a href="{{ route('admin.states.edit', $state->slug) }}" class="btn btn-info">
+                                                {{ __('admin/state/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('state-delete')
+                                            <form class="d-inline" action="{{ route('admin.states.destroy', $state->slug) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/state/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

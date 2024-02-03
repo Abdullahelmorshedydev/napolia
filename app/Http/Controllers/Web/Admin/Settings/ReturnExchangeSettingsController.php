@@ -9,6 +9,18 @@ use App\Http\Requests\Web\Admin\Settings\ReturnExchangeSettingsRequest;
 
 class ReturnExchangeSettingsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:return_exchange_settings-list|return_exchange_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:return_exchange_settings-edit'], ['only' => ['update']]);
+    }
+
     public function index()
     {
         return view('web.admin.pages.settings.return_exchange.index');

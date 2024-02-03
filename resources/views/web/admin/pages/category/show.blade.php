@@ -40,8 +40,19 @@
                                     @endif
                                 </h6>
                                 <p class="card-text">{{ $category->status->lang() }}</p>
-                                <a href="{{ route('admin.categories.edit', $category->slug) }}"
-                                    class="card-link text-secondary">{{ __('admin/category/index.edit') }}</a>
+                                @can('category-edit')
+                                    <a href="{{ route('admin.categories.edit', $category->slug) }}"
+                                        class="card-link text-secondary">{{ __('admin/category/index.edit') }}</a>
+                                @endcan
+                                @can('category-delete')
+                                    <form class="d-inline" action="{{ route('admin.categories.destroy', $category->slug) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger"
+                                            type="submit">{{ __('admin/category/index.delete') }}</button>
+                                    </form>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -143,14 +154,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-secondary">
+                                        <a href="{{ route('admin.products.show', $product->id) }}"
+                                            class="btn btn-secondary">
                                             {{ __('admin/category/show.show') }}
                                         </a>
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info">
                                             {{ __('admin/category/show.edit') }}
                                         </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.products.destroy', $product->id) }}" method="post">
+                                        <form class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}"
+                                            method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger"

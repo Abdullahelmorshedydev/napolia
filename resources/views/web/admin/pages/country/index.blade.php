@@ -47,16 +47,20 @@
                                     <th>{{ $country->name }}</th>
                                     <td>{{ $country->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.countries.edit', $country->slug) }}" class="btn btn-info">
-                                            {{ __('admin/country/index.edit') }}
-                                        </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.countries.destroy', $country->slug) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/country/index.delete') }}</button>
-                                        </form>
+                                        @can('country-list')
+                                            <a href="{{ route('admin.countries.edit', $country->slug) }}" class="btn btn-info">
+                                                {{ __('admin/country/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('country-delete')
+                                            <form class="d-inline"
+                                                action="{{ route('admin.countries.destroy', $country->slug) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/country/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

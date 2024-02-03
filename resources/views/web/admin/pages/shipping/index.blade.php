@@ -47,16 +47,20 @@
                                     <th>{{ $shipping->price }}</th>
                                     <th>{{ $shipping->state->name }}</th>
                                     <td>
-                                        <a href="{{ route('admin.shippings.edit', $shipping->id) }}" class="btn btn-info">
-                                            {{ __('admin/shipping/index.edit') }}
-                                        </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.shippings.destroy', $shipping->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/shipping/index.delete') }}</button>
-                                        </form>
+                                        @can('shipping-edit')
+                                            <a href="{{ route('admin.shippings.edit', $shipping->id) }}" class="btn btn-info">
+                                                {{ __('admin/shipping/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('shipping-delete')
+                                            <form class="d-inline"
+                                                action="{{ route('admin.shippings.destroy', $shipping->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/shipping/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

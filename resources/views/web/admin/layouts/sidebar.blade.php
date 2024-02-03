@@ -34,161 +34,249 @@
                 </a>
             </li>
             <li class="side-item side-item-category">{{ __('admin/home/sidebar.general') }}</li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.slider_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.sliders.index') }}">{{ __('admin/home/sidebar.slider_all') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.sliders.create') }}">{{ __('admin/home/sidebar.slider_create') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.category_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.categories.index') }}">{{ __('admin/home/sidebar.category_all') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.categories.create') }}">{{ __('admin/home/sidebar.category_create') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.product_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.products.index') }}">{{ __('admin/home/sidebar.product_all') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.products.create') }}">{{ __('admin/home/sidebar.product_create') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.coupon_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.coupons.index') }}">{{ __('admin/home/sidebar.coupon_all') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.coupons.create') }}">{{ __('admin/home/sidebar.coupon_create') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.blog_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.blogs.index') }}">{{ __('admin/home/sidebar.blog_all') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.blogs.create') }}">{{ __('admin/home/sidebar.blog_create') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.shipping_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.shippings.index') }}">{{ __('admin/home/sidebar.shipping_all') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.shippings.create') }}">{{ __('admin/home/sidebar.shipping_create') }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                        <path
-                            d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                    </svg>
-                    <span class="side-menu__label">{{ __('admin/home/sidebar.settings_title') }}</span>
-                    <i class="angle fe fe-chevron-down"></i>
-                </a>
-                <ul class="slide-menu">
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.general.index') }}">{{ __('admin/home/sidebar.general_settings') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.files.index') }}">{{ __('admin/home/sidebar.files_settings') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.links.index') }}">{{ __('admin/home/sidebar.links_settings') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.about_us.index') }}">{{ __('admin/home/sidebar.about_us_settings') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.contact.index') }}">{{ __('admin/home/sidebar.contact_settings') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.terms.index') }}">{{ __('admin/home/sidebar.terms_settings') }}</a>
-                    </li>
-                    <li><a class="slide-item"
-                            href="{{ route('admin.settings.return_exchange.index') }}">{{ __('admin/home/sidebar.return_exchange_settings') }}</a>
-                    </li>
-                </ul>
-            </li>
+            @can('slider-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.slider_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.sliders.index') }}">{{ __('admin/home/sidebar.slider_all') }}</a>
+                        </li>
+                        @can('slider-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.sliders.create') }}">{{ __('admin/home/sidebar.slider_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('category-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.category_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.categories.index') }}">{{ __('admin/home/sidebar.category_all') }}</a>
+                        </li>
+                        @can('category-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.categories.create') }}">{{ __('admin/home/sidebar.category_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('product-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.product_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.products.index') }}">{{ __('admin/home/sidebar.product_all') }}</a>
+                        </li>
+                        @can('product-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.products.create') }}">{{ __('admin/home/sidebar.product_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('coupon-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.coupon_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.coupons.index') }}">{{ __('admin/home/sidebar.coupon_all') }}</a>
+                        </li>
+                        @can('coupon-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.coupons.create') }}">{{ __('admin/home/sidebar.coupon_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('blog-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.blog_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.blogs.index') }}">{{ __('admin/home/sidebar.blog_all') }}</a>
+                        </li>
+                        @can('blog-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.blogs.create') }}">{{ __('admin/home/sidebar.blog_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('shipping-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.shipping_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.shippings.index') }}">{{ __('admin/home/sidebar.shipping_all') }}</a>
+                        </li>
+                        @can('shipping-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.shippings.create') }}">{{ __('admin/home/sidebar.shipping_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('user-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.user_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.users.index') }}">{{ __('admin/home/sidebar.user_all') }}</a>
+                        </li>
+                        @can('user-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.users.create') }}">{{ __('admin/home/sidebar.user_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('role-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.role_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item"
+                                href="{{ route('admin.roles.index') }}">{{ __('admin/home/sidebar.role_all') }}</a>
+                        </li>
+                        @can('role-create')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.roles.create') }}">{{ __('admin/home/sidebar.role_create') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('aboutus_settings-list')
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
+                            <path
+                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                        </svg>
+                        <span class="side-menu__label">{{ __('admin/home/sidebar.settings_title') }}</span>
+                        <i class="angle fe fe-chevron-down"></i>
+                    </a>
+                    <ul class="slide-menu">
+                        @can('general_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.general.index') }}">{{ __('admin/home/sidebar.general_settings') }}</a>
+                            </li>
+                        @endcan
+                        @can('files_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.files.index') }}">{{ __('admin/home/sidebar.files_settings') }}</a>
+                            </li>
+                        @endcan
+                        @can('links_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.links.index') }}">{{ __('admin/home/sidebar.links_settings') }}</a>
+                            </li>
+                        @endcan
+                        @can('aboutus_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.about_us.index') }}">{{ __('admin/home/sidebar.about_us_settings') }}</a>
+                            </li>
+                        @endcan
+                        @can('contact_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.contact.index') }}">{{ __('admin/home/sidebar.contact_settings') }}</a>
+                            </li>
+                        @endcan
+                        @can('terms_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.terms.index') }}">{{ __('admin/home/sidebar.terms_settings') }}</a>
+                            </li>
+                        @endcan
+                        @can('return_exchange_settings-list')
+                            <li><a class="slide-item"
+                                    href="{{ route('admin.settings.return_exchange.index') }}">{{ __('admin/home/sidebar.return_exchange_settings') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
         </ul>
     </div>
 </aside>

@@ -12,6 +12,18 @@ class AboutUsSettingsController extends Controller
 {
     use FilesTrait;
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:aboutus_settings-list|aboutus_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:aboutus_settings-edit'], ['only' => ['edit']]);
+    }
+
+
     public function index()
     {
         return view('web.admin.pages.settings.about.index');

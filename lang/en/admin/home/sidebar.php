@@ -37,8 +37,14 @@ return [
     'shipping_title' => 'Shipping',
     'shipping_all' => 'Shipping Settings',
     'shipping_create' => 'Create New Shipping Data',
-    'blog_title' => 'Blog',
-    'blog_all' => 'Blog Settings',
+    'blog_title' => 'Blogs',
+    'blog_all' => 'All Blogs',
     'blog_create' => 'Create New Blog',
+    'user_title' => 'Users',
+    'user_all' => 'All Users',
+    'user_create' => 'Create New User',
+    'role_title' => 'Roles',
+    'role_all' => 'All Roles',
+    'role_create' => 'Create New Role',
 
 ];

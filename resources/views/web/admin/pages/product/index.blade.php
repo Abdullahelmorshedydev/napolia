@@ -56,20 +56,26 @@
                                     <td>{{ $product->condition->lang() }}</td>
                                     <td>{{ $product->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.products.show', $product->slug) }}"
-                                            class="btn btn-secondary">
-                                            {{ __('admin/product/index.show') }}
-                                        </a>
-                                        <a href="{{ route('admin.products.edit', $product->slug) }}" class="btn btn-info">
-                                            {{ __('admin/product/index.edit') }}
-                                        </a>
-                                        <form class="d-inline" action="{{ route('admin.products.destroy', $product->slug) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/product/index.delete') }}</button>
-                                        </form>
+                                        @can('product-list')
+                                            <a href="{{ route('admin.products.show', $product->slug) }}"
+                                                class="btn btn-secondary">
+                                                {{ __('admin/product/index.show') }}
+                                            </a>
+                                        @endcan
+                                        @can('product-edit')
+                                            <a href="{{ route('admin.products.edit', $product->slug) }}" class="btn btn-info">
+                                                {{ __('admin/product/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('product-delete')
+                                            <form class="d-inline"
+                                                action="{{ route('admin.products.destroy', $product->slug) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/product/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

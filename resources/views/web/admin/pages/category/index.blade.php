@@ -46,26 +46,35 @@
                                 <tr>
                                     <th scope="row">{{ $categories->firstItem() + $loop->index }}</th>
                                     <td>
-                                        <img style="width: 50px;" src="{{ asset($category->image->image) }}" alt="category_image">
+                                        <img style="width: 50px;" src="{{ asset($category->image->image) }}"
+                                            alt="category_image">
                                     </td>
                                     <th>{{ $category->name }}</th>
                                     <th>{{ isset($category->category) ? $category->category->name : 'Parent' }}</th>
                                     <td>{{ $category->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.categories.show', $category->slug) }}"
-                                            class="btn btn-secondary">
-                                            {{ __('admin/category/index.show') }}
-                                        </a>
-                                        <a href="{{ route('admin.categories.edit', $category->slug) }}" class="btn btn-info">
-                                            {{ __('admin/category/index.edit') }}
-                                        </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.categories.destroy', $category->slug) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/category/index.delete') }}</button>
-                                        </form>
+                                        @can('category-list')
+                                            <a href="{{ route('admin.categories.show', $category->slug) }}"
+                                                class="btn btn-secondary">
+                                                {{ __('admin/category/index.show') }}
+                                            </a>
+                                        @endcan
+                                        @can('category-edit')
+                                            <a href="{{ route('admin.categories.edit', $category->slug) }}"
+                                                class="btn btn-info">
+                                                {{ __('admin/category/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('category-delete')
+                                            <form class="d-inline"
+                                                action="{{ route('admin.categories.destroy', $category->slug) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/category/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

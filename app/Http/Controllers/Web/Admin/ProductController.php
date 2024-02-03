@@ -24,6 +24,19 @@ class ProductController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:product-list|product-create|product-edit|product-delete'], ['only' => ['index', 'show']]);
+        $this->middleware(['permission:product-create'], ['only' => ['create', 'store', 'createImage', 'storeImage']]);
+        $this->middleware(['permission:product-edit'], ['only' => ['edit', 'update', 'editImage', 'updateImage']]);
+        $this->middleware(['permission:product-delete'], ['only' => ['destroy', 'deleteImage']]);
+    }
+
+    /**
+     * Display a listing of the resource.
      */
     public function index()
     {

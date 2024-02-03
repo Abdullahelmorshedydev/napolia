@@ -9,6 +9,18 @@ use App\Http\Requests\Web\Admin\Settings\LinksSettingsRequest;
 
 class LinksSettingsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:links_settings-list|links_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:links_settings-edit'], ['only' => ['update']]);
+    }
+
     public function index()
     {
         return view('web.admin.pages.settings.links.index');

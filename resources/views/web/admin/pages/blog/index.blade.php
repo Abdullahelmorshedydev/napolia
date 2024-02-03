@@ -52,20 +52,25 @@
                                     <th>{{ $blog->admin->name }}</th>
                                     <td>{{ $blog->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.blogs.show', $blog->slug) }}"
-                                            class="btn btn-secondary">
-                                            {{ __('admin/blog/index.show') }}
-                                        </a>
-                                        <a href="{{ route('admin.blogs.edit', $blog->slug) }}" class="btn btn-info">
-                                            {{ __('admin/blog/index.edit') }}
-                                        </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.blogs.destroy', $blog->slug) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/blog/index.delete') }}</button>
-                                        </form>
+                                        @can('blog-list')
+                                            <a href="{{ route('admin.blogs.show', $blog->slug) }}" class="btn btn-secondary">
+                                                {{ __('admin/blog/index.show') }}
+                                            </a>
+                                        @endcan
+                                        @can('blog-edit')
+                                            <a href="{{ route('admin.blogs.edit', $blog->slug) }}" class="btn btn-info">
+                                                {{ __('admin/blog/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('blog-delete')
+                                            <form class="d-inline" action="{{ route('admin.blogs.destroy', $blog->slug) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/blog/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

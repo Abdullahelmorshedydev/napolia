@@ -12,6 +12,20 @@ use App\Http\Requests\Web\Admin\Coupon\UpdateCouponRequest;
 
 class CouponController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:coupon-list|coupon-create|coupon-edit|coupon-delete'], ['only' => ['index', 'show']]);
+        $this->middleware(['permission:coupon-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:coupon-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['permission:coupon-delete'], ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

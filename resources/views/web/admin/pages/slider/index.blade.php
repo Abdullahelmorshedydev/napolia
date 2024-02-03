@@ -48,16 +48,20 @@
                                     </td>
                                     <td>{{ $slider->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.sliders.edit', $slider->id) }}" class="btn btn-info">
-                                            {{ __('admin/slider/index.edit') }}
-                                        </a>
-                                        <form class="d-inline"
-                                            action="{{ route('admin.sliders.destroy', $slider->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/slider/index.delete') }}</button>
-                                        </form>
+                                        @can('slider-edit')
+                                            <a href="{{ route('admin.sliders.edit', $slider->id) }}" class="btn btn-info">
+                                                {{ __('admin/slider/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('slider-delete')
+                                            <form class="d-inline" action="{{ route('admin.sliders.destroy', $slider->id) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/slider/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -36,15 +36,19 @@
                                     {{ $blog->admin->name }}
                                 </h6>
                                 <p class="card-text">{!! $blog->article !!}</p>
-                                <a href="{{ route('admin.blogs.edit', $blog->slug) }}"
-                                    class="card-link text-secondary">{{ __('admin/blog/index.edit') }}</a>
-                                <form class="d-inline" action="{{ route('admin.blogs.destroy', $blog->slug) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"
-                                        type="submit">{{ __('admin/blog/index.delete') }}</button>
-                                </form>
+                                @can('blog-edit')
+                                    <a href="{{ route('admin.blogs.edit', $blog->slug) }}"
+                                        class="card-link text-secondary">{{ __('admin/blog/index.edit') }}</a>
+                                @endcan
+                                @can('blog-delete')
+                                    <form class="d-inline" action="{{ route('admin.blogs.destroy', $blog->slug) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger"
+                                            type="submit">{{ __('admin/blog/index.delete') }}</button>
+                                    </form>
+                                @endcan
                             </div>
                         </div>
                     </div>

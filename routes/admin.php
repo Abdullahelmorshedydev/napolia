@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\BlogController;
 use App\Http\Controllers\Web\Admin\CityController;
 use App\Http\Controllers\Web\Admin\HomeController;
+use App\Http\Controllers\Web\Admin\RoleController;
+use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Admin\StateController;
 use App\Http\Controllers\Web\Admin\CouponController;
 use App\Http\Controllers\Web\Admin\SliderController;
@@ -133,6 +135,10 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/shiping_states/{id?}',[ShippingController::class, 'getStates'])->name('shipping_states');
 
     Route::resource('blogs', BlogController::class);
+
+    Route::resource('users', UserController::class)->except('show');
+
+    Route::resource('roles', RoleController::class)->except('show');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

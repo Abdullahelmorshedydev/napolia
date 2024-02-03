@@ -36,7 +36,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputName_en1">{{ __('admin/category/edit.name_en_label') }}</label>
-                                            <input type="text" value="{{ old('name_en', $category->getTranslation('name', 'en')) }}" name="name"
+                                            <input type="text" value="{{ old('name_en', $category->getTranslation('name', 'en')) }}" name="name_en"
                                                 class="form-control" id="exampleInputName_en1"
                                                 placeholder="{{ __('admin/category/edit.name_en_place') }}">
                                             @error('name_en')
@@ -47,7 +47,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputName_ar1">{{ __('admin/category/edit.name_ar_label') }}</label>
-                                            <input type="text" value="{{ old('name_ar', $category->getTranslation('name', 'ar')) }}" name="name"
+                                            <input type="text" value="{{ old('name_ar', $category->getTranslation('name', 'ar')) }}" name="name_ar"
                                                 class="form-control" id="exampleInputName_ar1"
                                                 placeholder="{{ __('admin/category/edit.name_ar_place') }}">
                                             @error('name_ar')

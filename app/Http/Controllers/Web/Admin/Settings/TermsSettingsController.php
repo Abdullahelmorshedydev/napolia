@@ -9,6 +9,18 @@ use App\Http\Requests\Web\Admin\Settings\TermsSettingsRequest;
 
 class TermsSettingsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware(['permission:terms_settings-list|terms_settings-edit'], ['only' => ['index']]);
+        $this->middleware(['permission:terms_settings-edit'], ['only' => ['update']]);
+    }
+
     public function index()
     {
         return view('web.admin.pages.settings.terms.index');

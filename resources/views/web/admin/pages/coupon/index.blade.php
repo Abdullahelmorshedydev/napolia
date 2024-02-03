@@ -55,21 +55,25 @@
                                     </th>
                                     <th>{{ $coupon->type->lang() }}</th>
                                     <th>{{ $coupon->max_usage }}</th>
-                                    <th>{{ $coupon->number_of_usage ?? 0 }}</th>
+                                    <th>{{ $coupon->number_of_usage ? $coupon->number_of_usage : 0 }}</th>
                                     <th>{{ $coupon->min_order_value }}</th>
                                     <th>{{ $coupon->expire_date }}</th>
                                     <td>{{ $coupon->status->lang() }}</td>
                                     <td>
-                                        <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-info">
-                                            {{ __('admin/coupon/index.edit') }}
-                                        </a>
-                                        <form class="d-inline" action="{{ route('admin.coupons.destroy', $coupon->id) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                type="submit">{{ __('admin/coupon/index.delete') }}</button>
-                                        </form>
+                                        @can('coupon-edit')
+                                            <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-info">
+                                                {{ __('admin/coupon/index.edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('coupon-delete')
+                                            <form class="d-inline" action="{{ route('admin.coupons.destroy', $coupon->id) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"
+                                                    type="submit">{{ __('admin/coupon/index.delete') }}</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
