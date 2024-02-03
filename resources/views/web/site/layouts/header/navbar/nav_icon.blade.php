@@ -10,7 +10,7 @@
                 <i class="ti-settings mobile-icon"></i>
             </div>
             <div class="show-div setting">
-                <h6>language</h6>
+                <h6>{{ __('site/home/nav.language') }}</h6>
                 <ul>
                     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li>

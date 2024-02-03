@@ -8,8 +8,10 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
             <a class="dropdown-item"
                 href="{{ route('admin.cities.index') }}">{{ __('admin/home/sidebar.city_all') }}</a>
-            <a class="dropdown-item"
-                href="{{ route('admin.cities.create') }}">{{ __('admin/home/sidebar.city_create') }}</a>
+            @can('city-create')
+                <a class="dropdown-item"
+                    href="{{ route('admin.cities.create') }}">{{ __('admin/home/sidebar.city_create') }}</a>
+            @endcan
         </div>
     </div>
 </div>

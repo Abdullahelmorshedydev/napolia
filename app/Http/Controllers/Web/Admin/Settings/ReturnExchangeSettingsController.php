@@ -17,8 +17,8 @@ class ReturnExchangeSettingsController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:return_exchange_settings-list|return_exchange_settings-edit'], ['only' => ['index']]);
-        $this->middleware(['permission:return_exchange_settings-edit'], ['only' => ['update']]);
+        // $this->middleware(['permission:return_exchange_settings-list|return_exchange_settings-edit'], ['only' => ['index']]);
+        // $this->middleware(['permission:return_exchange_settings-edit'], ['only' => ['update']]);
     }
 
     public function index()

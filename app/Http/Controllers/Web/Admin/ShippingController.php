@@ -23,10 +23,10 @@ class ShippingController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:shipping-list|shipping-create|shipping-edit|shipping-delete'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:shipping-create'], ['only' => ['create', 'store']]);
-        $this->middleware(['permission:shipping-edit'], ['only' => ['edit', 'update']]);
-        $this->middleware(['permission:shipping-delete'], ['only' => ['destroy']]);
+        // $this->middleware(['permission:shipping-list|shipping-create|shipping-edit|shipping-delete'], ['only' => ['index', 'show']]);
+        // $this->middleware(['permission:shipping-create'], ['only' => ['create', 'store']]);
+        // $this->middleware(['permission:shipping-edit'], ['only' => ['edit', 'update']]);
+        // $this->middleware(['permission:shipping-delete'], ['only' => ['destroy']]);
     }
 
     /**

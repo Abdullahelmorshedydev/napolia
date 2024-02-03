@@ -3,7 +3,7 @@
 return [
 
     'title' => 'Create New Role',
-    'header' => 'Role',
+    'header' => 'Roles',
     'active' => 'Create New Role',
     'add_new' => 'Add New Role',
     'submit' => 'Create',
@@ -17,6 +17,6 @@ return [
     'valid_min' => 'this field minimum length is 3 character',
     'valid_max' => 'this field maximum length is 50 character',
     'valid_exists' => 'this record not in our recordes',
-    'success' => 'User Created Successfully',
+    'success' => 'Role Created Successfully',
 
 ];

@@ -126,20 +126,6 @@
                                                 <button class="btn btn-main-primary btn-block">
                                                     {{ __('admin/auth/login.sign_in') }}
                                                 </button>
-                                                <div class="row row-xs">
-                                                    <div class="col-sm-6">
-                                                        <button class="btn btn-block">
-                                                            <i class="fab fa-facebook-f"></i>
-                                                            Signin with Facebook
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-6 mg-t-10 mg-sm-t-0">
-                                                        <button class="btn btn-info btn-block">
-                                                            <i class="fab fa-twitter"></i>
-                                                            Signin with Twitter
-                                                        </button>
-                                                    </div>
-                                                </div>
                                             </form>
                                             <div class="main-signup-footer mt-5">
                                                 <p><a

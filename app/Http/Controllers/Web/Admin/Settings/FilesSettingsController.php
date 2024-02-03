@@ -19,8 +19,8 @@ class FilesSettingsController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:files_settings-list|files_settings-edit'], ['only' => ['index']]);
-        $this->middleware(['permission:files_settings-edit'], ['only' => ['update']]);
+        // $this->middleware(['permission:files_settings-list|files_settings-edit'], ['only' => ['index']]);
+        // $this->middleware(['permission:files_settings-edit'], ['only' => ['update']]);
     }
 
 

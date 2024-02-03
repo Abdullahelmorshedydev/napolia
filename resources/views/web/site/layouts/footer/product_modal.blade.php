@@ -6,37 +6,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="row">
                     <div class="col-lg-6 col-xs-12">
-                        <div class="quick-view-img"><img src="{{ asset('site/assets/images/product/14.jpg') }}"
+                        <div class="quick-view-img"><img src="{{ asset($product->images[0]->image) }}"
                                 alt="" class="img-fluid "></div>
                     </div>
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
-                            <h2>Women Pink Shirt</h2>
-                            <h3>$32.96</h3>
+                            <h2>{{ $product->name }}</h2>
+                            <h3>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}</h3>
                             <div class="border-product">
-                                <h6 class="product-title">product details:</h6>
-                                <p>this brand is a t-shirt led value brand for men, women and kids. Our range consists
-                                    of basic and updated basic knit apparel. We offer both singles and packs with the
-                                    right blend of quality, style and value aimed to delight our customers.</p>
+                                <h6 class="product-title">{{ __('site/home/product.product_details') }}:</h6>
+                                <p>{{ $product->description }}.</p>
                             </div>
                             <div class="product-description border-product">
-                                <h6 class="product-title">color:</h6>
+                                <h6 class="product-title">{{ __('site/home/product.color') }}:</h6>
                                 <ul class="color-variant">
-                                    <li class="light-purple active"></li>
-                                    <li class="theme-blue"></li>
-                                    <li class="theme-color"></li>
+                                    @foreach ($product->colors as $color)
+                                    <li style="background-color: {{ $color->code }}"></li>
+                                    @endforeach
                                 </ul>
-                                <h6 class="product-title">size:</h6>
-                                <div class="size-box">
-                                    <ul class="size-box">
-                                        <li class="active">xs</li>
-                                        <li>s</li>
-                                        <li>m</li>
-                                        <li>l</li>
-                                        <li>xl</li>
-                                    </ul>
-                                </div>
-                                <h6 class="product-title">quantity:</h6>
+                                <h6 class="product-title">{{ __('site/home/product.quantity') }}:</h6>
                                 <div class="qty-box">
                                     <div class="input-group"><span class="input-group-prepend"><button type="button"
                                                 class="btn quantity-left-minus" data-type="minus" data-field=""><i
@@ -49,8 +37,8 @@
                                 </div>
                             </div>
                             <div class="product-buttons">
-                                <a href="cart.html" class="btn btn-solid">add to cart</a>
-                                <a href="product-page.html" class="btn btn-solid">view detail</a>
+                                <a href="#" class="btn btn-solid">{{ __('site/home/product.add_to_cart') }}</a>
+                                <a href="#" class="btn btn-solid">{{ __('site/home/product.product_details') }}</a>
                             </div>
                         </div>
                     </div>

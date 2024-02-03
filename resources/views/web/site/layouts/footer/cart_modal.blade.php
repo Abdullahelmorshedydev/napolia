@@ -21,21 +21,16 @@
                                             <h6>
                                                 <i class="fa fa-check"></i>Item
                                                 <span>men full sleeves</span>
-                                                <span> successfully added to your Cart -</span>
+                                                <span> {{ __('site/home/cart.added_success') }} -</span>
                                                 <span>blue,</span>
                                                 <span>XS</span>
                                             </h6>
                                         </a>
                                         <div class="buttons">
-                                            <a href="cart.html" class="view-cart btn btn-solid">Your cart</a>
-                                            <a href="checkout.html" class="checkout btn btn-solid">Check out</a>
+                                            <a href="#" class="view-cart btn btn-solid">{{ __('site/home/cart.your_cart') }}</a>
+                                            <a href="#" class="checkout btn btn-solid">{{ __('site/home/cart.checkout_button') }}</a>
                                             <a href="#" data-bs-dismiss="modal"
-                                                class="continue btn btn-solid">Continue shopping</a>
-                                        </div>
-
-                                        <div class="upsell_payment">
-                                            <img src="{{ asset('site/assets/images/payment_cart.png') }}"
-                                                class="img-fluid " alt="">
+                                                class="continue btn btn-solid">{{ __('site/home/cart.continue_shopping') }}</a>
                                         </div>
                                     </div>
                                 </div>

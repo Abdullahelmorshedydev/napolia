@@ -113,8 +113,16 @@
                         <p class="card-subtitle mb-2 text-muted d-inline">{{ $product->description }}</p>
                     </div>
                     <div class="col-md-12 mt-2">
+                        {{ __('admin/product/show.colors') }}:
+                        @foreach ($product->colors as $color)
+                            <p class="card-subtitle mb-2 text-muted d-inline">
+                                {{ $color->name . '(' . $color->code . ')' }}
+                            </p>
+                        @endforeach
+                    </div>
+                    <div class="col-md-12 mt-2">
                         @can('product-edit')
-                            <a href="{{ route('admin.products.edit', $product->slug) }}" class="card-link text-secondary ml-2">
+                            <a href="{{ route('admin.products.edit', $product->slug) }}" class="btn btn-info ml-2">
                                 {{ __('admin/product/show.edit') }}
                             </a>
                         @endcan

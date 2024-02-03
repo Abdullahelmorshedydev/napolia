@@ -10,7 +10,7 @@
             </div>
             <div class="nav-right">
                 @include('web.site.layouts.header.navbar.main_nav')
-                @include('web.site.layouts.header.navbar.search_bar')
+                {{-- @include('web.site.layouts.header.navbar.search_bar') --}}
                 @include('web.site.layouts.header.navbar.nav_icon')
             </div>
         </div>

@@ -25,10 +25,10 @@ class StateController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:state-list|state-create|state-edit|state-delete'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:state-create'], ['only' => ['create', 'store']]);
-        $this->middleware(['permission:state-edit'], ['only' => ['edit', 'update']]);
-        $this->middleware(['permission:state-delete'], ['only' => ['destroy']]);
+        // $this->middleware(['permission:state-list|state-create|state-edit|state-delete'], ['only' => ['index', 'show']]);
+        // $this->middleware(['permission:state-create'], ['only' => ['create', 'store']]);
+        // $this->middleware(['permission:state-edit'], ['only' => ['edit', 'update']]);
+        // $this->middleware(['permission:state-delete'], ['only' => ['destroy']]);
     }
 
     /**

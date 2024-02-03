@@ -57,7 +57,7 @@ class Product extends Model
 
     public function subCategory()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'sub_category_id');
     }
 
     public function images() : MorphMany

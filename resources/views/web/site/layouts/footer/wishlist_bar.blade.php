@@ -3,7 +3,7 @@
     <a href="javascript:void(0)" class="overlay" onclick="closeWishlist()"></a>
     <div class="cart-inner">
         <div class="cart_top">
-            <h3>my wishlist</h3>
+            <h3>{{ __('site/home/wishlist.my_wishlist') }}</h3>
             <div class="close-cart">
                 <a href="javascript:void(0)" onclick="closeWishlist()">
                     <i class="fa fa-times" aria-hidden="true"></i>
@@ -90,7 +90,7 @@
                 </li>
                 <li>
                     <div class="buttons">
-                        <a href="wishlist.html" class="btn btn-solid btn-block btn-solid-sm view-cart">view wislist</a>
+                        <a href="#" class="btn btn-solid btn-block btn-solid-sm view-cart">{{ __('site/home/wishlist.view_wishlist') }}</a>
                     </div>
                 </li>
             </ul>

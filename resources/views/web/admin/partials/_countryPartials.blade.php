@@ -8,8 +8,10 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
             <a class="dropdown-item"
                 href="{{ route('admin.countries.index') }}">{{ __('admin/home/sidebar.country_all') }}</a>
-            <a class="dropdown-item"
-                href="{{ route('admin.countries.create') }}">{{ __('admin/home/sidebar.country_create') }}</a>
+            @can('country-create')
+                <a class="dropdown-item"
+                    href="{{ route('admin.countries.create') }}">{{ __('admin/home/sidebar.country_create') }}</a>
+            @endcan
         </div>
     </div>
 </div>

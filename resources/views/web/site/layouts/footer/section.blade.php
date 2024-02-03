@@ -7,26 +7,23 @@
                 </div>
                 <div class="footer-content">
                     <div class="footer-logo">
-                        <img src="{{ asset('site/assets/images/icon/brand-logo/6.png') }}" alt="">
+                        <img src="{{ asset(settings()->get('site_logo')) }}" alt="">
                     </div>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page.
+                    <p>{{ settings()->get('slogan_' . app()->currentLocale()) }}.
                     </p>
                     <div class="footer-social">
                         <ul>
                             <li>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('facebook_link') }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('google_plux_link') }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('x_link') }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('instgram_link') }}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -37,16 +34,14 @@
                     <div class="col-lg-3 footer-link">
                         <div>
                             <div class="footer-title">
-                                <h4>my account</h4>
+                                <h4>{{ __('site/home/section.my_acc') }}</h4>
                             </div>
                             <div class="footer-content">
                                 <ul>
-                                    <li><a href="#">about us</a></li>
-                                    <li><a href="#">contact us</a></li>
-                                    <li><a href="#">terms & conditions</a></li>
-                                    <li><a href="#">return & exchanges</a></li>
-                                    <li><a href="#">secure shopping</a></li>
-                                    <li><a href="#">shipping & delivery</a></li>
+                                    <li><a href="#">{{ __('site/home/section.about_us') }}</a></li>
+                                    <li><a href="#">{{ __('site/home/section.contact_us') }}</a></li>
+                                    <li><a href="#">{{ __('site/home/section.terms_conditions') }}</a></li>
+                                    <li><a href="#">{{ __('site/home/section.return_exchange') }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -54,16 +49,15 @@
                     <div class="col-lg-3 footer-link">
                         <div>
                             <div class="footer-title">
-                                <h4>quick link</h4>
+                                <h4>{{ __('site/home/section.links') }}</h4>
                             </div>
                             <div class="footer-content">
                                 <ul>
-                                    <li><a href="#">store location</a></li>
-                                    <li><a href="#">my account</a></li>
-                                    <li><a href="#">order tracking</a></li>
-                                    <li><a href="#">size guide</a></li>
-                                    <li><a href="#">my cart</a></li>
-                                    <li><a href="#">FAQ</a></li>
+                                    {{-- <li><a href="#">store location</a></li> --}}
+                                    <li><a href="#">{{ __('site/home/section.my_acc') }}</a></li>
+                                    <li><a href="#">{{ __('site/home/section.order_track') }}</a></li>
+                                    <li><a href="#">{{ __('site/home/cart.my_cart') }}</a></li>
+                                    <li><a href="#">{{ __('site/home/section.faq') }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -71,16 +65,13 @@
                     <div class="col-lg-3 footer-link">
                         <div>
                             <div class="footer-title">
-                                <h4>category</h4>
+                                <h4>{{ __('site/home/section.category') }}</h4>
                             </div>
                             <div class="footer-content">
                                 <ul>
-                                    <li><a href="#">fashion</a></li>
-                                    <li><a href="#">shoes</a></li>
-                                    <li><a href="#">cosmetic</a></li>
-                                    <li><a href="#">mobile</a></li>
-                                    <li><a href="#">electronics</a></li>
-                                    <li><a href="#">bags</a></li>
+                                    @foreach ($parentCategories as $category)
+                                        <li><a href="#">{{ $category->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -88,15 +79,14 @@
                     <div class="col-lg-3 footer-link">
                         <div>
                             <div class="footer-title">
-                                <h4>contact us</h4>
+                                <h4>{{ __('site/home/section.contact_us') }}</h4>
                             </div>
                             <div class="footer-content">
                                 <ul class="contact-list">
-                                    <li><i class="fa fa-map-marker"></i>Fiot Fashion Demo Store
-                                        India-3654123</li>
-                                    <li><i class="fa fa-phone"></i>Call Us: 123-456-7898</li>
-                                    <li><i class="fa fa-envelope-o"></i>Email Us: Support@Fiot.com</li>
-                                    <li><i class="fa fa-fax"></i>Fax: 123456</li>
+                                    <li><i class="fa fa-phone"></i>{{ __('site/home/section.call_us') }}:
+                                        {{ settings()->get('phone_1') }}</li>
+                                    <li><i class="fa fa-envelope-o"></i>{{ __('site/home/section.email_us') }}:
+                                        {{ settings()->get('email_1') }}</li>
                                 </ul>
                             </div>
                         </div>

@@ -11,6 +11,6 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'show' => 'Details',
-    'success' => 'User Deleted Successfully',
+    'success' => 'Role Deleted Successfully',
 
 ];

@@ -17,8 +17,8 @@ class GeneralSettingsController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:general_settings-list|general_settings-edit'], ['only' => ['index']]);
-        $this->middleware(['permission:general_settings-edit'], ['only' => ['update']]);
+        // $this->middleware(['permission:general_settings-list|general_settings-edit'], ['only' => ['index']]);
+        // $this->middleware(['permission:general_settings-edit'], ['only' => ['update']]);
     }
 
     public function index()

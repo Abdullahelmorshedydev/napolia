@@ -17,8 +17,8 @@ class LinksSettingsController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:links_settings-list|links_settings-edit'], ['only' => ['index']]);
-        $this->middleware(['permission:links_settings-edit'], ['only' => ['update']]);
+        // $this->middleware(['permission:links_settings-list|links_settings-edit'], ['only' => ['index']]);
+        // $this->middleware(['permission:links_settings-edit'], ['only' => ['update']]);
     }
 
     public function index()

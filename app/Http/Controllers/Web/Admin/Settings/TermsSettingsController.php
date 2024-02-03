@@ -17,8 +17,8 @@ class TermsSettingsController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['permission:terms_settings-list|terms_settings-edit'], ['only' => ['index']]);
-        $this->middleware(['permission:terms_settings-edit'], ['only' => ['update']]);
+        // $this->middleware(['permission:terms_settings-list|terms_settings-edit'], ['only' => ['index']]);
+        // $this->middleware(['permission:terms_settings-edit'], ['only' => ['update']]);
     }
 
     public function index()

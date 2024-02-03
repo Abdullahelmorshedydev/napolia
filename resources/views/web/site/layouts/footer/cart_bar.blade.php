@@ -3,7 +3,7 @@
     <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
     <div class="cart-inner">
         <div class="cart_top">
-            <h3>my cart</h3>
+            <h3>{{ __('site/home/cart.my_cart') }}</h3>
             <div class="close-cart">
                 <a href="javascript:void(0)" onclick="closeCart()">
                     <i class="fa fa-times" aria-hidden="true"></i>
@@ -78,8 +78,8 @@
                 </li>
                 <li>
                     <div class="buttons">
-                        <a href="cart.html" class="btn btn-solid btn-block btn-solid-sm view-cart">view cart</a>
-                        <a href="#" class="btn btn-solid btn-solid-sm btn-block checkout">checkout</a>
+                        <a href="#" class="btn btn-solid btn-block btn-solid-sm view-cart">{{ __('site/home/cart.view') }}</a>
+                        <a href="#" class="btn btn-solid btn-solid-sm btn-block checkout">{{ __('site/home/cart.checkout') }}</a>
                     </div>
                 </li>
             </ul>

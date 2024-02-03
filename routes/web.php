@@ -5,7 +5,8 @@ use App\Http\Controllers\Web\Site\HomeController;
 use App\Http\Controllers\Web\Site\Auth\LoginController;
 use App\Http\Controllers\Web\Site\Auth\ProfileController;
 use App\Http\Controllers\Web\Site\Auth\RegisterController;
-use App\Http\Controllers\Web\Site\Auth\ResetPasswordController;
+use App\Http\Controllers\Web\Site\CategoryController;
+use App\Http\Controllers\Web\Site\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,10 @@ Route::middleware('auth:web')->group(function () {
 });
 
 Route::get('/', HomeController::class)->name('index');
+
+Route::get('/category/{category}', [CategoryController::class, 'index'])->name('category.index');
+
+Route::get('/product/{product}', [ProductController::class, 'index'])->name('product.index');
 
 Route::fallback(function () {
     return redirect()->route('index');
