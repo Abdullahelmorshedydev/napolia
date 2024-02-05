@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\View\Composers\FavComposer;
+use App\View\Composers\CartComposer;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -24,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         View::composer('*', CategoryComposer::class);
+        View::composer('*', FavComposer::class);
+        View::composer('*', CartComposer::class);
     }
 }

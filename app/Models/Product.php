@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DiscountTypeEnum;
+use App\Enums\PriceTypeEnum;
 use App\Enums\ProductStatusEnum;
 use App\Enums\ProductConditionEnum;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,7 @@ class Product extends Model
         'code',
         'quantity',
         'price',
+        'price_type',
         'discount',
         'discount_type',
         'status',
@@ -48,6 +50,7 @@ class Product extends Model
         'status' => ProductStatusEnum::class,
         'condition' => ProductConditionEnum::class,
         'discount_type' => DiscountTypeEnum::class,
+        'price_type' => PriceTypeEnum::class,
     ];
 
     public function category()
@@ -68,5 +71,10 @@ class Product extends Model
     public function colors()
     {
         return $this->hasMany(ProductColors::class);
+    }
+
+    public function favourites()
+    {
+        return $this->hasMay(Favourite::class);
     }
 }

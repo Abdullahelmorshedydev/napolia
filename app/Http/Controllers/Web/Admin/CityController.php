@@ -23,10 +23,10 @@ class CityController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:city-list|city-create|city-edit|city-delete'], ['only' => ['index', 'show']]);
-        // $this->middleware(['permission:city-create'], ['only' => ['create', 'store']]);
-        // $this->middleware(['permission:city-edit'], ['only' => ['edit', 'update']]);
-        // $this->middleware(['permission:city-delete'], ['only' => ['destroy']]);
+        $this->middleware(['check.admin.permission:city-list'], ['only' => ['index', 'show']]);
+        $this->middleware(['check.admin.permission:city-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['check.admin.permission:city-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['check.admin.permission:city-delete'], ['only' => ['destroy']]);
     }
 
     /**

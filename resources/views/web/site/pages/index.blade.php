@@ -92,16 +92,28 @@
                                 <div class="box-5">
                                     <div class="product-box product-full">
                                         <div class="img-block">
-                                            <a href="{{ route('product.index', $product->slug) }}"><img src="{{ asset($product->images[0]->image) }}"
-                                                    class=" img-fluid bg-img" alt=""></a>
+                                            <a href="{{ route('product.index', $product->slug) }}">
+                                                <img src="{{ asset($product->images->first()->image) }}"
+                                                    class=" img-fluid bg-img" alt="">
+                                            </a>
                                             <div class="cart-right">
-                                                <button tabindex="0" class="addcart-box" title="Quick shop"><i
-                                                        class="ti-shopping-cart"></i></button>
-                                                <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart"
-                                                        aria-hidden="true"></i></a>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#quick-view" title="Quick View"><i class="ti-search"
-                                                        aria-hidden="true"></i></a>
+                                                <button tabindex="0" class="addcart-box" title="Quick shop">
+                                                    <i class="ti-shopping-cart"></i>
+                                                </button>
+                                                @if (in_array($product->id, $favProdIds))
+                                                    <a href="{{ route('favourites.delete', $product->id) }}"
+                                                        title="remove from wishlist">
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('favourites.store', $product->id) }}"
+                                                        title="add to wishlist">
+                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
+                                                <a href="{{ route('product.index', $product->slug) }}">
+                                                    <i class="ti-search" aria-hidden="true"></i>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="product-info">
@@ -113,22 +125,29 @@
                                         </div>
                                         <div class="addtocart_box">
                                             <div class="addtocart_detail">
-                                                <div>
-                                                    <div class="color">
-                                                        <h5>{{ __('site/home/product.color') }}</h5>
-                                                        <ul class="type-box color-variant">
-                                                            @foreach ($product->colors as $color)
-                                                                <li style="background-color: {{ $color->code }}">
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                                                <form action="{{ route('cart.add.to.cart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $product->id }}" name="id">
+                                                    <input type="hidden" value="1" name="quantity">
+                                                    <div>
+                                                        <div class="color">
+                                                            <h5>{{ __('site/home/product.color') }}</h5>
+                                                            <ul class="type-box color-variant">
+                                                                @foreach ($product->colors as $color)
+                                                                    <li style="background-color: {{ $color->code }};">
+                                                                    </li>
+                                                                    <input type="hidden" value="{{ $color->id }}"
+                                                                        name="color_id">
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        <div class="addtocart_btn">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                {{ __('site/home/product.add_to_cart') }}
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="addtocart_btn">
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                            class="closeCartbox" data-bs-target="#addtocart"
-                                                            tabindex="0">{{ __('site/home/product.add_to_cart') }}</a>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                             <div class="close-cart">
                                                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -147,16 +166,28 @@
                                 <div class="box-5">
                                     <div class="product-box product-full">
                                         <div class="img-block">
-                                            <a href="{{ route('product.index', $product->slug) }}"><img src="{{ asset($product->images[0]->image) }}"
-                                                    class=" img-fluid bg-img" alt=""></a>
+                                            <a href="{{ route('product.index', $product->slug) }}">
+                                                <img src="{{ asset($product->images->first()->image) }}"
+                                                    class=" img-fluid bg-img" alt="">
+                                            </a>
                                             <div class="cart-right">
-                                                <button tabindex="0" class="addcart-box" title="Quick shop"><i
-                                                        class="ti-shopping-cart"></i></button>
-                                                <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart"
-                                                        aria-hidden="true"></i></a>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#quick-view" title="Quick View"><i class="ti-search"
-                                                        aria-hidden="true"></i></a>
+                                                <button tabindex="0" class="addcart-box" title="Quick shop">
+                                                    <i class="ti-shopping-cart"></i>
+                                                </button>
+                                                @if (in_array($product->id, $favProdIds))
+                                                    <a href="{{ route('favourites.delete', $product->id) }}"
+                                                        title="remove from wishlist">
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('favourites.store', $product->id) }}"
+                                                        title="add to wishlist">
+                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
+                                                <a href="{{ route('product.index', $product->slug) }}">
+                                                    <i class="ti-search" aria-hidden="true"></i>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="product-info">
@@ -168,22 +199,29 @@
                                         </div>
                                         <div class="addtocart_box">
                                             <div class="addtocart_detail">
-                                                <div>
-                                                    <div class="color">
-                                                        <h5>{{ __('site/home/product.color') }}</h5>
-                                                        <ul class="type-box color-variant">
-                                                            @foreach ($product->colors as $color)
-                                                                <li style="background-color: {{ $color->code }}">
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                                                <form action="{{ route('cart.add.to.cart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $product->id }}" name="id">
+                                                    <input type="hidden" value="1" name="quantity">
+                                                    <div>
+                                                        <div class="color">
+                                                            <h5>{{ __('site/home/product.color') }}</h5>
+                                                            <ul class="type-box color-variant">
+                                                                @foreach ($product->colors as $color)
+                                                                    <li style="background-color: {{ $color->code }};">
+                                                                    </li>
+                                                                    <input type="hidden" value="{{ $color->id }}"
+                                                                        name="color_id">
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        <div class="addtocart_btn">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                {{ __('site/home/product.add_to_cart') }}
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="addtocart_btn">
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                            class="closeCartbox" data-bs-target="#addtocart"
-                                                            tabindex="0">{{ __('site/home/product.add_to_cart') }}</a>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                             <div class="close-cart">
                                                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -202,16 +240,28 @@
                                 <div class="box-5">
                                     <div class="product-box product-full">
                                         <div class="img-block">
-                                            <a href="{{ route('product.index', $product->slug) }}"><img src="{{ asset($product->images[0]->image) }}"
-                                                    class=" img-fluid bg-img" alt=""></a>
+                                            <a href="{{ route('product.index', $product->slug) }}">
+                                                <img src="{{ asset($product->images->first()->image) }}"
+                                                    class=" img-fluid bg-img" alt="">
+                                            </a>
                                             <div class="cart-right">
-                                                <button tabindex="0" class="addcart-box" title="Quick shop"><i
-                                                        class="ti-shopping-cart"></i></button>
-                                                <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart"
-                                                        aria-hidden="true"></i></a>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#quick-view" title="Quick View"><i class="ti-search"
-                                                        aria-hidden="true"></i></a>
+                                                <button tabindex="0" class="addcart-box" title="Quick shop">
+                                                    <i class="ti-shopping-cart"></i>
+                                                </button>
+                                                @if (in_array($product->id, $favProdIds))
+                                                    <a href="{{ route('favourites.delete', $product->id) }}"
+                                                        title="remove from wishlist">
+                                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('favourites.store', $product->id) }}"
+                                                        title="add to wishlist">
+                                                        <i class="ti-heart" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
+                                                <a href="{{ route('product.index', $product->slug) }}">
+                                                    <i class="ti-search" aria-hidden="true"></i>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="product-info">
@@ -223,22 +273,29 @@
                                         </div>
                                         <div class="addtocart_box">
                                             <div class="addtocart_detail">
-                                                <div>
-                                                    <div class="color">
-                                                        <h5>{{ __('site/home/product.color') }}</h5>
-                                                        <ul class="type-box color-variant">
-                                                            @foreach ($product->colors as $color)
-                                                                <li style="background-color: {{ $color->code }}">
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                                                <form action="{{ route('cart.add.to.cart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $product->id }}" name="id">
+                                                    <input type="hidden" value="1" name="quantity">
+                                                    <div>
+                                                        <div class="color">
+                                                            <h5>{{ __('site/home/product.color') }}</h5>
+                                                            <ul class="type-box color-variant">
+                                                                @foreach ($product->colors as $color)
+                                                                    <li style="background-color: {{ $color->code }};">
+                                                                    </li>
+                                                                    <input type="hidden" value="{{ $color->id }}"
+                                                                        name="color_id">
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        <div class="addtocart_btn">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                {{ __('site/home/product.add_to_cart') }}
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="addtocart_btn">
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                            class="closeCartbox" data-bs-target="#addtocart"
-                                                            tabindex="0">{{ __('site/home/product.add_to_cart') }}</a>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                             <div class="close-cart">
                                                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -255,7 +312,7 @@
     </section>
     <!-- tab section start -->
 
-    @if(!empty($rooms))
+    @if (!empty($rooms))
         <!-- section start-->
         <section class="section-b-space">
             <div class="container">
@@ -271,21 +328,22 @@
                         <div class="collection-section">
                             <div class="collection-4 no-arrow">
                                 @foreach ($rooms as $room)
-                                <div>
-                                    <div class="card">
-                                        <a href="{{ route('product.index', $room->slug) }}"><img src="{{ asset($room->image->image) }}"
-                                                alt="" class="img-fluid w-100"></a>
-                                        <div class="card-body">
-                                            <div class="collection_detail">
-                                                <div>
-                                                    <a href="{{ route('product.index', $room->slug) }}">
-                                                        <h5>{{ $room->name }}</h5>
-                                                    </a>
+                                    <div>
+                                        <div class="card">
+                                            <a href="{{ route('product.index', $room->slug) }}"><img
+                                                    src="{{ asset($room->image->image) }}" alt=""
+                                                    class="img-fluid w-100"></a>
+                                            <div class="card-body">
+                                                <div class="collection_detail">
+                                                    <div>
+                                                        <a href="{{ route('product.index', $room->slug) }}">
+                                                            <h5>{{ $room->name }}</h5>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>

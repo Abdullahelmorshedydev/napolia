@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\DiscountTypeEnum;
+use App\Enums\PriceTypeEnum;
 use App\Enums\ProductConditionEnum;
 use App\Enums\ProductStatusEnum;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->json('description');
             $table->integer('quantity');
             $table->decimal('price');
+            $table->enum('price_type', PriceTypeEnum::values());
             $table->decimal('discount')->nullable();
             $table->enum('discount_type', DiscountTypeEnum::values())->nullable();
             $table->enum('status', ProductStatusEnum::values())->default(ProductStatusEnum::ACTIVE->value);

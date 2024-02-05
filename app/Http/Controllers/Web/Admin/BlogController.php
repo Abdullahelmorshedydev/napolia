@@ -22,10 +22,10 @@ class BlogController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:blog-list|blog-create|blog-edit|blog-delete'], ['only' => ['index', 'show']]);
-        // $this->middleware(['permission:blog-create'], ['only' => ['create', 'store']]);
-        // $this->middleware(['permission:blog-edit'], ['only' => ['edit', 'update']]);
-        // $this->middleware(['permission:blog-delete'], ['only' => ['destroy']]);
+        $this->middleware(['check.admin.permission:blog-list'], ['only' => ['index', 'show']]);
+        $this->middleware(['check.admin.permission:blog-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['check.admin.permission:blog-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['check.admin.permission:blog-delete'], ['only' => ['destroy']]);
     }
 
     /**

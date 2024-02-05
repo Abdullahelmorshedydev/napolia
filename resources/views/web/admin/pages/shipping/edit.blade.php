@@ -46,7 +46,32 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="countryId1">{{ __('admin/shipping/edit.country_id_label') }}</label>
+                                            <label
+                                                for="price_type1">{{ __('admin/shipping/create.price_type_label') }}</label>
+                                            <select name="price_type" id="price_type1" class="form-control">
+                                                <option disabled selected>{{ __('admin/shipping/create.price_type_place') }}
+                                                </option>
+                                                @foreach ($priceTypes as $type)
+                                                    <option
+                                                        {{ old('price_type', $shipping->price_type->value) == $type->value ? 'selected' : '' }}
+                                                        value="{{ $type->value }}">
+                                                        {{ $type->lang() }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('price_type')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label
+                                                for="countryId1">{{ __('admin/shipping/edit.country_id_label') }}</label>
                                             <select name="country_id" id="countryId1" class="form-control">
                                                 <option disabled selected>{{ __('admin/shipping/edit.country_id_place') }}
                                                 </option>
@@ -65,8 +90,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cityId1">{{ __('admin/shipping/edit.city_id_label') }}</label>
@@ -88,6 +111,8 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="stateId1">{{ __('admin/shipping/edit.state_id_label') }}</label>

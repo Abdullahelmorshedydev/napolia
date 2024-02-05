@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Enums\CityStatusEnum;
 use App\Models\City;
+use App\Models\State;
 use App\Models\Country;
 use App\Models\Shipping;
+use App\Enums\PriceTypeEnum;
 use Illuminate\Http\Request;
+use App\Enums\CityStatusEnum;
 use App\Enums\CountryStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Shipping\StoreShippingRequest;
 use App\Http\Requests\Web\Admin\Shipping\UpdateShippingRequest;
-use App\Models\State;
 
 class ShippingController extends Controller
 {
@@ -23,10 +24,10 @@ class ShippingController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:shipping-list|shipping-create|shipping-edit|shipping-delete'], ['only' => ['index', 'show']]);
-        // $this->middleware(['permission:shipping-create'], ['only' => ['create', 'store']]);
-        // $this->middleware(['permission:shipping-edit'], ['only' => ['edit', 'update']]);
-        // $this->middleware(['permission:shipping-delete'], ['only' => ['destroy']]);
+        $this->middleware(['check.admin.permission:shipping-list'], ['only' => ['index', 'show']]);
+        $this->middleware(['check.admin.permission:shipping-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['check.admin.permission:shipping-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['check.admin.permission:shipping-delete'], ['only' => ['destroy']]);
     }
 
     /**
@@ -46,7 +47,8 @@ class ShippingController extends Controller
         $countries = Country::where('status', CountryStatusEnum::ACTIVE->value)
             ->has('cities')
             ->get();
-        return view('web.admin.pages.shipping.create', compact('countries'));
+        $priceTypes = PriceTypeEnum::cases();
+        return view('web.admin.pages.shipping.create', compact('countries', 'priceTypes'));
     }
 
     /**
@@ -69,7 +71,8 @@ class ShippingController extends Controller
         $cities = City::where('status', CityStatusEnum::ACTIVE->value)
             ->has('states')
             ->get();
-        return view('web.admin.pages.shipping.edit', compact('shipping', 'countries', 'cities'));
+        $priceTypes = PriceTypeEnum::cases();
+        return view('web.admin.pages.shipping.edit', compact('shipping', 'countries', 'cities', 'priceTypes'));
     }
 
     /**

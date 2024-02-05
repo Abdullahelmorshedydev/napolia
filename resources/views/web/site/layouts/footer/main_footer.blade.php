@@ -6,15 +6,13 @@
 </footer>
 <!-- footer end -->
 
-@include('web.site.layouts.footer.cart_bar')
-
-@include('web.site.layouts.footer.wishlist_bar')
-
 @include('web.site.layouts.footer.account_bar')
 
-@include('web.site.layouts.footer.cart_modal')
+{{-- @if(!empty($product)) --}}
+    @include('web.site.layouts.footer.cart_bar')
 
-@include('web.site.layouts.footer.product_modal')
+    @include('web.site.layouts.footer.wishlist_bar')
+{{-- @endif --}}
 
 <!-- tap to top -->
 <div class="tap-top">

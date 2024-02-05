@@ -20,5 +20,6 @@ return [
     'share_it' => 'share it',
     'product_details' => 'product details',
     'off' => 'off',
+    'remove_from_wishlist' => 'Remove From Favourite',
 
 ];

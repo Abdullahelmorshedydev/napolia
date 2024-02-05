@@ -14,5 +14,14 @@ return [
     'red' => 'Red',
     'green' => 'Green',
     'black' => 'Black',
+    'pound' => 'POUND',
+    'dollar' => 'DOLLAR',
+    'pound_char' => 'LE',
+    'dollar_char' => '$',
+    'pending' => 'pending',
+    'proccessing' => 'proccessing',
+    'completed' => 'completed',
+    'canceled' => 'canceled',
+    'shipped' => 'shipped',
 
 ];

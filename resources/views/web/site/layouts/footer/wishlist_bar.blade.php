@@ -11,89 +11,59 @@
             </div>
         </div>
         <div class="cart_media">
-            <ul class="cart_product">
-                <li>
-                    <div class="media">
-                        <a href="#">
-                            <img alt="" class="me-3" src="{{ asset('site/assets/images/product/1.jpg') }}">
-                        </a>
-                        <div class="media-body">
-                            <a href="#">
-                                <h4>item name</h4>
-                            </a>
-                            <h4>
-                                <span>sm</span>
-                                <span>, blue</span>
-                            </h4>
-                            <h4>
-                                <span>$ 299.00</span>
-                            </h4>
+            @if (!empty($favProducts))
+                <ul class="cart_product">
+                    @foreach ($favProducts as $product)
+                        <li>
+                            <div class="media">
+                                <a href="{{ route('product.index', $product->slug) }}">
+                                    <img alt="" class="me-3"
+                                        src="{{ asset($product->images->first()->image) }}">
+                                </a>
+                                <div class="media-body">
+                                    <a href="{{ route('product.index', $product->slug) }}">
+                                        <h4>{{ $product->name }}</h4>
+                                    </a>
+                                    <h4>
+                                        <span>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}</span>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="close-circle">
+                                <a href="{{ route('favourites.delete', $product->id) }}">
+                                    <i class="ti-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+                <ul class="cart_total">
+                    <li>
+                        <div class="buttons">
+                            <a href="{{ route('favourites.index') }}"
+                                class="btn btn-solid btn-block btn-solid-sm view-cart">{{ __('site/home/wishlist.view_wishlist') }}</a>
                         </div>
-                    </div>
-                    <div class="close-circle">
-                        <a href="#">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="media">
-                        <a href="#">
-                            <img alt="" class="me-3" src="{{ asset('site/assets/images/product/2.jpg') }}">
-                        </a>
-                        <div class="media-body">
-                            <a href="#">
-                                <h4>item name</h4>
-                            </a>
-                            <h4>
-                                <span>sm</span>
-                                <span>, blue</span>
-                            </h4>
-                            <h4>
-                                <span>$ 299.00</span>
-                            </h4>
+                    </li>
+                </ul>
+            @else
+                <ul class="cart_total">
+                    <li>
+                        <div class="total">
+                            <h5>
+                                <span>{{ __('site/order.empty_fav') }}</span>
+                            </h5>
                         </div>
-                    </div>
-                    <div class="close-circle">
-                        <a href="#">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="media">
-                        <a href="#"><img alt="" class="me-3"
-                                src="{{ asset('site/assets/images/product/3.jpg') }}"></a>
-                        <div class="media-body">
-                            <a href="#">
-                                <h4>item name</h4>
+                    </li>
+                    <li>
+                        <div class="buttons">
+                            <a href="{{ route('auth.login.show') }}"
+                                class="btn btn-solid btn-block btn-solid-sm view-cart">
+                                {{ __('site/auth/login.button') }}
                             </a>
-                            <h4>
-                                <span>sm</span>
-                                <span>, blue</span>
-                            </h4>
-                            <h4><span>$ 299.00</span></h4>
                         </div>
-                    </div>
-                    <div class="close-circle">
-                        <a href="#">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="cart_total">
-                <li>
-                    <div class="total">
-                        <h5>subtotal : <span>$299.00</span></h5>
-                    </div>
-                </li>
-                <li>
-                    <div class="buttons">
-                        <a href="#" class="btn btn-solid btn-block btn-solid-sm view-cart">{{ __('site/home/wishlist.view_wishlist') }}</a>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            @endif
         </div>
     </div>
 </div>

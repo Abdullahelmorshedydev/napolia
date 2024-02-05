@@ -1,12 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Site\CartController;
 use App\Http\Controllers\Web\Site\HomeController;
+use App\Http\Controllers\Web\Site\OrderController;
+use App\Http\Controllers\Web\Site\ProductController;
+use App\Http\Controllers\Web\Site\CategoryController;
+use App\Http\Controllers\Web\Site\FavouriteController;
 use App\Http\Controllers\Web\Site\Auth\LoginController;
 use App\Http\Controllers\Web\Site\Auth\ProfileController;
 use App\Http\Controllers\Web\Site\Auth\RegisterController;
-use App\Http\Controllers\Web\Site\CategoryController;
-use App\Http\Controllers\Web\Site\ProductController;
+use App\Http\Controllers\Web\Site\ContactusController;
+use App\Http\Controllers\Web\Site\Settings\AboutUsSettingsController;
+use App\Http\Controllers\Web\Site\Settings\ReturnExchangeSettingsController;
+use App\Http\Controllers\Web\Site\Settings\TermsSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +60,41 @@ Route::get('/', HomeController::class)->name('index');
 Route::get('/category/{category}', [CategoryController::class, 'index'])->name('category.index');
 
 Route::get('/product/{product}', [ProductController::class, 'index'])->name('product.index');
+
+Route::controller(FavouriteController::class)->middleware('check.auth.login')->prefix('/favourites')->as('favourites.')->group(function () {
+
+    Route::get('/', 'index')->name('index');
+    Route::get('/store/{id}', 'store')->name('store');
+    Route::get('/delete/{id}', 'delete')->name('delete');
+});
+
+Route::controller(CartController::class)->middleware('check.auth.login')->prefix('/cart')->as('cart.')->group(function () {
+
+    Route::get('/', 'index')->name('view');
+    Route::post('/add-to-cart', 'addToCart')->name('add.to.cart');
+    Route::get('/delete-from-cart/{id}', 'deleteItem')->name('delete.item');
+});
+
+Route::controller(OrderController::class)->middleware('check.auth.login')->prefix('/order')->as('order.')->group(function () {
+
+    Route::get('place-order', 'placeOrder')->name('place_order');
+    Route::get('/order-cities/{id?}', 'getCities')->name('order_cities');
+    Route::get('/order-states/{id?}', 'getStates')->name('order_states');
+    Route::get('/state-shipping/{id?}', 'getShipping')->name('state_shipping');
+
+    Route::get('/checkout/{id}', 'checkout')->name('checkout');
+    Route::post('/store', 'store')->name('store');
+
+    Route::get('/', 'allOrders')->name('all_orders');
+    Route::get('/order-success/{order}', 'orderSuccess')->name('order_success');
+    // Route::get('/track-order/{order}', 'trackOrder')->name('track_order');
+});
+
+Route::get('/about-us', AboutUsSettingsController::class)->name('aboutus');
+Route::get('/terms-conditions', TermsSettingsController::class)->name('terms');
+Route::get('/return-exchange', ReturnExchangeSettingsController::class)->name('return_exchange');
+Route::get('/contact-us', [ContactusController::class, 'index'])->name('contactus.index');
+Route::post('/contact-us', [ContactusController::class, 'store'])->name('contactus.store');
 
 Route::fallback(function () {
     return redirect()->route('index');

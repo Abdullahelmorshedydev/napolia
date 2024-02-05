@@ -20,5 +20,6 @@ return [
     'top_rated' => 'top rated',
     'on_sale' => 'on sale',
     'popular' => 'popular',
+    'about' => 'About',
 
 ];

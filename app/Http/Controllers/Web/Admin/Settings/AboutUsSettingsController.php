@@ -19,8 +19,8 @@ class AboutUsSettingsController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:aboutus_settings-list|aboutus_settings-edit'], ['only' => ['index']]);
-        // $this->middleware(['permission:aboutus_settings-edit'], ['only' => ['edit']]);
+        $this->middleware(['check.admin.permission:aboutus_settings-list'], ['only' => ['index']]);
+        $this->middleware(['check.admin.permission:aboutus_settings-edit'], ['only' => ['edit']]);
     }
 
 

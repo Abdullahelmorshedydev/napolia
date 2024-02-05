@@ -11,78 +11,71 @@
             </div>
         </div>
         <div class="cart_media">
-            <ul class="cart_product">
-                <li>
-                    <div class="media">
-                        <a href="#">
-                            <img alt="" class="me-3" src="{{ asset('site/assets/images/product/1.jpg') }}">
-                        </a>
-                        <div class="media-body">
-                            <a href="#">
-                                <h4>item name</h4>
-                            </a>
-                            <h4>
-                                <span>1 x $ 299.00</span>
-                            </h4>
+            @if (!empty($cart))
+                <ul class="cart_product">
+                    @foreach ($cartItems as $cartItem)
+                        <li>
+                            <div class="media">
+                                <a href="{{ route('product.index', $cartItem->product->slug) }}">
+                                    <img alt="" class="me-3"
+                                        src="{{ asset($cartItem->product->images->first()->image) }}">
+                                </a>
+                                <div class="media-body">
+                                    <a href="{{ route('product.index', $cartItem->product->slug) }}">
+                                        <h4>{{ $cartItem->product->name }}</h4>
+                                    </a>
+                                    <h4>
+                                        <span>{{ $cartItem->quantity . ' x ' . $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount) . ' ' . __('admin/product/show.pound') }}</span>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="close-circle">
+                                <a href="{{ route('cart.delete.item', $cartItem->product->id) }}">
+                                    <i class="ti-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+                <ul class="cart_total">
+                    <li>
+                        <div class="total">
+                            <h5>{{ __('site/cart.sub_total') }} :
+                                <span>{{ $cart->total . ' ' . __('admin/product/show.pound') }}</span>
+                            </h5>
                         </div>
-                    </div>
-                    <div class="close-circle">
-                        <a href="#">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="media">
-                        <a href="#">
-                            <img alt="" class="me-3" src="{{ asset('site/assets/images/product/2.jpg') }}">
-                        </a>
-                        <div class="media-body">
-                            <a href="#">
-                                <h4>item name</h4>
+                    </li>
+                    <li>
+                        <div class="buttons">
+                            <a href="{{ route('cart.view') }}" class="btn btn-solid btn-block btn-solid-sm view-cart">
+                                {{ __('site/home/cart.view') }}
                             </a>
-                            <h4>
-                                <span>1 x $ 299.00</span>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="close-circle">
-                        <a href="#">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="media">
-                        <a href="#"><img alt="" class="me-3"
-                                src="{{ asset('site/assets/images/product/3.jpg') }}"></a>
-                        <div class="media-body">
-                            <a href="#">
-                                <h4>item name</h4>
+                            <a href="{{ route('order.place_order') }}"
+                                class="btn btn-solid btn-solid-sm btn-block checkout">
+                                {{ __('site/home/cart.checkout') }}
                             </a>
-                            <h4><span>1 x $ 299.00</span></h4>
                         </div>
-                    </div>
-                    <div class="close-circle">
-                        <a href="#">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="cart_total">
-                <li>
-                    <div class="total">
-                        <h5>subtotal : <span>$299.00</span></h5>
-                    </div>
-                </li>
-                <li>
-                    <div class="buttons">
-                        <a href="#" class="btn btn-solid btn-block btn-solid-sm view-cart">{{ __('site/home/cart.view') }}</a>
-                        <a href="#" class="btn btn-solid btn-solid-sm btn-block checkout">{{ __('site/home/cart.checkout') }}</a>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            @else
+                <ul class="cart_total">
+                    <li>
+                        <div class="total">
+                            <h5>
+                                <span>{{ __('site/order.empty_cart') }}</span>
+                            </h5>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="buttons">
+                            <a href="{{ route('auth.login.show') }}"
+                                class="btn btn-solid btn-block btn-solid-sm view-cart">
+                                {{ __('site/auth/login.button') }}
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            @endif
         </div>
     </div>
 </div>

@@ -45,7 +45,7 @@ Route::middleware('guest:admin')->prefix('/auth')->as('auth.')->group(function (
 
     Route::controller(ResetPasswordController::class)->as('forget.')->group(function () {
 
-        Route::get('/forgetPassword', 'index')->name('index');
+        Route::get('/forget-password', 'index')->name('index');
         Route::post('/forget-password/send', 'send')->name('send');
 
         Route::get('/reset-password/{email}', 'update')->name('update');
@@ -97,16 +97,16 @@ Route::middleware('auth:admin')->group(function () {
 
         Route::controller(ReturnExchangeSettingsController::class)->as('return_exchange.')->group(function () {
 
-            Route::get('/return_exchange', 'index')->name('index');
-            Route::put('/return_exchange', 'update')->name('update');
+            Route::get('/return-exchange', 'index')->name('index');
+            Route::put('/return-exchange', 'update')->name('update');
         });
     });
 
     Route::controller(ProfileController::class)->prefix('/profile')->as('profile.')->group(function () {
 
         Route::get('/', 'index')->name('index');
-        Route::put('/generalUpdate', 'generalUpdate')->name('general_update');
-        Route::put('/passwordUpdate', 'passwordUpdate')->name('password_update');
+        Route::put('/general-update', 'generalUpdate')->name('general_update');
+        Route::put('/password-update', 'passwordUpdate')->name('password_update');
     });
 
     Route::resource('sliders', SliderController::class)->except('show');
@@ -114,11 +114,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
-    Route::get('/createImage/{product}', [ProductController::class, 'createImage'])->name('products.create.image');
-    Route::post('/createImage/{product}', [ProductController::class, 'storeImage'])->name('products.store.image');
-    Route::get('/editImage/{image}', [ProductController::class, 'editImage'])->name('products.edit.image');
-    Route::put('/updateImage/{image}', [ProductController::class, 'updateImage'])->name('products.update.image');
-    Route::delete('/deleteImage/{image}', [ProductController::class, 'deleteImage'])->name('products.delete.image');
+    Route::get('/create-image/{product}', [ProductController::class, 'createImage'])->name('products.create.image');
+    Route::post('/create-image/{product}', [ProductController::class, 'storeImage'])->name('products.store.image');
+    Route::get('/edit-image/{image}', [ProductController::class, 'editImage'])->name('products.edit.image');
+    Route::put('/update-image/{image}', [ProductController::class, 'updateImage'])->name('products.update.image');
+    Route::delete('/delete-image/{image}', [ProductController::class, 'deleteImage'])->name('products.delete.image');
     Route::get('/sub-categories/{id?}',[ProductController::class, 'getSubCategories'])->name('sub_categories');
 
     Route::resource('coupons', CouponController::class)->except('show');
@@ -131,8 +131,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/country_cities/{id?}',[StateController::class, 'getCities'])->name('country_cities');
 
     Route::resource('shippings', ShippingController::class)->except('show');
-    Route::get('/shiping_cities/{id?}',[ShippingController::class, 'getCities'])->name('shipping_cities');
-    Route::get('/shiping_states/{id?}',[ShippingController::class, 'getStates'])->name('shipping_states');
+    Route::get('/shiping-cities/{id?}',[ShippingController::class, 'getCities'])->name('shipping_cities');
+    Route::get('/shiping-states/{id?}',[ShippingController::class, 'getStates'])->name('shipping_states');
 
     Route::resource('blogs', BlogController::class);
 

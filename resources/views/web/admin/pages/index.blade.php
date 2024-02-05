@@ -23,12 +23,12 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">{{ __('admin/home/index.total_orders') }}</h6>
+                        <h6 class="mb-3 tx-12 text-white">{{ __('admin/home/index.complete_orders') }}</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $complete_order_count }}</h4>
                             </div>
                         </div>
                     </div>

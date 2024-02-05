@@ -21,5 +21,7 @@ return [
     'valid_exists' => 'this record not in our records',
     'valid_min' => 'shipping value minmum is 0LE',
     'success' => 'Shipping Data Created Successfully',
+    'price_type_label' => 'Price Type',
+    'price_type_place' => 'Select Price Type',
 
 ];

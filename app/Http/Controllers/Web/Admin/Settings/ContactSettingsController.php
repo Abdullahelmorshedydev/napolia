@@ -17,8 +17,8 @@ class ContactSettingsController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:contact_settings-list|contact_settings-edit'], ['only' => ['index']]);
-        // $this->middleware(['permission:contact_settings-edit'], ['only' => ['update']]);
+        $this->middleware(['check.admin.permission:contact_settings-list'], ['only' => ['index']]);
+        $this->middleware(['check.admin.permission:contact_settings-edit'], ['only' => ['update']]);
     }
 
     public function index()

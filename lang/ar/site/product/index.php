@@ -20,5 +20,6 @@ return [
     'share_it' => 'مشاركة',
     'product_details' => 'تفاصيل المنتج',
     'off' => 'خصم',
+    'remove_from_wishlist' => 'ازالة من المفضلة',
 
 ];

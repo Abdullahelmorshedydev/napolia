@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Web\Admin\Product;
 
 use App\Enums\DiscountTypeEnum;
+use App\Enums\PriceTypeEnum;
 use App\Enums\ProductConditionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -26,12 +27,14 @@ class StoreProductRequest extends FormRequest
     {
         $condition = ProductConditionEnum::cases();
         $types = DiscountTypeEnum::cases();
+        $priceTypes = PriceTypeEnum::cases();
         return [
             'name_en' => ['required', 'string', Rule::unique('products', 'name->en'), 'min:3', 'max:50'],
             'name_ar' => ['required', 'string', Rule::unique('products', 'name->ar'), 'min:3', 'max:50'],
             'description_en' => ['required', 'string'],
             'description_ar' => ['required', 'string'],
             'price' => ['required', 'numeric'],
+            'price_type' => ['required', Rule::in($priceTypes)],
             'code' => ['required'],
             'shipping_time' => ['required', 'numeric'],
             'discount' => ['numeric', 'min:0', function ($attribte, $value, $fail) {
@@ -81,6 +84,8 @@ class StoreProductRequest extends FormRequest
             'description_ar.string' => __('admin/product/create.valid_string'),
             'price.required' => __('admin/product/create.valid_required'),
             'price.numeric' => __('admin/product/create.valid_numeric'),
+            'price_type.required' => __('admin/product/edit.valid_required'),
+            'price_type.rule' => __('admin/product/create.valid_rule'),
             'code.required' => __('admin/product/create.valid_required'),
             'discount.numeric' => __('admin/product/create.valid_numeric'),
             'discount_type.rule' => __('admin/product/create.valid_rule'),

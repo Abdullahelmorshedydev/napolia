@@ -14,5 +14,14 @@ return [
     'red' => 'أحمر',
     'green' => 'أخضر',
     'black' => 'أسود',
+    'pound' => 'جنيه',
+    'dollar' => 'دولار',
+    'pound_char' => 'جنيه',
+    'dollar_char' => '$',
+    'pending' => 'انتظار',
+    'proccessing' => 'يجهز',
+    'completed' => 'اكتمل',
+    'canceled' => 'ملغى',
+    'shipped' => 'يشحن',
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Admin\Product;
 
+use App\Enums\PriceTypeEnum;
 use App\Enums\DiscountTypeEnum;
 use Illuminate\Validation\Rule;
 use App\Enums\ProductStatusEnum;
@@ -28,7 +29,7 @@ class UpdateProductRequest extends FormRequest
         $condition = ProductConditionEnum::cases();
         $status = ProductStatusEnum::cases();
         $types = DiscountTypeEnum::cases();
-        // dd($this->product->colors);
+        $priceTypes = PriceTypeEnum::cases();
         return [
             'name_en' => ['required', 'string', Rule::unique('products', 'name->en')->ignore($this->product), 'min:3', 'max:50'],
             'name_ar' => ['required', 'string', Rule::unique('products', 'name->ar')->ignore($this->product), 'min:3', 'max:50'],
@@ -36,6 +37,7 @@ class UpdateProductRequest extends FormRequest
             'description_ar' => ['required', 'string'],
             'code' => ['required'],
             'price' => ['required', 'numeric'],
+            'price_type' => ['required', Rule::in($priceTypes)],
             'shipping_time' => ['required', 'numeric'],
             'discount' => ['numeric', 'min:0', function ($attribte, $value, $fail) {
                 if (request()->input('discount_type') == 'percent') {
@@ -83,6 +85,8 @@ class UpdateProductRequest extends FormRequest
             'description_ar.string' => __('admin/product/edit.valid_string'),
             'price.required' => __('admin/product/edit.valid_required'),
             'price.numeric' => __('admin/product/edit.valid_numeric'),
+            'price_type.required' => __('admin/product/edit.valid_required'),
+            'price_type.rule' => __('admin/product/edit.valid_rule'),
             'code.required' => __('admin/product/edit.valid_required'),
             'discount.numeric' => __('admin/product/edit.valid_numeric'),
             'condition.rule' => __('admin/product/edit.valid_rule'),

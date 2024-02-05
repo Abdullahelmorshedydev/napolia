@@ -3,7 +3,7 @@
         <div class="row border-cls section-b-space section-t-space">
             <div class="col-xl-4 col-lg-12 about-section">
                 <div class="footer-title footer-mobile-title">
-                    <h4>about</h4>
+                    <h4>{{ __('site/home/section.about') }}</h4>
                 </div>
                 <div class="footer-content">
                     <div class="footer-logo">
@@ -14,16 +14,20 @@
                     <div class="footer-social">
                         <ul>
                             <li>
-                                <a href="{{ settings()->get('facebook_link') }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('facebook_link') }}"><i class="fa fa-facebook"
+                                        aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="{{ settings()->get('google_plux_link') }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('google_plux_link') }}"><i class="fa fa-google-plus"
+                                        aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="{{ settings()->get('x_link') }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('x_link') }}"><i class="fa fa-twitter"
+                                        aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="{{ settings()->get('instgram_link') }}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="{{ settings()->get('instgram_link') }}"><i class="fa fa-instagram"
+                                        aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -38,10 +42,26 @@
                             </div>
                             <div class="footer-content">
                                 <ul>
-                                    <li><a href="#">{{ __('site/home/section.about_us') }}</a></li>
-                                    <li><a href="#">{{ __('site/home/section.contact_us') }}</a></li>
-                                    <li><a href="#">{{ __('site/home/section.terms_conditions') }}</a></li>
-                                    <li><a href="#">{{ __('site/home/section.return_exchange') }}</a></li>
+                                    <li>
+                                        <a href="{{ route('aboutus') }}">
+                                            {{ __('site/home/section.about_us') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('contactus.index') }}">
+                                            {{ __('site/home/section.contact_us') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('terms') }}">
+                                            {{ __('site/home/section.terms_conditions') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('return_exchange') }}">
+                                            {{ __('site/home/section.return_exchange') }}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -54,10 +74,26 @@
                             <div class="footer-content">
                                 <ul>
                                     {{-- <li><a href="#">store location</a></li> --}}
-                                    <li><a href="#">{{ __('site/home/section.my_acc') }}</a></li>
-                                    <li><a href="#">{{ __('site/home/section.order_track') }}</a></li>
-                                    <li><a href="#">{{ __('site/home/cart.my_cart') }}</a></li>
-                                    <li><a href="#">{{ __('site/home/section.faq') }}</a></li>
+                                    <li>
+                                        <a href="{{ route('profile.index') }}">
+                                            {{ __('site/home/section.my_acc') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            {{ __('site/home/section.order_track') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('cart.view') }}">
+                                            {{ __('site/home/cart.my_cart') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            {{ __('site/home/section.faq') }}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -70,7 +106,11 @@
                             <div class="footer-content">
                                 <ul>
                                     @foreach ($parentCategories as $category)
-                                        <li><a href="#">{{ $category->name }}</a></li>
+                                        <li>
+                                            <a href="{{ route('category.index', $category->slug) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>

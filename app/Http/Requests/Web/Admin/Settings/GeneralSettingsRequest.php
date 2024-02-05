@@ -30,6 +30,7 @@ class GeneralSettingsRequest extends FormRequest
             'phone' => 'required|numeric',
             'address' => 'required|string',
             'tax' => 'required',
+            'dollar_price' => 'required',
         ];
     }
 
@@ -55,6 +56,7 @@ class GeneralSettingsRequest extends FormRequest
             'address.required' => __('admin/settings/general/index.required_valid'),
             'address.string' => __('admin/settings/general/index.string_valid'),
             'tax.required' => __('admin/settings/general/index.required_valid'),
+            'dollar_price.required' => __('admin/settings/general/index.required_valid'),
         ];
     }
 }

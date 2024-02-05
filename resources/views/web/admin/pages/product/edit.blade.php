@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label
                                                 for="exampleInputPrice1">{{ __('admin/product/edit.price_label') }}</label>
@@ -98,7 +98,29 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label
+                                                for="price_type1">{{ __('admin/shipping/create.price_type_label') }}</label>
+                                            <select name="price_type" id="price_type1" class="form-control">
+                                                <option disabled selected>{{ __('admin/shipping/create.price_type_place') }}
+                                                </option>
+                                                @foreach ($priceTypes as $type)
+                                                    <option
+                                                        {{ old('price_type', $product->price_type->value) == $type->value ? 'selected' : '' }}
+                                                        value="{{ $type->value }}">
+                                                        {{ $type->lang() }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('price_type')
+                                                <span class="text-danger">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="quantity">{{ __('admin/product/edit.quantity_label') }}</label>
                                             <input type="number" value="{{ old('quantity', $product->quantity) }}"

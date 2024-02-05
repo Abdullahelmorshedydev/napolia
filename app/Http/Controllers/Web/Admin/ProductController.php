@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Enums\CategoryStatusEnum;
-use App\Enums\ColorEnum;
-use App\Enums\DiscountTypeEnum;
-use App\Enums\ProductConditionEnum;
-use App\Enums\ProductStatusEnum;
+use App\Models\Image;
 use App\Models\Product;
+use App\Enums\ColorEnum;
 use App\Models\Category;
 use App\Traits\FilesTrait;
+use App\Enums\PriceTypeEnum;
+use App\Traits\TranslateTrait;
+use App\Enums\DiscountTypeEnum;
+use App\Enums\ProductStatusEnum;
+use App\Enums\CategoryStatusEnum;
+use App\Enums\ProductConditionEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Product\StoreImageRequest;
-use App\Http\Requests\Web\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateImageRequest;
+use App\Http\Requests\Web\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateProductRequest;
-use App\Models\Image;
-use App\Traits\TranslateTrait;
 
 class ProductController extends Controller
 {
@@ -29,10 +30,10 @@ class ProductController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:product-list|product-create|product-edit|product-delete'], ['only' => ['index', 'show']]);
-        // $this->middleware(['permission:product-create'], ['only' => ['create', 'store', 'createImage', 'storeImage']]);
-        // $this->middleware(['permission:product-edit'], ['only' => ['edit', 'update', 'editImage', 'updateImage']]);
-        // $this->middleware(['permission:product-delete'], ['only' => ['destroy', 'deleteImage']]);
+        $this->middleware(['check.admin.permission:product-list'], ['only' => ['index', 'show']]);
+        $this->middleware(['check.admin.permission:product-create'], ['only' => ['create', 'store', 'createImage', 'storeImage']]);
+        $this->middleware(['check.admin.permission:product-edit'], ['only' => ['edit', 'update', 'editImage', 'updateImage']]);
+        $this->middleware(['check.admin.permission:product-delete'], ['only' => ['destroy', 'deleteImage']]);
     }
 
     /**
@@ -51,7 +52,8 @@ class ProductController extends Controller
     {
         $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->has('categories')->get();
         $types = DiscountTypeEnum::cases();
-        return view('web.admin.pages.product.create', compact('categories', 'types'));
+        $priceTypes = PriceTypeEnum::cases();
+        return view('web.admin.pages.product.create', compact('categories', 'types', 'priceTypes'));
     }
 
     /**
@@ -96,7 +98,8 @@ class ProductController extends Controller
         $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)->has('categories')->get();
         $subCategories = Category::where('category_id', $product->category_id)->get();
         $types = DiscountTypeEnum::cases();
-        return view('web.admin.pages.product.edit', compact('product', 'status', 'conditions', 'categories', 'subCategories', 'types'));
+        $priceTypes = PriceTypeEnum::cases();
+        return view('web.admin.pages.product.edit', compact('product', 'status', 'conditions', 'categories', 'subCategories', 'types', 'priceTypes'));
     }
 
     /**

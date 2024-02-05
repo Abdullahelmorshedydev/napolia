@@ -44,7 +44,8 @@
                             @foreach ($shippings as $shipping)
                                 <tr>
                                     <th scope="row">{{ $shippings->firstItem() + $loop->index }}</th>
-                                    <th>{{ $shipping->price }}</th>
+                                    <th>{{ $shipping->price_type->calc($shipping->price, settings()->get('dollar_price')) }}
+                                    </th>
                                     <th>{{ $shipping->state->name }}</th>
                                     <td>
                                         @can('shipping-edit')

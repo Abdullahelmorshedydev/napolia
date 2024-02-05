@@ -3,6 +3,6 @@
 return [
 
     'total_product' => 'Total Products',
-    'total_orders' => 'Total Orders',
+    'complete_orders' => 'Orders Complete',
 
 ];

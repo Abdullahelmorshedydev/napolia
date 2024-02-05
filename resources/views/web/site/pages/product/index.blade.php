@@ -16,8 +16,10 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb" class="theme-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('index') }}">{{ __('site/home/nav.home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('site/product/index.product_header') }}</li>
+                            <li class="breadcrumb-item"><a href="{{ route('index') }}">{{ __('site/home/nav.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ __('site/product/index.product_header') }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -34,15 +36,19 @@
                     <div class="col-lg-6">
                         <div class="product-slick">
                             @foreach ($product->images as $image)
-                                <div><img src="{{ asset($image->image) }}" alt=""
-                                        class="img-fluid  image_zoom_cls-{{ $loop->index }}"></div>
+                                <div>
+                                    <img src="{{ asset($image->image) }}" alt=""
+                                        class="img-fluid  image_zoom_cls-{{ $loop->index }}">
+                                </div>
                             @endforeach
                         </div>
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="slider-nav">
                                     @foreach ($product->images as $image)
-                                        <div><img src="{{ asset($image->image) }}" alt="" class="img-fluid "></div>
+                                        <div>
+                                            <img src="{{ asset($image->image) }}" alt="" class="img-fluid ">
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -51,32 +57,64 @@
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
                             <h2>{{ $product->name }}</h2>
-                            <h4><del>{{ $product->price }}</del><span>{{ $product->discount . ' ' . $product->discount_type->char() . ' ' . __('site/product/index.off') }}</span>
+                            <h4>
+                                <del>{{ $product->price }}</del>
+                                <span>
+                                    {{ $product->discount . ' ' . $product->discount_type->char() . ' ' . __('site/product/index.off') }}
+                                </span>
                             </h4>
-                            <h3>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                            <h3>
+                                {{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
                             </h3>
-                            <ul class="color-variant">
-                                @foreach ($product->colors as $color)
-                                    <li style="background-color: {{ $color->code }}"></li>
-                                @endforeach
-                            </ul>
-                            <div class="product-description border-product">
-                                <h6 class="product-title">{{ __('site/home/product.quantity') }}</h6>
-                                <div class="qty-box">
-                                    <div class="input-group"><span class="input-group-prepend"><button type="button"
-                                                class="btn quantity-left-minus" data-type="minus" data-field=""><i
-                                                    class="ti-angle-left"></i></button> </span>
-                                        <input type="text" name="quantity" class="form-control input-number"
-                                            value="1"> <span class="input-group-prepend"><button type="button"
-                                                class="btn quantity-right-plus" data-type="plus" data-field=""><i
-                                                    class="ti-angle-right"></i></button></span>
+                            <form action="{{ route('cart.add.to.cart') }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ $product->id }}" name="id">
+                                <ul class="color-variant">
+                                    @foreach ($product->colors as $color)
+                                        <li id="color" style="background-color: {{ $color->code }}">
+                                            <input id="radioInput" type="radio" value="{{ $color->id }}"
+                                                name="color_id" class="d-none">
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <div class="product-description border-product">
+                                    <h6 class="product-title">{{ __('site/home/product.quantity') }}</h6>
+                                    <div class="qty-box">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                                    data-field="">
+                                                    <i class="ti-angle-left"></i>
+                                                </button>
+                                            </span>
+                                            <input type="text" name="quantity" class="form-control input-number"
+                                                value="1">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-right-plus" data-type="plus"
+                                                    data-field="">
+                                                    <i class="ti-angle-right"></i>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product-buttons">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addtocart"
-                                    class="btn btn-solid">{{ __('site/home/product.add_to_cart') }}</a>
-                            </div>
+                                <div class="product-buttons">
+                                    @if (in_array($product->id, $cartProdIds))
+                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal"
+                                            class="btn btn-solid">
+                                            {{ __('site/home/cart.view') }}
+                                        </a>
+                                        <a href="{{ route('cart.delete.item', $product->id) }}" data-bs-toggle="modal"
+                                            class="btn btn-solid">
+                                            {{ __('site/home/product.remove_from_cart') }}
+                                        </a>
+                                    @else
+                                        <button type="submit" data-bs-toggle="modal" class="btn btn-solid">
+                                            {{ __('site/home/product.add_to_cart') }}
+                                        </button>
+                                    @endif
+                                </div>
+                            </form>
                             <div class="border-product">
                                 <h6 class="product-title">{{ __('site/product/index.product_details') }}</h6>
                                 <p>{{ $product->description }}</p>
@@ -85,19 +123,42 @@
                                 <h6 class="product-title">{{ __('site/product/index.share_it') }}</h6>
                                 <div class="product-icon">
                                     <ul class="product-social">
-                                        <li><a href="{{ settings()->get('facebook_link') }}"><i
-                                                    class="fa fa-facebook"></i></a></li>
-                                        <li><a href="{{ settings()->get('google_plus_link') }}"><i
-                                                    class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="{{ settings()->get('x_link') }}"><i class="fa fa-twitter"></i></a>
+                                        <li>
+                                            <a href="{{ settings()->get('facebook_link') }}">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
                                         </li>
-                                        <li><a href="{{ settings()->get('instgram_link') }}"><i
-                                                    class="fa fa-instagram"></i></a></li>
+                                        <li>
+                                            <a href="{{ settings()->get('google_plus_link') }}">
+                                                <i class="fa fa-google-plus"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ settings()->get('x_link') }}">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ settings()->get('instgram_link') }}">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
                                     </ul>
-                                    <form class="d-inline-block">
-                                        <button class="wishlist-btn"><i class="fa fa-heart"></i><span
-                                                class="title-font">{{ __('site/product/index.add_to_wishlist') }}</span></button>
-                                    </form>
+                                    @if (in_array($product->id, $favProdIds))
+                                        <form action="{{ route('favourites.delete', $product->id) }}" method="GET"
+                                            class="d-inline-block">
+                                            @csrf
+                                            <button type="submit" class="wishlist-btn"><i class="fa fa-heart"></i><span
+                                                    class="title-font">{{ __('site/product/index.remove_from_wishlist') }}</span></button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('favourites.store', $product->id) }}" method="GET"
+                                            class="d-inline-block">
+                                            @csrf
+                                            <button type="submit" class="wishlist-btn"><i class="ti-heart"></i><span
+                                                    class="title-font">{{ __('site/product/index.add_to_wishlist') }}</span></button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -114,13 +175,18 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-12">
                     <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab"
-                                href="#top-home" role="tab"
-                                aria-selected="true">{{ __('site/product/index.description') }}</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home"
+                                role="tab" aria-selected="true">
+                                {{ __('site/product/index.description') }}
+                            </a>
                             <div class="material-border"></div>
                         </li>
-                        <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review"
-                                role="tab" aria-selected="false">{{ __('site/product/index.write_review') }}</a>
+                        <li class="nav-item">
+                            <a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review"
+                                role="tab" aria-selected="false">
+                                {{ __('site/product/index.write_review') }}
+                            </a>
                             <div class="material-border"></div>
                         </li>
                     </ul>
@@ -183,19 +249,25 @@
                     <div class="">
                         <div class="product-box">
                             <div class="img-block">
-                                <a href="#"><img src="{{ asset($product->images[0]->image) }}"
-                                        class=" img-fluid bg-img" alt=""></a>
+                                <a href="{{ route('product.index', $product->slug) }}">
+                                    <img src="{{ asset($product->images[0]->image) }}" class=" img-fluid bg-img"
+                                        alt="">
+                                </a>
                                 <div class="cart-details">
-                                    <button tabindex="0" class="addcart-box" title="Quick shop"><i
-                                            class="ti-shopping-cart"></i></button>
-                                    <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart"
-                                            aria-hidden="true"></i></a>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                        title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                    <button tabindex="0" class="addcart-box" title="Quick shop">
+                                        <i class="ti-shopping-cart"></i>
+                                    </button>
+                                    <a href="{{ route('favourites.store', $product->id) }}" title="Add to Wishlist">
+                                        <i class="ti-heart" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="{{ route('product.index', $product->slug) }}" data-bs-toggle="modal"
+                                        data-bs-target="#quick-view" title="Quick View">
+                                        <i class="ti-search" aria-hidden="true"></i>
+                                    </a>
                                 </div>
                             </div>
                             <div class="product-info">
-                                <a href="#">
+                                <a href="{{ route('product.index', $product->slug) }}">
                                     <h6>{{ $product->name }}</h6>
                                 </a>
                                 <h5>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
@@ -233,4 +305,9 @@
 @endsection
 
 @push('script')
+    <script>
+        if (document.querySelector('li.active')) {
+            document.getElementById('radioInput').checked = true;
+        }
+    </script>
 @endpush

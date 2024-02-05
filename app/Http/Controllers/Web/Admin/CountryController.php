@@ -21,10 +21,10 @@ class CountryController extends Controller
      */
     function __construct()
     {
-        // $this->middleware(['permission:country-list|country-create|country-edit|country-delete'], ['only' => ['index', 'show']]);
-        // $this->middleware(['permission:country-create'], ['only' => ['create', 'store']]);
-        // $this->middleware(['permission:country-edit'], ['only' => ['edit', 'update']]);
-        // $this->middleware(['permission:country-delete'], ['only' => ['destroy']]);
+        $this->middleware(['check.admin.permission:country-list'], ['only' => ['index', 'show']]);
+        $this->middleware(['check.admin.permission:country-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['check.admin.permission:country-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['check.admin.permission:country-delete'], ['only' => ['destroy']]);
     }
 
     /**
