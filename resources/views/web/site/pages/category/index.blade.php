@@ -46,7 +46,7 @@
                                                     <div class="category-wrapper">
                                                         <div class="img-block">
                                                             <a href="{{ route('category.index', $cat->slug) }}">
-                                                                <img width="100px" src="{{ asset($cat->image->image) }}"
+                                                                <img width="100px" src="{{ asset('storage/' . $cat->image->image) }}"
                                                                     alt="" class=" img-fluid"></a>
                                                         </div>
                                                         <div class="category-title">
@@ -67,7 +67,7 @@
                                                         <div class="product-box">
                                                             <div class="img-block">
                                                                 <a href="{{ route('product.index', $product->slug) }}"><img
-                                                                        src="{{ asset($product->images[0]->image) }}"
+                                                                        src="{{ asset('storage/' . $product->images[0]->image) }}"
                                                                         class=" img-fluid bg-img" alt=""></a>
                                                                 <div class="cart-details">
                                                                     <button tabindex="0" class="addcart-box"
@@ -86,7 +86,8 @@
                                                                         <h6>{{ $product->name }}</h6>
                                                                     </a>
                                                                     <p>{{ $product->description }}</p>
-                                                                    <h5>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                                                    <h5>
+                                                                        {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                                                     </h5>
                                                                 </div>
                                                             </div>

@@ -36,7 +36,7 @@
                     <p>{!! settings()->get('about_us_content_' . app()->currentLocale()) !!}.</p>
                 </div>
                 <div class="col-xl-5 about-image">
-                    <img src="{{ asset(settings()->get('about_us_image')) }}" class="img-fluid" alt="">
+                    <img src="{{ asset('storage/' . settings()->get('about_us_image')) }}" class="img-fluid" alt="">
                 </div>
             </div>
         </div>

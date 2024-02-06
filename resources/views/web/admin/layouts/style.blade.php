@@ -1,5 +1,5 @@
 <!-- Favicon -->
-<link rel="icon" href="{{ asset(settings()->get('favicon')) }}" type="image/x-icon" sizes="16x16" />
+<link rel="icon" href="{{ asset('storage/' , settings()->get('favicon')) }}" type="image/x-icon" sizes="16x16" />
 
 <!-- Icons css -->
 <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet">

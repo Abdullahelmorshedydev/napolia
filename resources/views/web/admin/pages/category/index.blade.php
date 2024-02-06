@@ -46,7 +46,7 @@
                                 <tr>
                                     <th scope="row">{{ $categories->firstItem() + $loop->index }}</th>
                                     <td>
-                                        <img style="width: 50px;" src="{{ asset($category->image->image) }}"
+                                        <img style="width: 50px;" src="{{ asset('storage/' . $category->image->image) }}"
                                             alt="category_image">
                                     </td>
                                     <th>{{ $category->name }}</th>

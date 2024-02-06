@@ -29,7 +29,7 @@
                     @foreach ($product->images as $image)
                         <div class="img-fluid card-img-top mt-5 col-md-4">
                             <div class="mb-2">
-                                <img width="75%" height="200px" src="{{ asset($image->image) }}" alt="image">
+                                <img width="75%" height="200px" src="{{ asset('storage/' . $image->image) }}" alt="image">
                             </div>
                             <div class="col-md-12">
                                 @can('product-edit')
@@ -68,7 +68,7 @@
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.price') }}:
                         <h6 class="card-subtitle mb-2 text-muted d-inline">
-                            {{ $product->price . ' ' . __('admin/product/show.pound') }}</h6>
+                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}</h6>
                     </div>
                     <div class="col-md-12 mt-2">
                         {{ __('admin/product/show.discount') }}:
@@ -80,7 +80,7 @@
                         <div class="col-md-12 mt-2">
                             {{ __('admin/product/show.price_after_discount') }}:
                             <h6 class="card-subtitle mb-2 text-muted d-inline">
-                                {{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                             </h6>
                         </div>
                     @endisset

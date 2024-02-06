@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Rawilk\Settings\Facades\Settings;
 use App\Http\Requests\Web\Admin\Settings\FilesSettingsRequest;
 use App\Traits\FilesTrait;
+use Illuminate\Support\Facades\Storage;
+
+use function App\Helpers\displayImage;
 
 class FilesSettingsController extends Controller
 {
@@ -34,7 +37,7 @@ class FilesSettingsController extends Controller
         foreach($request->validated() as $key => $value) {
             
             if ($request->hasFile($key)) {
-                if (file_exists(asset(settings()->get($key)))) {
+                if (Storage::exists(asset('storage/' . settings()->get($key)))) {
                     FilesTrait::delete(settings()->get($key));
                 }
                 $val = FilesTrait::store($request->file($key), 'uploads/settings/');

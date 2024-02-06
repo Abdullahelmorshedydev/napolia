@@ -22,7 +22,7 @@ class LoginController extends Controller
         $credentials = $request->validated();
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(app()->currentLocale() . '/admin');
+            return redirect()->route('admin.index');
         }
         return back()->with('error', __('admin/auth/login.credintial_not_found'));
     }

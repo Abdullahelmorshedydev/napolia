@@ -33,87 +33,142 @@
                     <div class="row row-sm">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <div class="card-body pt-0">
-                                <div class="form-group">
-                                    <label for="site_name_en">
-                                        {{ __('admin/settings/general/index.site_name_en_label') }}
-                                    </label>
-                                    <input type="text" value="{{ old('site_name_en', settings()->get('site_name_en')) }}"
-                                        name="site_name_en" class="form-control" id="site_name_en">
-                                        @error('site_name_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="site_name_en">
+                                                {{ __('admin/settings/general/index.site_name_en_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('site_name_en', settings()->get('site_name_en')) }}"
+                                                name="site_name_en" class="form-control" id="site_name_en">
+                                            @error('site_name_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="site_name_ar">
+                                                {{ __('admin/settings/general/index.site_name_ar_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('site_name_ar', settings()->get('site_name_ar')) }}"
+                                                name="site_name_ar" class="form-control" id="site_name_ar">
+                                            @error('site_name_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="site_name_ar">
-                                        {{ __('admin/settings/general/index.site_name_ar_label') }}
-                                    </label>
-                                    <input type="text" value="{{ old('site_name_ar', settings()->get('site_name_ar')) }}"
-                                        name="site_name_ar" class="form-control" id="site_name_ar">
-                                        @error('site_name_ar')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="header_slogan_en">
+                                                {{ __('admin/settings/general/index.header_slogan_en_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('header_slogan_en', settings()->get('header_slogan_en')) }}"
+                                                name="header_slogan_en" class="form-control" id="header_slogan_en">
+                                            @error('header_slogan_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="header_slogan_ar">
+                                                {{ __('admin/settings/general/index.header_slogan_ar_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('header_slogan_ar', settings()->get('header_slogan_ar')) }}"
+                                                name="header_slogan_ar" class="form-control" id="header_slogan_ar">
+                                            @error('header_slogan_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="footer_slogan_en">
-                                        {{ __('admin/settings/general/index.footer_slogan_en_label') }}
-                                    </label>
-                                    <input type="text"
-                                        value="{{ old('footer_slogan_en', settings()->get('footer_slogan_en')) }}"
-                                        name="footer_slogan_en" class="form-control" id="footer_slogan_en">
-                                        @error('footer_slogan_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="footer_slogan_en">
+                                                {{ __('admin/settings/general/index.footer_slogan_en_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('footer_slogan_en', settings()->get('footer_slogan_en')) }}"
+                                                name="footer_slogan_en" class="form-control" id="footer_slogan_en">
+                                            @error('footer_slogan_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="footer_slogan_ar">
+                                                {{ __('admin/settings/general/index.footer_slogan_ar_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('footer_slogan_ar', settings()->get('footer_slogan_ar')) }}"
+                                                name="footer_slogan_ar" class="form-control" id="footer_slogan_ar">
+                                            @error('footer_slogan_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="footer_slogan_ar">
-                                        {{ __('admin/settings/general/index.footer_slogan_ar_label') }}
-                                    </label>
-                                    <input type="text"
-                                        value="{{ old('footer_slogan_ar', settings()->get('footer_slogan_ar')) }}"
-                                        name="footer_slogan_ar" class="form-control" id="footer_slogan_ar">
-                                        @error('footer_slogan_ar')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="need_help">
+                                                {{ __('admin/settings/general/index.need_help_label') }}
+                                            </label>
+                                            <input type="email"
+                                                value="{{ old('need_help', settings()->get('need_help')) }}"
+                                                name="need_help" class="form-control" id="need_help">
+                                            @error('need_help')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">
+                                                {{ __('admin/settings/general/index.phone_label') }}
+                                            </label>
+                                            <input type="text" value="{{ old('phone', settings()->get('phone')) }}"
+                                                name="phone" class="form-control" id="phone">
+                                            @error('phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="need_help">
-                                        {{ __('admin/settings/general/index.need_help_label') }}
-                                    </label>
-                                    <input type="email" value="{{ old('need_help', settings()->get('need_help')) }}"
-                                        name="need_help" class="form-control" id="need_help">
-                                        @error('need_help')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">
-                                        {{ __('admin/settings/general/index.phone_label') }}
-                                    </label>
-                                    <input type="text" value="{{ old('phone', settings()->get('phone')) }}"
-                                        name="phone" class="form-control" id="phone">
-                                        @error('phone')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">
-                                        {{ __('admin/settings/general/index.address_label') }}
-                                    </label>
-                                    <input type="text" value="{{ old('address', settings()->get('address')) }}"
-                                        name="address" class="form-control" id="address">
-                                        @error('address')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="tax">
-                                        {{ __('admin/settings/general/index.tax_label') }}
-                                    </label>
-                                    <input type="text" value="{{ old('tax', settings()->get('tax')) }}"
-                                        name="tax" class="form-control" id="tax">
-                                        @error('tax')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="tax">
+                                                {{ __('admin/settings/general/index.tax_label') }}
+                                            </label>
+                                            <input type="text" value="{{ old('tax', settings()->get('tax')) }}"
+                                                name="tax" class="form-control" id="tax">
+                                            @error('tax')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dollar_price">
+                                                {{ __('admin/settings/general/index.dollar_price_label') }}
+                                            </label>
+                                            <input type="text" value="{{ old('dollar_price', settings()->get('dollar_price')) }}"
+                                                name="dollar_price" class="form-control" id="dollar_price">
+                                            @error('dollar_price')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

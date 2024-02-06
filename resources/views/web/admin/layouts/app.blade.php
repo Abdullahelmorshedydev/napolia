@@ -12,10 +12,6 @@
 
         @include('web.admin.layouts.content')
 
-        @include('web.admin.layouts.rightSidebar')
-
-        @include('web.admin.layouts.modal')
-
         @include('web.admin.layouts.footer')
 
     </div>

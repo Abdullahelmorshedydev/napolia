@@ -46,5 +46,8 @@ return [
     'role_title' => 'Roles',
     'role_all' => 'All Roles',
     'role_create' => 'Create New Role',
+    'message_title' => 'Messages',
+    'message_all' => 'All Messages',
+    'review_all' => 'All Reviews',
 
 ];

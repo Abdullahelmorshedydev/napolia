@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>
                                         <a href="{{ route('product.index', $product->slug) }}">
-                                            <img src="{{ asset($product->images->first()->image) }}" alt="">
+                                            <img src="{{ asset('storage/' . $product->images->first()->image) }}" alt="">
                                         </a>
                                     </td>
                                     <td><a href="{{ route('product.index', $product->slug) }}">{{ $product->name }}</a>
@@ -64,7 +64,7 @@
                                             </div>
                                             <div class="col-xs-3">
                                                 <h2 class="td-color">
-                                                    {{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                                    {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                                 </h2>
                                             </div>
                                             <div class="col-xs-3">
@@ -87,7 +87,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h2>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                        <h2>
+                                            {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                         </h2>
                                     </td>
                                     <td>

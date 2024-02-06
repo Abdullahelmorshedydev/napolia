@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img width="100px" src="{{ asset($blog->image->image) }}" alt="blog_image">
+                                <img width="100px" src="{{ asset('storage/' . $blog->image->image) }}" alt="blog_image">
                             </div>
                             <div class="col-md-9">
                                 <h5 class="card-title d-inline-block">{{ $blog->title }}</h5>

@@ -48,9 +48,9 @@
                                     <td>{{ $product->name }}</td>
                                     <td>
                                         @if (isset($product->discount))
-                                            {{ $product->discount_type->calc($product->price, $product->discount) }}
+                                            {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
                                         @else
-                                            {{ $product->price }}$
+                                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}$
                                         @endif
                                     </td>
                                     <td>{{ $product->condition->lang() }}</td>
@@ -60,6 +60,10 @@
                                             <a href="{{ route('admin.products.show', $product->slug) }}"
                                                 class="btn btn-secondary">
                                                 {{ __('admin/product/index.show') }}
+                                            </a>
+                                            <a href="{{ route('admin.products.showReviews', $product->slug) }}"
+                                                class="btn btn-secondary">
+                                                {{ __('admin/product/index.reviews') }}
                                             </a>
                                         @endcan
                                         @can('product-edit')

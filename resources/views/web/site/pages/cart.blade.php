@@ -56,7 +56,7 @@
                                 <tr>
                                     <td>
                                         <a href="{{ route('product.index', $cartItem->product->slug) }}">
-                                            <img src="{{ asset($cartItem->product->images->first()->image) }}" alt="">
+                                            <img src="{{ asset('storage/' . $cartItem->product->images->first()->image) }}" alt="">
                                         </a>
                                     </td>
                                     <td>
@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="col-xs-3">
                                                 <h2 class="td-color">
-                                                    {{ $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount) . ' ' . __('admin/product/show.pound') }}
+                                                    {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                                 </h2>
                                             </div>
                                             <div class="col-xs-3">
@@ -89,7 +89,7 @@
                                     </td>
                                     <td>
                                         <h2>
-                                            {{ $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount) . ' ' . __('admin/product/show.pound') }}
+                                            {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                         </h2>
                                     </td>
                                     <form action="{{ route('cart.add.to.cart') }}" method="POST">
@@ -125,7 +125,7 @@
                                     </form>
                                     <td>
                                         <h2 id="prodPrice" class="td-color">
-                                            {{ $cartItem->quantity * $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount) }}
+                                            {{ $cartItem->quantity * $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}
                                         </h2>
                                     </td>
                                 </tr>

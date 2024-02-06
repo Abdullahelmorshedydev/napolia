@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\Site\FavouriteController;
 use App\Http\Controllers\Web\Site\Auth\LoginController;
 use App\Http\Controllers\Web\Site\Auth\ProfileController;
 use App\Http\Controllers\Web\Site\Auth\RegisterController;
+use App\Http\Controllers\Web\Site\BlogController;
 use App\Http\Controllers\Web\Site\ContactusController;
 use App\Http\Controllers\Web\Site\Settings\AboutUsSettingsController;
 use App\Http\Controllers\Web\Site\Settings\ReturnExchangeSettingsController;
@@ -91,10 +92,21 @@ Route::controller(OrderController::class)->middleware('check.auth.login')->prefi
 });
 
 Route::get('/about-us', AboutUsSettingsController::class)->name('aboutus');
+
 Route::get('/terms-conditions', TermsSettingsController::class)->name('terms');
+
 Route::get('/return-exchange', ReturnExchangeSettingsController::class)->name('return_exchange');
+
 Route::get('/contact-us', [ContactusController::class, 'index'])->name('contactus.index');
+
 Route::post('/contact-us', [ContactusController::class, 'store'])->name('contactus.store');
+
+Route::controller(BlogController::class)->prefix('/blog')->as('blog.')->group(function () {
+
+    Route::get('/', 'index')->name('index');
+    Route::get('/{blog}', 'show')->name('show');
+    Route::post('/store', 'store')->name('store');
+});
 
 Route::fallback(function () {
     return redirect()->route('index');

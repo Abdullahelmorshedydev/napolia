@@ -46,7 +46,7 @@
                                 <tr>
                                     <th scope="row">{{ $blogs->firstItem() + $loop->index }}</th>
                                     <td>
-                                        <img style="width: 50px;" src="{{ asset($blog->image->image) }}" alt="blog_image">
+                                        <img style="width: 50px;" src="{{ asset('storage/' . $blog->image->image) }}" alt="blog_image">
                                     </td>
                                     <th>{{ $blog->title }}</th>
                                     <th>{{ $blog->admin->name }}</th>
@@ -55,6 +55,9 @@
                                         @can('blog-list')
                                             <a href="{{ route('admin.blogs.show', $blog->slug) }}" class="btn btn-secondary">
                                                 {{ __('admin/blog/index.show') }}
+                                            </a>
+                                            <a href="{{ route('admin.blogs.comments', $blog->slug) }}" class="btn btn-secondary">
+                                                {{ __('admin/blog/index.comments') }}
                                             </a>
                                         @endcan
                                         @can('blog-edit')

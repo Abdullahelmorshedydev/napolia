@@ -24,6 +24,7 @@ class FilesSettingsRequest extends FormRequest
         return [
             'site_logo' => 'nullable|image|mimes:png,jpg,jpeg|mimetypes:image/png,image/jpg,image/jpeg',
             'favicon' => 'nullable|image|mimes:png,jpg,jpeg|mimetypes:image/png,image/jpg,image/jpeg',
+            'home_banner' => 'nullable|image|mimes:png,jpg,jpeg|mimetypes:image/png,image/jpg,image/jpeg',
         ];
     }
 
@@ -36,6 +37,9 @@ class FilesSettingsRequest extends FormRequest
             'favicon.image' => __('admin/settings/files/index.image_valid'),
             'favicon.mimes' => __('admin/settings/files/index.mimes_valid'),
             'favicon.mimetype' => __('admin/settings/files/index.mimetype_valid'),
+            'home_banner.image' => __('admin/settings/files/index.image_valid'),
+            'home_banner.mimes' => __('admin/settings/files/index.mimes_valid'),
+            'home_banner.mimetype' => __('admin/settings/files/index.mimetype_valid'),
         ];
     }
 }

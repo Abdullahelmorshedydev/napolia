@@ -3,23 +3,20 @@
 namespace App\Traits;
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 trait FilesTrait
 {
     public static function store(UploadedFile $file, string $publicStoragePath): string
     {
-        $fileName = uniqid() . '_' . $file->getClientOriginalName();
-        $destinationPath = public_path($publicStoragePath);
-        $file->move($destinationPath, $fileName);
-
-        return $publicStoragePath . $fileName;
+        $path = $file->store($publicStoragePath, 'public');
+        return $path;
     }
 
     public static function delete(string $path)
     {
-        if (File::exists(public_path($path))) {
-            File::delete(public_path($path));
+        if (Storage::exists('public/' . $path)) {
+            Storage::delete('public/' . $path);
             return true;
         }
         return false;

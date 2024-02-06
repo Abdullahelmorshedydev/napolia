@@ -15,5 +15,11 @@ return [
     'delete' => 'Delete',
     'show' => 'Details',
     'success' => 'Blog Deleted Successfully',
+    'comments' => 'Comments',
+    'show' => 'Show',
+    'hide' => 'Hide',
+    'show_success' => 'Comment Showed Successfully',
+    'hide_success' => 'Comment Hided Successfully',
+    'delete_success' => 'Comment Deleted successfully',
 
 ];

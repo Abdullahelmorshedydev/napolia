@@ -13,7 +13,7 @@
                         @foreach ($sliders as $slider)
                             <div>
                                 <div class="home text-center p-right">
-                                    <img src="{{ asset($slider->image->image) }}" class="bg-img " alt="">
+                                    <img src="{{ asset('storage/' . $slider->image->image) }}" class="bg-img " alt="">
                                 </div>
                             </div>
                         @endforeach
@@ -33,7 +33,7 @@
                         <div class="category-wrapper">
                             <div class="img-block">
                                 <a href="{{ route('category.index', $category->slug) }}">
-                                    <img src="{{ asset($category->image->image) }}" alt="" class=" img-fluid"></a>
+                                    <img src="{{ asset('storage/' . $category->image->image) }}" alt="" class=" img-fluid"></a>
                             </div>
                             <div class="category-title">
                                 <a href="{{ route('category.index', $category->slug) }}">
@@ -54,7 +54,7 @@
             <div class="row partition-3">
                 <div class="col-md-12">
                     <a href="#">
-                        <img src="{{ asset('site/assets/images/banner-l.png') }}" class=" img-fluid w-100 " alt="">
+                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}" class=" img-fluid w-100 " alt="">
                     </a>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                                     <div class="product-box product-full">
                                         <div class="img-block">
                                             <a href="{{ route('product.index', $product->slug) }}">
-                                                <img src="{{ asset($product->images->first()->image) }}"
+                                                <img src="{{ asset('storage/' . $product->images->first()->image) }}"
                                                     class=" img-fluid bg-img" alt="">
                                             </a>
                                             <div class="cart-right">
@@ -120,7 +120,7 @@
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <h5>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                            <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                             </h5>
                                         </div>
                                         <div class="addtocart_box">
@@ -167,7 +167,7 @@
                                     <div class="product-box product-full">
                                         <div class="img-block">
                                             <a href="{{ route('product.index', $product->slug) }}">
-                                                <img src="{{ asset($product->images->first()->image) }}"
+                                                <img src="{{ asset('storage/' . $product->images->first()->image) }}"
                                                     class=" img-fluid bg-img" alt="">
                                             </a>
                                             <div class="cart-right">
@@ -194,7 +194,7 @@
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <h5>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                            <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                             </h5>
                                         </div>
                                         <div class="addtocart_box">
@@ -241,7 +241,7 @@
                                     <div class="product-box product-full">
                                         <div class="img-block">
                                             <a href="{{ route('product.index', $product->slug) }}">
-                                                <img src="{{ asset($product->images->first()->image) }}"
+                                                <img src="{{ asset('storage/' . $product->images->first()->image) }}"
                                                     class=" img-fluid bg-img" alt="">
                                             </a>
                                             <div class="cart-right">
@@ -268,7 +268,7 @@
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <h5>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                            <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                             </h5>
                                         </div>
                                         <div class="addtocart_box">
@@ -331,7 +331,7 @@
                                     <div>
                                         <div class="card">
                                             <a href="{{ route('product.index', $room->slug) }}"><img
-                                                    src="{{ asset($room->image->image) }}" alt=""
+                                                    src="{{ asset('storage/' . $room->image->image) }}" alt=""
                                                     class="img-fluid w-100"></a>
                                             <div class="card-body">
                                                 <div class="collection_detail">
@@ -363,9 +363,9 @@
                     <div class="slide-3">
                         @foreach ($blogs as $blog)
                             <div>
-                                <a href="#">
+                                <a href="{{ route('blog.show', $blog->slug) }}">
                                     <div class="blog-image">
-                                        <img src="{{ asset($blog->image->image) }}" class=" img-fluid bg-img"
+                                        <img src="{{ asset('storage/' . $blog->image->image) }}" class=" img-fluid bg-img"
                                             alt="">
                                     </div>
                                     <div class="blog-info">

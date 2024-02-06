@@ -13,11 +13,13 @@ use App\Enums\DiscountTypeEnum;
 use App\Enums\ProductStatusEnum;
 use App\Enums\CategoryStatusEnum;
 use App\Enums\ProductConditionEnum;
+use App\Enums\ReviewStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Product\StoreImageRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateImageRequest;
 use App\Http\Requests\Web\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Web\Admin\Product\UpdateProductRequest;
+use App\Models\ProductReview;
 
 class ProductController extends Controller
 {
@@ -175,5 +177,33 @@ class ProductController extends Controller
     {
         $sub_categories = Category::where('category_id', $id)->where('status', CategoryStatusEnum::ACTIVE->value)->get();
         return response()->json(['data' => $sub_categories]);
+    }
+
+    public function showReviews(Product $product)
+    {
+        $reviews = ProductReview::where('product_id', $product->id)->paginate();
+        return view('web.admin.pages.product.productReview', compact('reviews'));
+    }
+
+    public function showReview(ProductReview $review)
+    {
+        $review->update([
+            'status' => ReviewStatusEnum::ACTIVE->value,
+        ]);
+        return back()->with('success', __('admin/product/index.show_success'));
+    }
+
+    public function hideReview(ProductReview $review)
+    {
+        $review->update([
+            'status' => ReviewStatusEnum::DESACTIVE->value,
+        ]);
+        return back()->with('success', __('admin/product/index.hide_success'));
+    }
+
+    public function deleteReview(ProductReview $review)
+    {
+        $review->delete();
+        return back()->with('success', __('admin/product/index.delete_review_success'));
     }
 }

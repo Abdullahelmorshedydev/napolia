@@ -45,4 +45,9 @@ class Blog extends Model
     {
         return $this->MorphOne(Image::class, 'morphable');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(BlogComment::class);
+    }
 }

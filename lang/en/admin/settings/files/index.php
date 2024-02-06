@@ -8,6 +8,7 @@ return [
     'label' => 'Files Settings',
     'site_logo_label' => 'Site Logo',
     'favicon_label' => 'Favicon',
+    'home_banner_label' => 'Home Banner',
     'choose_file' => 'choose file',
     'submit' => 'Update',
     'image_valid' => 'not image',

@@ -5,7 +5,7 @@
     <meta name="description" content="bigboost">
     <meta name="keywords" content="bigboost">
     <meta name="author" content="bigboost">
-    <link rel="icon" href="{{ asset(settings()->get('favicon')) }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('storage/' . settings()->get('favicon')) }}" type="image/x-icon" />
     <title>{{ settings()->get('site_name_'. app()->currentLocale()) }}</title>
 
     @include('web.site.layouts.style')

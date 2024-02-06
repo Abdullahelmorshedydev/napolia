@@ -5,9 +5,9 @@ return [
     'home' => 'الرئيسية',
     'main' => 'الرئيسية',
     'general' => 'عام',
-    'slider_title' => 'المنزلق',
-    'slider_all' => 'جميع المنزلقات',
-    'slider_create' => 'اضافة منزلق جديد',
+    'slider_title' => 'الشريط',
+    'slider_all' => 'جميع الاشرطة',
+    'slider_create' => 'اضافة شريط جديد',
     'category_title' => 'الاقسام',
     'category_all' => 'جميع الاقسام',
     'category_create' => 'اضافة قسم جديد',
@@ -46,6 +46,9 @@ return [
     'role_title' => 'الصلاحيات',
     'role_all' => 'جميع الصلاحيات',
     'role_create' => 'اضافة صلاحية جديدة',
+    'message_title' => 'الرسائل',
+    'message_all' => 'جميع الرسائل',
+    'review_all' => 'جميع التعليقات',
 
 
 ];

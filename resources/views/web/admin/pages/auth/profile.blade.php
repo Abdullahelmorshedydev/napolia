@@ -27,7 +27,7 @@
                         <div class="main-profile-overview">
                             <div class="main-img-user profile-user">
                                 <img alt=""
-                                    src="{{ isset(auth('admin')->user()->image->image) ? asset(auth('admin')->user()->image->image) : asset('admin/assets/img/faces/6.jpg') }}">
+                                    src="{{ isset(auth('admin')->user()->image->image) ? asset('storage/' . auth('admin')->user()->image->image) : asset('admin/assets/img/faces/6.jpg') }}">
                             </div>
                             <div class="d-flex justify-content-between mg-b-20">
                                 <div>

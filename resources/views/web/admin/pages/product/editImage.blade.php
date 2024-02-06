@@ -43,7 +43,7 @@
                                         </label>
                                     </div>
                                     <div class="mt-3">
-                                        <img width="300px" src="{{ asset($image->image) }}" alt="image">
+                                        <img width="300px" src="{{ asset('storage/' . $image->image) }}" alt="image">
                                     </div>
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>

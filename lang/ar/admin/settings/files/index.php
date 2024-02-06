@@ -8,6 +8,7 @@ return [
     'label' => 'اعدادات الملفات',
     'site_logo_label' => 'لوجو الموقع',
     'favicon_label' => 'ايقونة الموقع',
+    'home_banner_label' => 'يافطة الواجهة',
     'choose_file' => 'اختر ملف',
     'submit' => 'تعديل',
     'image_valid' => 'ليست صورة',

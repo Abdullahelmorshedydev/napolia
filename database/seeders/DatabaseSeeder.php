@@ -76,6 +76,14 @@ class DatabaseSeeder extends Seeder
         'return_exchange_settings-edit',
         'terms_settings-list',
         'terms_settings-edit',
+        'message-list',
+        'message-read',
+        'message-unread',
+        'message-delete',
+        'review-list',
+        'review-view',
+        'review-unview',
+        'review-delete',
     ];
 
 

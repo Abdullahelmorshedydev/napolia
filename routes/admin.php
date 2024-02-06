@@ -16,6 +16,7 @@ use App\Http\Controllers\Web\Admin\ShippingController;
 use App\Http\Controllers\Web\Admin\Auth\LoginController;
 use App\Http\Controllers\Web\Admin\Auth\ProfileController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\Web\Admin\ContactController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
@@ -114,12 +115,20 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
-    Route::get('/create-image/{product}', [ProductController::class, 'createImage'])->name('products.create.image');
-    Route::post('/create-image/{product}', [ProductController::class, 'storeImage'])->name('products.store.image');
-    Route::get('/edit-image/{image}', [ProductController::class, 'editImage'])->name('products.edit.image');
-    Route::put('/update-image/{image}', [ProductController::class, 'updateImage'])->name('products.update.image');
-    Route::delete('/delete-image/{image}', [ProductController::class, 'deleteImage'])->name('products.delete.image');
-    Route::get('/sub-categories/{id?}',[ProductController::class, 'getSubCategories'])->name('sub_categories');
+    Route::controller(ProductController::class)->prefix('/products')->as('products.')->group(function () {
+
+        Route::get('/create-image/{product}', 'createImage')->name('create.image');
+        Route::post('/create-image/{product}', 'storeImage')->name('store.image');
+        Route::get('/edit-image/{image}', 'editImage')->name('edit.image');
+        Route::put('/update-image/{image}', 'updateImage')->name('update.image');
+        Route::delete('/delete-image/{image}', 'deleteImage')->name('delete.image');
+
+        Route::get('/{product}/reviews', 'showReviews')->name('reviews');
+        Route::get('/{review}/show-review', 'showReview')->name('show_review');
+        Route::get('/{review}/hide-review', 'hideReview')->name('hide_review');
+        Route::post('/{review}/delete-review', 'deleteReview')->name('destroy_review');
+    });
+    Route::get('/sub-categories/{id?}', [ProductController::class, 'getSubCategories'])->name('sub_categories');
 
     Route::resource('coupons', CouponController::class)->except('show');
 
@@ -128,17 +137,38 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('cities', CityController::class)->except('show');
 
     Route::resource('states', StateController::class)->except('show');
-    Route::get('/country_cities/{id?}',[StateController::class, 'getCities'])->name('country_cities');
+    Route::get('/country_cities/{id?}', [StateController::class, 'getCities'])->name('country_cities');
 
     Route::resource('shippings', ShippingController::class)->except('show');
-    Route::get('/shiping-cities/{id?}',[ShippingController::class, 'getCities'])->name('shipping_cities');
-    Route::get('/shiping-states/{id?}',[ShippingController::class, 'getStates'])->name('shipping_states');
+    Route::get('/shiping-cities/{id?}', [ShippingController::class, 'getCities'])->name('shipping_cities');
+    Route::get('/shiping-states/{id?}', [ShippingController::class, 'getStates'])->name('shipping_states');
 
     Route::resource('blogs', BlogController::class);
+    Route::controller(BlogController::class)->prefix('/blogs')->as('blogs.')->group(function () {
+
+        Route::get('/{blog}/comments', 'showComments')->name('comments');
+        Route::get('/{comment}/show-comment', 'showComment')->name('show_comment');
+        Route::get('/{comment}/hide-comment', 'hideComment')->name('hide_comment');
+        Route::post('/{comment}/delete-comment', 'deleteComment')->name('destroy_comment');
+    });
 
     Route::resource('users', UserController::class)->except('show');
 
     Route::resource('roles', RoleController::class)->except('show');
+
+    Route::controller(ContactController::class)->prefix('/contact')->as('contact.')->group(function () {
+
+        Route::get('/messages', 'allMessages')->name('all_messages');
+        Route::get('/message-show/{contact}', 'showMessage')->name('show_message');
+        Route::get('/mark-as-read/{contact}', 'markRead')->name('read');
+        Route::get('/mark-as-unread/{contact}', 'markUnRead')->name('unread');
+        Route::delete('/delete-message/{contact}', 'destroyMessage')->name('destroy_message');
+        Route::get('/reviews', 'allReviews')->name('all_reviews');
+        Route::get('/message-show/{review}', 'showMessage')->name('show_review');
+        Route::get('/mark-as-view/{review}', 'markView')->name('view');
+        Route::get('/mark-as-unview/{review}', 'markUnView')->name('unview');
+        Route::delete('/delete-review/{review}', 'destroyReview')->name('destroy_review');
+    });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

@@ -44,7 +44,7 @@
                                 <tr>
                                     <th scope="row">{{ $sliders->firstItem() + $loop->index }}</th>
                                     <td>
-                                        <img width="100px" src="{{ asset($slider->image->image) }}" alt="slider_image">
+                                        <img width="100px" src="{{ asset('storage/' . $slider->image->image) }}" alt="slider_image">
                                     </td>
                                     <td>{{ $slider->status->lang() }}</td>
                                     <td>

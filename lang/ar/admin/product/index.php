@@ -17,5 +17,11 @@ return [
     'discount' => 'الخصم',
     'condition' => 'الشرط',
     'pound' => 'جنيه',
+    'reviews' => 'تعليق',
+    'show' => 'اظهار',
+    'hide' => 'اخفاء',
+    'show_success' => 'تم اظهار الصورة بنجاح',
+    'hide_success' => 'تم اخفاء الصورة بنجاح',
+    'delete_review_success' => 'تم حذف الصورة بنجاح',
 
 ];

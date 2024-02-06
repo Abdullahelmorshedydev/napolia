@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContactStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +18,10 @@ class Contact extends Model
         'phone',
         'subject',
         'message',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => ContactStatusEnum::class,
     ];
 }

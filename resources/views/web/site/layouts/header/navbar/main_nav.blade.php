@@ -12,15 +12,15 @@
         @foreach ($cats as $category)
             @if (!isset($category->category_id))
                 <li>
-                    <a href="#">{{ $category->name }}</a>
+                    <a href="{{ route('category.index', $category->slug) }}">{{ $category->name }}</a>
                     <ul>
                         @foreach ($cats as $cat)
                             @if ($category->id == $cat->category_id)
-                                <li><a href="#">{{ $cat->name }}</a>
+                                <li><a href="{{ route('category.index', $cat->slug) }}">{{ $cat->name }}</a>
                                     <ul>
                                         @foreach ($cats as $c)
                                             @if ($cat->id == $c->category_id)
-                                                <li><a href="#">{{ $c->name }}</a></li>
+                                                <li><a href="{{ route('category.index', $c->slug) }}">{{ $c->name }}</a></li>
                                             @endif
                                         @endforeach
                                     </ul>

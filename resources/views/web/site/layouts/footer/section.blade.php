@@ -7,9 +7,9 @@
                 </div>
                 <div class="footer-content">
                     <div class="footer-logo">
-                        <img src="{{ asset(settings()->get('site_logo')) }}" alt="">
+                        <img src="{{ asset('storage/' . settings()->get('site_logo')) }}" alt="">
                     </div>
-                    <p>{{ settings()->get('slogan_' . app()->currentLocale()) }}.
+                    <p>{{ settings()->get('footer_slogan_' . app()->currentLocale()) }}.
                     </p>
                     <div class="footer-social">
                         <ul>
@@ -89,11 +89,7 @@
                                             {{ __('site/home/cart.my_cart') }}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            {{ __('site/home/section.faq') }}
-                                        </a>
-                                    </li>
+                                    {{-- <li><a href="#">{{ __('site/home/section.faq') }}</a></li> --}}
                                 </ul>
                             </div>
                         </div>

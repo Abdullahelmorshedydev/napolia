@@ -25,7 +25,16 @@
                                         <h4>{{ $cartItem->product->name }}</h4>
                                     </a>
                                     <h4>
-                                        <span>{{ $cartItem->quantity . ' x ' . $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount) . ' ' . __('admin/product/show.pound') }}</span>
+                                        <span>
+                                            {{ $cartItem->quantity .
+                                                ' x ' .
+                                                $cartItem->product->price_type->calc(
+                                                    $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount),
+                                                    settings()->get('dollar_price'),
+                                                ) .
+                                                ' ' .
+                                                __('admin/product/show.pound') }}
+                                        </span>
                                     </h4>
                                 </div>
                             </div>

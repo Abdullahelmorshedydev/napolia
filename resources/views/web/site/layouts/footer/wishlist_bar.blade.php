@@ -18,14 +18,21 @@
                             <div class="media">
                                 <a href="{{ route('product.index', $product->slug) }}">
                                     <img alt="" class="me-3"
-                                        src="{{ asset($product->images->first()->image) }}">
+                                        src="{{ asset('storage/' . $product->images->first()->image) }}">
                                 </a>
                                 <div class="media-body">
                                     <a href="{{ route('product.index', $product->slug) }}">
                                         <h4>{{ $product->name }}</h4>
                                     </a>
                                     <h4>
-                                        <span>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}</span>
+                                        <span>
+                                            {{ $product->price_type->calc(
+                                                $product->discount_type->calc($product->price, $product->discount),
+                                                settings()->get('dollar_price'),
+                                            ) .
+                                                ' ' .
+                                                __('admin/product/show.pound') }}
+                                        </span>
                                     </h4>
                                 </div>
                             </div>

@@ -26,11 +26,12 @@ class GeneralSettingsRequest extends FormRequest
             'site_name_ar' => 'required|string|min:3',
             'footer_slogan_en' => 'required|string|min:3',
             'footer_slogan_ar' => 'required|string|min:3',
+            'header_slogan_en' => 'required|string|min:3',
+            'header_slogan_ar' => 'required|string|min:3',
             'need_help' => 'required|email',
             'phone' => 'required|numeric',
-            'address' => 'required|string',
-            'tax' => 'required',
-            'dollar_price' => 'required',
+            'tax' => 'required|numeric',
+            'dollar_price' => 'required|numeric',
         ];
     }
 
@@ -49,14 +50,20 @@ class GeneralSettingsRequest extends FormRequest
             'footer_slogan_ar.string' => __('admin/settings/general/index.string_valid'),
             'footer_slogan_en.min' => __('admin/settings/general/index.min_valid'),
             'footer_slogan_ar.min' => __('admin/settings/general/index.min_valid'),
+            'header_slogan_en.required' => __('admin/settings/general/index.required_valid'),
+            'header_slogan_ar.required' => __('admin/settings/general/index.required_valid'),
+            'header_slogan_en.string' => __('admin/settings/general/index.string_valid'),
+            'header_slogan_ar.string' => __('admin/settings/general/index.string_valid'),
+            'header_slogan_en.min' => __('admin/settings/general/index.min_valid'),
+            'header_slogan_ar.min' => __('admin/settings/general/index.min_valid'),
             'need_help.required' => __('admin/settings/general/index.required_valid'),
             'need_help.email' => __('admin/settings/general/index.email_valid'),
             'phone.required' => __('admin/settings/general/index.required_valid'),
             'phone.numeric' => __('admin/settings/general/index.numeric_valid'),
-            'address.required' => __('admin/settings/general/index.required_valid'),
-            'address.string' => __('admin/settings/general/index.string_valid'),
             'tax.required' => __('admin/settings/general/index.required_valid'),
+            'tax.numeric' => __('admin/settings/general/index.numeric_valid'),
             'dollar_price.required' => __('admin/settings/general/index.required_valid'),
+            'dollar_price.numeric' => __('admin/settings/general/index.numeric_valid'),
         ];
     }
 }

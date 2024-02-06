@@ -37,7 +37,7 @@
                         <div class="product-slick">
                             @foreach ($product->images as $image)
                                 <div>
-                                    <img src="{{ asset($image->image) }}" alt=""
+                                    <img src="{{ asset('storage/' . $image->image) }}" alt=""
                                         class="img-fluid  image_zoom_cls-{{ $loop->index }}">
                                 </div>
                             @endforeach
@@ -47,7 +47,8 @@
                                 <div class="slider-nav">
                                     @foreach ($product->images as $image)
                                         <div>
-                                            <img src="{{ asset($image->image) }}" alt="" class="img-fluid ">
+                                            <img src="{{ asset('storage/' . $image->image) }}" alt=""
+                                                class="img-fluid ">
                                         </div>
                                     @endforeach
                                 </div>
@@ -58,13 +59,18 @@
                         <div class="product-right">
                             <h2>{{ $product->name }}</h2>
                             <h4>
-                                <del>{{ $product->price }}</del>
+                                <del>{{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}</del>
                                 <span>
                                     {{ $product->discount . ' ' . $product->discount_type->char() . ' ' . __('site/product/index.off') }}
                                 </span>
                             </h4>
                             <h3>
-                                {{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                {{ $product->price_type->calc(
+                                    $product->discount_type->calc($product->price, $product->discount),
+                                    settings()->get('dollar_price'),
+                                ) .
+                                    ' ' .
+                                    __('admin/product/show.pound') }}
                             </h3>
                             <form action="{{ route('cart.add.to.cart') }}" method="POST">
                                 @csrf
@@ -100,8 +106,7 @@
                                 </div>
                                 <div class="product-buttons">
                                     @if (in_array($product->id, $cartProdIds))
-                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal"
-                                            class="btn btn-solid">
+                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal" class="btn btn-solid">
                                             {{ __('site/home/cart.view') }}
                                         </a>
                                         <a href="{{ route('cart.delete.item', $product->id) }}" data-bs-toggle="modal"
@@ -250,8 +255,8 @@
                         <div class="product-box">
                             <div class="img-block">
                                 <a href="{{ route('product.index', $product->slug) }}">
-                                    <img src="{{ asset($product->images[0]->image) }}" class=" img-fluid bg-img"
-                                        alt="">
+                                    <img src="{{ asset('storage/' . $product->images[0]->image) }}"
+                                        class=" img-fluid bg-img" alt="">
                                 </a>
                                 <div class="cart-details">
                                     <button tabindex="0" class="addcart-box" title="Quick shop">
@@ -270,7 +275,7 @@
                                 <a href="{{ route('product.index', $product->slug) }}">
                                     <h6>{{ $product->name }}</h6>
                                 </a>
-                                <h5>{{ $product->discount_type->calc($product->price, $product->discount) . ' ' . __('admin/product/show.pound') }}
+                                <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
                                 </h5>
                             </div>
                             <div class="addtocart_box">

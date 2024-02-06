@@ -8,6 +8,7 @@ use App\Enums\BlogStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Admin\Blog\StoreBlogRequest;
 use App\Http\Requests\Web\Admin\Blog\UpdateBlogRequest;
+use App\Models\BlogComment;
 use App\Traits\FilesTrait;
 use App\Traits\TranslateTrait;
 
@@ -107,5 +108,33 @@ class BlogController extends Controller
         $blog->image()->delete();
         $blog->delete();
         return redirect()->route('admin.blogs.index')->with('success', __('admin/blog/index.success'));
+    }
+
+    public function showComments(Blog $blog)
+    {
+        $comments = BlogComment::where('blog_id', $blog->id)->paginate();
+        return view('web.admin.pages.blog.blogComment', compact('comments'));
+    }
+
+    public function showComment(BlogComment $comment)
+    {
+        $comment->update([
+            'status' => BlogStatusEnum::ACTIVE->value,
+        ]);
+        return back()->with('success', __('admin/blog/index.show_success'));
+    }
+
+    public function hideComment(BlogComment $comment)
+    {
+        $comment->update([
+            'status' => BlogStatusEnum::DESACTIVE->value,
+        ]);
+        return back()->with('success', __('admin/blog/index.hide_success'));
+    }
+
+    public function deleteComment(BlogComment $comment)
+    {
+        $comment->delete();
+        return back()->with('success', __('admin/blog/index.delete_review_success'));
     }
 }

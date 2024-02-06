@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img width="100px" src="{{ asset($category->image->image) }}" alt="category_image">
+                                <img width="100px" src="{{ asset('storage/' . $category->image->image) }}" alt="category_image">
                             </div>
                             <div class="col-md-9">
                                 <h5 class="card-title">{{ $category->name }}</h5>
