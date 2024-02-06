@@ -31,7 +31,7 @@ enum PriceTypeEnum: string
         };
     }
 
-    public function calc($price, $dollar_price = 1): string
+    public function calc($price, $dollar_price)
     {
         return match ($this) {
             self::POUND => $price,

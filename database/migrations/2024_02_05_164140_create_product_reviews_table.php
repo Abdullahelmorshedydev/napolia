@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('review_title');
             $table->text('review_message');
-            $table->enum('status', ReviewStatusEnum::values())->default(ReviewStatusEnum::DESACTIVE->value);
+            $table->enum('status', ReviewStatusEnum::values())->default(ReviewStatusEnum::ACTIVE->value);
             $table->timestamps();
         });
     }

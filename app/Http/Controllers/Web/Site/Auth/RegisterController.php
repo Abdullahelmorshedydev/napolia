@@ -18,7 +18,7 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
         $user = User::create($request->validated());
-        Auth::login($user);
-        return redirect()->intended(app()->currentLocale() . '/');
+        Auth::guard('web')->login($user);
+        return redirect()->route('index');
     }
 }

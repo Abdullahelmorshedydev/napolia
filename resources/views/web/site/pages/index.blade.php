@@ -33,7 +33,8 @@
                         <div class="category-wrapper">
                             <div class="img-block">
                                 <a href="{{ route('category.index', $category->slug) }}">
-                                    <img src="{{ asset('storage/' . $category->image->image) }}" alt="" class=" img-fluid"></a>
+                                    <img src="{{ asset('storage/' . $category->image->image) }}" alt=""
+                                        class=" img-fluid"></a>
                             </div>
                             <div class="category-title">
                                 <a href="{{ route('category.index', $category->slug) }}">
@@ -54,7 +55,8 @@
             <div class="row partition-3">
                 <div class="col-md-12">
                     <a href="#">
-                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}" class=" img-fluid w-100 " alt="">
+                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}" class=" img-fluid w-100 "
+                            alt="">
                     </a>
                 </div>
             </div>
@@ -134,10 +136,11 @@
                                                             <h5>{{ __('site/home/product.color') }}</h5>
                                                             <ul class="type-box color-variant">
                                                                 @foreach ($product->colors as $color)
-                                                                    <li style="background-color: {{ $color->code }};">
+                                                                    <li id="{{ $color->id }}" class="color"
+                                                                        style="background-color: {{ $color->code }};">
+                                                                        <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                            value="{{ $color->id }}" name="color_id">
                                                                     </li>
-                                                                    <input type="hidden" value="{{ $color->id }}"
-                                                                        name="color_id">
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -208,10 +211,11 @@
                                                             <h5>{{ __('site/home/product.color') }}</h5>
                                                             <ul class="type-box color-variant">
                                                                 @foreach ($product->colors as $color)
-                                                                    <li style="background-color: {{ $color->code }};">
+                                                                    <li id="{{ $color->id }}" class="color"
+                                                                        style="background-color: {{ $color->code }};">
+                                                                        <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                            value="{{ $color->id }}" name="color_id">
                                                                     </li>
-                                                                    <input type="hidden" value="{{ $color->id }}"
-                                                                        name="color_id">
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -282,10 +286,11 @@
                                                             <h5>{{ __('site/home/product.color') }}</h5>
                                                             <ul class="type-box color-variant">
                                                                 @foreach ($product->colors as $color)
-                                                                    <li style="background-color: {{ $color->code }};">
+                                                                    <li id="{{ $color->id }}" class="color"
+                                                                        style="background-color: {{ $color->code }};">
+                                                                        <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                            value="{{ $color->id }}" name="color_id">
                                                                     </li>
-                                                                    <input type="hidden" value="{{ $color->id }}"
-                                                                        name="color_id">
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -365,8 +370,8 @@
                             <div>
                                 <a href="{{ route('blog.show', $blog->slug) }}">
                                     <div class="blog-image">
-                                        <img src="{{ asset('storage/' . $blog->image->image) }}" class=" img-fluid bg-img"
-                                            alt="">
+                                        <img src="{{ asset('storage/' . $blog->image->image) }}"
+                                            class=" img-fluid bg-img" alt="">
                                     </div>
                                     <div class="blog-info">
                                         <div>
@@ -387,4 +392,12 @@
 @endsection
 
 @push('script')
+    <script>
+        $("li").on("click", function() {
+            if ($("li").hasClass("active")) {
+                var id = $(this).attr("id");
+                document.getElementById("radioInput[" + id + "]").checked = true;
+            }
+        })
+    </script>
 @endpush

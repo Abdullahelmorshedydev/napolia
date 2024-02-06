@@ -18,7 +18,7 @@
                             <div class="media">
                                 <a href="{{ route('product.index', $cartItem->product->slug) }}">
                                     <img alt="" class="me-3"
-                                        src="{{ asset($cartItem->product->images->first()->image) }}">
+                                        src="{{ asset('storage/' . $cartItem->product->images->first()->image) }}">
                                 </a>
                                 <div class="media-body">
                                     <a href="{{ route('product.index', $cartItem->product->slug) }}">

@@ -29,11 +29,7 @@
         </div>
     </section>
     <!-- breadcrumb End -->
-    @if($errors)
-    @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-    @endforeach
-@endif
+
     <!--section start-->
     <section class="cart-section section-b-space">
         <div class="container">
@@ -56,7 +52,8 @@
                                 <tr>
                                     <td>
                                         <a href="{{ route('product.index', $cartItem->product->slug) }}">
-                                            <img src="{{ asset('storage/' . $cartItem->product->images->first()->image) }}" alt="">
+                                            <img src="{{ asset('storage/' . $cartItem->product->images->first()->image) }}"
+                                                alt="">
                                         </a>
                                     </td>
                                     <td>
@@ -67,8 +64,8 @@
                                             <div class="col-xs-3">
                                                 <div class="qty-box">
                                                     <div class="input-group">
-                                                        <input id="{{ $cartItem->product->id }}" type="number" name="quantity"
-                                                            class="form-control input-number"
+                                                        <input id="{{ $cartItem->product->id }}" type="number"
+                                                            name="quantity" class="form-control input-number"
                                                             value="{{ old('quantity', $cartItem->quantity) }}">
                                                     </div>
                                                 </div>
@@ -98,10 +95,11 @@
                                         <td>
                                             <ul class="color-variant">
                                                 @foreach ($cartItem->product->colors as $color)
-                                                    <li id="color" style="background-color: {{ $color->code }}"
-                                                        class="{{ $cartItem->product_color_id == $color->id ? 'active' : '' }}">
-                                                        <input id="radioInput" type="radio" value="{{ $color->id }}" name="color_id"
-                                                            class="d-none">
+                                                    <li id="{{ $color->id }}"
+                                                        class="{{ $cartItem->product_color_id == $color->id ? 'active' : '' }}"
+                                                        style="background-color: {{ $color->code }};">
+                                                        <input id="radioInput[{{ $color->id }}]" type="radio"
+                                                            class="d-none" value="{{ $color->id }}" name="color_id">
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -115,7 +113,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="{{ route('cart.delete.item', $cartItem->product->id) }}" class="icon">
+                                            <a href="{{ route('cart.delete.item', $cartItem->product->id) }}"
+                                                class="icon">
                                                 <i class="ti-close"></i>
                                             </a>
                                             <button type="submit" data-bs-toggle="modal" class="btn btn-sm btn-solid">
@@ -163,8 +162,11 @@
 
 @push('script')
     <script>
-        if (document.querySelector('li.active')) {
-            document.getElementById('radioInput').checked = true;
-        }
+        $("li").on("click", function() {
+            if ($("li").hasClass("active")) {
+                var id = $(this).attr("id");
+                document.getElementById("radioInput[" + id + "]").checked = true;
+            }
+        })
     </script>
 @endpush

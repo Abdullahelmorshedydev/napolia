@@ -285,7 +285,11 @@
                                             <h5>{{ __('site/home/product.color') }}</h5>
                                             <ul class="color-variant">
                                                 @foreach ($product->colors as $color)
-                                                    <li style="background-color: {{ $color->code }}"></li>
+                                                    <li id="{{ $color->id }}" class="color"
+                                                        style="background-color: {{ $color->code }};">
+                                                        <input id="radioInput[{{ $color->id }}]" type="radio"
+                                                            class="d-none" value="{{ $color->id }}" name="color_id">
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -311,8 +315,11 @@
 
 @push('script')
     <script>
-        if (document.querySelector('li.active')) {
-            document.getElementById('radioInput').checked = true;
-        }
+        $("li").on("click", function() {
+            if ($("li").hasClass("active")) {
+                var id = $(this).attr("id");
+                document.getElementById("radioInput[" + id + "]").checked = true;
+            }
+        })
     </script>
 @endpush

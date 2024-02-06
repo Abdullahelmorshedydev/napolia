@@ -15,7 +15,7 @@
     <title> {{ __('admin/auth/reset.title') }} </title>
 
     <!--- Favicon --->
-    <link rel="icon" href="{{ asset(settings()->get('favicon')) }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('storage/' . settings()->get('favicon')) }}" type="image/x-icon" />
 
     <!--- Icons css --->
     <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet">
@@ -95,7 +95,7 @@
                                 <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                     <div class="card-sigin">
                                         <div class="mb-5 d-flex"> <a href="{{ route('index') }}">
-                                                <img src="{{ asset(settings()->get('site_logo')) }}"
+                                                <img src="{{ asset('storage/' . settings()->get('site_logo')) }}"
                                                     class="sign-favicon ht-40" alt="logo"></a>
                                         </div>
                                         <div class="main-signup-header">

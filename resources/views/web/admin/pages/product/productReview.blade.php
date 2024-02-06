@@ -34,12 +34,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('admin/product/index.name') }}</th>
-                                <th>{{ __('admin/product/index.email') }}</th>
-                                <th>{{ __('admin/product/index.review_title') }}</th>
-                                <th>{{ __('admin/product/index.review_message') }}</th>
+                                <th>{{ __('admin/review/index.name') }}</th>
+                                <th>{{ __('admin/review/index.email') }}</th>
+                                <th>{{ __('admin/review/index.review_title') }}</th>
+                                <th>{{ __('admin/review/index.review_message') }}</th>
                                 <th>{{ __('admin/product/index.status') }}</th>
-                                <th>{{ __('admin/product/index.actions') }}</th>
+                                <th>{{ __('admin/review/index.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

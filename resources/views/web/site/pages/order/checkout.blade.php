@@ -98,9 +98,9 @@
                                             </div>
                                         </div>
                                         <ul class="qty">
-                                            @foreach ($cartProducts as $cartProduct)
-                                                <li>{{ $cartProduct->name . ' x ' . $cartItems[$loop->index]->quantity }} 
-                                                    <span>{{ $cartItems[$loop->index]->quantity * $cartProduct->discount_type->calc($cartProduct->price, $cartProduct->discount) }}</span>
+                                            @foreach ($cartItems as $cartItem)
+                                                <li>{{ $cartItem->product->name . ' x ' . $cartItems[$loop->index]->quantity }} 
+                                                    <span>{{ $cartItems[$loop->index]->quantity * $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}</span>
                                                 </li>
                                             @endforeach
                                         </ul>

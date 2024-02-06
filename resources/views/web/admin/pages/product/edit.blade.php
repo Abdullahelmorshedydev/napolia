@@ -388,18 +388,17 @@
             var colorArCount = document.getElementsByClassName('color_ar').length;
             var colorCode = document.getElementById('color_code');
             var colorColorCount = document.getElementsByClassName('color_code').length;
-            var colorDelete = document.getElementById('delete-color');
-            var colorDeleteCount = document.getElementsByClassName('delete-color').length;
 
             var newColorDivEn = document.createElement('div');
             var newColorDivAr = document.createElement('div');
             var newColorDivCode = document.createElement('div');
-            var newDeleteColor = document.createElement('div');
 
             newColorDivEn.classList.add('mt-1');
+            newColorDivEn.classList.add('color_en');
             newColorDivAr.classList.add('mt-1');
+            newColorDivAr.classList.add('color_ar');
             newColorDivCode.classList.add('mt-1');
-            newDeleteColor.classList.add('mt-1');
+            newColorDivCode.classList.add('color_code');
 
             newColorDivEn.innerHTML = `
                 <input type="text" name="colors[${colorEnCount}][en]"
@@ -413,14 +412,10 @@
                 <input type="text" name="colors[${colorArCount}][code]"
                     placeholder="Color Code" class="form-control">
             `;
-            newDeleteColor.innerHTML = `
-                <button type="button" class="btn btn-danger" id="delete-color">Delete Color</button>
-            `
 
             colorDivEn.appendChild(newColorDivEn);
             colorDivAr.appendChild(newColorDivAr);
             colorCode.appendChild(newColorDivCode);
-            colorDelete.appendChild(newDeleteColor);
         });
     </script>
 @endpush

@@ -348,8 +348,11 @@
             var newColorDivCode = document.createElement('div');
 
             newColorDivEn.classList.add('mt-1');
+            newColorDivEn.classList.add('color_en');
             newColorDivAr.classList.add('mt-1');
+            newColorDivAr.classList.add('color_ar');
             newColorDivCode.classList.add('mt-1');
+            newColorDivCode.classList.add('color_code');
 
             newColorDivEn.innerHTML = `
                 <input type="text" name="colors[${colorEnCount}][en]"

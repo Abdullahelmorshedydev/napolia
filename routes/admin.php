@@ -123,10 +123,10 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/update-image/{image}', 'updateImage')->name('update.image');
         Route::delete('/delete-image/{image}', 'deleteImage')->name('delete.image');
 
-        Route::get('/{product}/reviews', 'showReviews')->name('reviews');
+        Route::get('/{product}/reviews', 'showReviews')->name('showReviews');
         Route::get('/{review}/show-review', 'showReview')->name('show_review');
         Route::get('/{review}/hide-review', 'hideReview')->name('hide_review');
-        Route::post('/{review}/delete-review', 'deleteReview')->name('destroy_review');
+        Route::delete('/{review}/delete-review', 'deleteReview')->name('destroy_review');
     });
     Route::get('/sub-categories/{id?}', [ProductController::class, 'getSubCategories'])->name('sub_categories');
 
@@ -149,7 +149,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/{blog}/comments', 'showComments')->name('comments');
         Route::get('/{comment}/show-comment', 'showComment')->name('show_comment');
         Route::get('/{comment}/hide-comment', 'hideComment')->name('hide_comment');
-        Route::post('/{comment}/delete-comment', 'deleteComment')->name('destroy_comment');
+        Route::delete('/{comment}/delete-comment', 'deleteComment')->name('destroy_comment');
     });
 
     Route::resource('users', UserController::class)->except('show');

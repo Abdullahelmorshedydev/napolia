@@ -77,24 +77,19 @@
                         <div class="col-sm-6 col-md-6 col-lg-6">
                             <div class="card-body pt-0">
                                 <div class="form-group">
-                                    <label for="customFile">{{ __('admin/settings/files/index.site_logo_label') }}</label>
+                                    <label for="customFile">{{ __('admin/settings/files/index.favicon_label') }}</label>
                                     <div class="custom-file">
-                                        <input class="custom-file-input" name="site_logo" id="customFile" type="file">
+                                        <input class="custom-file-input" name="favicon" id="customFile" type="file">
                                         <label class="custom-file-label" for="customFile">
                                             {{ __('admin/settings/files/index.choose_file') }}
                                         </label>
                                     </div>
-                                    @if(settings()->get('site_logo'))
-                                        <div class="mt-2" style="width: 200px">
-                                            <img src="{{ asset('storage/' . settings()->get('site_logo')) }}" alt="">
-                                        </div>
-                                    @endif
                                     @if(settings()->get('favicon'))
-                                        <div class="mt-2" style="width: 200px">
+                                        <div class="mt-2" style="width: 50px">
                                             <img src="{{ asset('storage/' . settings()->get('favicon')) }}" alt="">
                                         </div>
                                     @endif
-                                    @error('site_logo')
+                                    @error('favicon')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

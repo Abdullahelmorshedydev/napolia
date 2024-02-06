@@ -6,6 +6,7 @@ use App\Enums\ProductStatusEnum;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ProductColors;
 
 class ProductController extends Controller
 {
