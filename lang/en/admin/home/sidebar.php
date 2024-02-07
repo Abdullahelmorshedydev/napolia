@@ -49,5 +49,11 @@ return [
     'message_title' => 'Messages',
     'message_all' => 'All Messages',
     'review_all' => 'All Reviews',
+    'order_title' => 'Orders',
+    'order_complete' => 'Orders Completed',
+    'order_pending' => 'Orders Pending',
+    'order_cancel' => 'Orders Canceled',
+    'order_proccess' => 'Orders Proccessing',
+    'order_shipping' => 'Orders Shipping',
 
 ];

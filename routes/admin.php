@@ -17,6 +17,7 @@ use App\Http\Controllers\Web\Admin\Auth\LoginController;
 use App\Http\Controllers\Web\Admin\Auth\ProfileController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\Admin\ContactController;
+use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
@@ -168,6 +169,21 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/mark-as-view/{review}', 'markView')->name('view');
         Route::get('/mark-as-unview/{review}', 'markUnView')->name('unview');
         Route::delete('/delete-review/{review}', 'destroyReview')->name('destroy_review');
+    });
+
+    Route::controller(OrderController::class)->prefix('/orders')->as('orders.')->group(function () {
+
+        Route::get('/all-complete', 'allComplete')->name('complete_order');
+        Route::get('/all-pending', 'allPending')->name('pending_order');
+        Route::get('/all-proccessing', 'allProccessing')->name('proccessing_order');
+        Route::get('/all-shipping', 'allShipping')->name('shipping_order');
+        Route::get('/all-cancel', 'allCanceled')->name('canceled_order');
+        Route::get('/show-order/{order}', 'showOrder')->name('show_order');
+        Route::put('/proccess-order/{order}', 'proccessOrder')->name('proccess');
+        Route::put('/ship-order/{order}', 'shipOrder')->name('ship');
+        Route::put('/complete-order/{order}', 'completeOrder')->name('complete');
+        Route::put('/cancel-order/{order}', 'cancelOrder')->name('cancel');
+        Route::delete('/delete-order/{order}', 'deleteOrder')->name('delete');
     });
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');

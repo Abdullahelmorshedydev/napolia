@@ -4,7 +4,7 @@
             <div class="left-part">
                 <div class="brand-logo">
                     <a href="{{ route('index') }}">
-                        <img src="{{ asset('storage/' . settings()->get('site_logo')) }}" class=" img-fluid" alt="">
+                        <img class="siteLogo" src="{{ asset('storage/' . settings()->get('site_logo')) }}" class=" img-fluid" alt="">
                     </a>
                 </div>
             </div>

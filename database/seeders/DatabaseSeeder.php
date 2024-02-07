@@ -84,6 +84,9 @@ class DatabaseSeeder extends Seeder
         'review-view',
         'review-unview',
         'review-delete',
+        'order-list',
+        'order-edit',
+        'order-delete',
     ];
 
 

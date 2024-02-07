@@ -62,6 +62,6 @@ class CartController extends Controller
             'total' => $cart->total - ($cart_item->product->price_type->calc($cart_item->product->discount_type->calc($cart_item->product->price, $cart_item->product->discount), settings()->get('dollar_price')) * $cart_item->quantity),
         ]);
         $cart_item->delete();
-        return back()->with('success', __('site/home/cart.delete_success'));
+        return back()->with('success', __('site/home/cart.removed_success'));
     }
 }

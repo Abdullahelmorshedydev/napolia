@@ -19,6 +19,6 @@ class RegisterController extends Controller
     {
         $user = User::create($request->validated());
         Auth::guard('web')->login($user);
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', __('site/auth/register.success'));
     }
 }

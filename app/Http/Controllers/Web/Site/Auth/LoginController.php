@@ -22,7 +22,7 @@ class LoginController extends Controller
         $credentials = $request->validated();
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(app()->currentLocale() . '/');
+            return redirect()->route('index');
         }
         return back()->with('error', __('site/auth/login.credintial_not_found'));
     }
@@ -30,6 +30,6 @@ class LoginController extends Controller
     public function logout()
     {
         auth()->guard('web')->logout();
-        return back();
+        return redirect()->route('index');
     }
 }

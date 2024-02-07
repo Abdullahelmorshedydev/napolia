@@ -63,7 +63,7 @@
                                             <label
                                                 for="exampleInputcountryId1">{{ __('admin/state/create.country_id_label') }}</label>
                                             <select name="country_id" id="exampleInputcountryId1" class="form-control">
-                                                <option disabled selected>{{ __('admin/state/create.country_id_place') }}
+                                                <option selected>{{ __('admin/state/create.country_id_place') }}
                                                 </option>
                                                 @foreach ($countries as $country)
                                                     <option {{ old('country_id') == $country->id ? 'selected' : '' }}
@@ -125,7 +125,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +

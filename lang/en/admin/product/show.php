@@ -22,5 +22,6 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'create_image' => 'Add New Image',
+    'colors' => 'Colors',
 
 ];

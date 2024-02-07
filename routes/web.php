@@ -76,7 +76,7 @@ Route::controller(CartController::class)->middleware('check.auth.login')->prefix
     Route::get('/delete-from-cart/{id}', 'deleteItem')->name('delete.item');
 });
 
-Route::controller(OrderController::class)->middleware('check.auth.login')->prefix('/order')->as('order.')->group(function () {
+Route::controller(OrderController::class)->middleware('check.auth.login')->prefix('/orders')->as('order.')->group(function () {
 
     Route::get('place-order', 'placeOrder')->name('place_order');
     Route::get('/order-cities/{id?}', 'getCities')->name('order_cities');
@@ -84,11 +84,11 @@ Route::controller(OrderController::class)->middleware('check.auth.login')->prefi
     Route::get('/state-shipping/{id?}', 'getShipping')->name('state_shipping');
 
     Route::get('/checkout/{id}', 'checkout')->name('checkout');
-    Route::post('/store', 'store')->name('store');
-
-    Route::get('/', 'allOrders')->name('all_orders');
     Route::get('/order-success/{order}', 'orderSuccess')->name('order_success');
-    // Route::get('/track-order/{order}', 'trackOrder')->name('track_order');
+    Route::post('/store', 'store')->name('store');
+    
+    Route::get('/', 'allOrders')->name('all_orders');
+    Route::get('/track-order/{order}', 'trackOrder')->name('track_order');
 });
 
 Route::get('/about-us', AboutUsSettingsController::class)->name('aboutus');

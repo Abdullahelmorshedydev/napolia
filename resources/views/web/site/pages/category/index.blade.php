@@ -69,7 +69,7 @@
                                                             <div class="img-block">
                                                                 <a href="{{ route('product.index', $product->slug) }}"><img
                                                                         src="{{ asset('storage/' . $product->images[0]->image) }}"
-                                                                        class=" img-fluid bg-img" alt=""></a>
+                                                                        class="productImage img-fluid" alt=""></a>
                                                                 <div class="cart-details">
                                                                     <button tabindex="0" class="addcart-box"
                                                                         title="Quick shop"><i

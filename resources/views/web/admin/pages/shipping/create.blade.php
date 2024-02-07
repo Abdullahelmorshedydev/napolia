@@ -72,7 +72,7 @@
                                             <label
                                                 for="exampleInputcountryId1">{{ __('admin/shipping/create.country_id_label') }}</label>
                                             <select name="country_id" id="exampleInputcountryId1" class="form-control">
-                                                <option disabled selected>
+                                                <option selected>
                                                     {{ __('admin/shipping/create.country_id_place') }}
                                                 </option>
                                                 @foreach ($countries as $country)
@@ -150,7 +150,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = <option value=""></option>;
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +
@@ -188,7 +188,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +

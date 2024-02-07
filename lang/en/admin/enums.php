@@ -23,5 +23,8 @@ return [
     'completed' => 'completed',
     'canceled' => 'canceled',
     'shipped' => 'shipped',
+    'cash' => 'CASH',
+    'visa' => 'VISA/MASTER',
+    'meeza' => 'MEEZA',
 
 ];

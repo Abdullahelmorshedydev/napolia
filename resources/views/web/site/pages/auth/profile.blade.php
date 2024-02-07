@@ -188,7 +188,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +
@@ -226,7 +226,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +

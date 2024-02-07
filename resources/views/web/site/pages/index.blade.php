@@ -55,7 +55,7 @@
             <div class="row partition-3">
                 <div class="col-md-12">
                     <a href="#">
-                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}" class=" img-fluid w-100 "
+                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}" class="headerImage img-fluid w-100 "
                             alt="">
                     </a>
                 </div>
@@ -96,7 +96,7 @@
                                         <div class="img-block">
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <img src="{{ asset('storage/' . $product->images->first()->image) }}"
-                                                    class=" img-fluid bg-img" alt="">
+                                                    class="productImage img-fluid" alt="">
                                             </a>
                                             <div class="cart-right">
                                                 <button tabindex="0" class="addcart-box" title="Quick shop">
@@ -171,7 +171,7 @@
                                         <div class="img-block">
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <img src="{{ asset('storage/' . $product->images->first()->image) }}"
-                                                    class=" img-fluid bg-img" alt="">
+                                                    class="productImage img-fluid" alt="">
                                             </a>
                                             <div class="cart-right">
                                                 <button tabindex="0" class="addcart-box" title="Quick shop">
@@ -246,7 +246,7 @@
                                         <div class="img-block">
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <img src="{{ asset('storage/' . $product->images->first()->image) }}"
-                                                    class=" img-fluid bg-img" alt="">
+                                                    class="productImage img-fluid" alt="">
                                             </a>
                                             <div class="cart-right">
                                                 <button tabindex="0" class="addcart-box" title="Quick shop">

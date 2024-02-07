@@ -23,5 +23,6 @@ return [
     'valid_min' => 'This field length was small',
     'valid_max' => 'This field length was largest',
     'logout' => 'Logout',
+    'success' => 'Account Created Successfully',
 
 ];

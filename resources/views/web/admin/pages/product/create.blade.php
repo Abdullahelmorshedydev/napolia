@@ -193,7 +193,7 @@
                                             <label
                                                 for="exampleInputCategoryId1">{{ __('admin/product/create.category_id_label') }}</label>
                                             <select name="category_id" id="exampleInputCategoryId1" class="form-control">
-                                                <option disabled selected>
+                                                <option selected>
                                                     {{ __('admin/product/create.category_id_place') }}
                                                 </option>
                                                 @foreach ($categories as $category)
@@ -313,7 +313,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +

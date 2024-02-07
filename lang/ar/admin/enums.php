@@ -23,5 +23,8 @@ return [
     'completed' => 'اكتمل',
     'canceled' => 'ملغى',
     'shipped' => 'يشحن',
+    'cash' => 'نقدي',
+    'visa' => 'فيزا/ماستر',
+    'meeza' => 'ميزة',
 
 ];

@@ -27,13 +27,21 @@
     </section>
     <!-- breadcrumb End -->
 
+    @if ($errors)
+        @foreach ($errors->all() as $error)
+            <span class="text-danger">{{ $error }}</span>
+        @endforeach
+    @endif
 
     <!-- section start -->
     <section class="section-b-space">
         <div class="container">
             <div class="checkout-page">
                 <div class="checkout-form">
-                    <form>
+                    <form id="form" action="{{ route('order.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{ auth('web')->user()->id }}" name="user_id">
+                        <input type="hidden" value="{{ $cart->id }}" name="cart_id">
                         <div class="row">
                             <div class="col-lg-6 col-sm-12 col-xs-12">
                                 <div class="checkout-title">
@@ -99,14 +107,19 @@
                                         </div>
                                         <ul class="qty">
                                             @foreach ($cartItems as $cartItem)
-                                                <li>{{ $cartItem->product->name . ' x ' . $cartItems[$loop->index]->quantity }} 
+                                                <li>{{ $cartItem->product->name . ' x ' . $cartItems[$loop->index]->quantity }}
                                                     <span>{{ $cartItems[$loop->index]->quantity * $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}</span>
                                                 </li>
+                                                <li>{{ $cartItem->productColor->name . '(' . $cartItem->productColor->code . ')' }}</li>
                                             @endforeach
                                         </ul>
                                         <ul class="sub-total">
-                                            <li>{{ __('site/order.sub_total') }} 
-                                                <span class="count">{{ $totalPrice }}</span>
+                                            <li>{{ __('site/order.sub_total') }}
+                                                <span class="count">{{ $cart->total }}</span>
+                                            </li>
+                                            <li>{{ __('site/order.tax') }}
+                                                <span
+                                                    class="count">{{ $cart->total * (settings()->get('tax') / 100) }}</span>
                                             </li>
                                             <li>
                                                 {{ __('site/order.shipping') }}
@@ -118,8 +131,12 @@
                                             </li>
                                         </ul>
                                         <ul class="total">
-                                            <li>{{ __('site/order.total') }} 
-                                                <span class="count">{{ $cart->total . ' ' . __('admin/product/show.pound') }}</span>
+                                            <li>{{ __('site/order.total') }}
+                                                <span class="count" id="total">
+                                                    {{ $cart->total + $cart->total * (settings()->get('tax') / 100) }}
+                                                </span>
+                                                <input type="hidden" name="InvoiceAmount" value="">
+                                                {{ ' ' . __('admin/product/show.pound') }}
                                             </li>
                                         </ul>
                                     </div>
@@ -129,16 +146,32 @@
                                                 <ul>
                                                     <li>
                                                         <div class="radio-option">
-                                                            <input type="radio" name="payment_method" value="CASH" id="payment-2"
-                                                                checked>
-                                                            <label for="payment-2">{{ __('site/order.cash_on_delivery') }}</label>
+                                                            <input type="radio" name="payment_method" value="CASH"
+                                                                id="payment-1">
+                                                            <label
+                                                                for="payment-1">{{ __('site/order.cash_on_delivery') }}</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="radio-option">
+                                                            <input type="radio" name="payment_method" value="VISA"
+                                                                id="payment-2">
+                                                            <label for="payment-2">{{ __('admin/enums.visa') }}</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="radio-option">
+                                                            <input type="radio" name="payment_method" value="MEEZA"
+                                                                id="payment-">
+                                                            <label for="payment-">{{ __('admin/enums.meeza') }}</label>
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="text-end">
-                                            <a href="#" class="btn-solid btn">Place Order</a>
+                                            <button type="submit"
+                                                class="btn-solid btn">{{ __('site/order.place_order') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +203,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +
@@ -208,7 +241,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +
@@ -238,7 +271,6 @@
         $(document).ready(function() {
             $('select[name="state_id"]').on('change', function() {
                 var state_id = $(this).val();
-                var lang = "{{ LaravelLocalization::getCurrentLocale() }}";
 
                 if (state_id) {
                     $.ajax({
@@ -246,7 +278,24 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            $('label[id="shipping_price"]').empty('').append($data['shipping_price']);
+                            $('label[id="shipping_price"]').empty('').append(response
+                                .shipping_price);
+                            var shippingInput = $('<input>', {
+                                type: 'hidden',
+                                name: 'shipping_price',
+                                value: response.shipping_price
+                            });
+                            $('label[id="shipping_price"]').append(shippingInput);
+
+                            $('span[id="total"]').empty('').append(response
+                                .total_price);
+                            var totalInput = $('<input>', {
+                                type: 'hidden',
+                                name: 'total',
+                                value: response.total_price
+                            });
+                            $('span[id="total"]').append(totalInput);
+                            $('input[name="InvoiceAmount"]').val(response.total_price);
                         },
                         error: function(xhr, status, error) {
                             console.log("feh error ya morshed");
@@ -256,6 +305,20 @@
                     console.log('Please select a State');
                 }
             });
+        });
+    </script>
+    <script>
+        $("input[id=payment-1]").on("click", function() {
+            var input = "<input type='hidden' name='payment_method' value='CASH'>"
+            document.getElementById("payment-1").append(input);
+        });
+        $("input[id=payment-2]").on("click", function() {
+            var input = "<input type='hidden' name='payment_method' value='VISA/MASTER'>"
+            document.getElementById("payment-2").append(input);
+        });
+        $("input[id=payment-3]").on("click", function() {
+            var input = "<input type='hidden' name='payment_method' value='MEEZA'>"
+            document.getElementById("payment-3").append(input);
         });
     </script>
 @endpush

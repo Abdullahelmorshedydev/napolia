@@ -73,7 +73,7 @@
                                             <label
                                                 for="countryId1">{{ __('admin/shipping/edit.country_id_label') }}</label>
                                             <select name="country_id" id="countryId1" class="form-control">
-                                                <option disabled selected>{{ __('admin/shipping/edit.country_id_place') }}
+                                                <option selected>{{ __('admin/shipping/edit.country_id_place') }}
                                                 </option>
                                                 @foreach ($countries as $country)
                                                     <option
@@ -94,7 +94,7 @@
                                         <div class="form-group">
                                             <label for="cityId1">{{ __('admin/shipping/edit.city_id_label') }}</label>
                                             <select name="city_id" id="cityId1" class="form-control">
-                                                <option disabled selected>{{ __('admin/shipping/edit.city_id_place') }}
+                                                <option selected>{{ __('admin/shipping/edit.city_id_place') }}
                                                 </option>
                                                 @foreach ($cities as $city)
                                                     <option
@@ -117,7 +117,7 @@
                                         <div class="form-group">
                                             <label for="stateId1">{{ __('admin/shipping/edit.state_id_label') }}</label>
                                             <select name="state_id" id="stateId1" class="form-control">
-                                                <option disabled selected>{{ __('admin/shipping/edit.state_id_place') }}
+                                                <option selected>{{ __('admin/shipping/edit.state_id_place') }}
                                                 </option>
                                                 <option
                                                     {{ old('state_id', $shipping->state_id) == $shipping->state->id ? 'selected' : '' }}
@@ -163,7 +163,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +
@@ -201,7 +201,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = "";
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +

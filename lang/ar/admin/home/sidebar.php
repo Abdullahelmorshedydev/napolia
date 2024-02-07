@@ -49,6 +49,12 @@ return [
     'message_title' => 'الرسائل',
     'message_all' => 'جميع الرسائل',
     'review_all' => 'جميع التعليقات',
+    'order_title' => 'الطلبات',
+    'order_complete' => 'الطلبات المكتملة',
+    'order_pending' => 'الطلبات قيد الانتظار',
+    'order_cancel' => 'الطلبات الملغاة',
+    'order_proccess' => 'الطلبات قيد التنفيذ',
+    'order_shipping' => 'الطلبات المشحنة',
 
 
 ];

@@ -7,7 +7,7 @@
                 </div>
                 <div class="footer-content">
                     <div class="footer-logo">
-                        <img src="{{ asset('storage/' . settings()->get('site_logo')) }}" alt="">
+                        <img class="siteLogo" src="{{ asset('storage/' . settings()->get('site_logo')) }}" alt="">
                     </div>
                     <p>{{ settings()->get('footer_slogan_' . app()->currentLocale()) }}.
                     </p>
@@ -80,7 +80,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ route('order.all_orders') }}">
                                             {{ __('site/home/section.order_track') }}
                                         </a>
                                     </li>

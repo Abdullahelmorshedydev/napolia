@@ -60,7 +60,7 @@
                                     <label
                                         for="exampleInputCategoryId1">{{ __('admin/product/create.category_id_label') }}</label>
                                     <select name="category_id" id="exampleInputCategoryId1" class="form-control">
-                                        <option disabled selected>{{ __('admin/product/create.category_id_place') }}
+                                        <option selected>{{ __('admin/product/create.category_id_place') }}
                                         </option>
                                         @foreach ($categories as $category)
                                             <option {{ old('category_id') == $category->id ? 'selected' : '' }}
