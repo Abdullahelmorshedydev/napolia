@@ -55,7 +55,7 @@
                                 <div class="col-3 order_detail">
                                     <div>
                                         <h4>{{ __('site/cart.color') }}</h4>
-                                        <h5>{{ $cartItem->productColor->name . '(' . $cartItem->productColor->code . ')' }}</h5>
+                                        <h5>{{ $orderItem->productColor->name . '(' . $orderItem->productColor->code . ')' }}</h5>
                                     </div>
                                 </div>
                             </div>

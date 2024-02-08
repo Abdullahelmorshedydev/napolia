@@ -45,7 +45,7 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>
-                                        <a href="#"><span class="dark-data">{{ $order->id }}</span></a>
+                                        <a href="{{ route('admin.orders.show_order', $order->id) }}"><span class="dark-data">{{ $order->id }}</span></a>
                                     </td>
                                     <td>
                                         <h4>{{ $order->address }}</h4>

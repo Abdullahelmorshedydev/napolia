@@ -8,7 +8,7 @@ return [
     'terms_conditions' => 'الشروط والأحكام',
     'return_exchange' => 'الاسترجاع و الاستبدال',
     'links' => 'عناوين مهمة',
-    'order_track' => 'تتبع طلبك',
+    'order_track' => 'جميع الطلبات',
     'faq' => 'FAQ',
     'email_us' => 'البريد الالكترونى',
     'call_us' => 'الهاتف',

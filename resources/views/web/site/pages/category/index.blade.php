@@ -94,30 +94,30 @@
                                                             </div>
                                                             <div class="addtocart_box">
                                                                 <div class="addtocart_detail">
-                                                                    <div>
-                                                                        <div class="color">
-                                                                            <h5>{{ __('site/home/product.color') }}</h5>
-                                                                            <ul class="color-variant">
-                                                                                @foreach ($product->colors as $color)
-                                                                                    <li id="{{ $color->id }}"
-                                                                                        class="color"
-                                                                                        style="background-color: {{ $color->code }};">
-                                                                                        <input
-                                                                                            id="radioInput[{{ $color->id }}]"
-                                                                                            type="radio" class="d-none"
-                                                                                            value="{{ $color->id }}"
-                                                                                            name="color_id">
-                                                                                    </li>
-                                                                                @endforeach
-                                                                            </ul>
+                                                                    <form action="{{ route('cart.add.to.cart') }}" method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" value="{{ $product->id }}" name="id">
+                                                                        <input type="hidden" value="1" name="quantity">
+                                                                        <div>
+                                                                            <div class="color">
+                                                                                <h5>{{ __('site/home/product.color') }}</h5>
+                                                                                <ul class="type-box color-variant">
+                                                                                    @foreach ($product->colors as $color)
+                                                                                        <li id="{{ $color->id }}" class="color"
+                                                                                            style="background-color: {{ $color->code }};">
+                                                                                            <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                                                value="{{ $color->id }}" name="color_id">
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="addtocart_btn">
+                                                                                <button type="submit" class="btn btn-primary">
+                                                                                    {{ __('site/home/product.add_to_cart') }}
+                                                                                </button>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="addtocart_btn">
-                                                                            <a href="javascript:void(0)"
-                                                                                data-bs-toggle="modal" class="closeCartbox"
-                                                                                data-bs-target="#addtocart"
-                                                                                tabindex="0">{{ __('site/home/product.add_to_cart') }}</a>
-                                                                        </div>
-                                                                    </div>
+                                                                    </form>
                                                                 </div>
                                                                 <div class="close-cart">
                                                                     <i class="fa fa-times" aria-hidden="true"></i>

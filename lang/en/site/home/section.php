@@ -8,7 +8,7 @@ return [
     'terms_conditions' => 'terms & conditions',
     'return_exchange' => 'return & exchange',
     'links' => 'important links',
-    'order_track' => 'Track Your Order',
+    'order_track' => 'All Orders',
     'faq' => 'FAQ',
     'email_us' => 'Email Us',
     'call_us' => 'Call Us',
