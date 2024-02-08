@@ -27,8 +27,8 @@ class HomeController extends Controller
         $products_rated = Product::where('status', ProductStatusEnum::ACTIVE->value)->with(['images', 'colors'])->limit(8)->get();
         $products_sales = Product::where('status', ProductStatusEnum::ACTIVE->value)->where('discount', '!=', null)->with(['images', 'colors'])->limit(8)->get();
         $products_popular = Product::where('status', ProductStatusEnum::ACTIVE->value)->orderBy('sales_count', 'desc')->with(['images', 'colors'])->limit(8)->get();
-        $blogs = Blog::where('status', BlogStatusEnum::ACTIVE->value)->with(['admin', 'with'])->limit(8)->get();
-        $parent = Category::where('name', 'rooms')->where('status', CategoryStatusEnum::ACTIVE->value)->first();
+        $blogs = Blog::where('status', BlogStatusEnum::ACTIVE->value)->with(['admin', 'image'])->limit(8)->get();
+        $parent = Category::where('name', 'Rooms')->where('status', CategoryStatusEnum::ACTIVE->value)->first();
         $rooms = [];
         if (isset($parent)) {
             $rooms = Category::where('category_id', $parent->id)->where('status', CategoryStatusEnum::ACTIVE->value)->with('image')->get();

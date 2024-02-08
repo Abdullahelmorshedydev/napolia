@@ -50,7 +50,7 @@
                                         @if (isset($product->discount))
                                             {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
                                         @else
-                                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}$
+                                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
                                         @endif
                                     </td>
                                     <td>{{ $product->condition->lang() }}</td>

@@ -45,7 +45,7 @@ class OrderController extends Controller
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $cartItem->product_id,
-                'prod_total' => $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')),
+                'prod_total' => $cartItem->product->discount ? $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) : $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')),
                 'quantity' => $cartItem->quantity,
                 'product_color_id' => $cartItem->product_color_id,
             ]);

@@ -31,8 +31,8 @@
                         @foreach ($order->orderItems as $orderItem)
                             <div class="row product-order-detail">
                                 <div class="col-3">
-                                    <img src="{{ asset('storage/' . $orderItem->product->images->first()->image) }}" alt=""
-                                        class="img-fluid ">
+                                    <img src="{{ asset('storage/' . $orderItem->product->images->first()->image) }}"
+                                        alt="" class="img-fluid ">
                                 </div>
                                 <div class="col-3 order_detail">
                                     <div>
@@ -49,26 +49,32 @@
                                 <div class="col-3 order_detail">
                                     <div>
                                         <h4>{{ __('site/order.price') }}</h4>
-                                        <h5>{{ $orderItem->product->price_type->calc($orderItem->product->discount_type->calc($orderItem->product->price, $orderItem->product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}</h5>
+                                        <h5>{{ $orderItem->product->discount ? $orderItem->product->price_type->calc($orderItem->product->discount_type->calc($orderItem->product->price, $orderItem->product->discount), settings()->get('dollar_price')) : $orderItem->product->price_type->calc($orderItem->product->price, settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                        </h5>
                                     </div>
                                 </div>
                                 <div class="col-3 order_detail">
                                     <div>
                                         <h4>{{ __('site/cart.color') }}</h4>
-                                        <h5>{{ $orderItem->productColor->name . '(' . $orderItem->productColor->code . ')' }}</h5>
+                                        <h5>{{ $orderItem->productColor->name . '(' . $orderItem->productColor->code . ')' }}
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                         <div class="total-sec">
                             <ul>
-                                <li>{{ __('site/order.sub_total') }} <span>{{ $subTotal . ' ' . __('admin/product/show.pound') }}</span></li>
-                                <li>{{ __('site/order.shipping') }} <span>{{ $order->shipping_price . ' ' . __('admin/product/show.pound') }}</span></li>
-                                <li>{{ __('site/order.tax') }} <span>{{ $taxPrice . ' ' . __('admin/product/show.pound') }}</span></li>
+                                <li>{{ __('site/order.sub_total') }}
+                                    <span>{{ $subTotal . ' ' . __('admin/product/show.pound') }}</span></li>
+                                <li>{{ __('site/order.shipping') }}
+                                    <span>{{ $order->shipping_price . ' ' . __('admin/product/show.pound') }}</span></li>
+                                <li>{{ __('site/order.tax') }}
+                                    <span>{{ $taxPrice . ' ' . __('admin/product/show.pound') }}</span></li>
                             </ul>
                         </div>
                         <div class="final-total">
-                            <h3>{{ __('site/order.total') }} <span>{{ $order->total . ' ' . __('admin/product/show.pound') }}</span></h3>
+                            <h3>{{ __('site/order.total') }}
+                                <span>{{ $order->total . ' ' . __('admin/product/show.pound') }}</span></h3>
                         </div>
                     </div>
                 </div>
@@ -78,7 +84,8 @@
                             <h4>{{ __('site/order.summery') }}</h4>
                             <ul class="order-detail">
                                 <li>{{ __('site/order.order_id') . ' ' . $order->id }}</li>
-                                <li>{{ __('site/order.order_date') . ' ' . \Carbon\Carbon::parse($order->created_at)->toDateString() }}</li>
+                                <li>{{ __('site/order.order_date') . ' ' . \Carbon\Carbon::parse($order->created_at)->toDateString() }}
+                                </li>
                                 <li>{{ __('site/order.order_total') . ' ' . $order->total }}</li>
                             </ul>
                         </div>

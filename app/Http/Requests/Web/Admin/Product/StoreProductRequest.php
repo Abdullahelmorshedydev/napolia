@@ -37,7 +37,7 @@ class StoreProductRequest extends FormRequest
             'price_type' => ['required', Rule::in($priceTypes)],
             'code' => ['required', 'unique:products,code'],
             'shipping_time' => ['required', 'numeric'],
-            'discount' => ['numeric', 'min:0', function ($attribte, $value, $fail) {
+            'discount' => ['nullable', 'numeric', 'min:0', function ($attribte, $value, $fail) {
                 if (request()->input('discount_type') == 'percent') {
                     if ($value <= 0 || $value > 100) {
                         $fail(__('admin/prodcut/create.valid_max'));

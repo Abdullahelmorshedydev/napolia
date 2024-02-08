@@ -98,7 +98,6 @@ Route::get('/terms-conditions', TermsSettingsController::class)->name('terms');
 Route::get('/return-exchange', ReturnExchangeSettingsController::class)->name('return_exchange');
 
 Route::get('/contact-us', [ContactusController::class, 'index'])->name('contactus.index');
-
 Route::post('/contact-us', [ContactusController::class, 'store'])->name('contactus.store');
 
 Route::controller(BlogController::class)->prefix('/blog')->as('blog.')->group(function () {

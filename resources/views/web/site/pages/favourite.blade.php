@@ -48,7 +48,8 @@
                                 <tr>
                                     <td>
                                         <a href="{{ route('product.index', $product->slug) }}">
-                                            <img src="{{ asset('storage/' . $product->images->first()->image) }}" alt="">
+                                            <img src="{{ asset('storage/' . $product->images->first()->image) }}"
+                                                alt="">
                                         </a>
                                     </td>
                                     <td><a href="{{ route('product.index', $product->slug) }}">{{ $product->name }}</a>
@@ -88,7 +89,11 @@
                                     </td>
                                     <td>
                                         <h2>
-                                            {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                            @if (isset($product->discount))
+                                                {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                            @else
+                                                {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                            @endif
                                         </h2>
                                     </td>
                                     <td>

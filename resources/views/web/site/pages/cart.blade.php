@@ -62,54 +62,64 @@
                                         </a>
                                         <div class="mobile-cart-content row">
                                             <form action="{{ route('cart.add.to.cart') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" value="{{ $cartItem->product_id }}" name="id">
-                                            <div class="col-xs-3">
-                                                <div class="qty-box">
-                                                    <div class="input-group">
-                                                        <input id="{{ $cartItem->product->id }}" type="number"
-                                                            name="quantity" class="form-control input-number"
-                                                            value="{{ old('quantity', $cartItem->quantity) }}">
+                                                @csrf
+                                                <input type="hidden" value="{{ $cartItem->product_id }}" name="id">
+                                                <div class="col-xs-3">
+                                                    <div class="qty-box">
+                                                        <div class="input-group">
+                                                            <input id="{{ $cartItem->product->id }}" type="number"
+                                                                name="quantity" class="form-control input-number"
+                                                                value="{{ old('quantity', $cartItem->quantity) }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-3">
-                                                <div class="qty-box">
-                                                    <div class="input-group">
-                                                        <ul class="color-variant">
-                                                            @foreach ($cartItem->product->colors as $color)
-                                                                <li id="{{ $color->id }}"
-                                                                    class="{{ $cartItem->product_color_id == $color->id ? 'active' : '' }}"
-                                                                    style="background-color: {{ $color->code }};">
-                                                                    <input id="radioInput[{{ $color->id }}]" type="radio"
-                                                                        class="d-none" value="{{ $color->id }}" name="color_id">
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                                                <div class="col-xs-3">
+                                                    <div class="qty-box">
+                                                        <div class="input-group">
+                                                            <ul class="color-variant">
+                                                                @foreach ($cartItem->product->colors as $color)
+                                                                    <li id="{{ $color->id }}"
+                                                                        class="{{ $cartItem->product_color_id == $color->id ? 'active' : '' }}"
+                                                                        style="background-color: {{ $color->code }};">
+                                                                        <input id="radioInput[{{ $color->id }}]"
+                                                                            type="radio" class="d-none"
+                                                                            value="{{ $color->id }}" name="color_id">
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xs-3">
-                                                <h2 class="td-color">
-                                                    {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
-                                                </h2>
-                                            </div>
-                                            <div class="col-xs-3">
-                                                <h2 class="td-color">
-                                                    <a href="{{ route('cart.delete.item', $cartItem->product->id) }}"
-                                                        class="icon"><i class="ti-close"></i>
-                                                    </a>
-                                                    <button type="submit" data-bs-toggle="modal" class="btn btn-sm btn-solid">
-                                                        {{ __('site/order.update') }}
-                                                    </button>
-                                                </h2>
-                                            </div>
+                                                <div class="col-xs-3">
+                                                    <h2 class="td-color">
+                                                        @if (isset($product->discount))
+                                                            {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                        @else
+                                                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                        @endif
+                                                    </h2>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <h2 class="td-color">
+                                                        <a href="{{ route('cart.delete.item', $cartItem->product->id) }}"
+                                                            class="icon"><i class="ti-close"></i>
+                                                        </a>
+                                                        <button type="submit" data-bs-toggle="modal"
+                                                            class="btn btn-sm btn-solid">
+                                                            {{ __('site/order.update') }}
+                                                        </button>
+                                                    </h2>
+                                                </div>
                                             </form>
                                         </div>
                                     </td>
                                     <td>
                                         <h2>
-                                            {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                            @if (isset($product->discount))
+                                                {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                            @else
+                                                {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                            @endif
                                         </h2>
                                     </td>
                                     <form action="{{ route('cart.add.to.cart') }}" method="POST">

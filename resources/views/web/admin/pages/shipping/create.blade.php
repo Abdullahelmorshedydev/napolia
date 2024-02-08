@@ -150,7 +150,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                            html = <option value=""></option>;
+                            html = '<option value=""></option>';
                             $.each(response.data, function(index, value) {
                                 html +=
                                     '<option value="' +

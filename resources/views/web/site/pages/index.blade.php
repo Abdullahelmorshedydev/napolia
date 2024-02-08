@@ -55,8 +55,8 @@
             <div class="row partition-3">
                 <div class="col-md-12">
                     <a href="#">
-                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}" class="headerImage img-fluid w-100 "
-                            alt="">
+                        <img src="{{ asset('storage/' . settings()->get('home_banner')) }}"
+                            class="headerImage img-fluid w-100 " alt="">
                     </a>
                 </div>
             </div>
@@ -122,7 +122,12 @@
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                            <h5>
+                                                @if (isset($product->discount))
+                                                    {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                @else
+                                                    {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                @endif
                                             </h5>
                                         </div>
                                         <div class="addtocart_box">
@@ -138,7 +143,8 @@
                                                                 @foreach ($product->colors as $color)
                                                                     <li id="{{ $color->id }}" class="color"
                                                                         style="background-color: {{ $color->code }};">
-                                                                        <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                        <input id="radioInput[{{ $color->id }}]"
+                                                                            type="radio" class="d-none"
                                                                             value="{{ $color->id }}" name="color_id">
                                                                     </li>
                                                                 @endforeach
@@ -197,7 +203,12 @@
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                            <h5>
+                                                @if (isset($product->discount))
+                                                    {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                @else
+                                                    {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                @endif
                                             </h5>
                                         </div>
                                         <div class="addtocart_box">
@@ -213,7 +224,8 @@
                                                                 @foreach ($product->colors as $color)
                                                                     <li id="{{ $color->id }}" class="color"
                                                                         style="background-color: {{ $color->code }};">
-                                                                        <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                        <input id="radioInput[{{ $color->id }}]"
+                                                                            type="radio" class="d-none"
                                                                             value="{{ $color->id }}" name="color_id">
                                                                     </li>
                                                                 @endforeach
@@ -272,7 +284,12 @@
                                             <a href="{{ route('product.index', $product->slug) }}">
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                            <h5>
+                                                @if (isset($product->discount))
+                                                    {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                @else
+                                                    {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                @endif
                                             </h5>
                                         </div>
                                         <div class="addtocart_box">
@@ -288,7 +305,8 @@
                                                                 @foreach ($product->colors as $color)
                                                                     <li id="{{ $color->id }}" class="color"
                                                                         style="background-color: {{ $color->code }};">
-                                                                        <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
+                                                                        <input id="radioInput[{{ $color->id }}]"
+                                                                            type="radio" class="d-none"
                                                                             value="{{ $color->id }}" name="color_id">
                                                                     </li>
                                                                 @endforeach
@@ -317,7 +335,7 @@
     </section>
     <!-- tab section start -->
 
-    @if (!empty($rooms))
+    @if (isset($rooms))
         <!-- section start-->
         <section class="section-b-space">
             <div class="container">

@@ -26,14 +26,13 @@
                                     </a>
                                     <h4>
                                         <span>
-                                            {{ $cartItem->quantity .
-                                                ' x ' .
-                                                $cartItem->product->price_type->calc(
-                                                    $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount),
-                                                    settings()->get('dollar_price'),
-                                                ) .
-                                                ' ' .
-                                                __('admin/product/show.pound') }}
+                                            {{ $cartItem->quantity . ' x ' }}
+                                            @if (isset($cartItem->product->discount))
+                                                {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}
+                                            @else
+                                                {{ $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')) }}
+                                            @endif
+                                            {{ ' ' . __('admin/product/show.pound') }}
                                         </span>
                                     </h4>
                                 </div>

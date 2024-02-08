@@ -88,31 +88,45 @@
                                                                     </a>
                                                                     <p>{{ $product->description }}</p>
                                                                     <h5>
-                                                                        {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                                                        @if (isset($product->discount))
+                                                                            {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                                        @else
+                                                                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                                        @endif
                                                                     </h5>
                                                                 </div>
                                                             </div>
                                                             <div class="addtocart_box">
                                                                 <div class="addtocart_detail">
-                                                                    <form action="{{ route('cart.add.to.cart') }}" method="POST">
+                                                                    <form action="{{ route('cart.add.to.cart') }}"
+                                                                        method="POST">
                                                                         @csrf
-                                                                        <input type="hidden" value="{{ $product->id }}" name="id">
-                                                                        <input type="hidden" value="1" name="quantity">
+                                                                        <input type="hidden" value="{{ $product->id }}"
+                                                                            name="id">
+                                                                        <input type="hidden" value="1"
+                                                                            name="quantity">
                                                                         <div>
                                                                             <div class="color">
-                                                                                <h5>{{ __('site/home/product.color') }}</h5>
+                                                                                <h5>{{ __('site/home/product.color') }}
+                                                                                </h5>
                                                                                 <ul class="type-box color-variant">
                                                                                     @foreach ($product->colors as $color)
-                                                                                        <li id="{{ $color->id }}" class="color"
+                                                                                        <li id="{{ $color->id }}"
+                                                                                            class="color"
                                                                                             style="background-color: {{ $color->code }};">
-                                                                                            <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
-                                                                                                value="{{ $color->id }}" name="color_id">
+                                                                                            <input
+                                                                                                id="radioInput[{{ $color->id }}]"
+                                                                                                type="radio"
+                                                                                                class="d-none"
+                                                                                                value="{{ $color->id }}"
+                                                                                                name="color_id">
                                                                                         </li>
                                                                                     @endforeach
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="addtocart_btn">
-                                                                                <button type="submit" class="btn btn-primary">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">
                                                                                     {{ __('site/home/product.add_to_cart') }}
                                                                                 </button>
                                                                             </div>

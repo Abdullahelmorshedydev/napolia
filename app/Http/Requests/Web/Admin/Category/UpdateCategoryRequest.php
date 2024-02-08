@@ -25,8 +25,8 @@ class UpdateCategoryRequest extends FormRequest
     {
         $status = CategoryStatusEnum::cases();
         return [
-            'name_en' => ['required', 'string', Rule::unique('categories', 'name->en') . $this->id, 'min:3', 'max:50'],
-            'name_ar' => ['required', 'string', Rule::unique('categories', 'name->ar') . $this->id, 'min:3', 'max:50'],
+            'name_en' => ['required', 'string', Rule::unique('categories', 'name->en')->ignore($this->category), 'min:3', 'max:50'],
+            'name_ar' => ['required', 'string', Rule::unique('categories', 'name->ar')->ignore($this->category), 'min:3', 'max:50'],
             'image' => ['nullable', 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
             'status' => [Rule::in($status)],
             'category_id' => ['nullable', 'exists:categories,id'],
@@ -38,7 +38,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name_en.required' => __('admin/category/edit.valid_required'),
             'name_en.string' => __('admin/category/edit.valid_string'),
-            'name_en.unique' => __('admin/category/edit.valid_uinque'),
+            'name_en.unique' => __('admin/category/edit.valid_unique'),
             'name_en.min' => __('admin/category/edit.valid_min'),
             'name_en.max' => __('admin/category/edit.valid_max'),
             'name_ar.required' => __('admin/category/edit.valid_required'),

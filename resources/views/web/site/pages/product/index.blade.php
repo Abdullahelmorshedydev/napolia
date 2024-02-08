@@ -58,19 +58,21 @@
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
                             <h2>{{ $product->name }}</h2>
-                            <h4>
-                                <del>{{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}</del>
-                                <span>
-                                    {{ $product->discount . ' ' . $product->discount_type->char() . ' ' . __('site/product/index.off') }}
-                                </span>
-                            </h4>
+                            @if (isset($product->discount))
+                                <h4>
+                                    <del>{{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}</del>
+                                    <span>
+                                        {{ $product->discount . ' ' . $product->discount_type->char() . ' ' . __('site/product/index.off') }}
+                                    </span>
+                                </h4>
+                            @endif
                             <h3>
-                                {{ $product->price_type->calc(
-                                    $product->discount_type->calc($product->price, $product->discount),
-                                    settings()->get('dollar_price'),
-                                ) .
-                                    ' ' .
-                                    __('admin/product/show.pound') }}
+                                @if (isset($product->discount))
+                                    {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                @else
+                                    {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                @endif
+                                {{ ' ' . __('admin/product/show.pound') }}
                             </h3>
                             <form action="{{ route('cart.add.to.cart') }}" method="POST">
                                 @csrf
@@ -78,8 +80,8 @@
                                 <ul class="color-variant">
                                     @foreach ($product->colors as $color)
                                         <li id="{{ $color->id }}" style="background-color: {{ $color->code }}">
-                                            <input id="radioInput[{{ $color->id }}]" type="radio" value="{{ $color->id }}"
-                                                name="color_id" class="d-none"> 
+                                            <input id="radioInput[{{ $color->id }}]" type="radio"
+                                                value="{{ $color->id }}" name="color_id" class="d-none">
                                         </li>
                                     @endforeach
                                 </ul>
@@ -275,7 +277,12 @@
                                 <a href="{{ route('product.index', $product->slug) }}">
                                     <h6>{{ $product->name }}</h6>
                                 </a>
-                                <h5>{{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                <h5>
+                                    @if (isset($product->discount))
+                                        {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                    @else
+                                        {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                    @endif
                                 </h5>
                             </div>
                             <div class="addtocart_box">
@@ -291,8 +298,9 @@
                                                     @foreach ($product->colors as $color)
                                                         <li id="{{ $color->id }}" class="color"
                                                             style="background-color: {{ $color->code }};">
-                                                            <input id="radioInput[{{ $color->id }}]" type="radio" class="d-none"
-                                                                value="{{ $color->id }}" name="color_id">
+                                                            <input id="radioInput[{{ $color->id }}]" type="radio"
+                                                                class="d-none" value="{{ $color->id }}"
+                                                                name="color_id">
                                                         </li>
                                                     @endforeach
                                                 </ul>

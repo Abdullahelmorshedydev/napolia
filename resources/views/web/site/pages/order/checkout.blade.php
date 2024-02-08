@@ -108,9 +108,17 @@
                                         <ul class="qty">
                                             @foreach ($cartItems as $cartItem)
                                                 <li>{{ $cartItem->product->name . ' x ' . $cartItems[$loop->index]->quantity }}
-                                                    <span>{{ $cartItems[$loop->index]->quantity * $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}</span>
+                                                    <span>
+                                                        {{ $cartItem->quantity * $cartItem->product->discount
+                                                            ? $cartItem->product->price_type->calc(
+                                                                $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount),
+                                                                settings()->get('dollar_price'),
+                                                            )
+                                                            : $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')) }}
+                                                    </span>
                                                 </li>
-                                                <li>{{ $cartItem->productColor->name . '(' . $cartItem->productColor->code . ')' }}</li>
+                                                <li>{{ $cartItem->productColor->name . '(' . $cartItem->productColor->code . ')' }}
+                                                </li>
                                             @endforeach
                                         </ul>
                                         <ul class="sub-total">

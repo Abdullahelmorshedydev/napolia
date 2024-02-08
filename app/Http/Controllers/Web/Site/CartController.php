@@ -21,6 +21,12 @@ class CartController extends Controller
     {
         $data = $request->validated();
         $product = Product::where('id', $data['id'])->first();
+        $productPrice = 0;
+        if($product->discount) {
+            $productPrice = $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price'));
+        } else {
+            $productPrice = $product->price_type->calc($product->price, settings()->get('dollar_price'));
+        }
         $cart = Cart::where('user_id', auth('web')->user()->id)->where('status', CartStatusEnum::CARTED->value)->first();
         if (!isset($cart)) {
             $cart = Cart::create([
@@ -36,18 +42,18 @@ class CartController extends Controller
                 'quantity' => $data['quantity'],
             ]);
             $cart->update([
-                'total' => $cart->total + ($product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) * $data['quantity']),
+                'total' => $cart->total + ($productPrice * $data['quantity']),
             ]);
         } else {
             $cart->update([
-                'total' => $cart->total - ($product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) * $cart_item->quantity),
+                'total' => $cart->total - ($productPrice * $cart_item->quantity),
             ]);
             $cart_item->update([
                 'quantity' => $data['quantity'],
                 'product_color_id' => $data['color_id'],
             ]);
             $cart->update([
-                'total' => $cart->total + ($product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) * $data['quantity']),
+                'total' => $cart->total + ($productPrice * $data['quantity']),
             ]);
         }
         
@@ -59,7 +65,7 @@ class CartController extends Controller
         $cart = Cart::where('user_id', auth()->user()->id)->where('status', CartStatusEnum::CARTED->value)->first();
         $cart_item = CartItem::where('cart_id', $cart->id)->where('product_id', $id)->first();
         $cart->update([
-            'total' => $cart->total - ($cart_item->product->price_type->calc($cart_item->product->discount_type->calc($cart_item->product->price, $cart_item->product->discount), settings()->get('dollar_price')) * $cart_item->quantity),
+            'total' => $cart->total - ($cart_item->product->discount ? $cart_item->product->price_type->calc($cart_item->product->discount_type->calc($cart_item->product->price, $cart_item->product->discount), settings()->get('dollar_price')) : $cart_item->product->price_type->calc($cart_item->product->price, settings()->get('dollar_price')) * $cart_item->quantity),
         ]);
         $cart_item->delete();
         return back()->with('success', __('site/home/cart.removed_success'));

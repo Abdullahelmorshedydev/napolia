@@ -23,7 +23,7 @@ class CartComposer
                 $cartItems = CartItem::where('cart_id', $cart->id)->get();
                 foreach ($cartItems as $cart_item) {
                     $cartProdIds[] = Product::where('id', $cart_item->product_id)->pluck('id')->first();
-                    $totalPrice += $cart_item->quantity * $cart_item->product->discount_type->calc($cart_item->product->price, $cart_item->product->discount);
+                    $totalPrice += $cart_item->quantity * $cart_item->product->discount ? $cart_item->product->discount_type->calc($cart_item->product->price, $cart_item->product->discount) : $cart_item->product->price;
                 }
             }
         }

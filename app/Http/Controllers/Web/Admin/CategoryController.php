@@ -85,6 +85,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $data = $request->validated();
+        $data['name'] = TranslateTrait::translate($request->name_en, $request->name_ar);
         $data['slug'] = TranslateTrait::translate($request->name_en, $request->name_ar, true);
         if ($request->hasFile('image')) {
             FilesTrait::delete($category->image->image);
