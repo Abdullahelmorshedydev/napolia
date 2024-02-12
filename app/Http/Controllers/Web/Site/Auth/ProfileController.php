@@ -59,16 +59,4 @@ class ProfileController extends Controller
         ]);
         return back()->with('success', __('site/auth/profile.password_success'));
     }
-
-    public function getCities($id)
-    {
-        $cities = City::where('country_id', $id)->has('states')->get();
-        return response()->json(['data' => $cities]);
-    }
-
-    public function getStates($id)
-    {
-        $states = State::where('city_id', $id)->get();
-        return response()->json(['data' => $states]);
-    }
 }

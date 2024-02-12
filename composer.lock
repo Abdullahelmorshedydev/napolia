@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a62175a04073928d76a496408bdda553",
+    "content-hash": "406d09177971ad6f2e45e7b3abd5137f",
     "packages": [
         {
             "name": "brick/math",
@@ -2071,129 +2071,6 @@
             "time": "2023-10-27T15:32:31+00:00"
         },
         {
-            "name": "myfatoorah/laravel-package",
-            "version": "2.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://dev.azure.com/myfatoorahsc/Public-Repo/_git/Laravel-Package",
-                "reference": "4bb8ce82639c06697e04b701569d35e72a00f591"
-            },
-            "require": {
-                "myfatoorah/library": "~2.2.4"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "MyFatoorah\\LaravelPackage\\MyFatoorahServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MyFatoorah\\LaravelPackage\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "MyFatoorah Plugin Team",
-                    "email": "plugins@myfatoorah.com"
-                },
-                {
-                    "name": "Nermeen Shoman",
-                    "email": "nshoman@myfatoorah.com",
-                    "role": "Senior Software Engineer"
-                },
-                {
-                    "name": "Rasha Saeed",
-                    "email": "rsaeed@myfatoorah.com",
-                    "role": "Senior Software Engineer"
-                }
-            ],
-            "description": "The official MyFatoorah Payment Gateway for Laravel.",
-            "homepage": "https://myfatoorah.com/",
-            "keywords": [
-                "My Fatoorah",
-                "api",
-                "commerce",
-                "fatoorah",
-                "gateway",
-                "laravel",
-                "myfatoorah",
-                "payment",
-                "shipping"
-            ],
-            "time": "2023-11-05T10:17:27+00:00"
-        },
-        {
-            "name": "myfatoorah/library",
-            "version": "2.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://dev.azure.com/myfatoorahsc/Public-Repo/_git/Library",
-                "reference": "a7d79faa1ec2d80f7d141a31df9959707a07464f"
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": ">=7"
-            },
-            "require-dev": {
-                "phan/phan": "^5.4",
-                "phpcompatibility/php-compatibility": "*",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "autoload.php"
-                ],
-                "psr-4": {
-                    "MyFatoorah\\Library\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "MyFatoorah Plugin Team",
-                    "email": "plugins@myfatoorah.com"
-                },
-                {
-                    "name": "Nermeen Shoman",
-                    "email": "nshoman@myfatoorah.com",
-                    "role": "Senior Software Engineer"
-                },
-                {
-                    "name": "Rasha Saeed",
-                    "email": "rsaeed@myfatoorah.com",
-                    "role": "Senior Software Engineer"
-                }
-            ],
-            "description": "MyFatoorah PHP Library",
-            "homepage": "https://myfatoorah.com/",
-            "keywords": [
-                "My Fatoorah",
-                "api",
-                "commerce",
-                "fatoorah",
-                "gateway",
-                "library",
-                "myfatoorah",
-                "payment",
-                "shipping"
-            ],
-            "time": "2023-12-27T11:37:52+00:00"
-        },
-        {
             "name": "nesbot/carbon",
             "version": "2.72.3",
             "source": {
@@ -3687,6 +3564,72 @@
                 }
             ],
             "time": "2023-12-06T10:56:22+00:00"
+        },
+        {
+            "name": "srmklive/paypal",
+            "version": "3.0.28",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/srmklive/laravel-paypal.git",
+                "reference": "6bde2b232a38c413f730115743cc9dcc29d4228e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/srmklive/laravel-paypal/zipball/6bde2b232a38c413f730115743cc9dcc29d4228e",
+                "reference": "6bde2b232a38c413f730115743cc9dcc29d4228e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "guzzlehttp/guzzle": "~7.0",
+                "illuminate/support": "~6.0|~7.0|~8.0|~9.0|^10.0",
+                "nesbot/carbon": "~2.0",
+                "php": ">=7.2|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^8.0|^9.0|^10.0",
+                "symfony/var-dumper": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Srmklive\\PayPal\\Providers\\PayPalServiceProvider"
+                    ],
+                    "aliases": {
+                        "PayPal": "Srmklive\\PayPal\\Facades\\PayPal"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Srmklive\\PayPal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raza Mehdi",
+                    "email": "srmk@outlook.com"
+                }
+            ],
+            "description": "Laravel plugin For Processing Payments Through Paypal Express Checkout. Can Be Used Independently With Other Applications.",
+            "keywords": [
+                "http",
+                "laravel paypal",
+                "paypal",
+                "rest",
+                "web service"
+            ],
+            "support": {
+                "issues": "https://github.com/srmklive/laravel-paypal/issues",
+                "source": "https://github.com/srmklive/laravel-paypal/tree/3.0.28"
+            },
+            "time": "2023-12-20T18:57:16+00:00"
         },
         {
             "name": "symfony/console",

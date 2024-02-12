@@ -32,7 +32,7 @@
             @endif
         @endforeach
         <li>
-            <a href="#">{{ __('site/home/nav.blogs') }}</a>
+            <a href="{{ route('blog.index') }}">{{ __('site/home/nav.blogs') }}</a>
         </li>
     </ul>
 </nav>

@@ -146,7 +146,7 @@
 
                 if (country_id) {
                     $.ajax({
-                        url: "{{ route('admin.country_cities') }}/" + country_id,
+                        url: "{{ route('admin.cities') }}/" + country_id,
                         type: "GET",
                         dataType: "json",
                         success: function(response) {

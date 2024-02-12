@@ -28,15 +28,13 @@ class CheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required'],
             'phone' => ['required', 'numeric'],
-            'country_id' => ['required', Rule::in(Country::pluck('id'))],
-            'city_id' => ['required', Rule::in(City::pluck('id'))],
-            'state_id' => ['required', Rule::in(State::pluck('id'))],
+            'country_id' => ['required', 'exists:countries,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'state_id' => ['required', 'exists:states,id'],
             'address' => ['required', 'string', 'min:5'],
             'shipping_price' => ['required', 'numeric'],
             'total' => ['required', 'numeric'],
-            'cart_id' => ['required', Rule::in(Cart::pluck('id'))],
             'payment_method' => ['required', Rule::in(PaymentMethodEnum::cases())],
         ];
     }

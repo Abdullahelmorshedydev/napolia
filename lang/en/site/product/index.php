@@ -21,5 +21,7 @@ return [
     'product_details' => 'product details',
     'off' => 'off',
     'remove_from_wishlist' => 'Remove From Favourite',
+    'rated_success' => 'Product Rated Successfully',
+    'product_rate' => 'Product Rate',
 
 ];

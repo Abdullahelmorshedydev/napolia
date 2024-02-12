@@ -20,6 +20,7 @@ class CartController extends Controller
     public function addToCart(AddToCartRequest $request)
     {
         $data = $request->validated();
+        $data['user_id'] = auth('web')->user()->id;
         $product = Product::where('id', $data['id'])->first();
         $productPrice = 0;
         if($product->discount) {
@@ -27,11 +28,9 @@ class CartController extends Controller
         } else {
             $productPrice = $product->price_type->calc($product->price, settings()->get('dollar_price'));
         }
-        $cart = Cart::where('user_id', auth('web')->user()->id)->where('status', CartStatusEnum::CARTED->value)->first();
+        $cart = auth('web')->user()->cart;
         if (!isset($cart)) {
-            $cart = Cart::create([
-                'user_id' => auth()->user()->id,
-            ]);
+            $cart = Cart::create($data);
         }
         $cart_item = CartItem::where('cart_id', $cart->id)->where('product_id', $data['id'])->first();
         if (!isset($cart_item)) {
@@ -62,7 +61,7 @@ class CartController extends Controller
 
     public function deleteItem($id)
     {
-        $cart = Cart::where('user_id', auth()->user()->id)->where('status', CartStatusEnum::CARTED->value)->first();
+        $cart = auth('web')->user()->cart;
         $cart_item = CartItem::where('cart_id', $cart->id)->where('product_id', $id)->first();
         $cart->update([
             'total' => $cart->total - ($cart_item->product->discount ? $cart_item->product->price_type->calc($cart_item->product->discount_type->calc($cart_item->product->price, $cart_item->product->discount), settings()->get('dollar_price')) : $cart_item->product->price_type->calc($cart_item->product->price, settings()->get('dollar_price')) * $cart_item->quantity),

@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
-use App\Enums\CartStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class ProductRate extends Model
 {
     use HasFactory;
 
-    protected $table = 'carts';
+    protected $table = 'product_rates';
 
     protected $fillable = [
+        'product_id',
         'user_id',
-        'total',
+        'rate',
     ];
 
-    public function cartItems()
+    public function product()
     {
-        return $this->hasMany(CartItem::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()

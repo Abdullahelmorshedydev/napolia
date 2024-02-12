@@ -1,14 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Admin\GetCitiesController;
+use App\Http\Controllers\Api\Admin\GetStatesController;
 use App\Http\Controllers\Web\Admin\BlogController;
 use App\Http\Controllers\Web\Admin\CityController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\RoleController;
 use App\Http\Controllers\Web\Admin\UserController;
+use App\Http\Controllers\Api\Admin\GetShippingController;
+use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\StateController;
 use App\Http\Controllers\Web\Admin\CouponController;
 use App\Http\Controllers\Web\Admin\SliderController;
+use App\Http\Controllers\Web\Admin\ContactController;
 use App\Http\Controllers\Web\Admin\CountryController;
 use App\Http\Controllers\Web\Admin\ProductController;
 use App\Http\Controllers\Web\Admin\CategoryController;
@@ -16,8 +21,6 @@ use App\Http\Controllers\Web\Admin\ShippingController;
 use App\Http\Controllers\Web\Admin\Auth\LoginController;
 use App\Http\Controllers\Web\Admin\Auth\ProfileController;
 use App\Http\Controllers\Web\Admin\Auth\ResetPasswordController;
-use App\Http\Controllers\Web\Admin\ContactController;
-use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\Settings\FilesSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\LinksSettingsController;
 use App\Http\Controllers\Web\Admin\Settings\TermsSettingsController;
@@ -138,11 +141,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('cities', CityController::class)->except('show');
 
     Route::resource('states', StateController::class)->except('show');
-    Route::get('/country_cities/{id?}', [StateController::class, 'getCities'])->name('country_cities');
 
     Route::resource('shippings', ShippingController::class)->except('show');
-    Route::get('/shiping-cities/{id?}', [ShippingController::class, 'getCities'])->name('shipping_cities');
-    Route::get('/shiping-states/{id?}', [ShippingController::class, 'getStates'])->name('shipping_states');
 
     Route::resource('blogs', BlogController::class);
     Route::controller(BlogController::class)->prefix('/blogs')->as('blogs.')->group(function () {
@@ -185,6 +185,10 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/cancel-order/{order}', 'cancelOrder')->name('cancel');
         Route::delete('/delete-order/{order}', 'deleteOrder')->name('delete');
     });
+
+    Route::get('/cities/{id?}', [GetCitiesController::class, 'getCities'])->name('cities');
+    Route::get('/states/{id?}', [GetStatesController::class, 'getStates'])->name('states');
+    Route::get('/state-shipping/{id?}', [GetShippingController::class, 'getShipping'])->name('state_shipping');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });

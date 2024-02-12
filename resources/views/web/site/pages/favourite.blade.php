@@ -65,7 +65,11 @@
                                             </div>
                                             <div class="col-xs-3">
                                                 <h2 class="td-color">
-                                                    {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) . ' ' . __('admin/product/show.pound') }}
+                                                    @if (isset($product->discount))
+                                                        {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                    @else
+                                                        {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                    @endif
                                                 </h2>
                                             </div>
                                             <div class="col-xs-3">
@@ -133,7 +137,7 @@
                     </a>
                 </div>
                 <div class="col-6">
-                    <a href="{{ route('order.place_order') }}" class="btn btn-solid">
+                    <a href="{{ route('order.checkout') }}" class="btn btn-solid">
                         {{ __('site/home/cart.checkout') }}
                     </a>
                 </div>

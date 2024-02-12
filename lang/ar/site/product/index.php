@@ -21,5 +21,7 @@ return [
     'product_details' => 'تفاصيل المنتج',
     'off' => 'خصم',
     'remove_from_wishlist' => 'ازالة من المفضلة',
+    'rated_success' => 'تم تقييم المنتج بنجاح',
+    'product_rate' => 'تقييم المنتج',
 
 ];

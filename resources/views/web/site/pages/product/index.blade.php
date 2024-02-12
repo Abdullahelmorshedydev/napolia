@@ -203,6 +203,16 @@
                             <p>{{ $product->description }}.</p>
                         </div>
                         <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                            <div class="rating mt-2 mb-2">
+                                <label for="name">{{ __('site/product/index.product_rate') }} : </label>
+                                <div class="rating">
+                                    <span class="star {{ $rate->rate >= 1 ? 'active' : '' }}" data-value="1">&#9733;</span>
+                                    <span class="star {{ $rate->rate >= 2 ? 'active' : '' }}" data-value="2">&#9733;</span>
+                                    <span class="star {{ $rate->rate >= 3 ? 'active' : '' }}" data-value="3">&#9733;</span>
+                                    <span class="star {{ $rate->rate >= 4 ? 'active' : '' }}" data-value="4">&#9733;</span>
+                                    <span class="star {{ $rate->rate == 5 ? 'active' : '' }}" data-value="5">&#9733;</span>
+                                </div>
+                            </div>
                             <form class="theme-form">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -334,5 +344,34 @@
                 document.getElementById("radioInput[" + id + "]").checked = true;
             }
         })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.star').on("click", function() {
+                var rate = $(this).data('value');
+                var productId = "{{ $product->id }}";
+
+                $.ajax({
+                    url: "{{ route('rate.product') }}",
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    data: {
+                        product_id: productId,
+                        rate: rate
+                    },
+                });
+            });
+
+            $('.star').hover(function() {
+                $(this).addClass('active');
+                $(this).prevAll('.star').addClass('active');
+                $(this).nextAll('.star').removeClass('active');
+            }, function() {
+                $(this).removeClass('active');
+                $(this).prevAll('.star').removeClass('active');
+            });
+        });
     </script>
 @endpush

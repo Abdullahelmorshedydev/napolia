@@ -93,10 +93,4 @@ class StateController extends Controller
         $state->delete();
         return redirect()->route('admin.states.index')->with('success',  __('admin/state/index.success'));
     }
-
-    public function getCities($id)
-    {
-        $cities = City::where('country_id', $id)->get();
-        return response()->json(['data' => $cities]);
-    }
 }

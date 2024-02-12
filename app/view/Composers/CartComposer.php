@@ -18,7 +18,7 @@ class CartComposer
         $cartProdIds = [];
         $totalPrice = 0;
         if (auth('web')->user()) {
-            $cart = Cart::where('user_id', auth()->user()->id)->where('status', CartStatusEnum::CARTED->value)->first();
+            $cart = auth('web')->user()->cart;
             if (isset($cart)) {
                 $cartItems = CartItem::where('cart_id', $cart->id)->get();
                 foreach ($cartItems as $cart_item) {

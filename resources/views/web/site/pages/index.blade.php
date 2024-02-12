@@ -353,13 +353,13 @@
                                 @foreach ($rooms as $room)
                                     <div>
                                         <div class="card">
-                                            <a href="{{ route('product.index', $room->slug) }}"><img
+                                            <a href="{{ route('category.index', $room->slug) }}"><img
                                                     src="{{ asset('storage/' . $room->image->image) }}" alt=""
                                                     class="img-fluid w-100"></a>
                                             <div class="card-body">
                                                 <div class="collection_detail">
                                                     <div>
-                                                        <a href="{{ route('product.index', $room->slug) }}">
+                                                        <a href="{{ route('category.index', $room->slug) }}">
                                                             <h5>{{ $room->name }}</h5>
                                                         </a>
                                                     </div>

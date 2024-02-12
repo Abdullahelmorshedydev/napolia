@@ -207,7 +207,7 @@
 
                 if (country_id) {
                     $.ajax({
-                        url: "{{ route('order.order_cities') }}/" + country_id,
+                        url: "{{ route('cities') }}/" + country_id,
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
@@ -245,7 +245,7 @@
 
                 if (city_id) {
                     $.ajax({
-                        url: "{{ route('order.order_states') }}/" + city_id,
+                        url: "{{ route('states') }}/" + city_id,
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
@@ -282,7 +282,7 @@
 
                 if (state_id) {
                     $.ajax({
-                        url: "{{ route('order.state_shipping') }}/" + state_id,
+                        url: "{{ route('state_shipping') }}/" + state_id,
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
@@ -311,7 +311,7 @@
                     });
                 } else {
                     console.log('Please select a State');
-                }
+                };
             });
         });
     </script>

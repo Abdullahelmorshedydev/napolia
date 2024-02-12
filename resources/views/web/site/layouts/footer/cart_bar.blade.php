@@ -58,7 +58,7 @@
                             <a href="{{ route('cart.view') }}" class="btn btn-solid btn-block btn-solid-sm view-cart">
                                 {{ __('site/home/cart.view') }}
                             </a>
-                            <a href="{{ route('order.place_order') }}"
+                            <a href="{{ route('order.checkout') }}"
                                 class="btn btn-solid btn-solid-sm btn-block checkout">
                                 {{ __('site/home/cart.checkout') }}
                             </a>

@@ -92,16 +92,4 @@ class ShippingController extends Controller
         $shipping->delete();
         return redirect()->route('admin.shippings.index')->with('success', __('admin/shipping/index.success'));
     }
-
-    public function getCities($id)
-    {
-        $cities = City::where('country_id', $id)->has('states')->get();
-        return response()->json(['data' => $cities]);
-    }
-
-    public function getStates($id)
-    {
-        $states = State::where('city_id', $id)->doesntHave('shipping')->get();
-        return response()->json(['data' => $states]);
-    }
 }

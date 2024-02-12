@@ -275,7 +275,7 @@
                                             <label>{{ __('admin/product/edit.color_code_lable') }}:</label>
                                             <div class="mt-1 color_code" id="color_code">
                                                 <div class="mt-1">
-                                                    <input type="text" name="colors[0][code]"
+                                                    <input type="color" name="colors[0][code]"
                                                         placeholder="Color code" class="form-control">
                                                 </div>
                                             </div>
@@ -363,7 +363,7 @@
                     placeholder="Color Name In Arabic" class="form-control">
             `;
             newColorDivCode.innerHTML = `
-                <input type="text" name="colors[${colorArCount}][code]"
+                <input type="color" name="colors[${colorArCount}][code]"
                     placeholder="Color Code" class="form-control">
             `;
 

@@ -92,10 +92,10 @@
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <h2 class="td-color">
-                                                        @if (isset($product->discount))
-                                                            {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                                        @if (isset($cartItem->product->discount))
+                                                            {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}
                                                         @else
-                                                            {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                            {{ $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')) }}
                                                         @endif
                                                     </h2>
                                                 </div>
@@ -115,10 +115,10 @@
                                     </td>
                                     <td>
                                         <h2>
-                                            @if (isset($product->discount))
-                                                {{ $product->price_type->calc($product->discount_type->calc($product->price, $product->discount), settings()->get('dollar_price')) }}
+                                            @if (isset($cartItem->product->discount))
+                                                {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}
                                             @else
-                                                {{ $product->price_type->calc($product->price, settings()->get('dollar_price')) }}
+                                                {{ $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')) }}
                                             @endif
                                         </h2>
                                     </td>
@@ -157,7 +157,12 @@
                                     </form>
                                     <td>
                                         <h2 id="prodPrice" class="td-color">
-                                            {{ $cartItem->quantity * $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}
+                                            {{ $cartItem->quantity * $cartItem->discount
+                                                ? $cartItem->product->price_type->calc(
+                                                    $cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount),
+                                                    settings()->get('dollar_price'),
+                                                )
+                                                : $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')) }}
                                         </h2>
                                     </td>
                                 </tr>
@@ -183,7 +188,7 @@
                     </a>
                 </div>
                 <div class="col-6">
-                    <a href="{{ route('order.place_order') }}" class="btn btn-solid">
+                    <a href="{{ route('order.checkout') }}" class="btn btn-solid">
                         {{ __('site/home/cart.checkout') }}
                     </a>
                 </div>

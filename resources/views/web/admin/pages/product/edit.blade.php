@@ -319,7 +319,7 @@
                                             <div class="mt-1" id="color_code">
                                                 @foreach ($product->colors as $color)
                                                     <div class="mt-1 color_code">
-                                                        <input type="text" value="{{ $color->code }}"
+                                                        <input type="color" value="{{ $color->code }}"
                                                             name="colors[{{ $loop->index }}][code]" placeholder="Color code"
                                                             class="form-control">
                                                     </div>
@@ -409,7 +409,7 @@
                     placeholder="Color Name In Arabic" class="form-control">
             `;
             newColorDivCode.innerHTML = `
-                <input type="text" name="colors[${colorArCount}][code]"
+                <input type="color" name="colors[${colorArCount}][code]"
                     placeholder="Color Code" class="form-control">
             `;
 

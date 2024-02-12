@@ -1,20 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Site\GetCitiesController;
+use App\Http\Controllers\Api\Site\GetStatesController;
+use App\Http\Controllers\Web\Site\BlogController;
 use App\Http\Controllers\Web\Site\CartController;
 use App\Http\Controllers\Web\Site\HomeController;
 use App\Http\Controllers\Web\Site\OrderController;
+use App\Http\Controllers\Api\Site\GetShippingController;
 use App\Http\Controllers\Web\Site\ProductController;
 use App\Http\Controllers\Web\Site\CategoryController;
+use App\Http\Controllers\Web\Site\ContactusController;
 use App\Http\Controllers\Web\Site\FavouriteController;
 use App\Http\Controllers\Web\Site\Auth\LoginController;
 use App\Http\Controllers\Web\Site\Auth\ProfileController;
 use App\Http\Controllers\Web\Site\Auth\RegisterController;
-use App\Http\Controllers\Web\Site\BlogController;
-use App\Http\Controllers\Web\Site\ContactusController;
+use App\Http\Controllers\Web\Site\Settings\TermsSettingsController;
 use App\Http\Controllers\Web\Site\Settings\AboutUsSettingsController;
 use App\Http\Controllers\Web\Site\Settings\ReturnExchangeSettingsController;
-use App\Http\Controllers\Web\Site\Settings\TermsSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +51,6 @@ Route::middleware('auth:web')->group(function () {
 
         Route::get('/', 'index')->name('index');
         Route::put('/updateProfile', 'updateProfile')->name('update');
-        Route::get('/profile_cities/{id?}', 'getCities')->name('profile_cities');
-        Route::get('/profile_states/{id?}', 'getStates')->name('profile_states');
         Route::put('/passwordUpdate', 'passwordUpdate')->name('password_update');
     });
 
@@ -61,6 +62,7 @@ Route::get('/', HomeController::class)->name('index');
 Route::get('/category/{category}', [CategoryController::class, 'index'])->name('category.index');
 
 Route::get('/product/{product}', [ProductController::class, 'index'])->name('product.index');
+Route::post('/rate-product', [ProductController::class, 'rateProduct'])->name('rate.product');
 
 Route::controller(FavouriteController::class)->middleware('check.auth.login')->prefix('/favourites')->as('favourites.')->group(function () {
 
@@ -78,12 +80,8 @@ Route::controller(CartController::class)->middleware('check.auth.login')->prefix
 
 Route::controller(OrderController::class)->middleware('check.auth.login')->prefix('/orders')->as('order.')->group(function () {
 
-    Route::get('place-order', 'placeOrder')->name('place_order');
-    Route::get('/order-cities/{id?}', 'getCities')->name('order_cities');
-    Route::get('/order-states/{id?}', 'getStates')->name('order_states');
-    Route::get('/state-shipping/{id?}', 'getShipping')->name('state_shipping');
+    Route::get('checkout', 'checkout')->name('checkout');
 
-    Route::get('/checkout/{id}', 'checkout')->name('checkout');
     Route::get('/order-success/{order}', 'orderSuccess')->name('order_success');
     Route::post('/store', 'store')->name('store');
     
@@ -106,6 +104,10 @@ Route::controller(BlogController::class)->prefix('/blog')->as('blog.')->group(fu
     Route::get('/{blog}', 'show')->name('show');
     Route::post('/store', 'store')->name('store');
 });
+
+Route::get('/cities/{id?}', [GetCitiesController::class, 'getCities'])->name('cities');
+Route::get('/states/{id?}', [GetStatesController::class, 'getStates'])->name('states');
+Route::get('/state-shipping/{id?}', [GetShippingController::class, 'getShipping'])->name('state_shipping');
 
 Route::fallback(function () {
     return redirect()->route('index');
