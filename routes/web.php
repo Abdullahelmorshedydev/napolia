@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Site\CartController;
+use App\Http\Controllers\Api\Site\CouponController;
 use App\Http\Controllers\Web\Site\BlogController;
 use App\Http\Controllers\Web\Site\HomeController;
 use App\Http\Controllers\Web\Site\OrderController;
@@ -79,12 +80,13 @@ Route::middleware('check.auth.login')->group(function () {
     });
 
     Route::controller(OrderController::class)->prefix('/orders')->as('order.')->group(function () {
-        Route::get('checkout', 'checkout')->name('checkout');
+        Route::get('/checkout', 'checkout')->name('checkout');
         Route::get('/order-success/{order}', 'orderSuccess')->name('order_success');
         Route::post('/store', 'store')->name('store');
         Route::get('/', 'allOrders')->name('all_orders');
         Route::get('/track-order/{order}', 'trackOrder')->name('track_order');
     });
+    Route::post('/orders/checkout/get-coupon', [CouponController::class, 'getCoupon'])->name('order.getCoupon');
 });
 
 Route::get('/about-us', AboutUsSettingsController::class)->name('aboutus');

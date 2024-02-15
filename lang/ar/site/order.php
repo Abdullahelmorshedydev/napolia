@@ -51,5 +51,8 @@ return [
     'proccessing_enum_header' => 'يتم تنفيذ طلبك، و سيصل اليك فى الوقت المحدد',
     'cancel_enum_msg' => 'تم الغاء الطلب',
     'cancel_enum_header' => 'تم إلغاء طلبك، يرجى الاتصال بنا لحل المشكلة',
+    'coupon_place' => 'ادخل كوبون الخصم',
+    'coupon_submit' => 'تطبيق',
+    'coupon_valid' => 'خطأ بالكوبون',
 
 ];

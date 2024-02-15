@@ -27,12 +27,6 @@
     </section>
     <!-- breadcrumb End -->
 
-    @if ($errors)
-        @foreach ($errors->all() as $error)
-            <span class="text-danger">{{ $error }}</span>
-        @endforeach
-    @endif
-
     <!-- section start -->
     <section class="section-b-space">
         <div class="container">
@@ -62,12 +56,22 @@
                                         <input type="text" name="phone"
                                             value="{{ old('phone', auth('web')->user()->profile ? auth('web')->user()->profile->phone : '') }}"
                                             placeholder="{{ __('site/auth/profile.phone_place') }}">
+                                        @error('phone')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">{{ __('site/auth/profile.email') }}</div>
                                         <input type="text" name="email"
                                             value="{{ old('email', auth('web')->user()->email) }}"
                                             placeholder="{{ __('site/auth/profile.email_place') }}">
+                                        @error('email')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">{{ __('site/auth/profile.country') }}</div>
@@ -77,24 +81,44 @@
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('country_id')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">{{ __('site/order.city') }}</div>
                                         <select name="city_id">
                                             <option value="">{{ __('site/auth/profile.choose_city') }}</option>
                                         </select>
+                                        @error('city_id')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                         <div class="field-label">{{ __('site/order.state') }}</div>
                                         <select name="state_id">
                                             <option value="">{{ __('site/auth/profile.choose_state') }}</option>
                                         </select>
+                                        @error('state_id')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">{{ __('site/auth/profile.address') }}</div>
                                         <input type="text" name="address"
                                             value="{{ old('address', auth('web')->user()->profile ? auth('web')->user()->profile->address : '') }}"
                                             placeholder="{{ __('site/order.address') }}">
+                                        @error('address')
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -106,8 +130,8 @@
                                             </div>
                                         </div>
                                         <ul class="qty">
-                                            @foreach ($cartItems as $cartItem)
-                                                <li>{{ $cartItem->product->name . ' x ' . $cartItems[$loop->index]->quantity }}
+                                            @foreach ($cart->cartItems as $cartItem)
+                                                <li>{{ $cartItem->product->name . ' x ' . $cart->cartItems[$loop->index]->quantity }}
                                                     <span>
                                                         {{ $cartItem->quantity * $cartItem->product->discount
                                                             ? $cartItem->product->price_type->calc(
@@ -137,14 +161,31 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            <li>
+                                                <div class="coupon">
+                                                    <div class="shopping-option">
+                                                        <div style="position: relative;">
+                                                            <input type="text" id="myInput" name="coupon"
+                                                                style="padding-right: 30px;"
+                                                                placeholder="{{ __('site/order.coupon_place') }}">
+                                                            <button type="button" id="myButton" class="btn btn-solid"
+                                                                style="position: absolute; right: 0; top: 0;">{{ __('site/order.coupon_submit') }}</button>
+                                                        </div>
+                                                        @error('coupon')
+                                                            <span class="text-danger">
+                                                                {{ $message }}
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </li>
                                         </ul>
                                         <ul class="total">
                                             <li>{{ __('site/order.total') }}
                                                 <span class="count" id="total">
-                                                    {{ $cart->total + $cart->total * (settings()->get('tax') / 100) }}
+                                                    {{ $cart->total + $cart->total * (settings()->get('tax') / 100) . ' ' . __('admin/product/show.pound') }}
                                                 </span>
                                                 <input type="hidden" name="InvoiceAmount" value="">
-                                                {{ ' ' . __('admin/product/show.pound') }}
                                             </li>
                                         </ul>
                                     </div>
@@ -155,12 +196,12 @@
                                                     <li>
                                                         <div class="radio-option">
                                                             <input type="radio" name="payment_method" value="CASH"
-                                                                id="payment-1">
+                                                                id="payment-1" checked>
                                                             <label
                                                                 for="payment-1">{{ __('site/order.cash_on_delivery') }}</label>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <div class="radio-option">
                                                             <input type="radio" name="payment_method" value="VISA"
                                                                 id="payment-2">
@@ -173,7 +214,7 @@
                                                                 id="payment-">
                                                             <label for="payment-">{{ __('admin/enums.meeza') }}</label>
                                                         </div>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </div>
                                         </div>
@@ -312,6 +353,40 @@
                 } else {
                     console.log('Please select a State');
                 };
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#myButton').on('click', function() {
+                var couponCode = $('input[name="coupon"]').val();
+                var invoiceAmount = $('input[name="InvoiceAmount"]').val();
+                console.log(invoiceAmount);
+                $.ajax({
+                    url: "{{ route('order.getCoupon') }}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    data: {
+                        'code': couponCode,
+                        'invoiceAmount': invoiceAmount
+                    },
+                    success: function(response) {
+                        $('span[id="total"]').empty('').append(response
+                            .total);
+                        var totalInput = $('<input>', {
+                            type: 'hidden',
+                            name: 'total',
+                            value: response.total
+                        });
+                        $('span[id="total"]').append(totalInput);
+                        $('input[name="InvoiceAmount"]').val(response.total);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("feh error ya morshed");
+                    }
+                });
             });
         });
     </script>

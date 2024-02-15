@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->enum('type', CouponTypeEnum::values());
             $table->decimal('value');
-            $table->integer('max_usage')->nullable();
-            $table->integer('number_of_usage')->nullable();
+            $table->integer('max_usage');
+            $table->integer('number_of_usage')->default(0);
             $table->decimal('min_order_value');
             $table->date('expire_date');
             $table->enum('status', CouponStatusEnum::values())->default(CouponStatusEnum::ACTIVE->value);

@@ -23,4 +23,12 @@ enum CouponTypeEnum: string
             self::PERCENT => __('admin/enums.percent'),
         };
     }
+
+    public function calc($price, $value): string
+    {
+        return match ($this) {
+            self::FIXED => $price - $value,
+            self::PERCENT => $price - $price * ($value / 100),
+        };
+    }
 }

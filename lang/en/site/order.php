@@ -52,5 +52,8 @@ return [
     'proccessing_enum_header' => 'Your Order Was Proccessing, It Will Arrive To You At The Specified Time',
     'cancel_enum_msg' => 'order canceled',
     'cancel_enum_header' => 'Your Order Was Canceled, Please Contact Us Solve The Problem',
+    'coupon_place' => 'Enter Discount Coupon',
+    'coupon_submit' => 'Submit',
+    'coupon_valid' => 'Coupon invalid',
 
 ];

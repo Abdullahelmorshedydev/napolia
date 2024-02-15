@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->enum('status', OrderStatusEnum::values())->default(OrderStatusEnum::PENDING->value);
             $table->enum('payment_method', PaymentMethodEnum::values());
+            $table->decimal('discount')->default(0);
             $table->decimal('total');
             $table->timestamps();
         });

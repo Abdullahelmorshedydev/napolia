@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests\Web\Site;
 
-use App\Enums\PaymentMethodEnum;
 use App\Models\Cart;
 use App\Models\City;
-use App\Models\Country;
 use App\Models\State;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Coupon;
+use App\Models\Country;
 use Illuminate\Validation\Rule;
+use App\Enums\PaymentMethodEnum;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CheckoutRequest extends FormRequest
 {
@@ -34,6 +35,16 @@ class CheckoutRequest extends FormRequest
             'state_id' => ['required', 'exists:states,id'],
             'address' => ['required', 'string', 'min:5'],
             'shipping_price' => ['required', 'numeric'],
+            'coupon' => ['nullable', function ($attribte, $value, $fail) {
+                $coupon = Coupon::where('code', $value)->first();
+                if (!isset($coupon)) {
+                    $fail(__('site/order.coupon_valid'));
+                } else {
+                    if ($coupon->max_usage <= $coupon->number_of_usage && $coupon->expire_date <= now() && $coupon->min_order_value > request()->input('total')) {
+                        $fail(__('site/order.coupon_valid'));
+                    }
+                }
+            }],
             'total' => ['required', 'numeric'],
             'payment_method' => ['required', Rule::in(PaymentMethodEnum::cases())],
         ];

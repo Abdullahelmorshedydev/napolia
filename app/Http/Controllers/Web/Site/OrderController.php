@@ -15,6 +15,7 @@ use App\Enums\OrderStatusEnum;
 use App\Events\Site\SendInvoiceEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Site\CheckoutRequest;
+use App\Models\Coupon;
 
 class OrderController extends Controller
 {
@@ -27,6 +28,8 @@ class OrderController extends Controller
     public function store(CheckoutRequest $request)
     {
         $data = $request->validated();
+        $coupon = Coupon::where('code', $data['coupon'])->first();
+        $data['discount'] = $data['total'] - $coupon->type->calc($data['total'], $coupon->value);
         $data['user_id'] = auth('web')->user()->id;
 
         UserProfile::updateOrCreate(['user_id' => auth('web')->user()->id], $data);

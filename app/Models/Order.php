@@ -21,6 +21,7 @@ class Order extends Model
         'shipping_price',
         'notes',
         'status',
+        'discount',
         'total',
     ];
 
