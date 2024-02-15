@@ -13,21 +13,30 @@
             @if (!isset($category->category_id))
                 <li>
                     <a href="{{ route('category.index', $category->slug) }}">{{ $category->name }}</a>
-                    <ul>
-                        @foreach ($cats as $cat)
-                            @if ($category->id == $cat->category_id)
-                                <li><a href="{{ route('category.index', $cat->slug) }}">{{ $cat->name }}</a>
-                                    <ul>
-                                        @foreach ($cats as $c)
-                                            @if ($cat->id == $c->category_id)
-                                                <li><a href="{{ route('category.index', $c->slug) }}">{{ $c->name }}</a></li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
+                    @if ($category->categories->count() > 0)
+                        <ul>
+                            @foreach ($cats as $cat)
+                                @if ($category->id == $cat->category_id)
+                                    <li>
+                                        <a href="{{ route('category.index', $cat->slug) }}">{{ $cat->name }}</a>
+                                        @if ($cat->categories->count() > 0)
+                                            <ul>
+                                                @foreach ($cats as $c)
+                                                    @if ($cat->id == $c->category_id)
+                                                        <li>
+                                                            <a href="{{ route('category.index', $c->slug) }}">
+                                                                {{ $c->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endif
                 </li>
             @endif
         @endforeach

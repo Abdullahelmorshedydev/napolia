@@ -10,6 +10,7 @@ class CartController extends Controller
 {
     public function __invoke()
     {
-        return view('web.site.pages.cart');
+        $cartItems = auth()->user()->cart->cartItems;
+        return view('web.site.pages.cart', compact('cartItems'));
     }
 }

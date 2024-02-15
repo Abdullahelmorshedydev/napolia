@@ -13,7 +13,7 @@
         <div class="cart_media">
             @if (!empty($cart))
                 <ul class="cart_product">
-                    @foreach ($cartItems as $cartItem)
+                    @foreach ($cart->cartItems as $cartItem)
                         <li>
                             <div class="media">
                                 <a href="{{ route('product.index', $cartItem->product->slug) }}">
@@ -74,14 +74,16 @@
                             </h5>
                         </div>
                     </li>
-                    <li>
-                        <div class="buttons">
-                            <a href="{{ route('auth.login.show') }}"
-                                class="btn btn-solid btn-block btn-solid-sm view-cart">
-                                {{ __('site/auth/login.button') }}
-                            </a>
-                        </div>
-                    </li>
+                    @guest
+                        <li>
+                            <div class="buttons">
+                                <a href="{{ route('auth.login.show') }}"
+                                    class="btn btn-solid btn-block btn-solid-sm view-cart">
+                                    {{ __('site/auth/login.button') }}
+                                </a>
+                            </div>
+                        </li>
+                    @endguest
                 </ul>
             @endif
         </div>

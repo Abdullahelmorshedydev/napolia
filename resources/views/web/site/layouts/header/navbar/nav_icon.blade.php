@@ -30,17 +30,19 @@
                 </ul>
             </div>
         </li>
-        <li class="onhover-div wishlist-icon" onclick="openWishlist()">
-            <img src="{{ asset('site/assets/images/icon/wishlist.png') }}" alt="" class="wishlist-img">
-            <i class="ti-heart mobile-icon"></i>
+        {{--  onclick="openWishlist()" --}}
+        <li class="onhover-div wishlist-icon">
+            <a href="{{ route('favourites.index') }}">
+                <img src="{{ asset('site/assets/images/icon/wishlist.png') }}" alt="" class="wishlist-img">
+                <i class="ti-heart mobile-icon"></i>
+            </a>
         </li>
-        <li class="onhover-div cart-icon" onclick="openCart()">
-            <img src="{{ asset('site/assets/images/icon/cart.png') }}" alt="" class="cart-image">
-            <i class="ti-shopping-cart mobile-icon"></i>
-            <div class="cart">
-                <span>2 item</span>
-                <h6>my cart</h6>
-            </div>
+        {{--  onclick="openCart()" --}}
+        <li class="onhover-div cart-icon">
+            <a href="{{ route('cart.view') }}">
+                <img src="{{ asset('site/assets/images/icon/cart.png') }}" alt="" class="cart-image">
+                <i class="ti-shopping-cart mobile-icon"></i>
+            </a>
         </li>
     </ul>
 </div>
