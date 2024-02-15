@@ -74,19 +74,11 @@
                                             </div>
                                             <div class="col-xs-3">
                                                 <h2 class="td-color">
-                                                    <a href="{{ route('favourites.delete', $product->id) }}"
-                                                        class="icon me-1">
-                                                        <i class="ti-close"></i>
+                                                    <a data-id="{{ $product->id }}" id="removeWishlistButton"
+                                                        tabindex="0" class="removewishlist-box"
+                                                        title="remove from wishlist">
+                                                        <i class="ti-trash" aria-hidden="true"></i>
                                                     </a>
-                                                    <form class="d-inline-block" action="{{ route('cart.add.to.cart') }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $product->id }}" name="id">
-                                                        <input type="hidden" value="{{ $product->colors->first()->id }}"
-                                                            name="color_id">
-                                                        <input type="hidden" value="1" name="quantity">
-                                                        <button type="submit"><i class="ti-shopping-cart"></i></button>
-                                                    </form>
                                                 </h2>
                                             </div>
                                         </div>
@@ -110,19 +102,10 @@
                                         </p>
                                     </td>
                                     <td>
-                                        <a href="{{ route('favourites.delete', $product->id) }}" class="icon me-3">
-                                            <i class="ti-close"></i>
+                                        <a data-id="{{ $product->id }}" id="removeWishlistButton" tabindex="0"
+                                            class="removewishlist-box" title="remove from wishlist">
+                                            <i class="ti-trash" aria-hidden="true"></i>
                                         </a>
-                                        <form class="d-inline-block" action="{{ route('cart.add.to.cart') }}"
-                                            method="POST">
-                                            @csrf
-                                            <input type="hidden" value="{{ $product->id }}" name="id">
-                                            <input type="hidden" value="{{ $product->colors->first()->id }}"
-                                                name="color_id">
-                                            <input type="hidden" value="1" name="quantity">
-                                            <button type="submit" class="btn btn-solid"><i
-                                                    class="ti-shopping-cart"></i></button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -148,4 +131,6 @@
 @endsection
 
 @push('script')
+    @include('web.site.partials.__cartAjax')
+    @include('web.site.partials.__wishlistAjax')
 @endpush

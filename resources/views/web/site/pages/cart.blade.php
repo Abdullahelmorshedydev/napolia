@@ -31,10 +31,10 @@
     <!-- breadcrumb End -->
 
     <!--section start-->
-    <section class="cart-section section-b-space">
+    <section class="cart-section section-b-space m-0">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 m-0">
                     <table class="table cart-table table-responsive-xs striped-table">
                         <thead>
                             <tr class="table-head">
@@ -61,8 +61,7 @@
                                             {{ $cartItem->product->name }}
                                         </a>
                                         <div class="mobile-cart-content row">
-                                            <form action="{{ route('cart.add.to.cart') }}" method="POST">
-                                                @csrf
+                                            <form id="myForm{{ $cartItem->product_id }}">
                                                 <input type="hidden" value="{{ $cartItem->product_id }}" name="id">
                                                 <div class="col-xs-3">
                                                     <div class="qty-box">
@@ -79,7 +78,7 @@
                                                             <ul class="color-variant">
                                                                 @foreach ($cartItem->product->colors as $color)
                                                                     <li id="{{ $color->id }}"
-                                                                        class="{{ $cartItem->product_color_id == $color->id ? 'active' : '' }}"
+                                                                        class="{{ $cartItem->product_color_id == $color->id ? 'active' : '' }} mt-2"
                                                                         style="background-color: {{ $color->code }};">
                                                                         <input id="radioInput[{{ $color->id }}]"
                                                                             type="radio" class="d-none"
@@ -92,22 +91,14 @@
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <h2 class="td-color">
-                                                        @if (isset($cartItem->product->discount))
-                                                            {{ $cartItem->product->price_type->calc($cartItem->product->discount_type->calc($cartItem->product->price, $cartItem->product->discount), settings()->get('dollar_price')) }}
-                                                        @else
-                                                            {{ $cartItem->product->price_type->calc($cartItem->product->price, settings()->get('dollar_price')) }}
-                                                        @endif
-                                                    </h2>
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <h2 class="td-color">
-                                                        <a href="{{ route('cart.delete.item', $cartItem->product->id) }}"
-                                                            class="icon"><i class="ti-close"></i>
+                                                        <a id="deleteItem" class="deleteItem mt-2 d-inline-block"
+                                                            data-id="{{ $cartItem->product_id }}">
+                                                            <i class="ti-trash" aria-hidden="true"></i>
                                                         </a>
-                                                        <button type="submit" data-bs-toggle="modal"
-                                                            class="btn btn-sm btn-solid">
-                                                            {{ __('site/order.update') }}
-                                                        </button>
+                                                        <a tabindex="0" data-id="{{ $cartItem->product_id }}"
+                                                            class="productCartButton mt-2 d-inline-block">
+                                                            <i class="ti-shopping-cart"></i>
+                                                        </a>
                                                     </h2>
                                                 </div>
                                             </form>
@@ -122,8 +113,7 @@
                                             @endif
                                         </h2>
                                     </td>
-                                    <form action="{{ route('cart.add.to.cart') }}" method="POST">
-                                        @csrf
+                                    <form id="myForm{{ $cartItem->product_id }}">
                                         <input type="hidden" value="{{ $cartItem->product_id }}" name="id">
                                         <td>
                                             <ul class="color-variant">
@@ -146,13 +136,13 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="{{ route('cart.delete.item', $cartItem->product->id) }}"
-                                                class="icon">
-                                                <i class="ti-close"></i>
+                                            <a id="deleteItem" class="deleteItem" data-id="{{ $cartItem->product_id }}">
+                                                <i class="ti-trash" aria-hidden="true"></i>
                                             </a>
-                                            <button type="submit" data-bs-toggle="modal" class="btn btn-sm btn-solid">
-                                                {{ __('site/order.update_cart') }}
-                                            </button>
+                                            <a tabindex="0" data-id="{{ $cartItem->product_id }}"
+                                                class="productCartButton">
+                                                <i class="ti-shopping-cart"></i>
+                                            </a>
                                         </td>
                                     </form>
                                     <td>
@@ -199,12 +189,7 @@
 @endsection
 
 @push('script')
-    <script>
-        $("li").on("click", function() {
-            if ($("li").hasClass("active")) {
-                var id = $(this).attr("id");
-                document.getElementById("radioInput[" + id + "]").checked = true;
-            }
-        });
-    </script>
+    @include('web.site.partials.__productColorAjax')
+    @include('web.site.partials.__cartAjax')
+    @include('web.site.partials.__wishlistAjax')
 @endpush

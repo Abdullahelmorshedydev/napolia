@@ -71,14 +71,28 @@
                                                                         src="{{ asset('storage/' . $product->images[0]->image) }}"
                                                                         class="productImage img-fluid" alt=""></a>
                                                                 <div class="cart-details">
-                                                                    <button tabindex="0" class="addcart-box"
-                                                                        title="Quick shop"><i
-                                                                            class="ti-shopping-cart"></i></button>
-                                                                    <a href="javascript:void(0)" title="Add to Wishlist"><i
-                                                                            class="ti-heart" aria-hidden="true"></i></a>
-                                                                    <a href="#" data-bs-toggle="modal"
-                                                                        data-bs-target="#quick-view" title="Quick View"><i
-                                                                            class="ti-search" aria-hidden="true"></i></a>
+                                                                    <a data-id="{{ $product->id }}" id="cartButton"
+                                                                        tabindex="0" class="addcart-box"
+                                                                        title="Quick shop">
+                                                                        <i class="ti-shopping-cart"></i>
+                                                                    </a>
+                                                                    @if (in_array($product->id, $favProdIds))
+                                                                        <a data-id="{{ $product->id }}"
+                                                                            id="removeWishlistButton" tabindex="0"
+                                                                            class="removewishlist-box"
+                                                                            title="remove from wishlist">
+                                                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        <a data-id="{{ $product->id }}"
+                                                                            id="addWishlistButton" tabindex="0"
+                                                                            class="addwishlist-box" title="add to wishlist">
+                                                                            <i class="ti-heart" aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @endif
+                                                                    <a href="{{ route('product.index', $product->slug) }}">
+                                                                        <i class="ti-search" aria-hidden="true"></i>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                             <div class="product-info">
@@ -98,9 +112,7 @@
                                                             </div>
                                                             <div class="addtocart_box">
                                                                 <div class="addtocart_detail">
-                                                                    <form action="{{ route('cart.add.to.cart') }}"
-                                                                        method="POST">
-                                                                        @csrf
+                                                                    <form id="myForm{{ $product->id }}">
                                                                         <input type="hidden" value="{{ $product->id }}"
                                                                             name="id">
                                                                         <input type="hidden" value="1"
@@ -125,8 +137,8 @@
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="addtocart_btn">
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary">
+                                                                                <button id="submitCart{{ $product->id }}"
+                                                                                    type="button" class="btn btn-primary">
                                                                                     {{ __('site/home/product.add_to_cart') }}
                                                                                 </button>
                                                                             </div>
@@ -168,12 +180,7 @@
 @endsection
 
 @push('script')
-    <script>
-        $("li").on("click", function() {
-            if ($("li").hasClass("active")) {
-                var id = $(this).attr("id");
-                document.getElementById("radioInput[" + id + "]").checked = true;
-            }
-        })
-    </script>
+    @include('web.site.partials.__productColorAjax')
+    @include('web.site.partials.__cartAjax')
+    @include('web.site.partials.__wishlistAjax')
 @endpush

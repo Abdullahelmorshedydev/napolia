@@ -74,8 +74,7 @@
                                 @endif
                                 {{ ' ' . __('admin/product/show.pound') }}
                             </h3>
-                            <form action="{{ route('cart.add.to.cart') }}" method="POST">
-                                @csrf
+                            <form id="myForm">
                                 <input type="hidden" value="{{ $product->id }}" name="id">
                                 <ul class="color-variant">
                                     @foreach ($product->colors as $color)
@@ -108,17 +107,17 @@
                                 </div>
                                 <div class="product-buttons">
                                     @if (in_array($product->id, $cartProdIds))
-                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal" class="btn btn-solid">
+                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal" class="btn btn-solid mt-2">
                                             {{ __('site/home/cart.view') }}
                                         </a>
-                                        <a href="{{ route('cart.delete.item', $product->id) }}" data-bs-toggle="modal"
-                                            class="btn btn-solid">
+                                        <a id="deleteItem" class="deleteItem btn btn-solid mt-2" data-id="{{ $product->id }}">
                                             {{ __('site/home/product.remove_from_cart') }}
                                         </a>
                                     @else
-                                        <button type="submit" data-bs-toggle="modal" class="btn btn-solid">
-                                            {{ __('site/home/product.add_to_cart') }}
-                                        </button>
+                                        <a tabindex="0" class="productCartButton btn btn-solid">
+                                            <i class="ti-shopping-cart"></i>
+                                            <span class="">{{ __('site/home/product.add_to_cart') }}</span>
+                                        </a>
                                     @endif
                                 </div>
                             </form>
@@ -152,19 +151,21 @@
                                         </li>
                                     </ul>
                                     @if (in_array($product->id, $favProdIds))
-                                        <form action="{{ route('favourites.delete', $product->id) }}" method="GET"
-                                            class="d-inline-block">
-                                            @csrf
-                                            <button type="submit" class="wishlist-btn"><i class="fa fa-heart"></i><span
-                                                    class="title-font">{{ __('site/product/index.remove_from_wishlist') }}</span></button>
-                                        </form>
+                                        <a data-id="{{ $product->id }}" id="removeWishlistButton" tabindex="0"
+                                            class="removewishlist-box btn btn-solid" title="remove from wishlist">
+                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                            <span class="title-font">
+                                                {{ __('site/product/index.remove_from_wishlist') }}
+                                            </span>
+                                        </a>
                                     @else
-                                        <form action="{{ route('favourites.store', $product->id) }}" method="GET"
-                                            class="d-inline-block">
-                                            @csrf
-                                            <button type="submit" class="wishlist-btn"><i class="ti-heart"></i><span
-                                                    class="title-font">{{ __('site/product/index.add_to_wishlist') }}</span></button>
-                                        </form>
+                                        <a data-id="{{ $product->id }}" id="addWishlistButton" tabindex="0"
+                                            class="addwishlist-box btn btn-solid" title="add to wishlist">
+                                            <i class="ti-heart" aria-hidden="true"></i>
+                                            <span class="title-font">
+                                                {{ __('site/product/index.add_to_wishlist') }}
+                                            </span>
+                                        </a>
                                     @endif
                                 </div>
                             </div>
@@ -206,11 +207,16 @@
                             <div class="rating mt-2 mb-2">
                                 <label for="name">{{ __('site/product/index.product_rate') }} : </label>
                                 <div class="rating">
-                                    <span class="star {{ $rate->rate >= 1 ? 'active' : '' }}" data-value="1">&#9733;</span>
-                                    <span class="star {{ $rate->rate >= 2 ? 'active' : '' }}" data-value="2">&#9733;</span>
-                                    <span class="star {{ $rate->rate >= 3 ? 'active' : '' }}" data-value="3">&#9733;</span>
-                                    <span class="star {{ $rate->rate >= 4 ? 'active' : '' }}" data-value="4">&#9733;</span>
-                                    <span class="star {{ $rate->rate == 5 ? 'active' : '' }}" data-value="5">&#9733;</span>
+                                    <span class="star {{ $rate ? ($rate->rate >= 1 ? 'active' : '') : '' }}"
+                                        data-value="1">&#9733;</span>
+                                    <span class="star {{ $rate ? ($rate->rate >= 2 ? 'active' : '') : '' }}"
+                                        data-value="2">&#9733;</span>
+                                    <span class="star {{ $rate ? ($rate->rate >= 3 ? 'active' : '') : '' }}"
+                                        data-value="3">&#9733;</span>
+                                    <span class="star {{ $rate ? ($rate->rate >= 4 ? 'active' : '') : '' }}"
+                                        data-value="4">&#9733;</span>
+                                    <span class="star {{ $rate ? ($rate->rate == 5 ? 'active' : '') : '' }}"
+                                        data-value="5">&#9733;</span>
                                 </div>
                             </div>
                             <form class="theme-form">
@@ -267,18 +273,26 @@
                         <div class="product-box">
                             <div class="img-block">
                                 <a href="{{ route('product.index', $product->slug) }}">
-                                    <img src="{{ asset('storage/' . $product->images[0]->image) }}"
+                                    <img src="{{ asset('storage/' . $product->images->first()->image) }}"
                                         class="productImage img-fluid" alt="">
                                 </a>
-                                <div class="cart-details">
-                                    <button tabindex="0" class="addcart-box" title="Quick shop">
+                                <div class="cart-right">
+                                    <a data-id="{{ $product->id }}" id="cartButton" tabindex="0" class="addcart-box"
+                                        title="Quick shop">
                                         <i class="ti-shopping-cart"></i>
-                                    </button>
-                                    <a href="{{ route('favourites.store', $product->id) }}" title="Add to Wishlist">
-                                        <i class="ti-heart" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('product.index', $product->slug) }}" data-bs-toggle="modal"
-                                        data-bs-target="#quick-view" title="Quick View">
+                                    @if (in_array($product->id, $favProdIds))
+                                        <a data-id="{{ $product->id }}" id="removeWishlistButton" tabindex="0"
+                                            class="removewishlist-box" title="remove from wishlist">
+                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                        </a>
+                                    @else
+                                        <a data-id="{{ $product->id }}" id="addWishlistButton" tabindex="0"
+                                            class="addwishlist-box" title="add to wishlist">
+                                            <i class="ti-heart" aria-hidden="true"></i>
+                                        </a>
+                                    @endif
+                                    <a href="{{ route('product.index', $product->slug) }}">
                                         <i class="ti-search" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -297,8 +311,7 @@
                             </div>
                             <div class="addtocart_box">
                                 <div class="addtocart_detail">
-                                    <form action="{{ route('cart.add.to.cart') }}" method="POST">
-                                        @csrf
+                                    <form id="myForm{{ $product->id }}">
                                         <input type="hidden" value="{{ $product->id }}" name="id">
                                         <input type="hidden" value="1" name="quantity">
                                         <div>
@@ -316,7 +329,8 @@
                                                 </ul>
                                             </div>
                                             <div class="addtocart_btn">
-                                                <button type="submit" class="btn btn-primary">
+                                                <button id="submitCart{{ $product->id }}" type="button"
+                                                    class="btn btn-primary">
                                                     {{ __('site/home/product.add_to_cart') }}
                                                 </button>
                                             </div>
@@ -337,41 +351,7 @@
 @endsection
 
 @push('script')
-    <script>
-        $("li").on("click", function() {
-            if ($("li").hasClass("active")) {
-                var id = $(this).attr("id");
-                document.getElementById("radioInput[" + id + "]").checked = true;
-            }
-        })
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.star').on("click", function() {
-                var rate = $(this).data('value');
-                var productId = "{{ $product->id }}";
-
-                $.ajax({
-                    url: "{{ route('rate.product') }}",
-                    method: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    },
-                    data: {
-                        product_id: productId,
-                        rate: rate
-                    },
-                });
-            });
-
-            $('.star').hover(function() {
-                $(this).addClass('active');
-                $(this).prevAll('.star').addClass('active');
-                $(this).nextAll('.star').removeClass('active');
-            }, function() {
-                $(this).removeClass('active');
-                $(this).prevAll('.star').removeClass('active');
-            });
-        });
-    </script>
+    @include('web.site.partials.__productColorAjax')
+    @include('web.site.partials.__cartAjax')
+    @include('web.site.partials.__wishlistAjax')
 @endpush

@@ -27,7 +27,7 @@ class AddToCartRequest extends FormRequest
     {
         return [
             'id' => ['required', Rule::in(Product::where('status', ProductStatusEnum::ACTIVE->value)->pluck('id')), 'numeric'],
-            'color_id' => ['required', Rule::in(ProductColors::pluck('id')), 'numeric'],
+            'color_id' => ['required', 'exists:product_colors,id', 'numeric'],
             'quantity' => ['required', 'numeric', 'min:1'],
         ];
     }

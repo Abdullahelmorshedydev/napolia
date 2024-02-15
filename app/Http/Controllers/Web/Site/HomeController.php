@@ -24,7 +24,7 @@ class HomeController extends Controller
             ->has('categories')
             ->with('image')->get();
         $cats = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
-        $products_rated = Product::where('status', ProductStatusEnum::ACTIVE->value)->with(['images', 'colors'])->limit(8)->get();
+        $products_rated = Product::where('status', ProductStatusEnum::ACTIVE->value)->where('discount', null)->with(['images', 'colors'])->limit(8)->get();
         $products_sales = Product::where('status', ProductStatusEnum::ACTIVE->value)->where('discount', '!=', null)->with(['images', 'colors'])->limit(8)->get();
         $products_popular = Product::where('status', ProductStatusEnum::ACTIVE->value)->orderBy('sales_count', 'desc')->with(['images', 'colors'])->limit(8)->get();
         $blogs = Blog::where('status', BlogStatusEnum::ACTIVE->value)->with(['admin', 'image'])->limit(8)->get();

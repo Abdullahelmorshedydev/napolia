@@ -9,23 +9,8 @@ use App\Http\Controllers\Controller;
 
 class FavouriteController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
         return view('web.site.pages.favourite');
-    }
-
-    public function store($id)
-    {
-        $fav = Favourite::create([
-            'user_id' => auth()->user()->id,
-            'product_id' => $id,
-        ]);
-        return back()->with('success', 'product added in favourite list successfully');
-    }
-
-    public function delete($id)
-    {
-        Favourite::where('user_id', auth('web')->user()->id)->where('product_id', $id)->delete();
-        return back();
     }
 }

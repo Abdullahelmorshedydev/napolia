@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="close-circle">
-                                <a href="{{ route('cart.delete.item', $cartItem->product->id) }}">
+                                <a id="deleteItem" class="deleteItem" data-id="{{ $cartItem->product_id }}">
                                     <i class="ti-trash" aria-hidden="true"></i>
                                 </a>
                             </div>
