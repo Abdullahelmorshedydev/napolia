@@ -32,10 +32,6 @@
                         <h3 class="title pt-0">{{ __('site/order.order_details') }}</h3>
                         @foreach ($order->orderItems as $orderItem)
                             <div class="row product-order-detail">
-                                <div class="col-3">
-                                    <img src="{{ asset('storage/' . $orderItem->product->images->first()->image) }}"
-                                        alt="" class="img-fluid mailImage">
-                                </div>
                                 <div class="col-3 order_detail">
                                     <div>
                                         <h4>{{ __('site/order.product_name') }}</h4>
