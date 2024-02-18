@@ -1,9 +1,5 @@
 <?php
 
-use App\Enums\DiscountTypeEnum;
-use App\Enums\PriceTypeEnum;
-use App\Enums\ProductConditionEnum;
-use App\Enums\ProductStatusEnum;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -23,11 +19,11 @@ return new class extends Migration
             $table->json('description');
             $table->integer('quantity');
             $table->decimal('price');
-            $table->enum('price_type', PriceTypeEnum::values());
+            $table->unsignedTinyInteger('price_type');
             $table->decimal('discount')->nullable();
-            $table->enum('discount_type', DiscountTypeEnum::values())->nullable();
-            $table->enum('status', ProductStatusEnum::values())->default(ProductStatusEnum::ACTIVE->value);
-            $table->enum('condition', ProductConditionEnum::values())->default(ProductConditionEnum::DEFAULT->value);
+            $table->unsignedTinyInteger('discount_type')->nullable();
+            $table->unsignedTinyInteger('status')->default(1);
+            $table->unsignedTinyInteger('condition')->default(1);
             $table->integer('sales_count')->default(0);
             $table->integer('shipping_time');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();

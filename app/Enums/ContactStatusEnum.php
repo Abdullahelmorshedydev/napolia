@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum ContactStatusEnum: string
+enum ContactStatusEnum: int
 {
-    case READ = 'read';
-    case UNREAD = 'unread';
+    case READ = 1;
+    case UNREAD = 2;
 
     public static function values(): array
     {

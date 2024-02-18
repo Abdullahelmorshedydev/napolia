@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\OrderStatusEnum;
-use App\Enums\PaymentMethodEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,8 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('shipping_price');
             $table->text('notes')->nullable();
-            $table->enum('status', OrderStatusEnum::values())->default(OrderStatusEnum::PENDING->value);
-            $table->enum('payment_method', PaymentMethodEnum::values());
+            $table->unsignedTinyInteger('status')->default(1);
+            $table->unsignedTinyInteger('payment_method');
             $table->decimal('discount')->default(0);
             $table->decimal('total');
             $table->timestamps();

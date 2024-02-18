@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\CategoryStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->json('name');
             $table->json('slug')->unique();
             $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
-            $table->enum('status', CategoryStatusEnum::values())->default(CategoryStatusEnum::ACTIVE->value);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

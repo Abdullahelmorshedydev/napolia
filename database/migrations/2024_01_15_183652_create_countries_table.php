@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\CountryStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->json('slug');
-            $table->enum('status', CountryStatusEnum::values())->default(CountryStatusEnum::ACTIVE->value);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

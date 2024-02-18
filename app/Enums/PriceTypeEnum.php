@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum PriceTypeEnum: string
+enum PriceTypeEnum: int
 {
-    case POUND = 'pound';
-    case DOLLAR = 'dollar';
+    case POUND = 1;
+    case DOLLAR = 2;
 
     public static function values(): array
     {

@@ -107,10 +107,12 @@
                                 </div>
                                 <div class="product-buttons">
                                     @if (in_array($product->id, $cartProdIds))
-                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal" class="btn btn-solid mt-2">
+                                        <a href="{{ route('cart.view') }}" data-bs-toggle="modal"
+                                            class="btn btn-solid mt-2">
                                             {{ __('site/home/cart.view') }}
                                         </a>
-                                        <a id="deleteItem" class="deleteItem btn btn-solid mt-2" data-id="{{ $product->id }}">
+                                        <a id="deleteItem" class="deleteItem btn btn-solid mt-2"
+                                            data-id="{{ $product->id }}">
                                             {{ __('site/home/product.remove_from_cart') }}
                                         </a>
                                     @else
@@ -226,24 +228,36 @@
                                         <input type="text" class="form-control" id="name" name="name"
                                             value="{{ old('name') }}"
                                             placeholder="{{ __('site/product/index.name_place') }}" required>
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email">{{ __('site/product/index.email') }}</label>
                                         <input type="email" name="email" class="form-control"
                                             value="{{ old('email') }}"
                                             placeholder="{{ __('site/product/index.email_place') }}" required>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12">
                                         <label for="review">{{ __('site/product/index.review_title_place') }}</label>
                                         <input type="text" class="form-control" name="review_title"
                                             value="{{ old('review_title') }}"
                                             placeholder="{{ __('site/product/index.review_title_place') }}" required>
+                                        @error('review_title')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12">
                                         <label for="review">{{ __('site/product/index.review_message') }}</label>
                                         <textarea name="review_message" class="form-control"
                                             placeholder="{{ __('site/product/index.review_message_place') }}" id="exampleFormControlTextarea1"
                                             rows="6">{{ old('review_message') }}</textarea>
+                                        @error('review_message')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12">
                                         <button class="btn btn-solid"

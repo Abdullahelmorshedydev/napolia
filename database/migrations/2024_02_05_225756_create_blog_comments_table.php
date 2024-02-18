@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\BlogStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('comment');
-            $table->enum('status', BlogStatusEnum::values())->default(BlogStatusEnum::ACTIVE->value);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

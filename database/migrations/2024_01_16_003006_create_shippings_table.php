@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\PriceTypeEnum;
-use App\Enums\ShippingStatusEnum;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +14,7 @@ return new class extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->decimal('price');
-            $table->enum('price_type', PriceTypeEnum::values());
+            $table->unsignedTinyInteger('price_type');
             $table->foreignId('state_id')->unique()->constrained('states')->cascadeOnDelete();
             $table->timestamps();
         });

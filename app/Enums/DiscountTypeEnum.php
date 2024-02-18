@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum DiscountTypeEnum: string
+enum DiscountTypeEnum: int
 {
-    case FIXED = 'fixed';
-    case PERCENT = 'percent';
+    case FIXED = 1;
+    case PERCENT = 2;
 
     public static function values(): array
     {

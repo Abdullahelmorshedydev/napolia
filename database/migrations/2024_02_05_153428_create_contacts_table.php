@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\ContactStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('subject');
             $table->text('message');
-            $table->enum('status', ContactStatusEnum::values())->default(ContactStatusEnum::UNREAD->value);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

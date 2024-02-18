@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum PaymentMethodEnum: string
+enum PaymentMethodEnum: int
 {
-    case CASH = 'CASH';
-    case VISA = 'VISA/MASTER';
-    case MEEZA = 'MEEZA';
+    case CASH = 1;
+    case VISA = 2;
+    case MEEZA = 3;
 
     public static function values(): array
     {

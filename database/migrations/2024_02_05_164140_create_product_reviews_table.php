@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\ReviewStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('review_title');
             $table->text('review_message');
-            $table->enum('status', ReviewStatusEnum::values())->default(ReviewStatusEnum::ACTIVE->value);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

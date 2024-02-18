@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum ProductConditionEnum: string
+enum ProductConditionEnum: int
 {
-    case DEFAULT = 'default';
-    case HOT = 'hot';
-    case NEW = 'new';
+    case DEFAULT = 1;
+    case HOT = 2;
+    case NEW = 3;
 
     public static function values(): array
     {

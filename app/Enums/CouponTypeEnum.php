@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum CouponTypeEnum: string
+enum CouponTypeEnum: int
 {
-    case FIXED = 'fixed';
-    case PERCENT = 'percent';
+    case FIXED = 1;
+    case PERCENT = 2;
 
     public static function values(): array
     {

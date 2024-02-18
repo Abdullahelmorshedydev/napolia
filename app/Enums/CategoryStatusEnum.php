@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum CategoryStatusEnum: string
+enum CategoryStatusEnum: int
 {
-    case ACTIVE = 'active';
-    case DESACTIVE = 'desactive';
+    case ACTIVE = 1;
+    case DESACTIVE = 2;
 
     public static function values(): array
     {

@@ -64,6 +64,62 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="site_description_en">
+                                                {{ __('admin/settings/general/index.site_description_en_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('site_description_en', settings()->get('site_description_en')) }}"
+                                                name="site_description_en" class="form-control" id="site_description_en">
+                                            @error('site_description_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="site_description_ar">
+                                                {{ __('admin/settings/general/index.site_description_ar_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('site_description_ar', settings()->get('site_description_ar')) }}"
+                                                name="site_description_ar" class="form-control" id="site_description_ar">
+                                            @error('site_description_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="site_keywords_en">
+                                                {{ __('admin/settings/general/index.site_keywords_en_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('site_keywords_en', settings()->get('site_keywords_en')) }}"
+                                                name="site_keywords_en" class="form-control" id="site_keywords_en">
+                                            @error('site_keywords_en')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="site_keywords_ar">
+                                                {{ __('admin/settings/general/index.site_keywords_ar_label') }}
+                                            </label>
+                                            <input type="text"
+                                                value="{{ old('site_keywords_ar', settings()->get('site_keywords_ar')) }}"
+                                                name="site_keywords_ar" class="form-control" id="site_keywords_ar">
+                                            @error('site_keywords_ar')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="header_slogan_en">
                                                 {{ __('admin/settings/general/index.header_slogan_en_label') }}
                                             </label>

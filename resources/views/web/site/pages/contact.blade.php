@@ -38,22 +38,37 @@
                             <div class="col-md-12">
                                 <label for="name">{{ __('site/auth/profile.name') }}</label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="{{ __('site/auth/profile.name_place') }}">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="review">{{ __('site/auth/profile.phone') }}</label>
                                 <input type="text" name="phone" class="form-control" placeholder="{{ __('site/auth/profile.phone') }}">
+                                @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="email">{{ __('site/auth/login.email') }}</label>
                                 <input type="email" name="email" class="form-control" placeholder="{{ __('site/auth/login.email_place') }}">
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="subject">{{ __('site/home/nav.subject') }}</label>
                                 <input type="text" name="subject" class="form-control" id="subject" placeholder="{{ __('site/home/nav.subject_place') }}">
+                                @error('subject')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="review">{{ __('site/home/nav.message') }}</label>
                                 <textarea class="form-control" name="message" placeholder="{{ __('site/home/nav.message_place') }}" id="exampleFormControlTextarea1" rows="6"></textarea>
+                                @error('message')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-solid" type="submit">{{ __('site/home/nav.msg_button') }}</button>
@@ -72,7 +87,7 @@
                                     <p>{{ settings()->get('contact_phone_1') }}</p>
                                     <p>{{ settings()->get('contact_phone_2') }}</p>
                                 </div>
-                            </li>
+                            </li><br>
                             @if(settings()->get('contact_address_1_en'))
                                 <li>
                                     <div class="contact-icon"><i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -84,7 +99,7 @@
                                             <p>{{ settings()->get('contact_address_2_' . app()->currentLocale()) }}</p>
                                         @endif
                                     </div>
-                                </li>
+                                </li><br>
                             @endif
                             <li>
                                 <div class="contact-icon"><i class="fa fa-fax" aria-hidden="true"></i>

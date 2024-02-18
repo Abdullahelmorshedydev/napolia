@@ -71,17 +71,26 @@
                                 <input type="text" name="name" class="form-control" id="name"
                                     value="{{ old('name', auth()->user() ? auth()->user()->name : '') }}"
                                     placeholder="{{ __('site/auth/profile.name_place') }}">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="email">{{ __('site/auth/login.email') }}</label>
                                 <input type="email" name="email" class="form-control"
                                     value="{{ old('email', auth()->user() ? auth()->user()->email : '') }}"
                                     placeholder="{{ __('site/auth/login.email_place') }}">
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <label for="exampleFormControlTextarea1">{{ __('site/blog.comment') }}</label>
                                 <textarea class="form-control" name="comment" placeholder="{{ __('site/blog.comment_place') }}"
                                     id="exampleFormControlTextarea1" rows="6"></textarea>
+                                @error('comment')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12">
                                 <button class="btn btn-solid"

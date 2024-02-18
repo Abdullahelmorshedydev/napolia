@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\CityStatusEnum;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->json('name');
             $table->json('slug');
             $table->foreignId('country_id')->constrained('countries')->cascadeOnDelete();
-            $table->enum('status', CityStatusEnum::values())->default(CityStatusEnum::ACTIVE->value);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
