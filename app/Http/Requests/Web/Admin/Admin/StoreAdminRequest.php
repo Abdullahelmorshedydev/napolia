@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Web\Admin\User;
+namespace App\Http\Requests\Web\Admin\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is userorized to make this request.

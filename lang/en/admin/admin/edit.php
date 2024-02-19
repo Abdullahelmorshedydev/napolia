@@ -2,15 +2,15 @@
 
 return [
 
-    'title' => 'Update User',
-    'header' => 'Users',
-    'active' => 'Update User',
-    'add_new' => 'Update User',
+    'title' => 'Update Admin',
+    'header' => 'Admins',
+    'active' => 'Update Admin',
+    'add_new' => 'Update Admin',
     'submit' => 'Update',
     'name_label' => 'Name',
-    'name_place' => 'Enter User Name',
+    'name_place' => 'Enter Admin Name',
     'email_label' => 'Email',
-    'email_place' => 'Enter User Email',
+    'email_place' => 'Enter Admin Email',
     'role_label' => 'Role',
     'role_place' => 'Choose Role',
     'valid_required' => 'This field is required',
@@ -23,6 +23,6 @@ return [
     'valid_mimes' => 'Image extension not supported',
     'valid_exists' => 'this record not in our records',
     'valid_rule' => 'this record not in our records',
-    'success' => 'User Updated Successfully',
+    'success' => 'Admin Updated Successfully',
 
 ];

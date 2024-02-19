@@ -3,15 +3,15 @@
 @push('style')
 @endpush
 
-@section('title', __('admin/user/index.title'))
+@section('title', __('admin/admin/index.title'))
 
 @section('breadcrumb')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ __('admin/user/index.header') }}</h4>
-                <span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{ __('admin/user/index.active') }}</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('admin/admin/index.header') }}</h4>
+                <span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{ __('admin/admin/index.active') }}</span>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <div class="card">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">{{ __('admin/user/index.label') }}</h4>
+                    <h4 class="card-title mg-b-0">{{ __('admin/admin/index.label') }}</h4>
                     <i class="mdi mdi-dots-horizontal text-gray"></i>
                 </div>
             </div>
@@ -34,38 +34,38 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('admin/user/index.name') }}</th>
-                                <th>{{ __('admin/user/index.email') }}</th>
-                                <th>{{ __('admin/user/index.role') }}</th>
-                                <th>{{ __('admin/user/index.actions') }}</th>
+                                <th>{{ __('admin/admin/index.name') }}</th>
+                                <th>{{ __('admin/admin/index.email') }}</th>
+                                <th>{{ __('admin/admin/index.role') }}</th>
+                                <th>{{ __('admin/admin/index.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($admins as $admin)
                                 <tr>
-                                    <th scope="row">{{ $users->firstItem() + $loop->index }}</th>
-                                    <th>{{ $user->name }}</th>
-                                    <th>{{ $user->email }}</th>
+                                    <th scope="row">{{ $admins->firstItem() + $loop->index }}</th>
+                                    <th>{{ $admin->name }}</th>
+                                    <th>{{ $admin->email }}</th>
                                     <td>
-                                        @if (!empty($user->getRoleNames()))
-                                            @foreach ($user->getRoleNames() as $role)
+                                        @if (!empty($admin->getRoleNames()))
+                                            @foreach ($admin->getRoleNames() as $role)
                                                 {{ $role }}
                                             @endforeach
                                         @endif
                                     </td>
                                     <td>
-                                        @can('user-edit')
-                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info">
-                                                {{ __('admin/user/index.edit') }}
+                                        @can('admin-edit')
+                                            <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-info">
+                                                {{ __('admin/admin/index.edit') }}
                                             </a>
                                         @endcan
-                                        @can('user-delete')
-                                            <form class="d-inline" action="{{ route('admin.users.destroy', $user->id) }}"
+                                        @can('admin-delete')
+                                            <form class="d-inline" action="{{ route('admin.admins.destroy', $admin->id) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger"
-                                                    type="submit">{{ __('admin/user/index.delete') }}</button>
+                                                    type="submit">{{ __('admin/admin/index.delete') }}</button>
                                             </form>
                                         @endcan
                                     </td>
@@ -74,7 +74,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $users->links() }}
+                {{ $admins->links() }}
             </div>
         </div>
     </div>

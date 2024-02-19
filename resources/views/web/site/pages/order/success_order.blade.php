@@ -99,7 +99,13 @@
                         </div>
                         <div class="col-sm-12 payment-mode">
                             <h4>{{ __('site/order.payment_method') }}</h4>
-                            <p>{{ __('site/order.payment') }}</p>
+                            <p>
+                                @foreach ($payments as $payment)
+                                    @if ($payment->value == $order->payment_method)
+                                        {{ $payment->lang() }}
+                                    @endif
+                                @endforeach
+                            </p>
                         </div>
                         <div class="col-md-12">
                             <div class="delivery-sec">

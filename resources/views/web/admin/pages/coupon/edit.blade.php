@@ -120,9 +120,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label
-                                                for="exampleInputStatus1">{{ __('admin/coupon/edit.status_label') }}</label>
+                                                for="exampleInputStatus1">{{ __('admin/blog/edit.status_label') }}</label>
                                             <select name="status" id="exampleInputStatus1" class="form-control">
-                                                <option disabled selected>{{ __('admin/coupon/edit.status_place') }}
+                                                <option disabled selected>{{ __('admin/blog/edit.status_place') }}
                                                 </option>
                                                 @foreach ($status as $stat)
                                                     <option
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
-                                {{ __('admin/coupon/edit.submit') }}
+                                {{ __('admin/blog/edit.submit') }}
                             </button>
                         </form>
                     </div>

@@ -9,14 +9,14 @@ return [
     'new' => 'New',
     'fixed' => 'Fixed',
     'percent' => 'Percent',
-    'fixed_char' => 'LE',
+    'fixed_char' => 'EGP',
     'percent_char' => '%',
     'red' => 'Red',
     'green' => 'Green',
     'black' => 'Black',
     'pound' => 'POUND',
     'dollar' => 'DOLLAR',
-    'pound_char' => 'LE',
+    'pound_char' => 'EGP',
     'dollar_char' => '$',
     'pending' => 'pending',
     'proccessing' => 'proccessing',
@@ -26,5 +26,6 @@ return [
     'cash' => 'CASH',
     'visa' => 'VISA/MASTER',
     'meeza' => 'MEEZA',
+    'vodafone' => 'Vodafone Cash',
 
 ];

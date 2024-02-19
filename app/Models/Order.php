@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Enums\OrderStatusEnum;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
     use HasFactory;
+
+    public static $img_path = 'uploads/orders/';
 
     protected $table = 'orders';
 
@@ -23,6 +26,7 @@ class Order extends Model
         'status',
         'discount',
         'total',
+        'payment_method',
     ];
 
     public $casts = [
@@ -52,5 +56,10 @@ class Order extends Model
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+
+    public function vodafoneImage() : MorphMany
+    {
+        return $this->morphMany(Image::class, 'morphable');
     }
 }

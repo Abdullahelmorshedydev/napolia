@@ -154,7 +154,7 @@
                                                 </option>
                                                 @foreach ($types as $type)
                                                     <option
-                                                        {{ old('discount_type', $product->discount_type->value) == $type->value ? 'selected' : '' }}
+                                                        {{ old('discount_type', $product->discount ? $product->discount_type->value : '') == $type->value ? 'selected' : '' }}
                                                         value="{{ $type->value }}">
                                                         {{ $type->lang() }}
                                                     </option>

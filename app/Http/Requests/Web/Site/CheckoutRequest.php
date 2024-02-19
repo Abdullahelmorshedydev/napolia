@@ -2,11 +2,7 @@
 
 namespace App\Http\Requests\Web\Site;
 
-use App\Models\Cart;
-use App\Models\City;
-use App\Models\State;
 use App\Models\Coupon;
-use App\Models\Country;
 use Illuminate\Validation\Rule;
 use App\Enums\PaymentMethodEnum;
 use Illuminate\Foundation\Http\FormRequest;
@@ -47,6 +43,13 @@ class CheckoutRequest extends FormRequest
             }],
             'total' => ['required', 'numeric'],
             'payment_method' => ['required', Rule::in(PaymentMethodEnum::cases())],
+            'vodafone_image' => [function ($attribte, $value, $fail) {
+                if (request()->input('payment_method') == PaymentMethodEnum::VODAFONE->value) {
+                    if (!isset($value)) {
+                        $fail(__('admin/blog/edit.valid_required'));
+                    }
+                }
+            }, 'image', 'mimetypes:image/png,image/jpg,image/jpeg', 'mimes:png,jpg,jpeg'],
         ];
     }
 
@@ -71,6 +74,9 @@ class CheckoutRequest extends FormRequest
             'address.min' => __('site/auth/profile.min_valid'),
             'payment_method.required' => __('site/auth/profile.required_valid'),
             'payment_method.rule' => __('admin/slider/edit.valid_rule'),
+            'vodafone_image.image' => __('admin/product/edit.valid_image'),
+            'vodafone_image.mimetype' => __('admin/product/edit.valid_mimetype'),
+            'vodafone_image.mimes' => __('admin/product/edit.valid_mimes'),
         ];
     }
 }

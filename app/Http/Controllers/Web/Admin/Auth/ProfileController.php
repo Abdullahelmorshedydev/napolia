@@ -51,6 +51,7 @@ class ProfileController extends Controller
             }
             $admin->profile()->create($data);
         }
+        $admin->update($data);
         return back()->with('success', __('admin/auth/profile.general_success'));
     }
 

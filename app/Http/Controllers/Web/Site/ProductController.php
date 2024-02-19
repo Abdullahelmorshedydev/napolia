@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index(Product $product)
     {
         $rate = ProductRate::where(['product_id' => $product->id, 'user_id' => auth('web')->user()->id])->first();
-        $related_products = Product::where('sub_category_id', $product->sub_category_id)->where('id', '!=', $product->id)->where('status', ProductStatusEnum::ACTIVE->value)->with(['images', 'colors'])->get();
+        $related_products = Product::where('sub_category_id', $product->sub_category_id)->where('id', '!=', $product->id)->where('status', ProductStatusEnum::ACTIVE->value)->with(['images', 'colors'])->inRandomOrder()->get();
         return view('web.site.pages.product.index', compact('product', 'related_products', 'rate'));
     }
 

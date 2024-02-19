@@ -87,6 +87,7 @@ Route::middleware('check.auth.login')->group(function () {
         Route::get('/track-order/{order}', 'trackOrder')->name('track_order');
     });
     Route::post('/orders/checkout/get-coupon', [CouponController::class, 'getCoupon'])->name('order.getCoupon');
+    Route::post('/orders/checkout/delete-coupon', [CouponController::class, 'deleteCoupon'])->name('order.deleteCoupon');
 });
 
 Route::get('/about-us', AboutUsSettingsController::class)->name('aboutus');

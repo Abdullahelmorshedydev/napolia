@@ -7,8 +7,8 @@ use App\Http\Controllers\Web\Admin\BlogController;
 use App\Http\Controllers\Web\Admin\CityController;
 use App\Http\Controllers\Web\Admin\HomeController;
 use App\Http\Controllers\Web\Admin\RoleController;
-use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Api\Admin\GetShippingController;
+use App\Http\Controllers\Web\Admin\AdminController;
 use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\StateController;
 use App\Http\Controllers\Web\Admin\CouponController;
@@ -153,7 +153,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::delete('/{comment}/delete-comment', 'deleteComment')->name('destroy_comment');
     });
 
-    Route::resource('users', UserController::class)->except('show');
+    Route::resource('admins', AdminController::class)->except('show');
 
     Route::resource('roles', RoleController::class)->except('show');
 

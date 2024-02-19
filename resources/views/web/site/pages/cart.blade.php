@@ -164,7 +164,7 @@
                             <tr>
                                 <td>{{ __('site/cart.total_price') }} :</td>
                                 <td>
-                                    <h2>{{ $cart->total }}</h2>
+                                    <h2>{{ $cart ? $cart->total : 0 }}</h2>
                                 </td>
                             </tr>
                         </tfoot>

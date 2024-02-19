@@ -42,18 +42,6 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="row">
-                            <div class="col-12 p-0">
-                                <div class="slider-nav">
-                                    @foreach ($product->images as $image)
-                                        <div>
-                                            <img src="{{ asset('storage/' . $image->image) }}" alt=""
-                                                class="productImage img-fluid">
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">

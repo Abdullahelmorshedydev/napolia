@@ -2,10 +2,10 @@
 
 return [
 
-    'title' => 'All Users',
-    'header' => 'Users',
-    'active' => 'All Users',
-    'label' => 'All Users',
+    'title' => 'All Admins',
+    'header' => 'Admins',
+    'active' => 'All Admins',
+    'label' => 'All Admins',
     'name' => 'Name',
     'email' => 'Email',
     'actions' => 'Actions',
@@ -13,6 +13,6 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'show' => 'Details',
-    'success' => 'User Deleted Successfully',
+    'success' => 'Admin Deleted Successfully',
 
 ];

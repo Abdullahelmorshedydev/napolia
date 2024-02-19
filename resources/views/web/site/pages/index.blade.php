@@ -13,7 +13,7 @@
                         @foreach ($sliders as $slider)
                             <div>
                                 <div class="home text-center p-right">
-                                    <img src="{{ asset('storage/' . $slider->image->image) }}" class="bg-img " alt="">
+                                    <img src="{{ asset('storage/' . $slider->image->image) }}" class="productImage bg-img" alt="">
                                 </div>
                             </div>
                         @endforeach

@@ -2,17 +2,17 @@
 
 return [
 
-    'title' => 'Create New User',
-    'header' => 'User',
-    'active' => 'Create New User',
-    'add_new' => 'Add New User',
+    'title' => 'Create New Admin',
+    'header' => 'Admin',
+    'active' => 'Create New Admin',
+    'add_new' => 'Add New Admin',
     'submit' => 'Create',
     'name_label' => 'Name',
-    'name_place' => 'Enter User Name',
+    'name_place' => 'Enter Admin Name',
     'email_label' => 'Email',
-    'email_place' => 'Enter User Email',
+    'email_place' => 'Enter Admin Email',
     'role_label' => 'Role',
-    'role_place' => 'Enter User Role',
+    'role_place' => 'Enter Admin Role',
     'valid_required' => 'This field is required',
     'valid_string' => 'this field should be a string',
     'valid_unique' => 'value in this field in use',
@@ -22,6 +22,6 @@ return [
     'valid_mimetype' => 'Image type should be image',
     'valid_mimes' => 'Image extension not supported',
     'valid_exists' => 'this record not in our recordes',
-    'success' => 'User Created Successfully',
+    'success' => 'Admin Created Successfully',
 
 ];

@@ -3,15 +3,15 @@
 @push('style')
 @endpush
 
-@section('title', __('admin/user/create.title'))
+@section('title', __('admin/admin/create.title'))
 
 @section('breadcrumb')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ __('admin/user/create.header') }}</h4>
-                <span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{ __('admin/user/create.active') }}</span>
+                <h4 class="content-title mb-0 my-auto">{{ __('admin/admin/create.header') }}</h4>
+                <span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{ __('admin/admin/create.active') }}</span>
             </div>
         </div>
     </div>
@@ -24,19 +24,19 @@
             <div class="card-body">
                 <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                     <div class="card-header">
-                        <h4 class="card-title mb-1">{{ __('admin/user/create.title') }}</h4>
+                        <h4 class="card-title mb-1">{{ __('admin/admin/create.title') }}</h4>
                     </div>
                     <div class="card-body pt-0">
-                        <form action="{{ route('admin.users.store') }}" method="POST">
+                        <form action="{{ route('admin.admins.store') }}" method="POST">
                             @csrf
                             <div class="">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name1">{{ __('admin/user/create.name_label') }}</label>
+                                            <label for="name1">{{ __('admin/admin/create.name_label') }}</label>
                                             <input type="text" value="{{ old('name') }}" name="name"
                                                 class="form-control" id="name1"
-                                                placeholder="{{ __('admin/user/create.name_place') }}">
+                                                placeholder="{{ __('admin/admin/create.name_place') }}">
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -44,10 +44,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email1">{{ __('admin/user/create.email_label') }}</label>
+                                            <label for="email1">{{ __('admin/admin/create.email_label') }}</label>
                                             <input type="email" value="{{ old('email') }}" name="email"
                                                 class="form-control" id="email1"
-                                                placeholder="{{ __('admin/user/create.email_place') }}">
+                                                placeholder="{{ __('admin/admin/create.email_place') }}">
                                             @error('email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -74,9 +74,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label>{{ __('admin/user/create.role_label') }}:</label>
+                                    <label>{{ __('admin/admin/create.role_label') }}:</label>
                                     <select class="form-control" name="roles">
-                                        <option value="">{{ __('admin/user/create.role_place') }}</option>
+                                        <option value="">{{ __('admin/admin/create.role_place') }}</option>
                                         @foreach ($roles as $role)
                                             <option {{ old('roles') == $role->id ? 'selected' : '' }}
                                                 value="{{ $role->name }}">{{ $role->name }}</option>
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 mb-0">
-                                {{ __('admin/user/create.submit') }}
+                                {{ __('admin/admin/create.submit') }}
                             </button>
                         </form>
                     </div>

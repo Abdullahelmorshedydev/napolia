@@ -32,7 +32,7 @@
         <div class="container">
             <div class="checkout-page">
                 <div class="checkout-form">
-                    <form id="form" action="{{ route('order.store') }}" method="POST">
+                    <form id="form" action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" value="{{ auth('web')->user()->id }}" name="user_id">
                         <input type="hidden" value="{{ $cart->id }}" name="cart_id">
@@ -161,7 +161,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
+                                            <li class="coupon_list">
                                                 <div class="coupon">
                                                     <div class="shopping-option">
                                                         <div style="position: relative;">
@@ -169,8 +169,11 @@
                                                                 style="padding-right: 30px;"
                                                                 placeholder="{{ __('site/order.coupon_place') }}">
                                                             <button type="button" id="myButton" class="btn btn-solid"
-                                                                style="position: absolute; right: 0; top: 0;">{{ __('site/order.coupon_submit') }}</button>
+                                                                style="position: absolute; right: 0; top: 0; bottom: 0;">
+                                                                {{ __('site/order.coupon_submit') }}
+                                                            </button>
                                                         </div>
+                                                        <span class="coupon_error text-danger"></span>
                                                         @error('coupon')
                                                             <span class="text-danger">
                                                                 {{ $message }}
@@ -193,28 +196,23 @@
                                         <div class="upper-box">
                                             <div class="payment-options">
                                                 <ul>
-                                                    <li>
-                                                        <div class="radio-option">
-                                                            <input type="radio" name="payment_method" value="CASH"
-                                                                id="payment-1" checked>
-                                                            <label
-                                                                for="payment-1">{{ __('site/order.cash_on_delivery') }}</label>
-                                                        </div>
-                                                    </li>
-                                                    {{-- <li>
-                                                        <div class="radio-option">
-                                                            <input type="radio" name="payment_method" value="VISA"
-                                                                id="payment-2">
-                                                            <label for="payment-2">{{ __('admin/enums.visa') }}</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="radio-option">
-                                                            <input type="radio" name="payment_method" value="MEEZA"
-                                                                id="payment-">
-                                                            <label for="payment-">{{ __('admin/enums.meeza') }}</label>
-                                                        </div>
-                                                    </li> --}}
+                                                    @foreach ($payments as $payment)
+                                                        <li>
+                                                            <div class="radio-option">
+                                                                <input type="radio" name="payment_method"
+                                                                    value="{{ $payment->value }}"
+                                                                    id="payment-{{ $loop->iteration }}">
+                                                                <label
+                                                                    for="payment-{{ $loop->iteration }}">{{ $payment->lang() }}</label>
+                                                            </div>
+                                                        </li>
+                                                        @if ($payment->value == 4)
+                                                            <li class="vodafone_image"></li>
+                                                            @error('vodafone_image')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        @endif
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -361,7 +359,6 @@
             $('#myButton').on('click', function() {
                 var couponCode = $('input[name="coupon"]').val();
                 var invoiceAmount = $('input[name="InvoiceAmount"]').val();
-                console.log(invoiceAmount);
                 $.ajax({
                     url: "{{ route('order.getCoupon') }}",
                     type: "POST",
@@ -373,35 +370,44 @@
                         'invoiceAmount': invoiceAmount
                     },
                     success: function(response) {
-                        $('span[id="total"]').empty('').append(response
-                            .total);
-                        var totalInput = $('<input>', {
-                            type: 'hidden',
-                            name: 'total',
-                            value: response.total
-                        });
-                        $('span[id="total"]').append(totalInput);
-                        $('input[name="InvoiceAmount"]').val(response.total);
+                        if (response.total > 0) {
+                            $('span[id="total"]').empty('').append(response
+                                .total);
+                            var totalInput = $('<input>', {
+                                type: 'hidden',
+                                name: 'total',
+                                value: response.total
+                            });
+                            $('span[id="total"]').append(totalInput);
+                            $('input[name="InvoiceAmount"]').val(response.total);
+                            $('.coupon').hide();
+
+                            var listCoupon = '<label">' + couponCode + '</label>';
+                            $('.coupon_list').append(listCoupon);
+                        } else {
+                            $('.coupon_error').empty('').append(
+                                "{{ __('site/order.coupon_valid') }}");
+                        }
                     },
                     error: function(xhr, status, error) {
-                        console.log("feh error ya morshed");
+                        $('.coupon_error').empty('').append(
+                            "{{ __('site/order.coupon_valid') }}");
                     }
                 });
             });
         });
     </script>
     <script>
-        $("input[id=payment-1]").on("click", function() {
-            var input = "<input type='hidden' name='payment_method' value='CASH'>"
-            document.getElementById("payment-1").append(input);
-        });
-        $("input[id=payment-2]").on("click", function() {
-            var input = "<input type='hidden' name='payment_method' value='VISA/MASTER'>"
-            document.getElementById("payment-2").append(input);
-        });
-        $("input[id=payment-3]").on("click", function() {
-            var input = "<input type='hidden' name='payment_method' value='MEEZA'>"
-            document.getElementById("payment-3").append(input);
+        $("input[id=payment-1]").on("click", function() {});
+        $("input[id=payment-2]").on("click", function() {});
+        $("input[id=payment-3]").on("click", function() {});
+        $("input[id=payment-4]").on("click", function() {
+            var imageFile = $('<input>', {
+                type: 'file',
+                name: 'vodafone_image',
+                class: 'form-control'
+            });
+            $('.vodafone_image').empty('').append(imageFile);
         });
     </script>
 @endpush
