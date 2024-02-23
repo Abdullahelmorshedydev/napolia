@@ -21,6 +21,7 @@ class HomeController extends Controller
     {
         $sliders = Slider::where('status', SliderStatusEnum::ACTIVE->value)->with('image')->get();
         $categories = Category::where('status', CategoryStatusEnum::ACTIVE->value)
+            ->where('name->en', '!=', 'Rooms')->orWhere('name->ar', '!=', 'غرف')
             ->has('categories')
             ->with('image')->get();
         $cats = Category::where('status', CategoryStatusEnum::ACTIVE->value)->get();
