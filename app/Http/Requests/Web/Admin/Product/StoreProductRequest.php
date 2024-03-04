@@ -48,13 +48,7 @@ class StoreProductRequest extends FormRequest
                     }
                 }
             }],
-            'discount_type' => [Rule::in($types), function ($attribte, $value, $fail) {
-                if (request()->input('discount') != null) {
-                    if ($value == null) {
-                        $fail(__('admin/prodcut/create.valid_required'));
-                    }
-                }
-            }],
+            'discount_type' => ['nullable', Rule::in($types)],
             'condition' => ['nullable', Rule::in($condition)],
             'quantity' => ['required', 'numeric'],
             'category_id' => ['required', 'exists:categories,id'],

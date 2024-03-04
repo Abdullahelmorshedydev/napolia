@@ -39,7 +39,7 @@ class UpdateProductRequest extends FormRequest
             'price' => ['required', 'numeric'],
             'price_type' => ['required', Rule::in($priceTypes)],
             'shipping_time' => ['required', 'numeric'],
-            'discount' => ['numeric', 'min:0', function ($attribte, $value, $fail) {
+            'discount' => ['nullable', 'numeric', 'min:0', function ($attribte, $value, $fail) {
                 if (request()->input('discount_type') == 'percent') {
                     if ($value <= 0 || $value > 100) {
                         $fail(__('admin/prodcut/edit.valid_max'));
@@ -50,13 +50,7 @@ class UpdateProductRequest extends FormRequest
                     }
                 }
             }],
-            'discount_type' => [Rule::in($types), function ($attribte, $value, $fail) {
-                if (request()->input('discount') != null) {
-                    if ($value == null) {
-                        $fail(__('admin/prodcut/edit.valid_required'));
-                    }
-                }
-            }],
+            'discount_type' => ['nullable', Rule::in($types)],
             'condition' => ['nullable', Rule::in($condition)],
             'status' => ['nullable', Rule::in($status)],
             'quantity' => ['required', 'numeric'],

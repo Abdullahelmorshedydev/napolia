@@ -48,6 +48,7 @@ return [
     'valid_mimes' => 'Image extension not supported',
     'valid_exists' => 'this value not found in our records',
     'valid_array' => 'This input should be an array',
+    'valid_numeric' => 'This input should be a number',
     'success' => 'Product Updated Successfully',
     'success_image' => 'Product Image Updated Successfully',
     'success_delete_image' => 'Product Image Deleted Successfully',
